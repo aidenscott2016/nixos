@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    pulse14.pulseaudioFull
     pgcli
     jetbrains.idea-community
     slock

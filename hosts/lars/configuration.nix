@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [ ./hardware-configuration.nix ./packages.nix ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -34,9 +34,8 @@
       usbmuxd.enable = true;
       xserver =
         {
-          displayManager.gdm.enable = true;
-          desktopManager.gnome.enable = true;
           enable = true;
+          desktopManager.plasma5.enable = true;
           windowManager.dwm.enable = true;
           windowManager.i3.enable = true;
           layout = "gb";
@@ -52,12 +51,6 @@
 
 
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = false;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   hardware = {
     enableAllFirmware = true;
