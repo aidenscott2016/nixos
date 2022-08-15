@@ -34,6 +34,8 @@
       usbmuxd.enable = true;
       xserver =
         {
+          displayManager.gdm.enable = true;
+          desktopManager.gnome.enable = true;
           enable = true;
           windowManager.dwm.enable = true;
           windowManager.i3.enable = true;
