@@ -1,0 +1,31 @@
+{ config, pkgs, ... }:
+{
+  environment.systemPackages = with pkgs; [
+    pulse14.pulseaudioFull
+    pgcli
+    jetbrains.idea-community
+    slock
+    vim
+    wget
+    emacs
+    git
+    firefox
+    arandr
+    st
+    pavucontrol
+    spotify
+    pass
+    pinentry-gtk2
+    nixpkgs-fmt
+    tmux
+    libimobiledevice
+    ifuse
+    tor-browser-bundle-bin
+    scala
+    sbt
+    xorg.xbacklight
+    metals
+    monero-gui
+    file
+  ];
+}
