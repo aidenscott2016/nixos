@@ -24,6 +24,8 @@
   location.provider = "geoclue2";
   services =
     {
+      avahi.enable = true;
+      avahi.nssmdns = true;
 
       geoclue2.enable = true;
       redshift = {
