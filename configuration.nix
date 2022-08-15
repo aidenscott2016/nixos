@@ -3,16 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-with builtins; let
-  pulse14 = import
-    (fetchTarball {
-      name = "pulse14";
-      url = "https://github.com/NixOS/nixpkgs/archive/17dbf56cea00eb47fa77ab1efbce75faef4b505c.zip";
-    })
-    { };
 
-
-in
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -56,15 +47,12 @@ in
     };
 
 
-  #sound.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = false;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
   };
 
   hardware = {
@@ -72,7 +60,6 @@ in
     bluetooth.enable = true;
     pulseaudio = {
       enable = true;
-      package = pulse14.pulseaudioFull;
     };
   };
 
@@ -85,34 +72,6 @@ in
 
   nixpkgs.config.allowUnfree = true;
   virtualisation.docker.enable = true;
-  environment.systemPackages = with pkgs; [
-    pulse14.pulseaudioFull
-    pgcli
-    jetbrains.idea-community
-    slock
-    vim
-    wget
-    emacs
-    git
-    firefox
-    arandr
-    st
-    pavucontrol
-    spotify
-    pass
-    pinentry-gtk2
-    nixpkgs-fmt
-    tmux
-    libimobiledevice
-    ifuse
-    tor-browser-bundle-bin
-    scala
-    sbt
-    xorg.xbacklight
-    metals
-    monero-gui
-    file
-  ];
 
   programs.gnupg.agent = {
     enable = true;
@@ -122,16 +81,6 @@ in
 
   programs.nm-applet.enable = true;
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
