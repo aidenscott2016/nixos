@@ -1,4 +1,7 @@
 { config, pkgs, ... }:
+let
+  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+in
 {
   environment.systemPackages = with pkgs; [
     pgcli
@@ -24,7 +27,7 @@
     sbt
     xorg.xbacklight
     metals
-    monero-gui
+    unstable.monero-gui
     file
   ];
 }

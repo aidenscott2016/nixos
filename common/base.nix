@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ../../common/packages.nix ];
+  imports = [ ./packages.nix ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -35,6 +35,7 @@
       xserver =
         {
           enable = true;
+          desktopManager.plasma5.enable = true;
           windowManager.dwm.enable = true;
           windowManager.i3.enable = true;
           layout = "gb";
@@ -123,4 +124,3 @@
 
 
 }
-
