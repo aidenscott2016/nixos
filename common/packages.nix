@@ -29,5 +29,16 @@ in
     metals
     unstable.monero-gui
     file
+    flyway
+    pcmanfm
+    libheif
+    imagemagick
+    nicotine-plus
+    vlc
+    hledger
+    hledger-web
+    powertop
+    coreboot-utils
+    flashrom
   ];
 }

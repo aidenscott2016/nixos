@@ -6,6 +6,7 @@
 
 {
   imports = [ ./hardware-configuration.nix ../../common/packages.nix ];
+  nix.settings.auto-optimise-store = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
