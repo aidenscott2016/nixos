@@ -40,5 +40,10 @@ in
     powertop
     coreboot-utils
     flashrom
+    bintools-unwrapped
+    slack
+    chromium
+    libreoffice
+    scrot
   ];
 }
