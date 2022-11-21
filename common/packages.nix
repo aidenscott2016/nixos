@@ -45,5 +45,10 @@ in
     chromium
     libreoffice
     scrot
+    jetbrains.phpstorm
+    php
+    jq
+    steam
+    docker-compose
   ];
 }
