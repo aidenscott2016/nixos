@@ -71,7 +71,7 @@
   users.users.aiden = {
     initialPassword = "password";
     isNormalUser = true;
-    extraGroups = [ "wheel" "disk" "docker" ];
+    extraGroups = [ "wheel" "disk" "docker" "cheese" ];
   };
   security.sudo.wheelNeedsPassword = false;
 

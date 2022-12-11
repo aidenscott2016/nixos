@@ -50,5 +50,6 @@ in
     jq
     steam
     docker-compose
+    xdotool
   ];
 }
