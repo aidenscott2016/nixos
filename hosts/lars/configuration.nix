@@ -111,6 +111,10 @@
       device = "/dev/disk/by-uuid/e754208b-f961-48f3-8f00-dc636f3c646d";
       preLVM = true;
     };
+    home = {
+      device = "/dev/disk/by-label/870-evo";
+      preLVM = true;
+    };
   };
 
   nix.extraOptions = "experimental-features = nix-command flakes";
