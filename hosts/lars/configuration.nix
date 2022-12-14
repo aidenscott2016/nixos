@@ -11,7 +11,7 @@
     logRefusedConnections = true;
     enable = true;
 
-    # xdebug. I want to narrow this down to  just the docker interface but the veth changes every time
+    # xdebug. I want to narrow this down to just the docker interface but the veth changes every time
     allowedTCPPorts = [ 9000 ];
     allowedUDPPorts = [ 9000 ];
   };
@@ -33,6 +33,7 @@
   location.provider = "geoclue2";
   services =
     {
+      autorandr = { enable = true; };
       avahi.enable = true;
       avahi.nssmdns = true;
 
@@ -45,7 +46,6 @@
         {
           enable = true;
           windowManager.dwm.enable = true;
-          windowManager.i3.enable = true;
           layout = "gb";
           xkbOptions = "caps:swapescape";
           libinput.enable = true;

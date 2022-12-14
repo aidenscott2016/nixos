@@ -51,5 +51,10 @@ in
     steam
     docker-compose
     xdotool
+    dmenu
+    i3lock
+    libnotify
+    busybox
+    dunst
   ];
 }
