@@ -30,7 +30,7 @@
     useXkbConfig = true;
   };
 
-  location.provider = "geoclue2";
+  location.provider = "geoclue2"; # for Redshift
   services =
     {
       auto-cpufreq.enable = true;
@@ -58,21 +58,16 @@
 
     };
 
-
-  security.rtkit.enable = true;
-
   hardware = {
     enableAllFirmware = true;
     bluetooth.enable = true;
-    pulseaudio = {
-      enable = true;
-    };
+    pulseaudio.enable = true;
   };
 
   users.users.aiden = {
     initialPassword = "password";
     isNormalUser = true;
-    extraGroups = [ "wheel" "disk" "docker" ];
+    extraGroups = [ "wheel" "disk" "docker" "cheese" ];
   };
   security.sudo.wheelNeedsPassword = false;
 
@@ -89,8 +84,8 @@
 
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
   };
 
 
