@@ -1,9 +1,7 @@
-{ config, pkgs, ... }:
-# let
-#   unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
-# in
+{ config, pkgs, inputs, ... }:
 {
   environment.systemPackages = with pkgs; [
+    inputs.maimpick.packages.x86_64-linux.maimpick
     pgcli
     jetbrains.idea-community
     slock
