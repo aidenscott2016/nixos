@@ -33,6 +33,7 @@
   location.provider = "geoclue2";
   services =
     {
+      auto-cpufreq.enable = true;
       autorandr = { enable = true; };
       avahi.enable = true;
       avahi.nssmdns = true;
@@ -45,7 +46,7 @@
       xserver =
         {
           enable = true;
-          windowManager.i3.enable = true;
+          windowManager.dwm.enable = true;
           layout = "gb";
           xkbOptions = "caps:swapescape";
           libinput.enable = true;
