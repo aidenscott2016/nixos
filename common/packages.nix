@@ -56,5 +56,6 @@ in
     libnotify
     busybox
     dunst
+    gnumake
   ];
 }
