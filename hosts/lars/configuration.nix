@@ -45,7 +45,7 @@
       xserver =
         {
           enable = true;
-          windowManager.dwm.enable = true;
+          windowManager.i3.enable = true;
           layout = "gb";
           xkbOptions = "caps:swapescape";
           libinput.enable = true;
