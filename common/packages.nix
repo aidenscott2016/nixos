@@ -1,7 +1,6 @@
 { config, pkgs, maimpick, ... }:
 {
   environment.systemPackages = with pkgs; [
-    #maimpick.packages.x86_64-linux.maimpick
     maimpick
     pgcli
     jetbrains.idea-community
@@ -26,7 +25,7 @@
     sbt
     xorg.xbacklight
     metals
-    #unstable.monero-gui
+    monero-gui
     file
     pcmanfm
     libheif
