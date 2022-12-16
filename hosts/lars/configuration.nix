@@ -33,6 +33,12 @@
   location.provider = "geoclue2"; # for Redshift
   services =
     {
+
+      fstrim.enable = true;
+
+      #this is enabled by hardware-support. It is unecessary since
+      #there is an SSD
+      hdapsd.enable = false;
       upower.enable = true;
       auto-cpufreq.enable = true;
       autorandr = { enable = true; };
@@ -137,6 +143,6 @@
   # ];
 
 
-
 }
+
 
