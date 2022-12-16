@@ -33,6 +33,7 @@
   location.provider = "geoclue2"; # for Redshift
   services =
     {
+      upower.enable = true;
       auto-cpufreq.enable = true;
       autorandr = { enable = true; };
       avahi.enable = true;

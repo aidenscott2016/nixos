@@ -54,5 +54,6 @@
     libnotify
     busybox
     dunst
+    acpi # seems to provide more accurate charging status than upower. cf the underpowered anker charger
   ];
 }
