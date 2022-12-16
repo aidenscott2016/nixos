@@ -27,7 +27,6 @@
     metals
     #unstable.monero-gui
     file
-    flyway
     pcmanfm
     libheif
     imagemagick
@@ -55,5 +54,8 @@
     psmisc
     dunst
     acpi # seems to provide more accurate charging status than upower. cf the underpowered anker charger
+    cbatticon
+    pamixer
+    xsettingsd
   ];
 }
