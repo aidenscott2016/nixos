@@ -52,7 +52,7 @@
     dmenu
     i3lock
     libnotify
-    busybox
+    psmisc
     dunst
     acpi # seems to provide more accurate charging status than upower. cf the underpowered anker charger
   ];
