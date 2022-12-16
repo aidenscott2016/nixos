@@ -1,0 +1,128 @@
+{
+  "nodes": {
+    "dwm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1671021689,
+        "narHash": "sha256-HGKtTEDVgPvmCkAXofgCwtYqqJtYjiHPILlBmhyh9Os=",
+        "owner": "aidenscott2016",
+        "repo": "dwm",
+        "rev": "197f018b9c7e84f63fb69ee6442c31266fca3506",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aidenscott2016",
+        "repo": "dwm",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "maimpick": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs",
+        "voidrice": "voidrice"
+      },
+      "locked": {
+        "lastModified": 1669583894,
+        "narHash": "sha256-69iig9+cgQuKX8y+MSHwnh6a74wLc6HFdKAWu59flR8=",
+        "owner": "aidenscott2016",
+        "repo": "larbs-flake",
+        "rev": "411271365b6b75b8d928dc555ccde17c92f3d092",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aidenscott2016",
+        "repo": "larbs-flake",
+        "type": "github"
+      }
+    },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1670959777,
+        "narHash": "sha256-9nQJWL7S77YZERxairPLFO6TUuF1RgQmdZO6dKRCHz4=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "0fbf27af51a7c9bc68a168fdcd63513c4f100b15",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1669568537,
+        "narHash": "sha256-OI+XMgKFgZjx6bjl+0hAvFO1Jn3RPQ+QZtib90hKGp0=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "f56d74c14806d7cdfae292d9d48de81c68f4c6a2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1670929434,
+        "narHash": "sha256-n5UBO6XBV4h3TB7FYu2yAuNQMEYOrQyKeODUwKe06ow=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "1710ed1f6f8ceb75cf7d1cf55ee0cc21760e1c7a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "dwm": "dwm",
+        "maimpick": "maimpick",
+        "nixos-hardware": "nixos-hardware",
+        "nixpkgs": "nixpkgs_2"
+      }
+    },
+    "voidrice": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1668894398,
+        "narHash": "sha256-racV4u/pE8Z8h4uAJy6UKaU+i36F8FCeq+JIVs8+9rE=",
+        "owner": "LukeSmithxyz",
+        "repo": "voidrice",
+        "rev": "450745a467524a0bacdae2679deb370ac2a2e9d5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LukeSmithxyz",
+        "repo": "voidrice",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

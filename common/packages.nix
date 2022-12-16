@@ -1,9 +1,8 @@
-{ config, pkgs, ... }:
-let
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
-in
+{ config, pkgs, maimpick, ... }:
 {
   environment.systemPackages = with pkgs; [
+    #maimpick.packages.x86_64-linux.maimpick
+    maimpick
     pgcli
     jetbrains.idea-community
     slock
@@ -27,9 +26,8 @@ in
     sbt
     xorg.xbacklight
     metals
-    unstable.monero-gui
+    #unstable.monero-gui
     file
-    flyway
     pcmanfm
     libheif
     imagemagick
@@ -54,8 +52,11 @@ in
     dmenu
     i3lock
     libnotify
-    busybox
+    psmisc
     dunst
-    gnumake
+    acpi # seems to provide more accurate charging status than upower. cf the underpowered anker charger
+    cbatticon
+    pamixer
+    xsettingsd
   ];
 }
