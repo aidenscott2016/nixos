@@ -134,13 +134,6 @@
     };
   };
 
-  # nixpkgs.overlays = [
-  #   (self: super: {
-  #     dwm = super.dwm.overrideAttrs (oldAttrs: rec {
-  #       src = builtins.fetchGit https://github.com/aidenscott2016/dwm;
-  #     });
-  #   })
-  # ];
 
 
 }

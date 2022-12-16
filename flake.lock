@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "dwm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1671021689,
+        "narHash": "sha256-HGKtTEDVgPvmCkAXofgCwtYqqJtYjiHPILlBmhyh9Os=",
+        "owner": "aidenscott2016",
+        "repo": "dwm",
+        "rev": "197f018b9c7e84f63fb69ee6442c31266fca3506",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aidenscott2016",
+        "repo": "dwm",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1667395993,
@@ -84,6 +100,7 @@
     },
     "root": {
       "inputs": {
+        "dwm": "dwm",
         "maimpick": "maimpick",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2"

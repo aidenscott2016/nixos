@@ -1,7 +1,8 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, maimpick, ... }:
 {
   environment.systemPackages = with pkgs; [
-    inputs.maimpick.packages.x86_64-linux.maimpick
+    #maimpick.packages.x86_64-linux.maimpick
+    maimpick
     pgcli
     jetbrains.idea-community
     slock
