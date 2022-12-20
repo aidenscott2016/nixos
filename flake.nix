@@ -9,22 +9,15 @@
   };
 
   outputs = inputs@{ nixpkgs, nixos-hardware, dwm, maimpick, ... }:
-    let
-      my-dwm = (self: super: {
-        dwm = super.dwm.overrideAttrs (_: {
-          src = dwm;
-        });
-      });
-    in
     {
       nixosConfigurations = {
-
         lars = nixpkgs.lib.nixosSystem rec {
           system = "x86_64-linux";
           modules = [
             ./hosts/lars/configuration.nix
             nixos-hardware.nixosModules.lenovo-thinkpad-x220
-            { nixpkgs.overlays = [ my-dwm ]; }
+            { nixpkgs.overlays = [ dwm.overlays.default ]; }
+            dwm.nixosModules.default
           ];
           specialArgs = { maimpick = inputs.maimpick; };
         };

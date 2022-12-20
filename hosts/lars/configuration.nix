@@ -153,17 +153,5 @@
         '';
     };
   };
-
-
-  services.xserver.windowManager.session = lib.singleton {
-    name = "dwm+aiden";
-    start =
-      ''
-        startdwm &
-        waitPID=$!
-      '';
-  };
-
 }
-
 
