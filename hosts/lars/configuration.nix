@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [ ./hardware-configuration.nix ../../common/packages.nix ];
@@ -58,7 +58,7 @@
             };
             mobile = {
               inherit fingerprint;
-              config = { LVDS-1.enable = true; DP-2.enable = false; };
+              config = { LVDS-1.enable = true; DP-2.enable = false; LVDS-1.mode = "1366x768"; };
             };
           };
       };
@@ -155,6 +155,14 @@
   };
 
 
+  services.xserver.windowManager.session = lib.singleton {
+    name = "dwm+aiden";
+    start =
+      ''
+        startdwm &
+        waitPID=$!
+      '';
+  };
 
 }
 

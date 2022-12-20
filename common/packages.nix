@@ -1,7 +1,7 @@
 { config, pkgs, maimpick, ... }:
 {
   environment.systemPackages = with pkgs; [
-    maimpick
+    maimpick.packages.x86_64-linux.maimpick
     pgcli
     jetbrains.idea-community
     slock
@@ -57,5 +57,8 @@
     cbatticon
     pamixer
     xsettingsd
+    transmission-gtk
+    playerctl
+    terraform
   ];
 }

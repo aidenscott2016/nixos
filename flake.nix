@@ -5,7 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     maimpick.url = "github:aidenscott2016/larbs-flake";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    dwm = { url = "github:aidenscott2016/dwm"; flake = false; };
+    dwm = { url = "github:aidenscott2016/dwm"; };
   };
 
   outputs = inputs@{ nixpkgs, nixos-hardware, dwm, maimpick, ... }:

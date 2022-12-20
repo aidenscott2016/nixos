@@ -1,13 +1,15 @@
 {
   "nodes": {
     "dwm": {
-      "flake": false,
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
       "locked": {
-        "lastModified": 1671021689,
-        "narHash": "sha256-HGKtTEDVgPvmCkAXofgCwtYqqJtYjiHPILlBmhyh9Os=",
+        "lastModified": 1671444842,
+        "narHash": "sha256-jiaKd9F5bD+dfStGoSwOmVFUVHzrMyNN28zjphW2sJ0=",
         "owner": "aidenscott2016",
         "repo": "dwm",
-        "rev": "197f018b9c7e84f63fb69ee6442c31266fca3506",
+        "rev": "179b37464b1d57de72ca1569d75d8251df3af4d9",
         "type": "github"
       },
       "original": {
@@ -34,15 +36,15 @@
     "maimpick": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "voidrice": "voidrice"
       },
       "locked": {
-        "lastModified": 1669583894,
-        "narHash": "sha256-69iig9+cgQuKX8y+MSHwnh6a74wLc6HFdKAWu59flR8=",
+        "lastModified": 1671554309,
+        "narHash": "sha256-114Abx3Mk34g6mx0ru6WNDcn/pi7gH2uUklpCvOxVEQ=",
         "owner": "aidenscott2016",
         "repo": "larbs-flake",
-        "rev": "411271365b6b75b8d928dc555ccde17c92f3d092",
+        "rev": "2906f27ff79a89015e5e5bc7c81d7be14f498265",
         "type": "github"
       },
       "original": {
@@ -69,6 +71,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1671215800,
+        "narHash": "sha256-2W54K41A7MefEaWzgL/TsaWlhKRK/RhWUybyOW4i0K8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "9d692a724e74d2a49f7c985132972f991d144254",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-22.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1669568537,
         "narHash": "sha256-OI+XMgKFgZjx6bjl+0hAvFO1Jn3RPQ+QZtib90hKGp0=",
         "owner": "nixos",
@@ -82,7 +100,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_2": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1670929434,
         "narHash": "sha256-n5UBO6XBV4h3TB7FYu2yAuNQMEYOrQyKeODUwKe06ow=",
@@ -103,7 +121,7 @@
         "dwm": "dwm",
         "maimpick": "maimpick",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       }
     },
     "voidrice": {
