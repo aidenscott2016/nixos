@@ -54,7 +54,11 @@
           {
             docked = {
               inherit fingerprint;
-              config = { LVDS-1.enable = false; DP-2.enable = true; };
+              config = {
+                LVDS-1.enable = false;
+                DP-2.enable = true;
+                DP-2.mode = "2560x1440";
+              };
             };
             mobile = {
               inherit fingerprint;
