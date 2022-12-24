@@ -60,5 +60,6 @@
     transmission-gtk
     playerctl
     terraform
+    networkmanagerapplet
   ];
 }
