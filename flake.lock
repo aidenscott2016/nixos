@@ -7,11 +7,10 @@
       "locked": {
         "lastModified": 1671704209,
         "narHash": "sha256-pDEUd8CeA/jLdBAQTKXhDYdH1i9gvqw/BXUIW0Y3bZ8=",
-        "ref": "refs/heads/master",
+        "owner": "aidenscott2016",
+        "repo": "dwm",
         "rev": "98153dbe2222445aee2c323c3cdef31e9c18cba4",
-        "shallow": true,
-        "type": "git",
-        "url": "file:///home/aiden/src/dwm"
+        "type": "github"
       },
       "original": {
         "owner": "aidenscott2016",
@@ -34,10 +33,29 @@
         "type": "github"
       }
     },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2",
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1673343300,
+        "narHash": "sha256-5Xdj6kpXYMie0MlnGwqK5FaMdsedxvyuakWtyKB3zaQ=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "176e455371a8371586e8a3ff0d56ee9f3ca2324e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "maimpick": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "voidrice": "voidrice"
       },
       "locked": {
@@ -56,11 +74,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1670959777,
-        "narHash": "sha256-9nQJWL7S77YZERxairPLFO6TUuF1RgQmdZO6dKRCHz4=",
+        "lastModified": 1673336835,
+        "narHash": "sha256-HMJ/Nt3+0MtgKfPfJSrC3/6yVAPQvZgv/7V9b49dG/c=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "0fbf27af51a7c9bc68a168fdcd63513c4f100b15",
+        "rev": "df029cfefc7494b399966cbb6b4fd692fa294fa3",
         "type": "github"
       },
       "original": {
@@ -88,6 +106,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1671983799,
+        "narHash": "sha256-Z2Ro6hFPZHkBqkVXY5/aBUzxi5xizQGvuHQ9+T5B/ks=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "fad51abd42ca17a60fc1d4cb9382e2d79ae31836",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1669568537,
         "narHash": "sha256-OI+XMgKFgZjx6bjl+0hAvFO1Jn3RPQ+QZtib90hKGp0=",
         "owner": "nixos",
@@ -101,13 +135,13 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
-        "lastModified": 1670929434,
-        "narHash": "sha256-n5UBO6XBV4h3TB7FYu2yAuNQMEYOrQyKeODUwKe06ow=",
+        "lastModified": 1673226411,
+        "narHash": "sha256-b6cGb5Ln7Zy80YO66+cbTyGdjZKtkoqB/iIIhDX9gRA=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1710ed1f6f8ceb75cf7d1cf55ee0cc21760e1c7a",
+        "rev": "aa1d74709f5dac623adb4d48fdfb27cc2c92a4d4",
         "type": "github"
       },
       "original": {
@@ -120,9 +154,25 @@
     "root": {
       "inputs": {
         "dwm": "dwm",
+        "home-manager": "home-manager",
         "maimpick": "maimpick",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
+      }
+    },
+    "utils": {
+      "locked": {
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
       }
     },
     "voidrice": {

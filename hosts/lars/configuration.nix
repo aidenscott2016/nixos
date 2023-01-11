@@ -73,7 +73,10 @@
       redshift = {
         enable = true;
       };
-      usbmuxd.enable = true;
+      usbmuxd = {
+        enable = true;
+        package = pkgs.usbmuxd2;
+      };
       xserver =
         {
           enable = true;
@@ -95,6 +98,7 @@
     pulseaudio.enable = true;
   };
 
+  users.groups.cheese = { };
   users.users.aiden = {
     initialPassword = "password";
     isNormalUser = true;
@@ -149,13 +153,15 @@
     _JAVA_AWT_WM_NONREPARENTING = "1";
     AWT_TOOLKIT = "MToolkit";
   };
-  environment.etc = {
-    "fuse.conf" = {
-      text =
-        ''
-          user_allow_other
-        '';
-    };
-  };
+  # environment.etc = {
+  #   "fuse.conf" = {
+  #     text =
+  #       ''
+  #         user_allow_other
+  #       '';
+  #   };
+  # };
+
+  services.gvfs.enable = true;
 }
 
