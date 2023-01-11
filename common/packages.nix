@@ -60,6 +60,7 @@
     transmission-gtk
     playerctl
     terraform
+    cifs-utils
     networkmanagerapplet
   ];
 }
