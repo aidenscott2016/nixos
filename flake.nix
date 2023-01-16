@@ -10,20 +10,13 @@
   };
 
   outputs = inputs@{ nixpkgs, nixos-hardware, dwm, maimpick, home-manager, ... }:
-    # let
-    #   home-manager-module = home-manager.nixosModules.home-manager {
-    #     home-manager.useGlobalPkgs = true;
-    #     home-manager.useUserPackages = true;
-    #     home-manager.users.aiden = import ./home/home.nix;
-
-    #   };
-    # in
     {
       nixosConfigurations = {
-        lars = nixpkgs.lib.nixosSystem rec {
+        lars = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./hosts/lars/configuration.nix
+            ./common/default.nix
             nixos-hardware.nixosModules.lenovo-thinkpad-x220
             { nixpkgs.overlays = [ dwm.overlays.default ]; }
             dwm.nixosModules.default

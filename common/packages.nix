@@ -62,5 +62,7 @@
     terraform
     cifs-utils
     networkmanagerapplet
+    xclip
+    postman
   ];
 }
