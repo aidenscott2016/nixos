@@ -53,7 +53,7 @@
     libnotify
     psmisc
     dunst
-    acpi # seems to provide more accurate charging status than upower. cf the underpowered anker charger
+    acpi # seems to provide more accurate charging status than upower. see the underpowered anker charger
     cbatticon
     pamixer
     xsettingsd
@@ -65,5 +65,6 @@
     xclip
     postman
     discord
+    silver-searcher
   ];
 }
