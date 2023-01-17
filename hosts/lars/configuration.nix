@@ -1,7 +1,14 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ../../common/packages.nix ../../modules/ios.nix ./autorandr ];
+  imports = [
+    ./hardware-configuration.nix
+    ./packages.nix
+    ../../modules/ios.nix
+    ./autorandr
+    ../../modules/redshift.nix
+    ../../modules/printer.nix
+  ];
 
   networking.firewall = {
     logRefusedConnections = true;
@@ -17,15 +24,8 @@
   networking.hostName = "lars";
   networking.networkmanager.enable = true;
 
-  time.timeZone = "Europe/London";
 
-  i18n.defaultLocale = "en_GB.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    useXkbConfig = true;
-  };
 
-  location.provider = "geoclue2"; # for Redshift
   services =
     {
       fstrim.enable = true;
@@ -34,14 +34,8 @@
       hdapsd.enable = false;
       upower.enable = true;
       auto-cpufreq.enable = true;
-      avahi.enable = true;
-      avahi.nssmdns = true;
 
-      #redshift
-      geoclue2.enable = true;
-      redshift = {
-        enable = true;
-      };
+
       xserver =
         {
           enable = true;
@@ -49,10 +43,6 @@
           xkbOptions = "caps:swapescape";
           libinput.enable = true;
         };
-
-      printing.enable = true;
-      printing.drivers = [ pkgs.hplip ];
-      pcscd.enable = true;
 
     };
 
@@ -92,11 +82,6 @@
     };
   };
 
-  # could be moved to DWM
-  environment.sessionVariables = rec {
-    _JAVA_AWT_WM_NONREPARENTING = "1";
-    AWT_TOOLKIT = "MToolkit";
-  };
 
   services.gvfs.enable = true;
 }

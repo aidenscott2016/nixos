@@ -2,13 +2,6 @@
 
 with lib;
 {
-  options = {
-    extraGroups = mkOption {
-      type = types.listOf types.str;
-      default = [ ];
-      description = lib.mdDoc "The user's auxiliary groups.";
-    };
-  };
   config = {
     system.stateVersion = "22.05";
     nixpkgs.config.allowUnfree = true;
