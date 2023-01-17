@@ -64,5 +64,6 @@
     networkmanagerapplet
     xclip
     postman
+    discord
   ];
 }
