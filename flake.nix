@@ -15,10 +15,9 @@
         lars = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            ./hosts/lars/configuration.nix
             ./common/default.nix
+            ./hosts/lars/configuration.nix
             nixos-hardware.nixosModules.lenovo-thinkpad-x220
-            { nixpkgs.overlays = [ dwm.overlays.default ]; }
             dwm.nixosModules.default
             home-manager.nixosModules.home-manager
             {

@@ -5,13 +5,12 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1671704209,
-        "narHash": "sha256-pDEUd8CeA/jLdBAQTKXhDYdH1i9gvqw/BXUIW0Y3bZ8=",
-        "ref": "refs/heads/master",
-        "rev": "98153dbe2222445aee2c323c3cdef31e9c18cba4",
-        "shallow": true,
-        "type": "git",
-        "url": "file:///home/aiden/src/dwm"
+        "lastModified": 1673951172,
+        "narHash": "sha256-5PhOomsBgIs0ISUJhw3YhBsDoHViO2BLQKBMRCbcSdU=",
+        "owner": "aidenscott2016",
+        "repo": "dwm",
+        "rev": "843ff6cca850c3e3b5ffff7e62cac64257c342bd",
+        "type": "github"
       },
       "original": {
         "owner": "aidenscott2016",
