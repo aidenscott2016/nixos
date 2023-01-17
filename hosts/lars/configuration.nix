@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ../../common/packages.nix ../../modules/ios.nix ../../modules/autorandr.nix ];
+  imports = [ ./hardware-configuration.nix ../../common/packages.nix ../../modules/ios.nix ./autorandr ];
 
   networking.firewall = {
     logRefusedConnections = true;
@@ -37,6 +37,7 @@
       avahi.enable = true;
       avahi.nssmdns = true;
 
+      #redshift
       geoclue2.enable = true;
       redshift = {
         enable = true;
@@ -44,7 +45,6 @@
       xserver =
         {
           enable = true;
-          windowManager.dwm.enable = true;
           layout = "gb";
           xkbOptions = "caps:swapescape";
           libinput.enable = true;
@@ -92,6 +92,7 @@
     };
   };
 
+  # could be moved to DWM
   environment.sessionVariables = rec {
     _JAVA_AWT_WM_NONREPARENTING = "1";
     AWT_TOOLKIT = "MToolkit";
