@@ -12,6 +12,23 @@
   outputs = inputs@{ nixpkgs, nixos-hardware, dwm, maimpick, home-manager, ... }:
     {
       nixosConfigurations = {
+        locutus = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./common/default.nix
+            ./hosts/lars/configuration.nix
+            nixos-hardware.nixosModules.lenovo-thinkpad-x
+            dwm.nixosModules.default
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.aiden = import ./home/home.nix;
+
+            }
+          ];
+          specialArgs = { maimpick = inputs.maimpick; /*i think maimpick should be made in to a module?*/ };
+        };
         lars = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
