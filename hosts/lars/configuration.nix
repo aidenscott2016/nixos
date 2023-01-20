@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, maimpick, ... }:
 
 {
   imports = [
@@ -8,6 +8,9 @@
     ./autorandr
     ../../modules/redshift.nix
     ../../modules/printer.nix
+  ];
+  environment.systemPackages = with pkgs; [
+    maimpick.packages.x86_64-linux.maimpick
   ];
 
   networking.firewall = {
