@@ -1,7 +1,7 @@
 { config, pkgs, maimpick, ... }:
 {
   environment.systemPackages = with pkgs; [
-    maimpick.packages.x86_64-linux.maimpick
+    maimpick.packages."${system}".maimpick
     pgcli
     jetbrains.idea-community
     slock
@@ -69,3 +69,4 @@
     pinta
   ];
 }
+
