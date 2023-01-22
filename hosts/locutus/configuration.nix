@@ -21,7 +21,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "lars";
+  networking.hostName = "locutus";
   networking.networkmanager.enable = true;
 
 
@@ -73,11 +73,7 @@
 
   boot.initrd.luks.devices = {
     root = {
-      device = "/dev/disk/by-uuid/e754208b-f961-48f3-8f00-dc636f3c646d";
-      preLVM = true;
-    };
-    home = {
-      device = "/dev/disk/by-label/870-evo";
+      device = "/dev/disk/by-id/nvme-eui.0025388301b4ecd7-part2";
       preLVM = true;
     };
   };

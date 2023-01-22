@@ -12,7 +12,7 @@ with lib;
     users.users.aiden = {
       initialPassword = "password";
       isNormalUser = true;
-      extraGroups = [ "wheel" "disk" "docker" "cheese" ];
+      extraGroups = [ "wheel" "disk" "docker" "cheese" "networkmanager" ];
     };
 
     time.timeZone = "Europe/London";
@@ -21,6 +21,12 @@ with lib;
       font = "Lat2-Terminus16";
       useXkbConfig = true;
     };
+    services.xserver =
+      {
+        layout = "gb";
+        xkbOptions = "caps:swapescape";
+        libinput.enable = true;
+      };
   };
 
 }

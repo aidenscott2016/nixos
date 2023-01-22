@@ -17,7 +17,7 @@
     pass
     pinentry-gtk2
     nixpkgs-fmt
-    tmux
+    #tmux
     libimobiledevice
     ifuse
     tor-browser-bundle-bin
