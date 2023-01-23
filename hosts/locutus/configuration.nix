@@ -8,6 +8,7 @@
     ./autorandr
     ../../modules/redshift.nix
     ../../modules/printer.nix
+    ./disko.nix
   ];
 
   networking.firewall = {
@@ -73,7 +74,7 @@
 
   boot.initrd.luks.devices = {
     root = {
-      device = "/dev/disk/by-id/nvme-eui.0025388301b4ecd7-part2";
+      device = "/dev/nvme0n1p2";
       preLVM = true;
     };
   };

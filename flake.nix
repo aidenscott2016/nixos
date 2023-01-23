@@ -27,12 +27,15 @@
       };
     in
     {
+      diskoConfigurations = {
+        locutus = import ./hosts/locutus/disko.nix;
+      };
       nixosConfigurations = {
         locutus = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./common/default.nix
-            ./hosts/lars/configuration.nix
+            ./hosts/locutus/configuration.nix
             dwm.nixosModules.default
             disko.nixosModules.disko
           ];
