@@ -15,7 +15,7 @@
 
 
   services.openssh.enable = true;
-    services.openssh.passwordAuthentication = false;
+  services.openssh.passwordAuthentication = false;
 
   networking.firewall = {
     logRefusedConnections = true;
@@ -43,13 +43,7 @@
       auto-cpufreq.enable = true;
 
 
-      xserver =
-        {
-          enable = true;
-          layout = "gb";
-          xkbOptions = "caps:swapescape";
-          libinput.enable = true;
-        };
+      xserver.enable = true;
 
     };
 

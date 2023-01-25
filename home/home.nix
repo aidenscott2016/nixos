@@ -7,5 +7,7 @@
   xdg.configFile."emacs/init.el".source = ./files/init.el;
   xdg.enable = true;
 
+  programs.ssh.matchBlocks."gitlab.com".identityFile = "~/.ssh/gitlab";
+
 }
 

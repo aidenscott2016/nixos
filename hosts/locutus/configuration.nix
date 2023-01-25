@@ -37,13 +37,7 @@
       auto-cpufreq.enable = true;
 
 
-      xserver =
-        {
-          enable = true;
-          layout = "gb";
-          xkbOptions = "caps:swapescape";
-          libinput.enable = true;
-        };
+      xserver.enable = true;
 
     };
 
