@@ -9,6 +9,5 @@
 
   programs.ssh.enable = true;
   programs.ssh.matchBlocks."gitlab.com".identityFile = "~/.ssh/gitlab";
-
+  programs.ssh.matchBlocks."10.0.4.*".identityFile = "~/.ssh/local";
 }
-
