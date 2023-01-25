@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
+    maimpick.packages."${system}".maimpick
     pgcli
     jetbrains.idea-community
     slock

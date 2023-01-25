@@ -41,6 +41,7 @@
             home-manager.nixosModules.home-manager
             home-manager-config
           ];
+          specialArgs = inputs;
         };
         lars = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
