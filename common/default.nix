@@ -34,8 +34,6 @@ with lib;
         VISUAL = "vim";
       };
 
-    programs.ssh.startAgent = true;
-
   };
 
 }

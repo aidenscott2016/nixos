@@ -38,6 +38,8 @@
             ./hosts/locutus/configuration.nix
             dwm.nixosModules.default
             disko.nixosModules.disko
+            home-manager.nixosModules.home-manager
+            home-manager-config
           ];
         };
         lars = nixpkgs.lib.nixosSystem {
