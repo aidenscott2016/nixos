@@ -13,6 +13,10 @@
     maimpick.packages.x86_64-linux.maimpick
   ];
 
+
+  services.openssh.enable = true;
+    services.openssh.passwordAuthentication = false;
+
   networking.firewall = {
     logRefusedConnections = true;
     enable = true;
