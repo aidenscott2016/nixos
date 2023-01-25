@@ -62,11 +62,6 @@
             home-manager.nixosModules.home-manager
             {
 
-              environment.sessionVariables =
-                {
-                  EDITOR = "vim";
-                  VISUAL = "vim";
-                };
               services.logind.extraConfig = "HandleLidSwitch=ignore";
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;

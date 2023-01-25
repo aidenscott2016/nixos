@@ -27,6 +27,12 @@ with lib;
         xkbOptions = "caps:swapescape";
         libinput.enable = true;
       };
+
+    environment.sessionVariables =
+      {
+        EDITOR = "vim";
+        VISUAL = "vim";
+      };
   };
 
 }
