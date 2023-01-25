@@ -9,7 +9,8 @@ inputs@{ config, pkgs, ... }:
     wget
     emacs
     git
-    firefox
+    #    firefox
+
     arandr
     st
     pavucontrol

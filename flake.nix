@@ -13,6 +13,8 @@
     };
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+    nur.url = "github:nix-community/NUR";
+    firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
   };
 
 
@@ -23,7 +25,7 @@
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.users.aiden = import ./home/home.nix;
-
+        home-manager.extraSpecialArgs = inputs;
       };
     in
     {
