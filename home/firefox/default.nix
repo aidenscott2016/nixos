@@ -19,6 +19,7 @@ in
         "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
         "browser.newtabpage.activity-stream.feeds.topsites" = false;
         "browser.newtabpage.activity-stream.showSearch" = false;
+        "browser.urlbar.suggest.topsites" = false;
       };
     };
     extensions = with addons; [
