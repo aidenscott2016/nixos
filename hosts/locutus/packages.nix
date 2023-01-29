@@ -1,7 +1,7 @@
-{ config, pkgs, maimpick, ... }:
+inputs@{ config, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    maimpick.packages."${system}".maimpick
+    inputs.maimpick.packages."${system}".maimpick
     pgcli
     jetbrains.idea-community
     slock
@@ -9,7 +9,8 @@
     wget
     emacs
     git
-    firefox
+    #    firefox
+
     arandr
     st
     pavucontrol
@@ -17,7 +18,7 @@
     pass
     pinentry-gtk2
     nixpkgs-fmt
-    #tmux
+    tmux
     libimobiledevice
     ifuse
     tor-browser-bundle-bin
@@ -69,4 +70,3 @@
     pinta
   ];
 }
-

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, maimpick, ... }:
 
 {
   imports = [
@@ -9,6 +9,13 @@
     ../../modules/redshift.nix
     ../../modules/printer.nix
   ];
+  environment.systemPackages = with pkgs; [
+    maimpick.packages.x86_64-linux.maimpick
+  ];
+
+
+  services.openssh.enable = true;
+  services.openssh.passwordAuthentication = false;
 
   networking.firewall = {
     logRefusedConnections = true;
@@ -36,13 +43,7 @@
       auto-cpufreq.enable = true;
 
 
-      xserver =
-        {
-          enable = true;
-          layout = "gb";
-          xkbOptions = "caps:swapescape";
-          libinput.enable = true;
-        };
+      xserver.enable = true;
 
     };
 

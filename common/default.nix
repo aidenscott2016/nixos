@@ -12,7 +12,11 @@ with lib;
     users.users.aiden = {
       initialPassword = "password";
       isNormalUser = true;
-      extraGroups = [ "wheel" "disk" "docker" "cheese" ];
+      extraGroups = [ "wheel" "disk" "docker" "cheese" "networkmanager" ];
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIgHxgT0rlJDXl+opb7o2JSfjd5lJZ6QTRr57N0MIAyN aiden@lars"
+      ];
+
     };
 
     time.timeZone = "Europe/London";
@@ -21,6 +25,17 @@ with lib;
       font = "Lat2-Terminus16";
       useXkbConfig = true;
     };
-  };
+    services.xserver =
+      {
+        layout = "gb";
+        xkbOptions = "caps:swapescape";
+        libinput.enable = true;
+      };
 
+    environment.sessionVariables =
+      {
+        EDITOR = "vim";
+        VISUAL = "vim";
+      };
+  };
 }
