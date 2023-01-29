@@ -76,5 +76,7 @@
     vSync = true;
   };
 
+  programs.light.enable = true;
+
 }
 
