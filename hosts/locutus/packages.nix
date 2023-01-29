@@ -41,7 +41,7 @@ inputs@{ config, pkgs, ... }:
     bintools-unwrapped
     slack
     chromium
-    libreoffice
+    #libreoffice
     scrot
     jetbrains.phpstorm
     php
