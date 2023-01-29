@@ -37,6 +37,7 @@
       hdapsd.enable = false;
       upower.enable = true;
       auto-cpufreq.enable = true;
+      xserver.enable = true;
 
 
     };
