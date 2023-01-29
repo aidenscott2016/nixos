@@ -12,22 +12,23 @@ in
   # they do not support all the attrbites required for autorandr to
   # detect the profile as 'current' I think it's some `x-*` prop
 
-  # systemd.user.services.autorandr-logon = {
-  #   wantedBy = [ "graphical-session.target" ];
-  #   after = [ "graphical-session.target" ];
-  #   enable = true;
-  #   description = "Autorandr logon execution hook";
-  #   serviceConfig.PassEnvironment = "DISPLAY";
+  systemd.user.services.autorandr-logon = {
+    wantedBy = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    enable = true;
+    description = "Autorandr logon execution hook";
 
-  #   serviceConfig = {
-  #     ExecStart = ''
-  #       ${pkgs.autorandr}/bin/autorandr docked
-  #     '';
-  #     Type = "oneshot";
-  #     # RemainAfterExit = false;
-  #     # KillMode = "process";
-  #   };
-  # };
+    serviceConfig = {
+      Environment = "XDG_CONFIG_DIRS=/etc/xdg";
+      ExecStart = ''
+        ${pkgs.autorandr}/bin/autorandr \
+           --change \
+           --default ${cfg.defaultTarget} \
+           ${optionalString cfg.ignoreLid "--ignore-lid"}
+      '';
+      Type = "oneshot";
+    };
+  };
   environment.etc."xdg/autorandr".source = ./profiles;
 }
 
