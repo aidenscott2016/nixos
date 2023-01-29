@@ -5,6 +5,7 @@ inputs@{ config, pkgs, lib, ... }:
     ./tmux
     ./bash
     ./firefox
+    ./gpg-agent.nix
   ];
   home.stateVersion = "23.05";
 
