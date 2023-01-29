@@ -1,5 +1,5 @@
 # todo
-* firefox extensions
+* ~ firefox extensions ~
 * script postinstall
 * secrets
 

@@ -8,10 +8,4 @@
 
   };
 
-  # programs.readline = {
-  #   extraConfig = ''
-  #     set -o vi
-  #   '';
-  # };
-
 }
