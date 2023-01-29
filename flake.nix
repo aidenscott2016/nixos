@@ -42,6 +42,7 @@
             disko.nixosModules.disko
             home-manager.nixosModules.home-manager
             home-manager-config
+            nixos-hardware.nixosModules.lenovo-thinkpad-t495
           ];
           specialArgs = inputs;
         };

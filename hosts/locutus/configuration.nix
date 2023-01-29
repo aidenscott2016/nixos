@@ -46,6 +46,7 @@
     enableAllFirmware = true;
     bluetooth.enable = true;
     pulseaudio.enable = true;
+    enableRedistributableFirmware = true;
   };
 
   security.sudo.wheelNeedsPassword = false;
