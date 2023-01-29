@@ -1,22 +1,20 @@
-output VGA-1
+output HDMI-A-0
 off
-output HDMI-1
+output DisplayPort-1
 off
-output DP-1
+output DisplayPort-0
 off
-output HDMI-2
-off
-output HDMI-3
-off
-output DP-3
-off
-output DP-2
-off
-output LVDS-1
+output eDP
 crtc 0
-mode 1366x768
+gamma 1.0:0.909:0.833
+mode 1920x1080
 pos 0x0
 primary
-rate 60.02
+rate 60.05
+x-prop-max_bpc 16
 x-prop-non_desktop 0
-x-prop-scaling_mode Full aspect
+x-prop-scaling_mode None
+x-prop-tearfree auto
+x-prop-underscan off
+x-prop-underscan_hborder 0
+x-prop-underscan_vborder 0
