@@ -59,29 +59,31 @@
           specialArgs = inputs;
         };
       };
-      installer = nixos-generators.nixosGenerate
-        {
-          system = "x86_64-linux";
-          format = "install-iso";
-          modules = [
-            ./common
-            home-manager.nixosModules.home-manager
-            {
+      installer =
+        nixos-generators.nixosGenerate
+          {
+            system = "x86_64-linux";
+            format = "install-iso";
+            modules = [
+              ./common
+              home-manager.nixosModules.home-manager
+              {
 
-              services.logind.extraConfig = "HandleLidSwitch=ignore";
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.nixos = import ./home/home.nix;
-              networking.networkmanager.enable = true;
-              networking.wireless.enable = false; # 
-              users.extraUsers.nixos.openssh.authorizedKeys.keys = [
-                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIgHxgT0rlJDXl+opb7o2JSfjd5lJZ6QTRr57N0MIAyN aiden@lars"
-              ];
+                services.logind.extraConfig = "HandleLidSwitch=ignore";
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users.nixos = import ./home/home.nix;
+                networking.networkmanager.enable = true;
+                networking.wireless.enable = false; # 
+                users.extraUsers.nixos.openssh.authorizedKeys.keys = [
+                  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIgHxgT0rlJDXl+opb7o2JSfjd5lJZ6QTRr57N0MIAyN aiden@lars"
+                ];
 
 
-            }
-          ];
-        };
+              }
+
+            ];
+          };
     };
 
 }  
