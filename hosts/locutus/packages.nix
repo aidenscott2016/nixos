@@ -10,7 +10,6 @@ inputs@{ config, pkgs, ... }:
     emacs
     git
     #    firefox
-
     arandr
     st
     pavucontrol
@@ -68,5 +67,6 @@ inputs@{ config, pkgs, ... }:
     discord
     silver-searcher
     pinta
+    gnupg
   ];
 }
