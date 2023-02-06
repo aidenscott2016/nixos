@@ -1,0 +1,6 @@
+set clipboard+=unnamed
+set relativenumber
+set number
+set incsearch
+set ignorecase
+set smartcase

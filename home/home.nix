@@ -18,4 +18,8 @@ inputs@{ config, pkgs, lib, ... }:
   programs.ssh.matchBlocks."github.com".identityFile = "~/.ssh/github";
   programs.ssh.matchBlocks."10.0.4.*".identityFile = "~/.ssh/local";
 
+  home.file."downloads".source = config.lib.file.mkOutOfStoreSymlink "/home/aiden/Downloads";
+  home.file.".vimrc".source = ./files/vimrc;
+  home.file.".ideavimrc".source = ./files/ideavimrc;
+
 }
