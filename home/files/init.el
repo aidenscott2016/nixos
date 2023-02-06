@@ -6,7 +6,7 @@
 		       'magit 'treemacs-projectile 'which-key
 		       'format-all 'geiser-mit 'hydra 'paredit
 		       'org-autolist 'ox-jira 'restclient 'tide
-		       'ace-window 'company) )
+		       'ace-window 'company 'ag 'typescript-mode 'metals 'nix-mode))
 
 ;; (USEu-package ace-window
 ;;   :ensure t
