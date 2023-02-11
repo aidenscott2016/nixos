@@ -78,5 +78,6 @@
 
   programs.light.enable = true;
 
+  boot.supportedFilesystems = [ "ntfs" ];
 }
 
