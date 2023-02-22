@@ -35,18 +35,18 @@
     enable = true;
   };
 
-  services =
-    {
-      fstrim.enable = true;
-      #this is enabled by hardware-support. It is unecessary since
-      #there is an SSD
-      hdapsd.enable = false;
-      upower.enable = true;
-      auto-cpufreq.enable = true;
-      xserver.enable = true;
+  services = {
+    fstrim.enable = true;
+    upower.enable = true;
+    auto-cpufreq.enable = true;
+    xserver.enable = true;
 
-
+    jellyfin = {
+      user = "aiden";
+      enable = true;
+      openFirewall = true;
     };
+  };
 
   hardware = {
     enableAllFirmware = true;
