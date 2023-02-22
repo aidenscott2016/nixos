@@ -12,3 +12,10 @@
 * import gpg key
 * add ssh-key to gpg-agent `ssh-add $filepath`
 
+# help
+
+```
+$ nix repl
+> :f .#
+> outputs.nixosConfigurations.locutus.config.etc.etc.etc
+```
