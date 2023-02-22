@@ -57,13 +57,6 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   pinentryFlavor = "gtk2";
-  #   enableSSHSupport = true;
-  # };
-
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
