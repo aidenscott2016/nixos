@@ -68,5 +68,7 @@ inputs@{ config, pkgs, ... }:
     silver-searcher
     pinta
     gnupg
+    vlc
+    yt-dlp
   ];
 }
