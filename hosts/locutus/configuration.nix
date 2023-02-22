@@ -10,10 +10,10 @@
     ../../modules/printer.nix
     ../../modules/ssh.nix
     ../../modules/php-docker.nix
+    ../../modules/gc.nix
     ./disko.nix
     #./samba.nix
   ];
-
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
