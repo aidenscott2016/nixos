@@ -6,6 +6,11 @@ in
   programs.firefox = {
     enable = true;
     profiles.aiden = {
+      extensions = with addons; [
+        sponsorblock
+        tridactyl
+        ublock-origin
+      ];
       settings = {
         "browser.compactmode.show" = true;
         "privacy.clearOnShutdown.history" = false;
@@ -24,11 +29,6 @@ in
         "extensions.pocket.enabled" = false;
       };
     };
-    extensions = with addons; [
-      sponsorblock
-      tridactyl
-      ublock-origin
-    ];
 
   };
 }
