@@ -70,6 +70,7 @@ inputs@{ config, pkgs, ... }:
     gnupg
     vlc
     barrier
+    samba
     yt-dlp
   ];
 }

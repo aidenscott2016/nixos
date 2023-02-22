@@ -11,6 +11,7 @@
     ../../modules/ssh.nix
     ../../modules/php-docker.nix
     ./disko.nix
+    #./samba.nix
   ];
 
 
