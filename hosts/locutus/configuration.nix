@@ -28,6 +28,12 @@
   programs.nm-applet.enable = true;
 
 
+  networking.firewall = {
+    allowedTCPPorts = [
+      24800 # barrier
+    ];
+    enable = true;
+  };
 
   services =
     {

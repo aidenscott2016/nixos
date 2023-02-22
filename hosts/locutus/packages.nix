@@ -69,6 +69,7 @@ inputs@{ config, pkgs, ... }:
     pinta
     gnupg
     vlc
+    barrier
     yt-dlp
   ];
 }
