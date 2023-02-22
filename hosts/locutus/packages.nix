@@ -72,5 +72,6 @@ inputs@{ config, pkgs, ... }:
     barrier
     samba
     yt-dlp
+    nicotine-plus
   ];
 }
