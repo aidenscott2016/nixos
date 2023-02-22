@@ -69,7 +69,6 @@ inputs@{ config, pkgs, ... }:
     pinta
     gnupg
     vlc
-    barrier
     samba
     yt-dlp
     nicotine-plus
