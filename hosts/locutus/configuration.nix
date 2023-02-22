@@ -1,18 +1,19 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, myModulesPath, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
     ./packages.nix
-    ../../modules/ios.nix
     ./autorandr
-    ../../modules/redshift.nix
-    ../../modules/printer.nix
-    ../../modules/ssh.nix
-    ../../modules/php-docker.nix
-    ../../modules/gc.nix
     ./disko.nix
     #./samba.nix
+    "${myModulesPath}/ios.nix"
+    "${myModulesPath}/redshift.nix"
+    "${myModulesPath}/printer.nix"
+    "${myModulesPath}/ssh.nix"
+    "${myModulesPath}/php-docker.nix"
+    "${myModulesPath}/gc.nix"
+    "${myModulesPath}/barrier.nix"
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -27,14 +28,6 @@
   networking.hostName = "locutus";
   networking.networkmanager.enable = true;
   programs.nm-applet.enable = true;
-
-
-  networking.firewall = {
-    allowedTCPPorts = [
-      24800 # barrier
-    ];
-    enable = true;
-  };
 
   services = {
     fstrim.enable = true;

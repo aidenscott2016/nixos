@@ -27,6 +27,7 @@
         home-manager.users.aiden = import ./home/home.nix;
         home-manager.extraSpecialArgs = inputs;
       };
+      myModulesPath = builtins.toString ./modules;
     in
     {
       diskoConfigurations = {
@@ -44,7 +45,7 @@
             home-manager-config
             nixos-hardware.nixosModules.lenovo-thinkpad-t495 # it's an x395 but it seems to work
           ];
-          specialArgs = inputs;
+          specialArgs = inputs // { inherit myModulesPath; };
         };
         lars = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -59,6 +60,7 @@
           specialArgs = inputs;
         };
       };
+
       installer =
         nixos-generators.nixosGenerate
           {
@@ -85,5 +87,4 @@
             ];
           };
     };
-
-}  
+}
