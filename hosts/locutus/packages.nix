@@ -71,6 +71,5 @@ inputs@{ config, pkgs, ... }:
     vlc
     samba
     yt-dlp
-    nicotine-plus
   ];
 }

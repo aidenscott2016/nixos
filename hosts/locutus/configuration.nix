@@ -7,6 +7,7 @@
     ./autorandr
     ./disko.nix
     #./samba.nix
+    ./music.nix
     "${myModulesPath}/ios.nix"
     "${myModulesPath}/redshift.nix"
     "${myModulesPath}/printer.nix"
@@ -14,6 +15,7 @@
     "${myModulesPath}/php-docker.nix"
     "${myModulesPath}/gc.nix"
     "${myModulesPath}/barrier.nix"
+    "${myModulesPath}/transmission.nix"
   ];
 
   boot.loader.systemd-boot.enable = true;
