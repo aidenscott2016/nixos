@@ -32,6 +32,7 @@
   programs.nm-applet.enable = true;
 
   services = {
+    tlp.enable = true;
     fstrim.enable = true;
     upower.enable = true;
     auto-cpufreq.enable = true;

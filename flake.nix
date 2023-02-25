@@ -43,7 +43,7 @@
             disko.nixosModules.disko
             home-manager.nixosModules.home-manager
             home-manager-config
-            nixos-hardware.nixosModules.lenovo-thinkpad-t495 # it's an x395 but it seems to work
+            nixos-hardware.nixosModules.lenovo-thinkpad-t495 # the t495 is practically identical
           ];
           specialArgs = inputs // { inherit myModulesPath; };
         };
