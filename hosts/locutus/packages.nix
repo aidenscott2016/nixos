@@ -71,5 +71,7 @@ inputs@{ config, pkgs, ... }:
     vlc
     samba
     yt-dlp
+    ncdu
+    unzip
   ];
 }
