@@ -16,6 +16,7 @@
     "${myModulesPath}/gc.nix"
     "${myModulesPath}/barrier.nix"
     "${myModulesPath}/transmission.nix"
+    "${myModulesPath}/jellyfin.nix"
   ];
 
   boot.loader.systemd-boot.enable = true;
