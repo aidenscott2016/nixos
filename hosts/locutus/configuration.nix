@@ -33,18 +33,24 @@
   programs.nm-applet.enable = true;
 
   services = {
-    tlp.enable = true;
     fstrim.enable = true;
     upower.enable = true;
     auto-cpufreq.enable = true;
     xserver.enable = true;
-
-    jellyfin = {
-      user = "aiden";
+    tlp = {
       enable = true;
-      openFirewall = true;
+      settings = {
+        USB_AUTOSUSPEND = 0;
+        START_CHARGE_THRESH_BAT0 = 50;
+        STOP_CHARGE_THRESH_BAT0 = 85;
+        START_CHARGE_THRESH_BAT1 = 50;
+        STOP_CHARGE_THRESH_BAT1 = 85;
+      };
+
     };
   };
+
+
 
   hardware = {
     enableAllFirmware = true;
@@ -66,7 +72,6 @@
 
   services.gvfs.enable = true;
 
-
   # move this to dwm some time
   services.picom = {
     enable = true;
@@ -76,5 +81,7 @@
   programs.light.enable = true;
 
   boot.supportedFilesystems = [ "ntfs" ];
+
+  # services.xserver.dpi = 180;
 }
 
