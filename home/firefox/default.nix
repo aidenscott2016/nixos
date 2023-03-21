@@ -10,8 +10,10 @@ in
         sponsorblock
         tridactyl
         ublock-origin
+        darkreader
       ];
       settings = {
+        "privacy.resistFingerprinting" = true;
         "browser.compactmode.show" = true;
         "privacy.clearOnShutdown.history" = false;
         "privacy.clearOnShutdown.cookies" = false;
