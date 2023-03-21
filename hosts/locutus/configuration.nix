@@ -37,6 +37,7 @@
     upower.enable = true;
     auto-cpufreq.enable = true;
     xserver.enable = true;
+    xserver.videoDrivers = [ "amdgpu" ];
     tlp = {
       enable = true;
       settings = {
