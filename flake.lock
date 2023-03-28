@@ -76,11 +76,11 @@
     },
     "flake-utils_2": {
       "locked": {
-        "lastModified": 1667395993,
-        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
+        "lastModified": 1678901627,
+        "narHash": "sha256-U02riOqrKKzwjsxc/400XnElV+UtPUQWpANPlyazjH0=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
+        "rev": "93a2b84fc4b70d9e089d029deacc3583435c2ed6",
         "type": "github"
       },
       "original": {
@@ -115,11 +115,11 @@
         "voidrice": "voidrice"
       },
       "locked": {
-        "lastModified": 1671554309,
-        "narHash": "sha256-114Abx3Mk34g6mx0ru6WNDcn/pi7gH2uUklpCvOxVEQ=",
+        "lastModified": 1680008152,
+        "narHash": "sha256-8RQsyWoVfLD+SBl27c018qxb9Dn9z2tPvy0bMoRrCHw=",
         "owner": "aidenscott2016",
         "repo": "larbs-flake",
-        "rev": "2906f27ff79a89015e5e5bc7c81d7be14f498265",
+        "rev": "63490a1ed23a6919b2b8ba7f1f379364640734cb",
         "type": "github"
       },
       "original": {
@@ -230,15 +230,16 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1669568537,
-        "narHash": "sha256-OI+XMgKFgZjx6bjl+0hAvFO1Jn3RPQ+QZtib90hKGp0=",
+        "lastModified": 1679865578,
+        "narHash": "sha256-sYQmxxqIYL3QFsRYjW0AufhGur8qWfwoOGPGHRJZlGc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "f56d74c14806d7cdfae292d9d48de81c68f4c6a2",
+        "rev": "4361baa782dc3d3b35fd455a1adc370681d9187c",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -305,11 +306,11 @@
     "voidrice": {
       "flake": false,
       "locked": {
-        "lastModified": 1668894398,
-        "narHash": "sha256-racV4u/pE8Z8h4uAJy6UKaU+i36F8FCeq+JIVs8+9rE=",
+        "lastModified": 1679694583,
+        "narHash": "sha256-W0TVLjfMWHjy8OFjkBp4jGZnIczTOYBnRMM/upn6BeE=",
         "owner": "LukeSmithxyz",
         "repo": "voidrice",
-        "rev": "450745a467524a0bacdae2679deb370ac2a2e9d5",
+        "rev": "749f74f84ef1ec1b15c9003c23120dc5c4baaa35",
         "type": "github"
       },
       "original": {
