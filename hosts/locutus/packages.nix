@@ -73,5 +73,6 @@ inputs@{ config, pkgs, ... }:
     yt-dlp
     ncdu
     unzip
+    p7zip
   ];
 }
