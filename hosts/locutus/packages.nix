@@ -1,78 +1,23 @@
-inputs@{ config, pkgs, ... }:
-{
+inputs@{ config, pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     inputs.maimpick.packages."${system}".maimpick
-    pgcli
-    jetbrains.idea-community
-    slock
-    vim
-    wget
-    emacs
-    git
-    #    firefox
-    arandr
-    st
-    pavucontrol
-    spotify
-    pass
-    pinentry-gtk2
-    nixpkgs-fmt
-    tmux
-    libimobiledevice
-    ifuse
-    tor-browser-bundle-bin
-    scala
-    sbt
-    xorg.xbacklight
-    metals
-    monero-gui
-    file
-    pcmanfm
-    libheif
     imagemagick
-    nicotine-plus
-    vlc
-    hledger
-    hledger-web
     powertop
-    coreboot-utils
-    flashrom
-    bintools-unwrapped
-    slack
+
+    #slack
     chromium
-    #libreoffice
-    scrot
-    jetbrains.phpstorm
-    php
+    #jetbrains.phpstorm
+    #php
     jq
-    steam
-    docker-compose
-    xdotool
-    dmenu
-    i3lock
-    libnotify
-    psmisc
-    dunst
+    #steam
     acpi # seems to provide more accurate charging status than upower. see the underpowered anker charger
-    cbatticon
-    pamixer
-    xsettingsd
-    transmission-gtk
-    playerctl
     terraform
-    cifs-utils
-    networkmanagerapplet
-    xclip
-    postman
-    discord
+    #postman
+    #discord
     silver-searcher
-    pinta
-    gnupg
-    vlc
-    samba
     yt-dlp
-    ncdu
-    unzip
-    p7zip
+    nixfmt
+
+    ripgrep
   ];
 }

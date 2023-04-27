@@ -5,18 +5,18 @@
     ./hardware-configuration.nix
     ./packages.nix
     ./autorandr
-    ./disko.nix
-    #./samba.nix
-    ./music.nix
     "${myModulesPath}/ios.nix"
     "${myModulesPath}/redshift.nix"
     "${myModulesPath}/printer.nix"
     "${myModulesPath}/ssh.nix"
-    "${myModulesPath}/php-docker.nix"
     "${myModulesPath}/gc.nix"
     "${myModulesPath}/barrier.nix"
     "${myModulesPath}/transmission.nix"
     "${myModulesPath}/jellyfin.nix"
+    "${myModulesPath}/cli-base.nix"
+    #"${myModulesPath}/desktop.nix"
+    "${myModulesPath}/nixos.nix"
+    "${myModulesPath}/multimedia.nix"
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -36,8 +36,8 @@
     fstrim.enable = true;
     upower.enable = true;
     auto-cpufreq.enable = true;
-    xserver.enable = true;
     xserver.videoDrivers = [ "amdgpu" ];
+    xserver.enable = true;
     tlp = {
       enable = true;
       settings = {
@@ -50,8 +50,6 @@
 
     };
   };
-
-
 
   hardware = {
     enableAllFirmware = true;
@@ -68,18 +66,7 @@
     dedicatedServer.openFirewall = true;
   };
 
-
-
-
   services.gvfs.enable = true;
-
-  # move this to dwm some time
-  services.picom = {
-    enable = true;
-    vSync = true;
-  };
-
-  programs.light.enable = true;
 
   boot.supportedFilesystems = [ "ntfs" ];
 

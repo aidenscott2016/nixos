@@ -3,7 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    maimpick.url = "github:aidenscott2016/larbs-flake";
+    maimpick = {
+      url = "github:aidenscott2016/larbs-flake"; # follows = "nixpkgs";
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     dwm = { url = "github:aidenscott2016/dwm"; };
     home-manager.url = "github:nix-community/home-manager";
@@ -17,8 +19,8 @@
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
   };
 
-
-  outputs = inputs@{ nixpkgs, nixos-hardware, dwm, home-manager, nixos-generators, disko, ... }:
+  outputs = inputs@{ nixpkgs, nixos-hardware, dwm, home-manager
+    , nixos-generators, disko, ... }:
     let
       # you can just move this in to a file
       home-manager-config = {
@@ -28,11 +30,8 @@
         home-manager.extraSpecialArgs = inputs;
       };
       myModulesPath = builtins.toString ./modules;
-    in
-    {
-      diskoConfigurations = {
-        locutus = import ./hosts/locutus/disko.nix;
-      };
+    in {
+      diskoConfigurations = { locutus = import ./hosts/locutus/disko.nix; };
       nixosConfigurations = {
         locutus = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -61,30 +60,27 @@
         };
       };
 
-      installer =
-        nixos-generators.nixosGenerate
+      installer = nixos-generators.nixosGenerate {
+        system = "x86_64-linux";
+        format = "install-iso";
+        modules = [
+          ./common
+          home-manager.nixosModules.home-manager
           {
-            system = "x86_64-linux";
-            format = "install-iso";
-            modules = [
-              ./common
-              home-manager.nixosModules.home-manager
-              {
 
-                services.logind.extraConfig = "HandleLidSwitch=ignore";
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.users.nixos = import ./home/home.nix;
-                networking.networkmanager.enable = true;
-                networking.wireless.enable = false; # 
-                users.extraUsers.nixos.openssh.authorizedKeys.keys = [
-                  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIgHxgT0rlJDXl+opb7o2JSfjd5lJZ6QTRr57N0MIAyN aiden@lars"
-                ];
-
-
-              }
-
+            services.logind.extraConfig = "HandleLidSwitch=ignore";
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.nixos = import ./home/home.nix;
+            networking.networkmanager.enable = true;
+            networking.wireless.enable = false;
+            users.extraUsers.nixos.openssh.authorizedKeys.keys = [
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIgHxgT0rlJDXl+opb7o2JSfjd5lJZ6QTRr57N0MIAyN aiden@lars"
             ];
-          };
+
+          }
+
+        ];
+      };
     };
 }
