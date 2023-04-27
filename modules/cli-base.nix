@@ -1,6 +1,5 @@
 inputs@{ config, pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    inputs.maimpick.packages."${system}".maimpick
     vim
     wget
     emacs

@@ -1,6 +1,5 @@
 inputs@{ config, pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    inputs.maimpick.packages."${system}".maimpick
     imagemagick
     powertop
 
@@ -15,7 +14,6 @@ inputs@{ config, pkgs, ... }: {
     #postman
     #discord
     silver-searcher
-    yt-dlp
     nixfmt
 
     ripgrep

@@ -3,11 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    maimpick = {
-      url = "github:aidenscott2016/larbs-flake"; # follows = "nixpkgs";
-    };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    dwm = { url = "github:aidenscott2016/dwm"; };
+    dwm = {
+      url = "github:aidenscott2016/dwm";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager.url = "github:nix-community/home-manager";
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
