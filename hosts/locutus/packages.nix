@@ -12,10 +12,8 @@ inputs@{ config, pkgs, ... }: {
     acpi # seems to provide more accurate charging status than upower. see the underpowered anker charger
     terraform
     #postman
-    #discord
-    silver-searcher
-    nixfmt
+    discord
+    xfce.thunar
 
-    ripgrep
   ];
 }
