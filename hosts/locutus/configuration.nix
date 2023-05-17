@@ -17,6 +17,8 @@
     #"${myModulesPath}/desktop.nix"
     "${myModulesPath}/nixos.nix"
     "${myModulesPath}/multimedia.nix"
+    "${myModulesPath}/emacs.nix"
+    "${myModulesPath}/steam.nix"
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -59,12 +61,6 @@
   };
 
   security.sudo.wheelNeedsPassword = false;
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-  };
 
   services.gvfs.enable = true;
 
