@@ -1,12 +1,6 @@
-inputs@{ config, pkgs, lib, ... }:
-{
-  imports = [
-    ./git.nix
-    ./tmux
-    ./bash
-    ./firefox
-    ./gpg-agent.nix
-  ];
+inputs@{ config, pkgs, lib, ... }: {
+  imports = [ ./git.nix ./tmux ./bash ./firefox ./gpg-agent.nix ./ledger.nix ];
+
   home.stateVersion = "23.05";
 
   xdg.enable = true;
@@ -18,7 +12,8 @@ inputs@{ config, pkgs, lib, ... }:
   programs.ssh.matchBlocks."github.com".identityFile = "~/.ssh/github";
   programs.ssh.matchBlocks."10.0.4.*".identityFile = "~/.ssh/local";
 
-  home.file."downloads".source = config.lib.file.mkOutOfStoreSymlink "/home/aiden/Downloads";
+  home.file."downloads".source =
+    config.lib.file.mkOutOfStoreSymlink "/home/aiden/Downloads";
   home.file.".vimrc".source = ./files/vimrc;
   home.file.".ideavimrc".source = ./files/ideavimrc;
 
