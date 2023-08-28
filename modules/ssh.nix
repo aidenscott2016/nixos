@@ -1,10 +1,9 @@
-inputs@{ ... }:
-{
+inputs@{ ... }: {
   services.openssh = {
     enable = true;
     settings = {
-      passwordAuthentication = false;
-      kbdInteractiveAuthentication = false;
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
     };
   };
   users.users.aiden.openssh.authorizedKeys.keys = [
