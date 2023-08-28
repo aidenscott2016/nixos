@@ -11,14 +11,15 @@
     "${myModulesPath}/ssh.nix"
     "${myModulesPath}/gc.nix"
     "${myModulesPath}/barrier.nix"
-    "${myModulesPath}/transmission.nix"
-    "${myModulesPath}/jellyfin.nix"
+    # "${myModulesPath}/transmission.nix"
+    # "${myModulesPath}/jellyfin.nix"
     "${myModulesPath}/cli-base.nix"
-    #"${myModulesPath}/desktop.nix"
+    "${myModulesPath}/desktop.nix"
     "${myModulesPath}/nixos.nix"
     "${myModulesPath}/multimedia.nix"
     "${myModulesPath}/emacs.nix"
     "${myModulesPath}/steam.nix"
+    "${myModulesPath}/virtualbox.nix"
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -43,7 +44,7 @@
     tlp = {
       enable = true;
       settings = {
-        USB_AUTOSUSPEND = 0;
+        USB_AUTOSUSPEND = 1;
         START_CHARGE_THRESH_BAT0 = 50;
         STOP_CHARGE_THRESH_BAT0 = 85;
         START_CHARGE_THRESH_BAT1 = 50;
@@ -66,6 +67,4 @@
 
   boot.supportedFilesystems = [ "ntfs" ];
 
-  # services.xserver.dpi = 180;
 }
-
