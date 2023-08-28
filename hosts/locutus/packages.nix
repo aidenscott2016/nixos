@@ -13,7 +13,15 @@ inputs@{ config, pkgs, ... }: {
     terraform
     #postman
     discord
-    xfce.thunar
+    calibre
+    tor-browser-bundle-bin
+    monero-gui
+    hledger
+    googleearth-pro
+    #xarchiver
+
+    gpsbabel-gui
+    jetbrains.idea-community
 
   ];
 }
