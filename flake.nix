@@ -2,7 +2,7 @@
   description = "An example NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/release-23.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     dwm = {
       url = "github:aidenscott2016/dwm";
@@ -62,9 +62,10 @@
           system = "x86_64-linux";
           modules = [
             ./common/default.nix
-            ./hosts/lars/configuration.nix
-            home-manager.nixosModules.home-manager
-            home-manager-config
+            ./hosts/gila/configuration.nix
+            # home-manager.nixosModules.home-manager
+            # home-manager-config
+            disko.nixosModules.disko
           ];
           specialArgs = inputs;
         };
