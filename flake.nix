@@ -58,6 +58,16 @@
           ];
           specialArgs = inputs;
         };
+        gila = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./common/default.nix
+            ./hosts/lars/configuration.nix
+            home-manager.nixosModules.home-manager
+            home-manager-config
+          ];
+          specialArgs = inputs;
+        };
       };
 
       installer = nixos-generators.nixosGenerate {
