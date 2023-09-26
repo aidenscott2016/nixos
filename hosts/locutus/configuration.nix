@@ -78,6 +78,4 @@
     };
   };
 
-  #programs.firefox.enable = true;
-
 }

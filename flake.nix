@@ -3,7 +3,7 @@
 
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs/release-23.05"; # 
-    nixpkgs.url = "github:nixos/nixpkgs/release-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     dwm = {
       url = "github:aidenscott2016/dwm";
@@ -65,8 +65,8 @@
           modules = [
             ./common/default.nix
             ./hosts/gila/configuration.nix
-            # home-manager.nixosModules.home-manager
-            # home-manager-config
+            home-manager.nixosModules.home-manager
+            home-manager-config
             disko.nixosModules.disko
           ];
           specialArgs = inputs;

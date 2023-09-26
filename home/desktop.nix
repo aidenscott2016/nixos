@@ -4,7 +4,7 @@ inputs@{ config, pkgs, lib, ... }: {
     ./tmux
     ./bash
 
-    # ./firefox
+    ./firefox
     ./gpg-agent.nix
     ./ledger.nix
     ./ssh.nix

@@ -17,7 +17,7 @@ inputs@{ config, pkgs, ... }: {
     #    gpsbabel-gui
     jetbrains.idea-community
     #    ventoy
-    #firefox
+    chromium
 
   ];
 }
