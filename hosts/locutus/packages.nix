@@ -2,21 +2,22 @@ inputs@{ config, pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     imagemagick
     powertop
-    chromium
-    jq
+    #google-chrome chromium is not cached?
+    #    jq
     acpi # seems to provide more accurate charging status than upower. see the underpowered anker charger
-    terraform
+    #terraform
     #postman
-    discord
-    calibre
-    tor-browser-bundle-bin
-    monero-gui
-    hledger
-    googleearth-pro
+    #    discord
+    #calibre -- includes speech synthesiser bloat
+    # tor-browser-bundle-bin
+    # monero-gui
+    #    hledger
+    #googleearth-pro
 
-    gpsbabel-gui
+    #    gpsbabel-gui
     jetbrains.idea-community
-    ventoy
+    #    ventoy
+    #firefox
 
   ];
 }

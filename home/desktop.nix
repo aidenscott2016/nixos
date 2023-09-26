@@ -3,7 +3,8 @@ inputs@{ config, pkgs, lib, ... }: {
     ./git.nix
     ./tmux
     ./bash
-    ./firefox
+
+    # ./firefox
     ./gpg-agent.nix
     ./ledger.nix
     ./ssh.nix
@@ -14,11 +15,6 @@ inputs@{ config, pkgs, lib, ... }: {
   xdg.enable = true;
   xdg.configFile."discord/settings.json".text = ''{"SKIP_HOST_UPDATE": true}'';
   xdg.configFile."emacs/init.el".source = ./files/init.el;
-
-  programs.ssh.enable = true;
-  programs.ssh.matchBlocks."gitlab.com".identityFile = "~/.ssh/gitlab";
-  programs.ssh.matchBlocks."github.com".identityFile = "~/.ssh/github";
-  programs.ssh.matchBlocks."10.0.4.*".identityFile = "~/.ssh/local";
 
   home.file."downloads".source =
     config.lib.file.mkOutOfStoreSymlink "/home/aiden/Downloads";

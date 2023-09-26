@@ -18,8 +18,8 @@
     "${myModulesPath}/nixos.nix"
     "${myModulesPath}/multimedia.nix"
     "${myModulesPath}/emacs.nix"
-    "${myModulesPath}/steam.nix"
-    "${myModulesPath}/virtualbox.nix"
+    #"${myModulesPath}/steam.nix"
+    #"${myModulesPath}/virtualbox.nix"
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -77,5 +77,7 @@
       extraOptions = [ "--network=host" ];
     };
   };
+
+  #programs.firefox.enable = true;
 
 }

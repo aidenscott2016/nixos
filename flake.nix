@@ -2,13 +2,15 @@
   description = "An example NixOS configuration";
 
   inputs = {
+    # nixpkgs.url = "github:nixos/nixpkgs/release-23.05"; # 
     nixpkgs.url = "github:nixos/nixpkgs/release-23.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     dwm = {
       url = "github:aidenscott2016/dwm";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/release-23.05";
+
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
