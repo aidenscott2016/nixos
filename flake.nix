@@ -21,7 +21,7 @@
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
   };
 
-  outputs = inputs@{ nixpkgs, nixos-hardware, dwm, home-manager
+  outputs = inputs@{ self, nixpkgs, nixos-hardware, dwm, home-manager
     , nixos-generators, disko, ... }:
     let
       # you can just move this in to a file
@@ -33,6 +33,16 @@
       };
       myModulesPath = builtins.toString ./modules;
     in {
+      nixosModules = {
+        lovelace = {
+          imports = [
+            nixos-generators.nixosModules.sd-aarch64
+            ./common
+            ./hosts/lovelace.nix
+            #   nixos-hardware.nixosModules.raspberry-pi-4
+          ];
+        };
+      };
       diskoConfigurations = { locutus = import ./hosts/locutus/disko.nix; };
       nixosConfigurations = {
         locutus = nixpkgs.lib.nixosSystem {
@@ -71,41 +81,16 @@
           ];
           specialArgs = inputs;
         };
-        #   gila = nixpkgs.lib.nixosSystem {
-        #     system = "x86_64-linux";
-        #     modules = [
-        #       ./common/default.nix
-        #       ./hosts/gila/configuration.nix
-        #       home-manager.nixosModules.home-manager
-        #       home-manager-config
-        #       disko.nixosModules.disko
-        #     ];
-        #     specialArgs = inputs;
-        #   };
-        # };
+
+        lovelace = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [ self.nixosModules.lovelace ];
+        };
       };
-
-      installer = nixos-generators.nixosGenerate {
-        system = "x86_64-linux";
-        format = "install-iso";
-        modules = [
-          ./common
-          home-manager.nixosModules.home-manager
-          {
-
-            services.logind.extraConfig = "HandleLidSwitch=ignore";
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.nixos = import ./home/home.nix;
-            networking.networkmanager.enable = true;
-            networking.wireless.enable = false;
-            users.extraUsers.nixos.openssh.authorizedKeys.keys = [
-              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIgHxgT0rlJDXl+opb7o2JSfjd5lJZ6QTRr57N0MIAyN aiden@lars"
-            ];
-
-          }
-
-        ];
+      lovelace = nixos-generators.nixosGenerate {
+        system = "aarch64-linux";
+        format = "sd-aarch64";
+        modules = [ self.nixosModules.lovelace ];
       };
     };
 }
