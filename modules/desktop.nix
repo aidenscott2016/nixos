@@ -6,6 +6,7 @@ inputs@{ config, pkgs, ... }: {
   #  nixpkgs.config.permittedInsecurePackages = [ "googleearth-pro-7.3.4.8248" ];
 
   #needed for extracting files in thunar
+  programs.thunar.enable = true;
   programs.thunar.plugins = with pkgs.xfce; [
     thunar-archive-plugin
     thunar-volman

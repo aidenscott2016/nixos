@@ -7,7 +7,7 @@ inputs@{ config, pkgs, ... }: {
     acpi # seems to provide more accurate charging status than upower. see the underpowered anker charger
     #terraform
     #postman
-    #    discord
+    discord
     #calibre -- includes speech synthesiser bloat
     # tor-browser-bundle-bin
     # monero-gui
