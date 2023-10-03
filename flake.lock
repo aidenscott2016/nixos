@@ -28,11 +28,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1682620229,
-        "narHash": "sha256-XufjeRbQL5Ndqcxu2pB2cIF6tJDxceaHu+DsnQ7Y+Bo=",
+        "lastModified": 1696338607,
+        "narHash": "sha256-FoPZ2wMWJQMLbu+3CagJ9hnGU7UdE+7UyTiZogqc3/c=",
         "owner": "aidenscott2016",
         "repo": "dwm",
-        "rev": "183cea5facc67dc8ba830a91ed4694833514b667",
+        "rev": "7c4f0c6ae22d54f8abfd8b322d2dfd6cfa2c3763",
         "type": "github"
       },
       "original": {

@@ -71,18 +71,18 @@
           ];
           specialArgs = inputs;
         };
-        gila = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./common/default.nix
-            ./hosts/gila/configuration.nix
-            home-manager.nixosModules.home-manager
-            home-manager-config
-            disko.nixosModules.disko
-          ];
-          specialArgs = inputs;
-        };
-      };
+        #   gila = nixpkgs.lib.nixosSystem {
+        #     system = "x86_64-linux";
+        #     modules = [
+        #       ./common/default.nix
+        #       ./hosts/gila/configuration.nix
+        #       home-manager.nixosModules.home-manager
+        #       home-manager-config
+        #       disko.nixosModules.disko
+        #     ];
+        #     specialArgs = inputs;
+        #   };
+        # };
       };
 
       installer = nixos-generators.nixosGenerate {
