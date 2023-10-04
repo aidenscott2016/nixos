@@ -86,6 +86,22 @@
           system = "aarch64-linux";
           modules = [ self.nixosModules.lovelace ];
         };
+      installer = nixos-generators.nixosGenerate {
+        system = "x86_64-linux";
+        format = "install-iso";
+        modules = [
+          ./common
+          {
+            networking.hostName = "nixos-installer";
+            services.openssh.enable = true;
+            security.sudo.wheelNeedsPassword = false;
+            services.avahi = {
+              enable = true;
+              nssmdns = true;
+              publish.domain = true;
+            };
+          }
+        ];
       };
       lovelace = nixos-generators.nixosGenerate {
         system = "aarch64-linux";
