@@ -86,6 +86,17 @@
           system = "aarch64-linux";
           modules = [ self.nixosModules.lovelace ];
         };
+        desktop = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            disko.nixosModules.disko
+            ./hosts/desktop/configuration.nix
+
+            ./common/default.nix
+          ];
+        };
+      };
+
       installer = nixos-generators.nixosGenerate {
         system = "x86_64-linux";
         format = "install-iso";
