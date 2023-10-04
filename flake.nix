@@ -93,6 +93,7 @@
 
             ./common/default.nix
           ];
+          specialArgs = inputs;
         };
       };
 
