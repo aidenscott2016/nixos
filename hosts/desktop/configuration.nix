@@ -2,12 +2,11 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
 
-{ config, pkgs, disko, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./disko.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

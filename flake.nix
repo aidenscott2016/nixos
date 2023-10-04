@@ -89,7 +89,6 @@
         desktop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            disko.nixosModules.disko
             ./hosts/desktop/configuration.nix
 
             ./common/default.nix
