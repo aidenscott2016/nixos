@@ -2,7 +2,7 @@
 
 with lib; {
   config = {
-    system.stateVersion = "22.05";
+    #system.stateVersion = "22.05";
     nixpkgs.config.allowUnfree = true;
     nix.extraOptions = "experimental-features = nix-command flakes";
     nix.settings.auto-optimise-store = true;
