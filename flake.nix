@@ -91,7 +91,7 @@
           modules = [
             ./hosts/desktop/configuration.nix
 
-            ./common/default.nix
+            #./common/default.nix
           ];
           specialArgs = inputs;
         };
