@@ -5,28 +5,28 @@
   networking.hostName = "lovelace";
   services.openssh.enable = true;
   security.sudo.wheelNeedsPassword = false;
-
-  virtualisation.oci-containers = {
-    backend = "podman";
-    containers.pihole = {
-      volumes = [ "etc-pihole:/etc/pihole" "etc-dnsmasq:/etc/dnsmasq.d" ];
-      ports = [
-        "53:53/tcp"
-        "53:53/udp"
-        "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
-        "80:80/tcp"
-      ];
-      environment.TZ = "Europe/London";
-      image = "pihole/pihole:latest";
-      extraOptions = [ "--network=host" ];
-    };
-  };
   networking.firewall.enable = false;
   environment.systemPackages = with pkgs; [ dnsutils ];
   networking.usePredictableInterfaceNames = true;
-  boot.kernel.sysctl = {
-    # if you use ipv4, this is all you need
-    "net.ipv4.conf.all.forwarding" = true;
+  boot.kernel.sysctl = { "net.ipv4.conf.all.forwarding" = true; };
+
+  specialisation = {
+    pihole.configuration.virtualisation.oci-containers = {
+      backend = "podman";
+      containers.pihole = {
+        volumes = [ "etc-pihole:/etc/pihole" "etc-dnsmasq:/etc/dnsmasq.d" ];
+        ports = [
+          "53:53/tcp"
+          "53:53/udp"
+          "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
+          "80:80/tcp"
+        ];
+        environment.TZ = "Europe/London";
+        image = "pihole/pihole:latest";
+        extraOptions = [ "--network=host" ];
+      };
+    };
+    adguard-home.configuration = { };
   };
 
   # networking = {
