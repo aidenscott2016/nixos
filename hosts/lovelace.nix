@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
+  system.stateVersion = "22.05";
   nixpkgs.hostPlatform = "aarch64-linux";
   networking.hostName = "lovelace";
   services.openssh.enable = true;
