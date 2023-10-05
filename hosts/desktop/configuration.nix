@@ -31,6 +31,8 @@
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
+  environment.systemPackages = with pkgs; [ git ];
+
   system.stateVersion = "23.05";
 
 }
