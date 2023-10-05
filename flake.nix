@@ -88,11 +88,7 @@
         };
         desktop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [
-            ./hosts/desktop/configuration.nix
-
-            #./common/default.nix
-          ];
+          modules = [ ./hosts/desktop/configuration.nix ./common/default.nix ];
           specialArgs = inputs;
         };
       };

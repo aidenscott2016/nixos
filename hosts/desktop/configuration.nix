@@ -29,6 +29,8 @@
     libinput.enable = true;
   };
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   system.stateVersion = "23.05";
 
 }
