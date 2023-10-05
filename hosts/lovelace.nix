@@ -10,6 +10,13 @@
   environment.systemPackages = with pkgs; [ dnsutils ];
   networking.usePredictableInterfaceNames = true;
   boot.kernel.sysctl = { "net.ipv4.conf.all.forwarding" = true; };
+  # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1008362877
+  nixpkgs.overlays = [
+    (final: super: {
+      makeModulesClosure = x:
+        super.makeModulesClosure (x // { allowMissing = true; });
+    })
+  ];
 
   specialisation = {
     pihole.configuration.virtualisation.oci-containers = {
