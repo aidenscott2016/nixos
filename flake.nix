@@ -39,7 +39,7 @@
             nixos-generators.nixosModules.sd-aarch64
             ./common
             ./hosts/lovelace.nix
-            #   nixos-hardware.nixosModules.raspberry-pi-4
+            nixos-hardware.nixosModules.raspberry-pi-4
           ];
         };
       };
