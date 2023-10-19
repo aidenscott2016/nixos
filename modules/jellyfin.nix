@@ -1,14 +1,13 @@
-{ lib, pkgs, config, ... }:
-{
+{ lib, pkgs, config, ... }: {
   networking.firewall.allowedTCPPorts = [ 80 443 ];
   networking.firewall.allowPing = true;
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "aiden@oldstreetjournal.co.uk";
   services = {
-    nginx.enable = true;
+    nginx.enable = false;
     nginx.virtualHosts."jellyfin.aidenscott.dev" = {
-      addSSL = true;
-      enableACME = true;
+      addSSL = false;
+      enableACME = false;
       extraConfig = ''
         ## The default `client_max_body_size` is 1M, this might not be enough for some posters, etc.
           client_max_body_size 20M;
@@ -93,5 +92,3 @@
     };
   };
 }
-  
-

@@ -1,4 +1,4 @@
-inputs@{ config, pkgs, ... }: {
+inputs@{ config, pkgs, agenix, ... }: {
   environment.systemPackages = with pkgs; [
     imagemagick
     powertop
@@ -18,6 +18,7 @@ inputs@{ config, pkgs, ... }: {
     jetbrains.idea-community
     #    ventoy
     chromium
+    agenix.packages.x86_64-linux.default
 
   ];
 }

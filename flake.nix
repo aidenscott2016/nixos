@@ -19,10 +19,14 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
     nur.url = "github:nix-community/NUR";
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
+    # optionally choose not to download darwin deps (saves some resources on Linux)
+    agenix.inputs.darwin.follows = "";
   };
 
   outputs = inputs@{ self, nixpkgs, nixos-hardware, dwm, home-manager
-    , nixos-generators, disko, ... }:
+    , nixos-generators, disko, agenix, ... }:
     let
       # you can just move this in to a file
       home-manager-config = {
@@ -41,7 +45,7 @@
             }/installer/sd-card/sd-image-aarch64-new-kernel.nix"
             ./common
             ./hosts/lovelace.nix
-            #nixos-hardware.nixosModules.raspberry-pi-4
+            agenix.nixosModules.default
           ];
         };
       };
@@ -57,6 +61,7 @@
             home-manager.nixosModules.home-manager
             home-manager-config
             nixos-hardware.nixosModules.lenovo-thinkpad-t495 # the t495 is practically identical
+            agenix.nixosModules.default
           ];
           specialArgs = inputs // { inherit myModulesPath; };
         };
