@@ -45,7 +45,7 @@
             }/installer/sd-card/sd-image-aarch64-new-kernel.nix"
             ./common
             ./hosts/lovelace.nix
-            #nixos-hardware.nixosModules.raspberry-pi-4
+            agenix.nixosModules.default
           ];
         };
       };
