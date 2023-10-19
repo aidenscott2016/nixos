@@ -34,12 +34,14 @@
       myModulesPath = builtins.toString ./modules;
     in {
       nixosModules = {
-        lovelace = {
+        lovelace = { modulesPath, ... }: {
           imports = [
-            nixos-generators.nixosModules.sd-aarch64
+            "${
+              toString modulesPath
+            }/installer/sd-card/sd-image-aarch64-new-kernel.nix"
             ./common
             ./hosts/lovelace.nix
-            nixos-hardware.nixosModules.raspberry-pi-4
+            #nixos-hardware.nixosModules.raspberry-pi-4
           ];
         };
       };

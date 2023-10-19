@@ -12,7 +12,7 @@
     "${myModulesPath}/gc.nix"
     "${myModulesPath}/barrier.nix"
     # "${myModulesPath}/transmission.nix"
-    # "${myModulesPath}/jellyfin.nix"
+    "${myModulesPath}/jellyfin.nix"
     "${myModulesPath}/cli-base.nix"
     "${myModulesPath}/desktop.nix"
     "${myModulesPath}/nixos.nix"
@@ -90,5 +90,9 @@
     nssmdns = true;
     publish.domain = true;
   };
+
+  system.stateVersion = "22.05";
+
+  services = { tailscale.enable = true; };
 
 }

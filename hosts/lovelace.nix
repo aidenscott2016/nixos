@@ -5,36 +5,68 @@
   nixpkgs.hostPlatform = "aarch64-linux";
   networking.hostName = "lovelace";
   services.openssh.enable = true;
+  services.openssh.openFirewall = true;
   security.sudo.wheelNeedsPassword = false;
-  networking.firewall.enable = false;
-  environment.systemPackages = with pkgs; [ dnsutils ];
+  networking.firewall = {
+    # enable the firewall
+    enable = true;
+
+    # always allow traffic from your Tailscale network
+    trustedInterfaces = [ "tailscale0" ];
+
+    # allow the Tailscale UDP port through the firewall
+    allowedUDPPorts = [ config.services.tailscale.port 80 53 ];
+    allowedTCPPorts = [ config.services.tailscale.port 80 53 ];
+  };
+
+  environment.systemPackages = with pkgs; [ dnsutils tailscale jq ];
   networking.usePredictableInterfaceNames = true;
   boot.kernel.sysctl = { "net.ipv4.conf.all.forwarding" = true; };
   # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1008362877
   nixpkgs.overlays = [
     (final: super: {
+      zfs = super.zfs.overrideAttrs (_: { meta.platforms = [ ]; });
       makeModulesClosure = x:
         super.makeModulesClosure (x // { allowMissing = true; });
     })
   ];
 
-  specialisation = {
-    pihole.configuration.virtualisation.oci-containers = {
-      backend = "podman";
-      containers.pihole = {
-        volumes = [ "etc-pihole:/etc/pihole" "etc-dnsmasq:/etc/dnsmasq.d" ];
-        ports = [
-          "53:53/tcp"
-          "53:53/udp"
-          "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
-          "80:80/tcp"
-        ];
-        environment.TZ = "Europe/London";
-        image = "pihole/pihole:latest";
-        extraOptions = [ "--network=host" ];
-      };
+  services = {
+    tailscale.enable = true;
+    adguardhome = {
+      enable = true;
+      openFirewall = true;
+      settings.bind_port = 80;
     };
-    adguard-home.configuration = { };
+  };
+
+  # create a oneshot job to authenticate to Tailscale
+  systemd.services.tailscale-autoconnect = let authkey = "changeme";
+  in {
+    description = "Automatic connection to Tailscale";
+
+    # make sure tailscale is running before trying to connect to tailscale
+    after = [ "network-pre.target" "tailscale.service" ];
+    wants = [ "network-pre.target" "tailscale.service" ];
+    wantedBy = [ "multi-user.target" ];
+
+    # set this service as a oneshot job
+    serviceConfig.Type = "oneshot";
+
+    # have the job run this shell script
+    script = with pkgs; ''
+      # wait for tailscaled to settle
+      sleep 2
+
+      # check if we are already authenticated to tailscale
+      status="$(${tailscale}/bin/tailscale status -json | ${jq}/bin/jq -r .BackendState)"
+      if [ $status = "Running" ]; then # if so, then do nothing
+        exit 0
+      fi
+
+      # otherwise authenticate with tailscale
+      ${tailscale}/bin/tailscale up -authkey  ${authkey}
+    '';
   };
 
   # networking = {
