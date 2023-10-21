@@ -41,6 +41,9 @@
       myModulesPath = builtins.toString ./modules;
     in {
       };
+  outputs = inputs:
+    let myModulesPath = builtins.toString ./modules;
+    in with inputs; {
       diskoConfigurations = { locutus = import ./hosts/locutus/disko.nix; };
       nixosConfigurations = {
         locutus = nixpkgs.lib.nixosSystem {
