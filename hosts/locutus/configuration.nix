@@ -1,4 +1,4 @@
-{ config, pkgs, lib, myModulesPath, ... }:
+{ config, pkgs, lib, myModulesPath, inputs, ... }:
 
 {
   imports = [
@@ -22,6 +22,7 @@
     #"${myModulesPath}/virtualbox.nix"
   ];
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.luks.devices = {
