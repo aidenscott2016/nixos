@@ -68,29 +68,6 @@
           ];
           specialArgs = inputs // { inherit myModulesPath; };
         };
-        lars = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./common/default.nix
-            ./hosts/lars/configuration.nix
-            nixos-hardware.nixosModules.lenovo-thinkpad-x220
-            dwm.nixosModules.default
-            home-manager.nixosModules.home-manager
-            home-manager-config
-          ];
-          specialArgs = inputs;
-        };
-        gila = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./common/default.nix
-            ./hosts/gila/configuration.nix
-            home-manager.nixosModules.home-manager
-            home-manager-config
-            disko.nixosModules.disko
-          ];
-          specialArgs = inputs;
-        };
 
         lovelace = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
@@ -103,23 +80,6 @@
         };
       };
 
-      installer = nixos-generators.nixosGenerate {
-        system = "x86_64-linux";
-        format = "install-iso";
-        modules = [
-          ./common
-          {
-            networking.hostName = "nixos-installer";
-            services.openssh.enable = true;
-            security.sudo.wheelNeedsPassword = false;
-            services.avahi = {
-              enable = true;
-              nssmdns = true;
-              publish.domain = true;
-            };
-          }
-        ];
-      };
       lovelace = nixos-generators.nixosGenerate {
         system = "aarch64-linux";
         format = "sd-aarch64";
