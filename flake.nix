@@ -40,17 +40,6 @@
       };
       myModulesPath = builtins.toString ./modules;
     in {
-      nixosModules = {
-        lovelace = { modulesPath, ... }: {
-          imports = [
-            "${
-              toString modulesPath
-            }/installer/sd-card/sd-image-aarch64-new-kernel.nix"
-            ./common
-            ./hosts/lovelace.nix
-            agenix.nixosModules.default
-          ];
-        };
       };
       diskoConfigurations = { locutus = import ./hosts/locutus/disko.nix; };
       nixosConfigurations = {
@@ -69,21 +58,21 @@
           specialArgs = inputs // { inherit myModulesPath; };
         };
 
+        #nix build .#nixosConfigurations.lovelace.config.formats.sd-aarch64
         lovelace = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
-          modules = [ self.nixosModules.lovelace ];
+          modules = [
+            ./common/default.nix
+            ./hosts/lovelace.nix
+            agenix.nixosModules.default
+            nixos-generators.nixosModules.all-formats
+          ];
         };
         desktop = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ ./hosts/desktop/configuration.nix ./common/default.nix ];
           specialArgs = inputs;
         };
-      };
-
-      lovelace = nixos-generators.nixosGenerate {
-        system = "aarch64-linux";
-        format = "sd-aarch64";
-        modules = [ self.nixosModules.lovelace ];
       };
     };
 }
