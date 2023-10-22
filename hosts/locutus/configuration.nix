@@ -2,10 +2,11 @@
 
 {
   imports = [
+    ../../modules/modules.nix
     ./hardware-configuration.nix
     ./packages.nix
     ./autorandr
-    "${myModulesPath}/ios.nix"
+    #"${myModulesPath}/ios.nix"
     "${myModulesPath}/redshift.nix"
     "${myModulesPath}/printer.nix"
     "${myModulesPath}/ssh.nix"
@@ -21,6 +22,8 @@
     #"${myModulesPath}/steam.nix"
     #"${myModulesPath}/virtualbox.nix"
   ];
+
+  #  aiden.ios.enabled = true;
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   boot.loader.systemd-boot.enable = true;
