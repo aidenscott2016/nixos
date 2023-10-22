@@ -28,22 +28,20 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixos-hardware, dwm, home-manager
-    , nixos-generators, disko, agenix, ... }:
-    let
-      # you can just move this in to a file
-      home-manager-config = {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.users.aiden = import ./home/home.nix;
-        home-manager.extraSpecialArgs = inputs;
-      };
-      myModulesPath = builtins.toString ./modules;
-    in {
-      };
   outputs = inputs:
-    let myModulesPath = builtins.toString ./modules;
-    in with inputs; {
+    with inputs;
+    let
+      myModulesPath = builtins.toString ./modules;
+      home-manager-modules = [
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.aiden = import ./home/home.nix;
+          home-manager.extraSpecialArgs = inputs;
+        }
+        home-manager.nixosModules.home-manager
+      ];
+    in {
       diskoConfigurations = { locutus = import ./hosts/locutus/disko.nix; };
       nixosConfigurations = {
         locutus = nixpkgs.lib.nixosSystem {
@@ -53,8 +51,7 @@
             ./hosts/locutus/configuration.nix
             dwm.nixosModules.default
             disko.nixosModules.disko
-            home-manager.nixosModules.home-manager
-            home-manager-config
+            home-manager-modules
             nixos-hardware.nixosModules.lenovo-thinkpad-t495 # the t495 is practically identical
             agenix.nixosModules.default
           ];
