@@ -1,8 +1,6 @@
 {
   description = "An example NixOS configuration";
-
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/release-23.05"; # 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager.url = "github:nix-community/home-manager/release-23.05";
@@ -26,57 +24,9 @@
       # optionally choose not to download darwin deps (saves some resources on Linux)
       inputs.darwin.follows = "";
     };
-    snowfall-lib = {
-      url = "github:snowfallorg/lib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
-
-  outputs = inputs:
-    with inputs;
-    let
-      myModulesPath = builtins.toString ./modules;
-      home-manager-modules = [
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.aiden = import ./home/home.nix;
-          home-manager.extraSpecialArgs = inputs;
-        }
-        home-manager.nixosModules.home-manager
-      ];
-    in {
-      diskoConfigurations = { locutus = import ./hosts/locutus/disko.nix; };
-      nixosConfigurations = {
-        locutus = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./common/default.nix
-            ./hosts/locutus/configuration.nix
-            dwm.nixosModules.default
-            disko.nixosModules.disko
-            home-manager-modules
-            nixos-hardware.nixosModules.lenovo-thinkpad-t495 # the t495 is practically identical
-            agenix.nixosModules.default
-          ];
-          specialArgs = inputs // { inherit myModulesPath; };
-        };
-
-        #nix build .#nixosConfigurations.lovelace.config.formats.sd-aarch64
-        lovelace = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          modules = [
-            ./common/default.nix
-            ./hosts/lovelace.nix
-            agenix.nixosModules.default
-            nixos-generators.nixosModules.all-formats
-          ];
-        };
-        desktop = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [ ./hosts/desktop/configuration.nix ./common/default.nix ];
-          specialArgs = inputs;
-        };
-      };
-    };
+  outputs = inputs: {
+    diskoConfigurations = { locutus = import ./hosts/locutus/disko.nix; };
+    nixosConfigurations = (import ./hosts inputs);
+  };
 }
