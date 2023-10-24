@@ -1,5 +1,7 @@
-{ pkgs, lib, ... }:
-with lib; {
+{ pkgs, config, lib, mylib, ... }:
+with lib;
+let cfg = config.aiden.modules.android;
+in {
   options.aiden.modules.android.enabled = mkOption {
     type = types.bool;
     default = false;

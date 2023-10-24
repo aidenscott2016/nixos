@@ -25,8 +25,22 @@
       inputs.darwin.follows = "";
     };
   };
-  outputs = inputs: {
-    diskoConfigurations = { locutus = import ./hosts/locutus/disko.nix; };
-    nixosConfigurations = (import ./hosts inputs);
-  };
+  outputs = inputs:
+    let
+      mylib = with inputs.lib; {
+        optionalModule = name: config: configToEnable:
+          let cfg = config.aiden.modules.${name};
+          in {
+            options.aiden.modules.${name}.enabled = mkOption {
+              type = types.bool;
+              default = false;
+            };
+            config = { };
+          };
+      };
+
+    in {
+      diskoConfigurations = { locutus = import ./hosts/locutus/disko.nix; };
+      nixosConfigurations = (import ./hosts inputs // mylib);
+    };
 }
