@@ -1,4 +1,5 @@
-inputs@{ config, pkgs, ... }:
+params@{ pkgs, lib, config, ... }:
+with lib.aiden;
 let
   beet-override = with pkgs;
     (beets.override {
@@ -11,7 +12,7 @@ let
         };
       };
     });
-in {
+in enableableModule "multimedia" params {
   environment.systemPackages = with pkgs; [
     beet-override
     nicotine-plus

@@ -1,9 +1,18 @@
-{ lib, pkgs, config, ... }: {
+params@{ pkgs, lib, config, ... }:
+with lib.aiden;
+enableableModule "jellyfin" params {
   networking.firewall.allowedTCPPorts = [ 80 443 ];
   networking.firewall.allowPing = true;
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "aiden@oldstreetjournal.co.uk";
   services = {
+
+    jellyfin = {
+      user = "aiden";
+      enable = true;
+      openFirewall = true;
+    };
+
     nginx.enable = false;
     nginx.virtualHosts."jellyfin.aidenscott.dev" = {
       addSSL = false;
@@ -84,11 +93,6 @@
               proxy_set_header X-Forwarded-Host $http_host;
           }
       '';
-    };
-    jellyfin = {
-      user = "aiden";
-      enable = true;
-      openFirewall = true;
     };
   };
 }

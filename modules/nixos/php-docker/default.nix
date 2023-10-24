@@ -1,5 +1,6 @@
-inputs@{ ... }:
-{
+params@{ pkgs, lib, config, ... }:
+with lib.aiden;
+enableableModule "php-docker" params {
   networking.firewall = {
     logRefusedConnections = true;
     enable = true;

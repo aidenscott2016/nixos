@@ -1,4 +1,6 @@
-inputs@{ ... }: {
+params@{ pkgs, lib, config, ... }:
+with lib.aiden;
+enableableModule "ssh" params {
   services.openssh = {
     enable = true;
     settings = {

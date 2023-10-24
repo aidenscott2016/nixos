@@ -1,4 +1,6 @@
-inputs@{ config, pkgs, ... }: {
+params@{ pkgs, lib, config, ... }:
+with lib.aiden;
+enableableModule "cli-base" params {
   environment.systemPackages = with pkgs; [
     vim
     wget
