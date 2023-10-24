@@ -6,24 +6,24 @@
     ./hardware-configuration.nix
     ./packages.nix
     ./autorandr
-    #"${myModulesPath}/ios.nix"
-    "${myModulesPath}/redshift.nix"
-    "${myModulesPath}/printer.nix"
-    "${myModulesPath}/ssh.nix"
-    "${myModulesPath}/gc.nix"
-    "${myModulesPath}/barrier.nix"
-    # "${myModulesPath}/transmission.nix"
-    "${myModulesPath}/jellyfin.nix"
-    "${myModulesPath}/cli-base.nix"
-    "${myModulesPath}/desktop.nix"
-    "${myModulesPath}/nixos.nix"
-    "${myModulesPath}/multimedia.nix"
-    "${myModulesPath}/emacs.nix"
-    #"${myModulesPath}/steam.nix"
-    #"${myModulesPath}/virtualbox.nix"
+    "${myModulesPath}/ios"
+    "${myModulesPath}/redshift"
+    "${myModulesPath}/printer"
+    "${myModulesPath}/ssh"
+    "${myModulesPath}/gc"
+    "${myModulesPath}/barrier"
+    # "${myModulesPath}/transmission"
+    "${myModulesPath}/jellyfin"
+    "${myModulesPath}/cli-base"
+    "${myModulesPath}/desktop"
+    "${myModulesPath}/nixos"
+    "${myModulesPath}/multimedia"
+    "${myModulesPath}/emacs"
+    #"${myModulesPath}/steam"
+    #"${myModulesPath}/virtualbox"
   ];
 
-  #  aiden.ios.enabled = true;
+  aiden.modules.android.enabled = true;
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   boot.loader.systemd-boot.enable = true;
