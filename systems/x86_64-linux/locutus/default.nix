@@ -1,29 +1,25 @@
-{ config, pkgs, lib, myModulesPath, inputs, ... }:
-
-{
+{ config, pkgs, lib, myModulesPath, inputs, ... }: {
   imports = [
-    ../../modules/modules.nix
+    # ../../modules/modules.nix
     ./hardware-configuration.nix
     ./packages.nix
     ./autorandr
-    "${myModulesPath}/ios"
-    "${myModulesPath}/redshift"
-    "${myModulesPath}/printer"
-    "${myModulesPath}/ssh"
-    "${myModulesPath}/gc"
-    "${myModulesPath}/barrier"
-    # "${myModulesPath}/transmission"
-    "${myModulesPath}/jellyfin"
-    "${myModulesPath}/cli-base"
-    "${myModulesPath}/desktop"
-    "${myModulesPath}/nixos"
-    "${myModulesPath}/multimedia"
-    "${myModulesPath}/emacs"
+    # "${myModulesPath}/ios"
+    # "${myModulesPath}/redshift"
+    # "${myModulesPath}/printer"
+    # "${myModulesPath}/ssh"
+    # "${myModulesPath}/gc"
+    # "${myModulesPath}/barrier"
+    # # "${myModulesPath}/transmission"
+    # "${myModulesPath}/jellyfin"
+    # "${myModulesPath}/cli-base"
+    # "${myModulesPath}/desktop"
+    # "${myModulesPath}/nixos"
+    # "${myModulesPath}/multimedia"
+    # "${myModulesPath}/emacs"
     #"${myModulesPath}/steam"
     #"${myModulesPath}/virtualbox"
   ];
-
-  aiden.modules.android.enabled = true;
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   boot.loader.systemd-boot.enable = true;
