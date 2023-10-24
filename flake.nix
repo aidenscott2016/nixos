@@ -24,9 +24,16 @@
       # optionally choose not to download darwin deps (saves some resources on Linux)
       inputs.darwin.follows = "";
     };
+    snowfall-lib = {
+      url = "github:snowfallorg/lib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = inputs: {
-    diskoConfigurations = { locutus = import ./hosts/locutus/disko.nix; };
-    nixosConfigurations = (import ./hosts inputs);
-  };
+  outputs = inputs:
+    inputs.snowfall-lib.mkFlake {
+      inherit inputs;
+      src = ./.;
+      snowfall = { namespace = "aiden"; };
+      diskoConfigurations = { locutus = import ./hosts/locutus/disko.nix; };
+    };
 }
