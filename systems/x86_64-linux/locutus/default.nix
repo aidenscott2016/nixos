@@ -1,6 +1,7 @@
 { config, pkgs, lib, myModulesPath, inputs, ... }: {
   imports = [
     # ../../modules/modules.nix
+    ../../../common
     ./hardware-configuration.nix
     ./packages.nix
     ./autorandr
