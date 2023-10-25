@@ -1,6 +1,7 @@
 { lib, ... }:
 with lib.aiden;
 with lib; {
+  enabled = { enabled = true; };
   enableableModule = name:
     params@{ config, ... }:
     configToEnable:
@@ -13,4 +14,5 @@ with lib; {
 
       config = mkIf cfg.enabled configToEnable;
     };
+
 }
