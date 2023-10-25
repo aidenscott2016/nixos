@@ -35,5 +35,6 @@
       src = ./.;
       snowfall = { namespace = "aiden"; };
       diskoConfigurations = { locutus = import ./hosts/locutus/disko.nix; };
+      channels-config = { allowUnfree = true; };
     };
 }

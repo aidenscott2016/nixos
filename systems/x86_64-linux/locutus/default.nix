@@ -1,7 +1,12 @@
 { config, pkgs, lib, myModulesPath, inputs, ... }:
 with lib.aiden; {
-  imports =
-    [ ../../../common ./hardware-configuration.nix ./packages.nix ./autorandr ];
+  imports = [
+    ../../../common
+    ./hardware-configuration.nix
+    ./packages.nix
+    ./autorandr
+    inputs.dwm.nixosModules.default
+  ];
 
   aiden.modules = {
     ios = enabled;
@@ -15,7 +20,7 @@ with lib.aiden; {
     desktop = enabled;
     multimedia = enabled;
     emacs = enabled;
-    home-assistant = enabled;
+    #home-assistant = enabled;
   };
 
   system.stateVersion = "22.05";
@@ -23,10 +28,6 @@ with lib.aiden; {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.aiden = { };
-
-  #// why is this?
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnfreePredicate = _: true;
 
   boot = {
     supportedFilesystems = [ "ntfs" ];

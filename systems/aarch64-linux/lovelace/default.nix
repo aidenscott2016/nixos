@@ -1,6 +1,6 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
+with inputs; {
 
-{
   age.secrets.secret1.file = ../secrets/secret1.age;
   system.stateVersion = "22.05";
   nixpkgs.hostPlatform = "aarch64-linux";
