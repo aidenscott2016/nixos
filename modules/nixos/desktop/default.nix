@@ -1,4 +1,6 @@
-inputs@{ config, pkgs, ... }: {
+params@{ pkgs, lib, config, ... }:
+with lib.aiden;
+enableableModule "desktop" params {
 
   # services.xserver.dpi = 180;
   services.mullvad-vpn.enable = true;

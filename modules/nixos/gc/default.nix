@@ -1,4 +1,6 @@
-{ pkgs, ... }: {
+params@{ pkgs, lib, config, ... }:
+with lib.aiden;
+enableableModule "gc" params {
   environment.systemPackages = with pkgs; [ nixfmt ];
   nix.gc = {
     automatic = true;
