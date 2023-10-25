@@ -1,39 +1,47 @@
-{ config, pkgs, lib, myModulesPath, inputs, ... }: {
-  imports = [
-    # ../../modules/modules.nix
-    ../../../common
-    ./hardware-configuration.nix
-    ./packages.nix
-    ./autorandr
-    # "${myModulesPath}/ios"
-    # "${myModulesPath}/redshift"
-    # "${myModulesPath}/printer"
-    # "${myModulesPath}/ssh"
-    # "${myModulesPath}/gc"
-    # "${myModulesPath}/barrier"
-    # # "${myModulesPath}/transmission"
-    # "${myModulesPath}/jellyfin"
-    # "${myModulesPath}/cli-base"
-    # "${myModulesPath}/desktop"
-    # "${myModulesPath}/nixos"
-    # "${myModulesPath}/multimedia"
-    # "${myModulesPath}/emacs"
-    #"${myModulesPath}/steam"
-    #"${myModulesPath}/virtualbox"
-  ];
+{ config, pkgs, lib, myModulesPath, inputs, ... }:
+with lib.aiden; {
+  imports =
+    [ ../../../common ./hardware-configuration.nix ./packages.nix ./autorandr ];
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices = {
-    root = {
-      device = "/dev/nvme0n1p2";
-      preLVM = true;
+  aiden.modules = {
+    ios = enabled;
+    redshift = enabled;
+    printer = enabled;
+    ssh = enabled;
+    gc = enabled;
+    barrier = enabled;
+    jellyfin.enabled = false;
+    cli-base = enabled;
+    desktop = enabled;
+    multimedia = enabled;
+    emacs = enabled;
+    home-assistant = enabled;
+  };
+
+  system.stateVersion = "22.05";
+
+  #// why is this?
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = _: true;
+
+  boot = {
+    supportedFilesystems = [ "ntfs" ];
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    initrd.luks.devices = {
+      root = {
+        device = "/dev/nvme0n1p2";
+        preLVM = true;
+      };
+
     };
   };
 
-  networking.hostName = "locutus";
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "locutus";
+    networkmanager.enable = true;
+  };
   programs.nm-applet.enable = true;
 
   services = {
@@ -53,6 +61,15 @@
       };
 
     };
+    avahi = {
+      enable = true;
+      nssmdns = true;
+      publish.domain = true;
+    };
+
+    tailscale.enable = true;
+    gvfs.enable = true;
+
   };
 
   hardware = {
@@ -63,37 +80,5 @@
   };
 
   security.sudo.wheelNeedsPassword = false;
-
-  services.gvfs.enable = true;
-
-  boot.supportedFilesystems = [ "ntfs" ];
-
-  virtualisation.oci-containers = {
-    backend = "podman";
-    containers.homeassistant = {
-      volumes = [ "home-assistant:/config" ];
-      environment.TZ = "Europe/London";
-      image =
-        "ghcr.io/home-assistant/home-assistant:stable"; # Warning: if the tag does not change, the image will not be updated
-      extraOptions = [ "--network=host" ];
-    };
-  };
-
-  specialisation = {
-    rpi-dev.configuration = {
-      boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-    };
-  };
-
-  #avahi
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-    publish.domain = true;
-  };
-
-  system.stateVersion = "22.05";
-
-  services = { tailscale.enable = true; };
 
 }
