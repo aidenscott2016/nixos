@@ -9,7 +9,7 @@
       rerere.enabled = true;
       help.autocorrect = -1;
       core = {
-        excludesfile = "${./files/gitignore}";
+        excludesfile = "${../files/gitignore}";
       };
       push = {
         autoSetupRemote = true;

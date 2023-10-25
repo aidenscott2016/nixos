@@ -20,6 +20,10 @@ with lib.aiden; {
 
   system.stateVersion = "22.05";
 
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.aiden = { };
+
   #// why is this?
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowUnfreePredicate = _: true;
