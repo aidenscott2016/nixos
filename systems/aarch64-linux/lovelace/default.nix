@@ -1,7 +1,10 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, modulesPath, ... }:
 with inputs; {
-  imports =
-    [ agenix.nixosModules.default nixos-generators.nixosModules.sd-aarch64 ];
+  imports = [
+    "${modulesPath}/installer/sd-card/sd-image-aarch64-new-kernel.nix" # gives bootloader, sd paritition expansion etc
+    agenix.nixosModules.default
+    nixos-generators.nixosModules.all-formats
+  ];
 
   age.secrets.secret1.file = "${self.outPath}/secrets/secret1.age";
   system.stateVersion = "22.05";
