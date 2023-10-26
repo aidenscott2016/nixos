@@ -1,7 +1,9 @@
 { config, lib, pkgs, inputs, ... }:
 with inputs; {
+  imports =
+    [ agenix.nixosModules.default nixos-generators.nixosModules.sd-aarch64 ];
 
-  age.secrets.secret1.file = ../secrets/secret1.age;
+  age.secrets.secret1.file = "${self.outPath}/secrets/secret1.age";
   system.stateVersion = "22.05";
   nixpkgs.hostPlatform = "aarch64-linux";
   networking.hostName = "lovelace";
