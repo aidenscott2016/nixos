@@ -7,6 +7,8 @@ with lib.aiden; {
     inputs.dwm.nixosModules.default
   ];
 
+  environment.systemPackages = with pkgs;
+    [ inputs.disko.packages.x86_64-linux.disko ];
   aiden.modules = {
     common = enabled;
     ios = enabled;
@@ -14,13 +16,13 @@ with lib.aiden; {
     printer = enabled;
     ssh = enabled;
     gc = enabled;
-    barrier = enabled;
-    jellyfin.enabled = false;
     cli-base = enabled;
     desktop = enabled;
     multimedia = enabled;
     emacs = enabled;
+    jellyfin.enabled = false;
     #home-assistant = enabled;
+    #barrier = enabled;
   };
 
   system.stateVersion = "22.05";
