@@ -1,7 +1,6 @@
 { config, pkgs, lib, myModulesPath, inputs, ... }:
 with lib.aiden; {
   imports = [
-    ../../../common
     ./hardware-configuration.nix
     ./packages.nix
     ./autorandr
@@ -9,6 +8,7 @@ with lib.aiden; {
   ];
 
   aiden.modules = {
+    common = enabled;
     ios = enabled;
     redshift = enabled;
     printer = enabled;
