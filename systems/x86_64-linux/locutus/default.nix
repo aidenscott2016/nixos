@@ -71,7 +71,12 @@ with lib.aiden; {
     avahi = {
       enable = true;
       nssmdns = true;
-      publish.domain = true;
+      publish = {
+        enable = true;
+        addresses = true;
+        workstation = true;
+      };
+      openFirewall = true;
     };
 
     tailscale.enable = true;
