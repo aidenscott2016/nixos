@@ -20,5 +20,6 @@ params@{ config, pkgs, inputs, ... }: {
     chromium
     inputs.agenix.packages.x86_64-linux.default
 
+    dnsutils # nslookup
   ];
 }
