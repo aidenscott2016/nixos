@@ -16,5 +16,15 @@
   system.stateVersion = lib.mkForce "23.05";
   powerManagement.cpuFreqGovernor = "ondemand";
   services.irqbalance.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      workstation = true;
+    };
+    openFirewall = true;
+  };
   services.acpid.enable = true;
 }
