@@ -51,16 +51,49 @@
     nat.internalInterfaces = [ "br0" ];
   };
 
-  services.dhcpd4 = {
-    enable = true;
-    extraConfig = ''
-      option subnet-mask 255.255.255.0;
-      option routers 10.0.0.1;
-      option domain-name-servers 10.0.0.1;
-      subnet 10.0.0.0 netmask 255.255.255.0 {
-          range 10.0.0.100 10.0.0.199;
-      }
-    '';
-    interfaces = [ "br0" ];
+  services.kea = {
+    dhcp6.enable = false;
+    dhcp4 = {
+      enable = true;
+      settings = {
+        interfaces-config = { interfaces = [ "br0" ]; };
+        lease-database = {
+          name = "/var/lib/kea/dhcp4.leases";
+          persist = true;
+          type = "memfile";
+        };
+        rebind-timer = 2000;
+        renew-timer = 1000;
+        subnet4 = [{
+          pools = [{ pool = "10.0.0.100 - 10.0.0.199"; }];
+          subnet = "10.0.0.0/24";
+          option-data = [
+            {
+              name = "domain-name-servers";
+              data = "10.0.0.1";
+            }
+            {
+              name = "routers";
+              data = "10.0.0.1";
+            }
+          ];
+        }];
+        valid-lifetime = 4000;
+      };
+    };
+
   };
+
+  # services.dhcpd4 = {
+  #   enable = true;
+  #   extraConfig = ''
+  #     option subnet-mask 255.255.255.0;
+  #     option routers 10.0.0.1;
+  #     option domain-name-servers 10.0.0.1;
+  #     subnet 10.0.0.0 netmask 255.255.255.0 {
+  #         range 10.0.0.100 10.0.0.199;
+  #     }
+  #   '';
+  #   interfaces = [ "br0" ];
+  # };
 }
