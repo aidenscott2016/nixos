@@ -24,7 +24,7 @@
   networking.dhcpcd.enable = true;
   networking.usePredictableInterfaceNames = true;
 
-  networking.firewall.enable = true; # !!!!!
+  networking.firewall.enable = false; # !!!!!
   networking.firewall.interfaces.eth0.allowedTCPPorts = [ ];
   networking.firewall.interfaces.eth0.allowedUDPPorts = [ ];
   networking.firewall.interfaces.br0.allowedTCPPorts = [ 53 22 ];
@@ -37,18 +37,33 @@
     };
     interfaces.eth0.useDHCP = true;
 
-    interfaces.br0 = {
-      ipv4.addresses = [{
-        address = "10.0.0.1";
-        prefixLength = 24;
-      }];
-    };
-
-    bridges.br0 = { interfaces = [ "eth1" "eth2" ]; };
-
     nat.enable = true;
     nat.externalInterface = "eth0";
-    nat.internalInterfaces = [ "br0" ];
+    nat.internalInterfaces = [ "eth1" "lan" ];
+
+    interfaces = {
+
+      lan = {
+        ipv4.addresses = [{
+          address = "10.0.0.2";
+          prefixLength = 24;
+        }];
+      };
+      eth1 = {
+        ipv4.addresses = [{
+          address = "10.0.0.1";
+          prefixLength = 24;
+        }];
+      };
+    };
+
+    vlans = {
+      lan = {
+        interface = "eth1";
+        id = 101;
+      };
+    };
+
   };
 
   services.kea = {
@@ -56,7 +71,7 @@
     dhcp4 = {
       enable = true;
       settings = {
-        interfaces-config = { interfaces = [ "br0" ]; };
+        interfaces-config = { interfaces = [ "eth1" "lan" ]; };
         lease-database = {
           name = "/var/lib/kea/dhcp4.leases";
           persist = true;
@@ -82,18 +97,17 @@
       };
     };
 
+    # services.dhcpd4 = {
+    #   enable = true;
+    #   extraConfig = ''
+    #     option subnet-mask 255.255.255.0;
+    #     option routers 10.0.0.1;
+    #     option domain-name-servers 10.0.0.1;
+    #     subnet 10.0.0.0 netmask 255.255.255.0 {
+    #         range 10.0.0.100 10.0.0.199;
+    #     }
+    #   '';
+    #   interfaces = [ "br0" ];
+    # };
   };
-
-  # services.dhcpd4 = {
-  #   enable = true;
-  #   extraConfig = ''
-  #     option subnet-mask 255.255.255.0;
-  #     option routers 10.0.0.1;
-  #     option domain-name-servers 10.0.0.1;
-  #     subnet 10.0.0.0 netmask 255.255.255.0 {
-  #         range 10.0.0.100 10.0.0.199;
-  #     }
-  #   '';
-  #   interfaces = [ "br0" ];
-  # };
 }
