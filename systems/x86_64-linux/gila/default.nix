@@ -69,7 +69,7 @@
   services.kea = {
     dhcp6.enable = false;
     dhcp4 = {
-      enable = true;
+      enable = false;
       settings = {
         interfaces-config = { interfaces = [ "eth1" "lan" ]; };
         lease-database = {
@@ -79,35 +79,68 @@
         };
         rebind-timer = 2000;
         renew-timer = 1000;
-        subnet4 = [{
-          pools = [{ pool = "10.0.0.100 - 10.0.0.199"; }];
-          subnet = "10.0.0.0/24";
-          option-data = [
-            {
-              name = "domain-name-servers";
-              data = "10.0.0.1";
-            }
-            {
-              name = "routers";
-              data = "10.0.0.1";
-            }
-          ];
-        }];
+        subnet4 = [
+          {
+            interface = "lan";
+            pools = [{ pool = "10.0.1.100 - 10.0.1.199"; }];
+            subnet = "10.0.1.0/24";
+            option-data = [
+              {
+                name = "domain-name-servers";
+                data = "10.0.1.1";
+              }
+              {
+                name = "routers";
+                data = "10.0.1.1";
+              }
+            ];
+          }
+
+          {
+            interface = "eth1";
+            pools = [{ pool = "10.0.0.100 - 10.0.0.199"; }];
+            subnet = "10.0.0.0/24";
+            option-data = [
+              {
+                name = "domain-name-servers";
+                data = "10.0.0.1";
+              }
+              {
+                name = "routers";
+                data = "10.0.0.1";
+              }
+            ];
+          }
+        ];
         valid-lifetime = 4000;
       };
     };
 
-    # services.dhcpd4 = {
-    #   enable = true;
-    #   extraConfig = ''
-    #     option subnet-mask 255.255.255.0;
-    #     option routers 10.0.0.1;
-    #     option domain-name-servers 10.0.0.1;
-    #     subnet 10.0.0.0 netmask 255.255.255.0 {
-    #         range 10.0.0.100 10.0.0.199;
-    #     }
-    #   '';
-    #   interfaces = [ "br0" ];
-    # };
   };
+  services.dhcpd4 = {
+    enable = true;
+    extraConfig = ''
+      subnet 10.0.0.0 netmask 255.255.255.0 {
+        option broadcast-address 10.0.0.255;
+        option routers 10.0.0.1;
+        option domain-name-servers 10.0.0.1;
+        option subnet-mask 255.255.255.0;
+        interface eth1;
+        range 10.0.0.50 10.0.0.99;
+      }
+
+
+      subnet 10.0.1.0 netmask 255.255.255.0 {
+        option broadcast-address 10.0.1.255;
+        option routers 10.0.1.1;
+        option domain-name-servers 10.0.1.1;
+        option subnet-mask 255.255.255.0;
+        interface lan;
+        range 10.0.1.50 10.0.1.99;
+      }
+    '';
+    interfaces = [ "eth1" "lan" ];
+  };
+
+  environment.systemPackages = [ pkgs.tcpdump pkgs.dnsutils ];
 }

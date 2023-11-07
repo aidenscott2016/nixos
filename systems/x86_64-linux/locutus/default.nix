@@ -48,6 +48,22 @@ with lib.aiden; {
   networking = {
     hostName = "locutus";
     networkmanager.enable = true;
+
+    # vlans = {
+    #   lan = {
+    #     interface = "wlp1s0";
+    #     id = 101;
+    #   };
+    # };
+
+    hostId = "deadb33f";
+    # interfaces.lan = {
+    #   useDHCP = true;
+    #   # ipv4.addresses = [{
+    #   #   address = "10.0.0.150";
+    #   #   prefixLength = 24;
+    #   # }];
+    # };
   };
   programs.nm-applet.enable = true;
 
