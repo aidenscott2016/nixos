@@ -11,7 +11,7 @@ in {
         darkreader
       ];
       settings = {
-        "privacy.resistFingerprinting" = true;
+        "privacy.resistFingerprinting" = false; # too annoying
         "browser.compactmode.show" = true;
         "privacy.clearOnShutdown.history" = false;
         "privacy.clearOnShutdown.cookies" = false;
