@@ -14,13 +14,13 @@ with lib.aiden; {
     printer = enabled;
     ssh = enabled;
     gc = enabled;
-    barrier = enabled;
-    jellyfin.enabled = false;
     cli-base = enabled;
     desktop = enabled;
     multimedia = enabled;
     emacs = enabled;
+    jellyfin.enabled = false;
     #home-assistant = enabled;
+    #barrier = enabled;
   };
 
   system.stateVersion = "22.05";
@@ -43,10 +43,6 @@ with lib.aiden; {
     };
   };
 
-  networking = {
-    hostName = "locutus";
-    networkmanager.enable = true;
-  };
   programs.nm-applet.enable = true;
 
   services = {
@@ -86,4 +82,10 @@ with lib.aiden; {
 
   security.sudo.wheelNeedsPassword = false;
 
+  networking = {
+    hostName = "locutus";
+    networkmanager.enable = true;
+  };
+
+  #programs.bash.undistract.me
 }
