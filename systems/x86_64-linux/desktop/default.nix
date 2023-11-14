@@ -1,7 +1,11 @@
-{ config, pkgs, ... }:
-
-{
+{ config, pkgs, lib, ... }:
+with lib.aiden; {
   imports = [ ./hardware-configuration.nix ];
+
+  aiden.modules = {
+    common = enabled;
+    ssh = enabled;
+  };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -31,9 +35,10 @@
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-  environment.systemPackages = with pkgs; [ git ];
+  environment.systemPackages = with pkgs; [ git udiskie ];
 
   system.stateVersion = "23.05";
+  services.udisks2.enable = true;
 
 }
 
