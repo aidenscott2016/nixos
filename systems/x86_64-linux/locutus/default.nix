@@ -21,6 +21,7 @@ with lib.aiden; {
     multimedia = enabled;
     emacs = enabled;
     jellyfin.enabled = false;
+    avahi = enabled;
     #home-assistant = enabled;
     #barrier = enabled;
   };
@@ -64,16 +65,6 @@ with lib.aiden; {
       };
 
     };
-    avahi = {
-      enable = true;
-      nssmdns = true;
-      publish = {
-        enable = true;
-        addresses = true;
-        workstation = true;
-      };
-      openFirewall = true;
-    };
 
     tailscale.enable = true;
     gvfs.enable = true;
@@ -95,4 +86,5 @@ with lib.aiden; {
   };
 
   #programs.bash.undistract.me
+  programs.steam.enable = true;
 }

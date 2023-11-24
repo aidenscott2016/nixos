@@ -1,9 +1,9 @@
 # https://xeiaso.net/blog/prometheus-grafana-loki-nixos-2020-11-20/
 { config, lib, pkgs, ... }:
 with lib;
-with config.aiden.modules.router; {
-  config = mkIf enabled {
-
+let cfg = config.aiden.modules.router;
+in {
+  config = mkIf cfg.enabled {
     # grafana configuration
     services.grafana = {
       enable = true;
