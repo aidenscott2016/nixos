@@ -21,5 +21,7 @@ params@{ config, pkgs, inputs, ... }: {
     inputs.agenix.packages.x86_64-linux.default
 
     dnsutils # nslookup
+    silver-searcher
   ];
+
 }
