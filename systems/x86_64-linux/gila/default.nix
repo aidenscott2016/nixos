@@ -5,18 +5,15 @@
     ./disko-config.nix
   ];
 
-  networking.hostName = "gila";
-  networking.networkmanager.enable = true;
+  networking.networkmanager.enable = false;
   networking.dhcpcd.enable = true;
-  networking.usePredictableInterfaceNames = true;
   environment.systemPackages = with pkgs; [ tcpdump dnsutils ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernel.sysctl = { "net.ipv4.conf.all.forwarding" = true; };
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.kernelParams = [ "copytoram" ];
-  boot.supportedFilesystems =
-    pkgs.lib.mkForce [ "btrfs" "vfat" "xfs" "ntfs" "cifs" ];
+  boot.supportedFilesystems = pkgs.lib.mkForce [ "btrfs" "vfat" "xfs" "cifs" ];
   security.sudo.wheelNeedsPassword = false;
   services.openssh.enable = true;
   services.openssh.openFirewall = false;
@@ -24,13 +21,22 @@
   powerManagement.cpuFreqGovernor = "ondemand";
   services.irqbalance.enable = true;
   services.acpid.enable = true;
-
   aiden.modules = {
     common.enabled = true;
-    router = {
-      enabled = true;
-      internalInterface = "eth1";
-      externalInterface = "eth0";
-    };
+    home-assistant.enabled = true;
+    router.enabled = false;
   };
+
+  services.mullvad-vpn.enable = true;
+
+  virtualisation.vmVariant = {
+    virtualisation = {
+      sharedDirectories.my-share = {
+        source = "/home/aiden/downloads";
+        target = "/mnt/shared";
+      };
+    };
+    networking = { hostName = lib.mkForce "gila-vm"; };
+  };
+
 }
