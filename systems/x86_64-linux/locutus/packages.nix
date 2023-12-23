@@ -22,6 +22,7 @@ params@{ config, pkgs, inputs, ... }: {
 
     dnsutils # nslookup
     silver-searcher
+    transmission-gtk
   ];
 
 }
