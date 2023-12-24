@@ -27,6 +27,7 @@
 
   aiden.modules = {
     common.enabled = true;
+    adguard.enabled = true;
     home-assistant = {
       enabled = true;
       devices = [
