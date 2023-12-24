@@ -10,6 +10,7 @@ with lib.aiden; {
   environment.systemPackages = with pkgs;
     [ inputs.disko.packages.x86_64-linux.disko ];
   aiden.modules = {
+    avahi = enabled;
     common = enabled;
     ios = enabled;
     redshift = enabled;
@@ -21,8 +22,6 @@ with lib.aiden; {
     multimedia = enabled;
     emacs = enabled;
     jellyfin.enabled = false;
-    #home-assistant = enabled;
-    #barrier = enabled;
   };
 
   system.stateVersion = "22.05";
@@ -63,16 +62,6 @@ with lib.aiden; {
         STOP_CHARGE_THRESH_BAT1 = 85;
       };
 
-    };
-    avahi = {
-      enable = true;
-      nssmdns = true;
-      publish = {
-        enable = true;
-        addresses = true;
-        workstation = true;
-      };
-      openFirewall = true;
     };
 
     tailscale.enable = true;

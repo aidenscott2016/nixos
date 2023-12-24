@@ -26,6 +26,7 @@
   services.acpid.enable = true;
 
   aiden.modules = {
+    avahi.enabled = true;
     common.enabled = true;
     adguard.enabled = true;
     home-assistant = {
