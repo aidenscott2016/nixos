@@ -35,6 +35,7 @@
       ];
     };
     router = {
+      dns.enabled = false;
       enabled = true;
       internalInterface = "eth1";
       externalInterface = "eth0";
