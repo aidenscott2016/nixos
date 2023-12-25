@@ -37,16 +37,13 @@
     };
     router = {
       dns.enabled = false;
+      kea.enabled = true;
       enabled = true;
       internalInterface = "eth1";
       externalInterface = "eth0";
     };
   };
 
-  services.caddy = {
-    enable = true;
-    virtualHosts."localhost".extraConfig = ''
-      respond "Hello, world!"
-    '';
-  };
+
+  networking.hosts."10.0.0.2" = ["adguard.oldstreetjournal.dev"];
 }
