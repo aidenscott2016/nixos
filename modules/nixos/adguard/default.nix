@@ -2,17 +2,15 @@ params@{ pkgs, lib, config, ... }:
 with lib.aiden;
 let
   http_port = 8080;
-  host = "10.0.0.2";
 in
 enableableModule "adguard" params {
   services.adguardhome = {
     enable = true;
     settings = {
-      http = {
-        bind_host = host;
-        bind_port = http_port;
-      };
-      dns.bind_hosts = [host];
+      bind_host = "10.0.1.1";
+      bind_port = http_port;
+
+      dns.bind_hosts = [ "10.0.0.2" ]; #admin lan
       users = [{
         name = "admin";
         password =
@@ -31,3 +29,4 @@ enableableModule "adguard" params {
     };
   };
 }
+  
