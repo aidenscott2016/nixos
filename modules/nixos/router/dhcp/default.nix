@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 with lib;
-let enabled = config.aiden.modules.router.enabled;
+let keaEnabled = config.aiden.modules.router.kea.enabled;
 in {
-  config = mkIf enabled {
-    services.kea = {
+  config = {
+    services.kea = mkIf keaEnabled {
       dhcp6.enable = false;
       dhcp4 = {
         enable = true;
@@ -26,7 +26,7 @@ in {
                 }
                 {
                   name = "routers";
-                  data = "10.0.0.1";
+                  data = "10.0.1.1";
                 }
               ];
             }

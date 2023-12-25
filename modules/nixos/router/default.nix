@@ -6,5 +6,7 @@ with config.aiden.modules.router; {
     internalInterface = mkOption { type = types.str; };
     externalInterface = mkOption { type = types.str; };
     dns.enabled = mkEnableOption "unbound dns";
+    kea.enabled = mkEnableOption "kea";
+    dnsmasq.enabled = mkEnableOption "dnsmasq";
   };
 }
