@@ -42,7 +42,4 @@
       externalInterface = "eth0";
     };
   };
-
-
-  networking.hosts."10.0.0.2" = ["adguard.oldstreetjournal.dev"];
 }
