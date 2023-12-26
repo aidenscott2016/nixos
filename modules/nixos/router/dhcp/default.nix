@@ -4,11 +4,20 @@ let
   dnsmasqEnabled = config.aiden.modules.router.dnsmasq.enabled;
 in
 {
-  config = {
+  config = mkIf dnsmasqEnabled {
     environment.systemPackages = with pkgs; [ dnsmasq ];
-    services.dnsmasq = mkIf dnsmasqEnabled {
+    services.dnsmasq = {
       enable = true;
+      resolveLocalQueries = false;
       settings = {
+        # upstream DNS
+        server = [
+          "10.0.0.2#5354" #adguard
+        ];
+        no-resolv = true;
+        bogus-priv = true;
+        domain-needed = true;
+        expand-hosts = true;
         domain = "oldstreetjournal.co.uk";
         dhcp-range = [
           "set:lan,10.0.1.200,10.0.1.250,255.255.255.0,12h"
