@@ -28,7 +28,7 @@
     avahi.enabled = true;
     common.enabled = true;
     adguard.enabled = true;
-    home-assistant = 
+    home-assistant = {
       enabled = true;
       devices = [
         "/dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_2ee577279f96ed119403c098a7669f5d-if00-port0"

@@ -11,6 +11,7 @@ in
       enable = true;
       resolveLocalQueries = false;
       settings = {
+        domain = "oldstreetjournal.co.uk,10.0.0.0/16,local";
         # upstream DNS
         server = [
           "10.0.0.2#5354" #adguard
@@ -19,7 +20,6 @@ in
         bogus-priv = true;
         domain-needed = true;
         expand-hosts = true;
-        domain = "oldstreetjournal.co.uk";
         dhcp-range = [
           "set:lan,10.0.1.200,10.0.1.250,255.255.255.0,12h"
           "set:iot,10.0.2.200,10.0.2.250,255.255.255.0,12h"
