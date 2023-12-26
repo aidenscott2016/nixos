@@ -9,8 +9,7 @@ enableableModule "adguard" params {
     settings = {
       bind_host = "10.0.1.1";
       bind_port = http_port;
-
-      dns.bind_hosts = [ "10.0.0.2" ]; #admin lan
+      dns.port = 5354; #avahi uses 5353
       users = [{
         name = "admin";
         password =
