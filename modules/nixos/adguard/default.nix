@@ -20,10 +20,13 @@ enableableModule "adguard" params {
 
   services.nginx = {
     enable = true;
-    virtualHosts."gila.local" = {
-      locations."/adguard" = {
-        proxyPass = "http://127.0.0.1:${toString http_port}";
+    virtualHosts."gila.oldstreetjournal.co.uk" = {
+      locations."/adguard/" = {
+        proxyPass = "http://10.0.1.1:${toString http_port}/";
         proxyWebsockets = true;
+        extraConfig = ''
+          proxy_redirect ~^/(.*) $scheme://$http_host/adguard/$1;
+        '';
       };
     };
   };
