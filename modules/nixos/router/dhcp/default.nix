@@ -1,8 +1,29 @@
 { config, lib, pkgs, ... }:
 with lib;
-let keaEnabled = config.aiden.modules.router.kea.enabled;
-in {
+let
+  keaEnabled = config.aiden.modules.router.kea.enabled;
+  dnsmasqEnabled = config.aiden.modules.router.dnsmasq.enabled;
+in
+{
   config = {
+    services.dnsmasq = mkIf dnsmasqEnabled {
+      enable = true;
+      settings = {
+        domain = "oldstreetjournal.co.uk";
+        #dhcp-range = "set:vlan99,10.0.1.100,10.0.1.255,12h";
+        dhcp-range = [
+          "interface:lan,10.0.1.200,10.0.1.250,255.255.255.0"
+          "interface:guest,10.0.2.200,10.0.2.250,255.255.255.0"
+        ];
+        dhcp-option = [
+          "lan,option:router,10.0.1.1"
+          "lan,option:dns-server,10.0.0.1"
+          "guest,option:router,10.0.3.1"
+          "guest,option:dns-server,10.0.0.1"
+        ];
+
+      };
+    };
     services.kea = mkIf keaEnabled {
       dhcp6.enable = false;
       dhcp4 = {
