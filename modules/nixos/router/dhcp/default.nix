@@ -6,6 +6,7 @@ in
 {
   config = mkIf dnsmasqEnabled {
     environment.systemPackages = with pkgs; [ dnsmasq ];
+    networking.nameservers = [ "127.0.0.1" ];
     services.dnsmasq = {
       enable = true;
       resolveLocalQueries = false;
