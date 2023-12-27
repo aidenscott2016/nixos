@@ -18,14 +18,15 @@ enableableModule "adguard" params {
     };
   };
 
+  networking.hosts."10.0.1.1" = [ "adguard.oldstreetjournal.co.uk" ];
   services.nginx = {
     enable = true;
-    virtualHosts."gila.oldstreetjournal.co.uk" = {
-      locations."/adguard/" = {
+    virtualHosts."adguard.oldstreetjournal.co.uk" = {
+      locations."/" = {
         proxyPass = "http://10.0.1.1:${toString http_port}/";
         proxyWebsockets = true;
         extraConfig = ''
-          proxy_redirect ~^/(.*) $scheme://$http_host/adguard/$1;
+          proxy_redirect ~^/(.*) $scheme://$http_host/$1;
         '';
       };
     };
