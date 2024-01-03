@@ -26,19 +26,35 @@ in
       };
     };
 
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "ligma@nuts.com";
+      certs = {
+        "oldstreetjournal.co.uk" = {
+          webroot = "/var/lib/acme/acme-challenge/";
+          email = "foo@example.com";
+          extraDomainNames = [ "hass.oldstreetjournal.co.uk" "adguard.oldstreetjournal.co.uk" ];
+        };
+      };
+    };
 
     networking.hosts."10.0.1.1" = [ "hass.oldstreetjournal.co.uk" ];
     services.nginx = {
       enable = true;
-      virtualHosts."hass.oldstreetjournal.co.uk" = {
-        locations."/" = {
-          proxyPass = "http://10.0.1.1:8123/";
-          proxyWebsockets = true;
-          extraConfig = ''
-            proxy_redirect ~^/(.*) $scheme://$http_host/$1;
-          '';
+      virtualHosts = {
+        "hass.oldstreetjournal.co.uk" = {
+          addSSL = true;
+          enableACME = true;
+          locations."/" = {
+            proxyPass = "http://10.0.1.1:8123/";
+            proxyWebsockets = true;
+            extraConfig = ''
+              proxy_redirect ~^/(.*) $scheme://$http_host/$1;
+            '';
+          };
         };
       };
     };
   };
 }
+
