@@ -7,8 +7,7 @@ enableableModule "adguard" params {
   services.adguardhome = {
     enable = true;
     settings = {
-      bind_host = "10.0.1.1";
-      bind_port = http_port;
+      http.address = "http://10.0.1.1:8080";
       dns.port = 5354; #avahi uses 5353
       users = [{
         name = "admin";
