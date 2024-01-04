@@ -14,7 +14,7 @@ with {
               type filter hook input priority 0; policy drop;
               ct state invalid counter drop comment "early drop of invalid packets"
               ip protocol icmp counter accept comment "accept all ICMP types"
-              iifname "${externalInterface}" tcp dport { http, https } accept comment "only allow wan traffic to http{,s}"
+              iifname "${externalInterface}" tcp dport { http, https } drop comment "only allow wan traffic to http{,s}"
               iifname {"${internalInterface}", "lan", "eth3", "lo", "guest"} accept comment "Allow trusted local network to access the router"
               iifname "${externalInterface}" ct state { established, related } accept comment "Allow established traffic"
               iifname "${externalInterface}" counter drop comment "drop all other unsolicited traffic from wan"

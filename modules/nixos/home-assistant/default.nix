@@ -30,19 +30,18 @@ in
       acceptTerms = true;
       defaults.email = "ligma@nuts.com";
       certs = {
-        "oldstreetjournal.co.uk" = {
+        "i.narrowdivergent.co.uk" = {
           webroot = "/var/lib/acme/acme-challenge/";
-          email = "foo@example.com";
-          extraDomainNames = [ "hass.oldstreetjournal.co.uk" "adguard.oldstreetjournal.co.uk" ];
+          email = "ligma@nuts.com";
         };
       };
     };
 
-    networking.hosts."10.0.1.1" = [ "hass.oldstreetjournal.co.uk" ];
+    networking.hosts."10.0.1.1" = [ "hass.i.narrowdivergent.co.uk" ];
     services.nginx = {
       enable = true;
       virtualHosts = {
-        "hass.oldstreetjournal.co.uk" = {
+        "hass.i.oldstreetjournal.co.uk" = {
           addSSL = true;
           enableACME = true;
           locations."/" = {

@@ -8,6 +8,8 @@ enableableModule "adguard" params {
     enable = true;
     settings = {
       http.address = "http://10.0.1.1:8080";
+
+      dns.bind_hosts = [ "10.0.0.1" ];
       dns.port = 5354; #avahi uses 5353
       users = [{
         name = "admin";
@@ -17,10 +19,10 @@ enableableModule "adguard" params {
     };
   };
 
-  networking.hosts."10.0.1.1" = [ "adguard.oldstreetjournal.co.uk" ];
+  networking.hosts."10.0.1.1" = [ "adguard.i.narrowdivergent.co.uk" ];
   services.nginx = {
     enable = true;
-    virtualHosts."adguard.oldstreetjournal.co.uk" = {
+    virtualHosts."adguard.i.narrowdivergent.co.uk" = {
       locations."/" = {
         proxyPass = "http://10.0.1.1:${toString http_port}/";
         proxyWebsockets = true;

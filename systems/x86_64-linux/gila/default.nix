@@ -36,11 +36,11 @@
     };
     router.enabled = true;
     router = {
-      dns.enabled = false;
+      dns.enabled = false; # TODO: remove
       dnsmasq.enabled = true;
       internalInterface = "eth1";
       externalInterface = "eth0";
     };
   };
-  networking.hosts."10.0.0.1" = ["gila.oldstreetjournal.co.uk"];
+  networking.hosts."10.0.0.1" = [ "i.narrowdivergent.co.uk" ];
 }

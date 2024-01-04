@@ -14,7 +14,7 @@ in
         domain = "oldstreetjournal.co.uk,10.0.0.0/16,local";
         # upstream DNS
         server = [
-          "10.0.0.2#5354" #adguard
+          "10.0.0.1#5354" #adguard
         ];
         no-resolv = true;
         bogus-priv = true;
