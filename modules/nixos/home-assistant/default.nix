@@ -14,7 +14,7 @@ in
       default = [ ];
     };
   };
-  config = {
+  config = lib.mkIf config.aiden.modules.home-assistant.enabled {
     virtualisation.oci-containers = {
       backend = "podman";
       containers.homeassistant = {
@@ -41,7 +41,7 @@ in
     services.nginx = {
       enable = true;
       virtualHosts = {
-        "hass.i.oldstreetjournal.co.uk" = {
+        "hass.i.narrowdivergent.co.uk" = {
           addSSL = true;
           enableACME = true;
           locations."/" = {
