@@ -5,5 +5,7 @@ with config.aiden.modules.router; {
     enabled = mkEnableOption "router";
     internalInterface = mkOption { type = types.str; };
     externalInterface = mkOption { type = types.str; };
+    dns.enabled = mkEnableOption "unbound dns";
+    dnsmasq.enabled = mkEnableOption "dnsmasq";
   };
 }

@@ -13,6 +13,7 @@ with {
             chain input {
               type filter hook input priority 0; policy drop;
               ip protocol icmp counter accept comment "accept all ICMP types"
+              iifname "${externalInterface}" tcp dport { http, https } drop comment "only allow wan traffic to http{,s}"
               iifname {"${internalInterface}", "lan", "eth3", "lo"} accept comment "Allow trusted local network to access the router"
               iifname "${externalInterface}" ct state { established, related } accept comment "Allow established traffic"
               iifname "${externalInterface}" counter drop comment "drop all other unsolicited traffic from wan"

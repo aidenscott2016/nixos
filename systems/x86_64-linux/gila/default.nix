@@ -8,7 +8,6 @@
   networking.hostName = "gila";
   networking.networkmanager.enable = true;
   networking.dhcpcd.enable = true;
-  networking.usePredictableInterfaceNames = true;
   environment.systemPackages = with pkgs; [ tcpdump dnsutils ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -26,15 +25,19 @@
   services.acpid.enable = true;
 
   aiden.modules = {
+    avahi.enabled = true;
     common.enabled = true;
+    adguard.enabled = true;
     home-assistant = {
       enabled = true;
       devices = [
         "/dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_2ee577279f96ed119403c098a7669f5d-if00-port0"
       ];
     };
+    router.enabled = true;
     router = {
-      enabled = true;
+      dns.enabled = false; # TODO: remove
+      dnsmasq.enabled = true;
       internalInterface = "eth1";
       externalInterface = "eth0";
     };

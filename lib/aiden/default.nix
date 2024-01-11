@@ -10,9 +10,9 @@ with lib; {
       options.aiden.modules.${name}.enabled = mkOption {
         type = types.bool;
         default = false;
+        description = "Enable the ${name} module";
       };
 
       config = mkIf cfg.enabled configToEnable;
     };
-
 }
