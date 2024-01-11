@@ -8,7 +8,6 @@
   networking.hostName = "gila";
   networking.networkmanager.enable = true;
   networking.dhcpcd.enable = true;
-  networking.usePredictableInterfaceNames = true;
   environment.systemPackages = with pkgs; [ tcpdump dnsutils ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -35,9 +34,10 @@
         "/dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_2ee577279f96ed119403c098a7669f5d-if00-port0"
       ];
     };
+    router.enabled = true;
     router = {
-      dns.enabled = false;
-      enabled = true;
+      dns.enabled = false; # TODO: remove
+      dnsmasq.enabled = true;
       internalInterface = "eth1";
       externalInterface = "eth0";
     };
