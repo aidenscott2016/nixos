@@ -3,7 +3,8 @@ with lib;
 let
   inherit (config.aiden.modules.router)
     enabled internalInterface externalInterface;
-in {
+in
+{
   config = mkIf enabled {
     networking = {
       vlans = {
@@ -22,29 +23,41 @@ in {
       };
       interfaces = {
         ${externalInterface} = { useDHCP = true; };
-        ${internalInterface} = { useDHCP = false; };
-        lan = {
-          ipv4.addresses = [{
-            address = "10.0.0.1";
-            prefixLength = 24;
-          }];
+        ${internalInterface} = {
+          ipv4.addresses = [
+            {
+              address = "10.0.0.1";
+              prefixLength = 24;
+            }
+            {
+              address = "10.0.0.2";
+              prefixLength = 24;
+            }
+          ];
+          useDHCP = false;
         };
-        iot = {
+        lan = {
           ipv4.addresses = [{
             address = "10.0.1.1";
             prefixLength = 24;
           }];
         };
-        guest = {
+        iot = {
           ipv4.addresses = [{
             address = "10.0.2.1";
+            prefixLength = 24;
+          }];
+        };
+        guest = {
+          ipv4.addresses = [{
+            address = "10.0.3.1";
             prefixLength = 24;
           }];
         };
         eth3 = {
           useDHCP = false;
           ipv4.addresses = [{
-            address = "10.0.3.1";
+            address = "10.0.4.1";
             prefixLength = 24;
           }];
         };
