@@ -6,9 +6,11 @@ in
 enableableModule "adguard" params {
   services.adguardhome = {
     enable = true;
+    mutableSettings = false; # TODO: import the defaults
     settings = {
-      http.address = "http://10.0.1.1:8080";
+      http.address = "10.0.1.1:8080";
 
+      dns.bootstrap_dns = [ "1.1.1.1" ]; # idk
       dns.bind_hosts = [ "10.0.0.1" ];
       dns.port = 5354; #avahi uses 5353
       users = [{
@@ -33,3 +35,4 @@ enableableModule "adguard" params {
     };
   };
 }
+  
