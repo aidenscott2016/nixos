@@ -16,14 +16,26 @@ in
     };
   };
   config = mkIf enabled {
+    networking.hosts."10.0.1.1" = [ "hass.i.narrowdivergent.co.uk" ];
+
     virtualisation.oci-containers = {
       backend = "podman";
       containers.homeassistant = {
+        #volumes = [ "/home/aiden/home-ass/:/config" ];
+        #volumes = [ "${./config}:/config" ];
         volumes = [ "home-assistant:/config" ];
         environment.TZ = "Europe/London";
+        labels =
+          {
+            "traefik.enable" = "true";
+            "traefik.http.routers.hass.rule" = "Host(`hass.i.narrowdivergent.co.uk`)";
+            "traefik.http.services.hass.loadbalancer.server.port" = "8123";
+          };
         image =
           "ghcr.io/home-assistant/home-assistant:stable";
-        extraOptions = [ "--network=host" ] ++ deviceParams;
+        extraOptions = [
+          "--network=host"
+        ] ++ deviceParams;
       };
     };
 
@@ -50,9 +62,8 @@ in
       ];
     };
 
-    networking.hosts."10.0.1.1" = [ "hass.i.narrowdivergent.co.uk" ];
     services.nginx = {
-      enable = true;
+      enable = false;
       virtualHosts = {
         "hass.i.narrowdivergent.co.uk" = {
           addSSL = true;

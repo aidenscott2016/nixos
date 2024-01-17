@@ -44,4 +44,19 @@
   };
 
   networking.hosts."10.0.0.1" = [ "i.narrowdivergent.co.uk" ];
+
+  services.nginx.enable = lib.mkForce false;
+
+
+
+  services.traefik = {
+    enable = true;
+    group = "podman";
+    staticConfigOptions = {
+      providers.docker.endpoint = "unix:///var/run/podman/podman.sock";
+      api.dashboard = true;
+      api.insecure = true;
+    };
+  };
+
 }
