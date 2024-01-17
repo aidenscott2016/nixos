@@ -24,6 +24,8 @@ params@{ config, pkgs, inputs, ... }: {
     silver-searcher
     transmission-gtk
     nixpkgs-fmt
+    rustc
+    cargo
   ];
 
 }
