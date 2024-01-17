@@ -1,14 +1,14 @@
 params@{ pkgs, lib, config, ... }:
 with lib.aiden;
 let
-  http_port = 8080;
+  http_port = 8081;
 in
 enableableModule "adguard" params {
   services.adguardhome = {
     enable = true;
     mutableSettings = false; # TODO: import the defaults
     settings = {
-      http.address = "10.0.1.1:8080";
+      http.address = "10.0.1.1:8081";
 
       dns.bootstrap_dns = [ "1.1.1.1" ]; # idk
       dns.bind_hosts = [ "10.0.0.1" ];
