@@ -9,7 +9,7 @@ enableableModule "common" params {
   users.users.aiden = {
     initialPassword = "password";
     isNormalUser = true;
-    extraGroups = [ "wheel" "disk" "docker" "networkmanager" "video" ];
+    extraGroups = [ "wheel" "disk" "networkmanager" "video" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIgHxgT0rlJDXl+opb7o2JSfjd5lJZ6QTRr57N0MIAyN aiden@lars"
     ];
