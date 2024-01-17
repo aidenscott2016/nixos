@@ -1,7 +1,7 @@
 params@{ pkgs, lib, config, ... }:
 with lib.aiden;
 enableableModule "common" params {
-  nixpkgs.config.allowUnfree = true;
+  #nixpkgs.config.allowUnfree = true;
   nix.extraOptions = "experimental-features = nix-command flakes";
   nix.settings.auto-optimise-store = true;
   nix.settings.trusted-users = [ "aiden" ];

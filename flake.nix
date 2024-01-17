@@ -1,9 +1,9 @@
 {
   description = "An example NixOS configuration";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    home-manager.url = "github:nix-community/home-manager/release-23.05";
+    home-manager.url = "github:nix-community/home-manager/release-23.11";
     nur.url = "github:nix-community/NUR";
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
     dwm = {
@@ -25,7 +25,7 @@
       inputs.darwin.follows = "";
     };
     snowfall-lib = {
-      url = "github:snowfallorg/lib";
+      url = "github:snowfallorg/lib?ref=v2.1.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
