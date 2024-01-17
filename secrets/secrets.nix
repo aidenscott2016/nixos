@@ -6,4 +6,5 @@ let
   lovelace =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHN4Z6+j8AU0Qiywv8sTjlG0UlY+ZAUzLWMSnqeY5U0f";
   systems = [ lovelace ];
-in { "secret1.age".publicKeys = [ aiden lovelace ]; }
+in
+{ "secret1.age".publicKeys = [ aiden lovelace ]; "lego-credentials.age".publicKeys = [ aiden ]; }

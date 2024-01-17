@@ -39,15 +39,21 @@ in
       };
     };
 
+
+
     security.acme = {
-      acceptTerms = true;
-      defaults.email = "ligma@nuts.com";
+      credentialsFile =
+        acceptTerms = true;
+      defaults.email = " ligma@nuts.com";
       certs = {
         "i.narrowdivergent.co.uk" = {
           webroot = "/var/lib/acme/acme-challenge/";
           email = "ligma@nuts.com";
         };
       };
+    };
+
+
     services.mosquitto = {
       enable = true;
       listeners = [
@@ -66,8 +72,8 @@ in
       enable = false;
       virtualHosts = {
         "hass.i.narrowdivergent.co.uk" = {
-          addSSL = true;
-          enableACME = true;
+          #addSSL = true;
+          # enableACME = true;
           locations."/" = {
             proxyPass = "http://10.0.1.1:8123/";
             proxyWebsockets = true;
@@ -80,4 +86,14 @@ in
     };
   };
 }
+
+
+
+
+
+
+
+
+
+
 
