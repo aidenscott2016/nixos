@@ -36,6 +36,18 @@ in
           email = "ligma@nuts.com";
         };
       };
+    services.mosquitto = {
+      enable = true;
+      listeners = [
+        {
+          users.homeassistant = {
+            acl = [
+              "readwrite #"
+            ];
+            hashedPassword = "$7$101$fid+6PD+4UVQtJho$9g7YOiJuSqO3tYwm1OoCqkUYrcnm1YCQT6y9K+ET5F6iZoBYCMNeXOo6w0d1ru8GctULQthscARhljkxLKlBJA==";
+          };
+        }
+      ];
     };
 
     networking.hosts."10.0.1.1" = [ "hass.i.narrowdivergent.co.uk" ];
