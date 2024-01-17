@@ -42,5 +42,6 @@
       externalInterface = "eth0";
     };
   };
+
   networking.hosts."10.0.0.1" = [ "i.narrowdivergent.co.uk" ];
 }
