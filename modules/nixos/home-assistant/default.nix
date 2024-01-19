@@ -25,12 +25,11 @@ in
         #volumes = [ "${./config}:/config" ];
         volumes = [ "home-assistant:/config" ];
         environment.TZ = "Europe/London";
-        labels =
-          {
-            "traefik.enable" = "true";
-            "traefik.http.routers.hass.rule" = "Host(`hass.i.narrowdivergent.co.uk`)";
-            "traefik.http.services.hass.loadbalancer.server.port" = "8123";
-          };
+        labels = {
+          "traefik.enable" = "true";
+          "traefik.http.routers.hass.rule" = "Host(`hass.i.narrowdivergent.co.uk`)";
+          "traefik.http.services.hass.loadbalancer.server.port" = "8123";
+        };
         image =
           "ghcr.io/home-assistant/home-assistant:stable";
         extraOptions = [
@@ -42,8 +41,7 @@ in
 
 
     security.acme = {
-      credentialsFile =
-        acceptTerms = true;
+      acceptTerms = true;
       defaults.email = " ligma@nuts.com";
       certs = {
         "i.narrowdivergent.co.uk" = {
