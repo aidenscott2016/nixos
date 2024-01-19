@@ -56,17 +56,6 @@ in
 
     services.mosquitto = {
       enable = true;
-      listeners = [
-        {
-          users.homeassistant = {
-            acl = [
-              "readwrite #"
-            ];
-            hashedPassword = "$7$101$fid+6PD+4UVQtJho$9g7YOiJuSqO3tYwm1OoCqkUYrcnm1YCQT6y9K+ET5F6iZoBYCMNeXOo6w0d1ru8GctULQthscARhljkxLKlBJA==";
-          };
-        }
-      ];
-    };
 
     services.nginx = {
       enable = false;
@@ -81,6 +70,10 @@ in
               proxy_redirect ~^/(.*) $scheme://$http_host/$1;
             '';
           };
+      listeners = [{
+        users.homeassistant = {
+          acl = [ "readwrite #" ];
+          hashedPasswordFile = config.age.secrets.mosquittoPass.path;
         };
       };
     };

@@ -1,8 +1,9 @@
 { config, pkgs, inputs, lib, ... }: {
   imports = [
     ./hardware-configuration.nix
-    inputs.disko.nixosModules.default
     ./disko-config.nix
+    inputs.disko.nixosModules.default
+    inputs.agenix.nixosModules.default
   ];
 
   networking.hostName = "gila";
@@ -42,6 +43,9 @@
       externalInterface = "eth0";
     };
   };
+
+
+  age.secrets.mosquittoPass.file = "${inputs.self.outPath}/secrets/mosquitto-pass.age";
 
   networking.hosts."10.0.0.1" = [ "i.narrowdivergent.co.uk" ];
 
