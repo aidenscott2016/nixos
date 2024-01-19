@@ -56,26 +56,12 @@ in
 
     services.mosquitto = {
       enable = true;
-
-    services.nginx = {
-      enable = false;
-      virtualHosts = {
-        "hass.i.narrowdivergent.co.uk" = {
-          #addSSL = true;
-          # enableACME = true;
-          locations."/" = {
-            proxyPass = "http://10.0.1.1:8123/";
-            proxyWebsockets = true;
-            extraConfig = ''
-              proxy_redirect ~^/(.*) $scheme://$http_host/$1;
-            '';
-          };
       listeners = [{
         users.homeassistant = {
           acl = [ "readwrite #" ];
           hashedPasswordFile = config.age.secrets.mosquittoPass.path;
         };
-      };
+      }];
     };
   };
 }
