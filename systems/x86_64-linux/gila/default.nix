@@ -6,9 +6,14 @@
     inputs.agenix.nixosModules.default
   ];
 
+  age.secrets.mosquittoPass.file = "${inputs.self.outPath}/secrets/mosquitto-pass.age";
+  age.secrets.cloudflareToken.file = "${inputs.self.outPath}/secrets/cf-token.age";
+
   networking.hostName = "gila";
   networking.networkmanager.enable = true;
   networking.dhcpcd.enable = true;
+  networking.hosts."10.0.0.1" = [ "gila.sw1a1aa.uk" ];
+
   environment.systemPackages = with pkgs; [ tcpdump dnsutils ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -26,6 +31,7 @@
   services.acpid.enable = true;
 
   aiden.modules = {
+    traefik.enabled = true;
     avahi.enabled = true;
     common.enabled = true;
     adguard.enabled = true;
@@ -45,51 +51,7 @@
   };
 
 
-  age.secrets.mosquittoPass.file = "${inputs.self.outPath}/secrets/mosquitto-pass.age";
-  age.secrets.cloudflareToken.file = "${inputs.self.outPath}/secrets/cf-token.age";
 
-  networking.hosts."10.0.0.1" = [ "i.sw1a1aa.uk" ];
 
   services.nginx.enable = lib.mkForce false;
-
-
-  users.users.traefik.extraGroups = [ "acme" ]; # to read acme folder
-  services.traefik = {
-    enable = true;
-    group = "podman";
-    staticConfigOptions = {
-      accessLog = { };
-      log.level = "DEBUG";
-      global = {
-        checkNewVersion = false;
-        sendAnonymousUsage = false;
-      };
-      providers.docker = {
-        exposedByDefault = false;
-        endpoint = "unix:///var/run/podman/podman.sock";
-      };
-      api.dashboard = true;
-      api.insecure = true;
-      entrypoints = {
-        web = {
-          address = ":80";
-          http.redirections.entrypoint = {
-            to = "websecure";
-            scheme = "https";
-          };
-        };
-        websecure.address = ":443";
-      };
-    };
-    dynamicConfigOptions = {
-      tls = {
-        stores.default = {
-          defaultCertificate = {
-            certFile = "/var/lib/acme/sw1a1aa.uk/fullchain.pem";
-            keyFile = "/var/lib/acme/sw1a1aa.uk/key.pem";
-          };
-        };
-      };
-    };
-  };
 }
