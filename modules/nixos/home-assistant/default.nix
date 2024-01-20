@@ -28,7 +28,10 @@ in
         labels = {
           "traefik.enable" = "true";
           "traefik.http.routers.hass.rule" = "Host(`hass.sw1a1aa.uk`)";
+          "traefik.http.routers.hass.tls" = "true";
+          "traefik.http.services.hass.loadbalancer.server.url" = "10.0.0.1";
           "traefik.http.services.hass.loadbalancer.server.port" = "8123";
+          "traefik.http.routers.hass.entrypoints" = "websecure";
         };
         image =
           "ghcr.io/home-assistant/home-assistant:stable";
