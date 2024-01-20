@@ -54,6 +54,7 @@
 
 
 
+  users.users.traefik.extraGroups = [ "acme" ];
   services.traefik = {
     enable = true;
     group = "podman";

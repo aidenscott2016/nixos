@@ -44,9 +44,11 @@ in
       acceptTerms = true;
       defaults.email = " ligma@nuts.com";
       certs = {
+        "sw1a1aa.uk" = {
+          domain = "sw1a1aa.uk";
+          dnsProvider = "cloudflare";
           credentialsFile = config.age.secrets.cloudflareToken.path;
-          webroot = "/var/lib/acme/acme-challenge/";
-          email = "ligma@nuts.com";
+          extraDomainNames = [ "*.sw1a1aa.uk" ];
         };
       };
     };
