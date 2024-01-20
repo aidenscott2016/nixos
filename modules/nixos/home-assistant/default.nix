@@ -16,7 +16,7 @@ in
     };
   };
   config = mkIf enabled {
-    networking.hosts."10.0.1.1" = [ "hass.i.narrowdivergent.co.uk" ];
+    networking.hosts."10.0.1.1" = [ "hass.sw1a1aa.uk" ];
 
     virtualisation.oci-containers = {
       backend = "podman";
@@ -27,7 +27,7 @@ in
         environment.TZ = "Europe/London";
         labels = {
           "traefik.enable" = "true";
-          "traefik.http.routers.hass.rule" = "Host(`hass.i.narrowdivergent.co.uk`)";
+          "traefik.http.routers.hass.rule" = "Host(`hass.sw1a1aa.uk`)";
           "traefik.http.services.hass.loadbalancer.server.port" = "8123";
         };
         image =
@@ -44,7 +44,7 @@ in
       acceptTerms = true;
       defaults.email = " ligma@nuts.com";
       certs = {
-        "i.narrowdivergent.co.uk" = {
+          credentialsFile = config.age.secrets.cloudflareToken.path;
           webroot = "/var/lib/acme/acme-challenge/";
           email = "ligma@nuts.com";
         };

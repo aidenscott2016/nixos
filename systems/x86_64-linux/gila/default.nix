@@ -46,8 +46,9 @@
 
 
   age.secrets.mosquittoPass.file = "${inputs.self.outPath}/secrets/mosquitto-pass.age";
+  age.secrets.cloudflareToken.file = "${inputs.self.outPath}/secrets/cf-token.age";
 
-  networking.hosts."10.0.0.1" = [ "i.narrowdivergent.co.uk" ];
+  networking.hosts."10.0.0.1" = [ "i.sw1a1aa.uk" ];
 
   services.nginx.enable = lib.mkForce false;
 
