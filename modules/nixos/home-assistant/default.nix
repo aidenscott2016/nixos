@@ -48,7 +48,6 @@ in
       defaults.email = " ligma@nuts.com";
       certs = {
         "sw1a1aa.uk" = {
-          domain = "sw1a1aa.uk";
           dnsProvider = "cloudflare";
           credentialsFile = config.age.secrets.cloudflareToken.path;
           extraDomainNames = [ "*.sw1a1aa.uk" ];
