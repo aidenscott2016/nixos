@@ -1,13 +1,19 @@
 { config, pkgs, inputs, lib, ... }: {
   imports = [
     ./hardware-configuration.nix
-    inputs.disko.nixosModules.default
     ./disko-config.nix
+    inputs.disko.nixosModules.default
+    inputs.agenix.nixosModules.default
   ];
+
+  age.secrets.mosquittoPass.file = "${inputs.self.outPath}/secrets/mosquitto-pass.age";
+  age.secrets.cloudflareToken.file = "${inputs.self.outPath}/secrets/cf-token.age";
 
   networking.hostName = "gila";
   networking.networkmanager.enable = true;
   networking.dhcpcd.enable = true;
+  networking.hosts."10.0.0.1" = [ "gila.sw1a1aa.uk" ];
+
   environment.systemPackages = with pkgs; [ tcpdump dnsutils ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -25,8 +31,13 @@
   services.acpid.enable = true;
 
   aiden.modules = {
+    traefik.enabled = true;
     avahi.enabled = true;
-    common.enabled = true;
+    common = {
+      email = "aiden@oldstreetjournal.co.uk";
+      domainName = "sw1a1aa.uk";
+      enabled = true;
+    };
     adguard.enabled = true;
     home-assistant = {
       enabled = true;

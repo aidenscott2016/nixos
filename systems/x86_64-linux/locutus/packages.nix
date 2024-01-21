@@ -26,6 +26,7 @@ params@{ config, pkgs, inputs, ... }: {
     nixpkgs-fmt
     rustc
     cargo
+    xclip
   ];
 
 }

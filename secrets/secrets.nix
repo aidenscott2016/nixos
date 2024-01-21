@@ -5,5 +5,12 @@ let
 
   lovelace =
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHN4Z6+j8AU0Qiywv8sTjlG0UlY+ZAUzLWMSnqeY5U0f";
-  systems = [ lovelace ];
-in { "secret1.age".publicKeys = [ aiden lovelace ]; }
+  gila = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK9nT33O30eofxYEcnJRVunFvFmOB9VqPDWC9EC77+Lz";
+  systems = [ lovelace gila ];
+in
+{
+  "secret1.age".publicKeys = [ aiden lovelace ];
+  "lego-credentials.age".publicKeys = [ aiden ];
+  "mosquitto-pass.age".publicKeys = [ aiden gila ];
+  "cf-token.age".publicKeys = [ aiden gila ];
+}
