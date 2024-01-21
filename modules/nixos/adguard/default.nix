@@ -2,15 +2,14 @@ params@{ pkgs, lib, config, ... }:
 with lib.aiden;
 let
   http_port = 8081;
+  inherit (config.aiden.modules.common) domainName email;
+  fqdn = "adguard.${domainName}";
 in
 enableableModule "adguard" params {
   services.adguardhome = {
     enable = true;
-    mutableSettings = false; # TODO: import the defaults
     settings = {
       http.address = "10.0.1.1:8081";
-
-      dns.bootstrap_dns = [ "1.1.1.1" ]; # idk
       dns.bind_hosts = [ "10.0.0.1" ];
       dns.port = 5354; #avahi uses 5353
       users = [{
@@ -21,18 +20,32 @@ enableableModule "adguard" params {
     };
   };
 
-  networking.hosts."10.0.1.1" = [ "adguard.i.narrowdivergent.co.uk" ];
-  services.nginx = {
-    enable = true;
-    virtualHosts."adguard.i.narrowdivergent.co.uk" = {
-      locations."/" = {
-        proxyPass = "http://10.0.1.1:${toString http_port}/";
-        proxyWebsockets = true;
-        extraConfig = ''
-          proxy_redirect ~^/(.*) $scheme://$http_host/$1;
-        '';
-      };
+  networking.hosts."10.0.1.1" = [ fqdn ];
+
+
+
+  services.traefik = {
+    dynamicConfigOptions = {
+      http.routers.adguard.service = "adguard";
+      http.routers.adguard.entrypoints = "websecure";
+      http.routers.adguard.rule = "Host(`adguard.sw1a1aa.uk`)";
+      http.routers.adguard.tls = "true";
+      http.services.adguard.loadbalancer.servers = [{ url = "http://10.0.1.1:8081"; }];
     };
   };
+
+
+  # Servicesv.nginx = {
+  #   enable = true;
+  #   virtualHosts."adguard.i.narrowdivergent.co.uk" = {
+  #     locations."/" = {
+  #       proxyPass = "http://10.0.1.1:${toString http_port}/";
+  #       proxyWebsockets = true;
+  #       extraConfig = ''
+  #         proxy_redirect ~^/(.*) $scheme://$http_host/$1;
+  #       '';
+  #     };
+  #   };
+  # };
 }
   
