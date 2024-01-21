@@ -4,6 +4,8 @@ let
   deviceParams =
     map (path: "--device=${path}") config.aiden.modules.home-assistant.devices;
   enabled = config.aiden.modules.home-assistant.enabled;
+  inherit (config.aiden.modules.common) domainName email;
+  fqdn = "hass.${domainName}";
 in
 {
   options.aiden.modules.home-assistant = {
@@ -16,7 +18,9 @@ in
     };
   };
   config = mkIf enabled {
-    networking.hosts."10.0.1.1" = [ "hass.sw1a1aa.uk" ];
+    networking.hosts."10.0.1.1" = [
+      fqdn
+    ];
 
     virtualisation.oci-containers = {
       backend = "podman";
@@ -27,7 +31,7 @@ in
         environment.TZ = "Europe/London";
         labels = {
           "traefik.enable" = "true";
-          "traefik.http.routers.hass.rule" = "Host(`hass.sw1a1aa.uk`)";
+          "traefik.http.routers.hass.rule" = "Host(`${fqdn}`)";
           "traefik.http.routers.hass.tls" = "true";
           "traefik.http.services.hass.loadbalancer.server.url" = "10.0.0.1";
           "traefik.http.services.hass.loadbalancer.server.port" = "8123";
@@ -45,12 +49,12 @@ in
 
     security.acme = {
       acceptTerms = true;
-      defaults.email = " ligma@nuts.com";
+      defaults.email = email;
       certs = {
-        "sw1a1aa.uk" = {
+        "${domainName}" = {
           dnsProvider = "cloudflare";
           credentialsFile = config.age.secrets.cloudflareToken.path;
-          extraDomainNames = [ "*.sw1a1aa.uk" ];
+          extraDomainNames = [ "*.${fqdn}" ];
         };
       };
     };
@@ -67,6 +71,7 @@ in
     };
   };
 }
+
 
 
 
