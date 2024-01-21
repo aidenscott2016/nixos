@@ -33,7 +33,11 @@
   aiden.modules = {
     traefik.enabled = true;
     avahi.enabled = true;
-    common.enabled = true;
+    common = {
+      email = "aiden@oldstreetjournal.co.uk";
+      domainName = "sw1a1aa.uk";
+      enabled = true;
+    };
     adguard.enabled = true;
     home-assistant = {
       enabled = true;
