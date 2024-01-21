@@ -1,6 +1,23 @@
 params@{ pkgs, lib, config, ... }:
 with lib.aiden;
+let
+  inherit (config.aiden.modules.common) domainName email;
+in
 enableableModule "traefik" params {
+
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = email;
+    certs = {
+      "${domainName}" = {
+        dnsProvider = "cloudflare";
+        credentialsFile = config.age.secrets.cloudflareToken.path;
+        extraDomainNames = [ "*.${domainName}" ];
+      };
+    };
+  };
+
+
   users.users.traefik.extraGroups = [ "acme" ]; # to read acme folder
   services.traefik = {
     enable = true;
@@ -33,8 +50,8 @@ enableableModule "traefik" params {
       tls = {
         stores.default = {
           defaultCertificate = {
-            certFile = "/var/lib/acme/sw1a1aa.uk/fullchain.pem";
-            keyFile = "/var/lib/acme/sw1a1aa.uk/key.pem";
+            certFile = "/var/lib/acme/${domainName}/fullchain.pem";
+            keyFile = "/var/lib/acme/${domainName}/key.pem";
           };
         };
       };

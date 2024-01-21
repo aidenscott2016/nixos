@@ -45,21 +45,6 @@ in
       };
     };
 
-
-
-    security.acme = {
-      acceptTerms = true;
-      defaults.email = email;
-      certs = {
-        "${domainName}" = {
-          dnsProvider = "cloudflare";
-          credentialsFile = config.age.secrets.cloudflareToken.path;
-          extraDomainNames = [ "*.${fqdn}" ];
-        };
-      };
-    };
-
-
     services.mosquitto = {
       enable = true;
       listeners = [{
