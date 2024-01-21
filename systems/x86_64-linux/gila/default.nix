@@ -53,9 +53,4 @@
       externalInterface = "eth0";
     };
   };
-
-
-
-
-  services.nginx.enable = lib.mkForce false;
 }

@@ -28,24 +28,11 @@ enableableModule "adguard" params {
     dynamicConfigOptions = {
       http.routers.adguard.service = "adguard";
       http.routers.adguard.entrypoints = "websecure";
-      http.routers.adguard.rule = "Host(`adguard.sw1a1aa.uk`)";
+      http.routers.adguard.rule = "Host(`${fqdn}`)";
       http.routers.adguard.tls = "true";
       http.services.adguard.loadbalancer.servers = [{ url = "http://10.0.1.1:8081"; }];
     };
   };
-
-
-  # Servicesv.nginx = {
-  #   enable = true;
-  #   virtualHosts."adguard.i.narrowdivergent.co.uk" = {
-  #     locations."/" = {
-  #       proxyPass = "http://10.0.1.1:${toString http_port}/";
-  #       proxyWebsockets = true;
-  #       extraConfig = ''
-  #         proxy_redirect ~^/(.*) $scheme://$http_host/$1;
-  #       '';
-  #     };
-  #   };
-  # };
 }
   
+

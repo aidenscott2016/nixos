@@ -18,9 +18,7 @@ in
     };
   };
   config = mkIf enabled {
-    networking.hosts."10.0.1.1" = [
-      fqdn
-    ];
+    networking.hosts."10.0.1.1" = [ fqdn ];
 
     virtualisation.oci-containers = {
       backend = "podman";
@@ -56,15 +54,3 @@ in
     };
   };
 }
-
-
-
-
-
-
-
-
-
-
-
-

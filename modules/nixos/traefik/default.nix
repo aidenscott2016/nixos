@@ -24,7 +24,6 @@ enableableModule "traefik" params {
     group = "podman";
     staticConfigOptions = {
       accessLog = { };
-      log.level = "DEBUG";
       global = {
         checkNewVersion = false;
         sendAnonymousUsage = false;
