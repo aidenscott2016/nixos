@@ -1,1 +1,1 @@
-This is my personal nix flake which encapsulates config for a variety of services and machines
+This is my personal nix flake which encapsulates config for a variety of services and machines. This flake is for my personal use. Feel free to copy parts or use it for inspiration. Advice, comments, bug reports welcomed
