@@ -28,7 +28,9 @@ with lib.aiden; {
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users.aiden = { };
+  home-manager.users.aiden = {
+    home.stateVersion = "22.05";
+  };
 
   boot = {
     supportedFilesystems = [ "ntfs" ];
