@@ -9,28 +9,33 @@ with lib.aiden; {
 
   environment.systemPackages = with pkgs;
     [ inputs.disko.packages.x86_64-linux.disko ];
-  aiden.modules = {
-    avahi = enabled;
-    common = enabled;
-    ios = enabled;
-    redshift = enabled;
-    printer = enabled;
-    ssh = enabled;
-    gc = enabled;
-    cli-base = enabled;
-    desktop = enabled;
-    multimedia = enabled;
-    emacs = enabled;
-    jellyfin.enabled = false;
+  aiden = {
+    modules = {
+      avahi = enabled;
+      common = enabled;
+      ios = enabled;
+      redshift = enabled;
+      printer = enabled;
+      ssh = enabled;
+      gc = enabled;
+      cli-base = enabled;
+      desktop = enabled;
+      multimedia = enabled;
+      emacs = enabled;
+      jellyfin.enabled = false;
+      steam.enabled = true;
+    };
+    programs = { openttd.enabled = true; };
   };
 
   system.stateVersion = "22.05";
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users.aiden = {
-    home.stateVersion = "22.05";
-  };
+  home-manager.users.aiden = { };
+
+  # services.xserver.libinput.touchpad.accelProfile = "flat";
+  # services.xserver.libinput.mouse.accelProfile = "flat";
 
   boot = {
     supportedFilesystems = [ "ntfs" ];

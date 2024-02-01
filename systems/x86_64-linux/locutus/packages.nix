@@ -16,6 +16,7 @@ params@{ config, pkgs, inputs, ... }: {
 
     #    gpsbabel-gui
     jetbrains.idea-community
+    scalac
     #    ventoy
     chromium
     inputs.agenix.packages.x86_64-linux.default
