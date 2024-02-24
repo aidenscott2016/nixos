@@ -33,6 +33,7 @@ with lib.aiden; {
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.aiden = { };
+  hardware.opengl.enable = true;
 
   # services.xserver.libinput.touchpad.accelProfile = "flat";
   # services.xserver.libinput.mouse.accelProfile = "flat";
