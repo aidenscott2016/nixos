@@ -16,8 +16,8 @@ with inputs; {
   networking.firewall = {
     enable = true;
     trustedInterfaces = [ "tailscale0" ];
-    allowedUDPPorts = [ config.services.tailscale.port 80 53 ];
-    allowedTCPPorts = [ config.services.tailscale.port 80 53 ];
+    allowedUDPPorts = [ 8081 53 ];
+    allowedTCPPorts = [ 8081 53 ];
   };
 
   environment.systemPackages = with pkgs; [ dnsutils tailscale jq ];
@@ -26,11 +26,11 @@ with inputs; {
   # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1008362877
 
   services = {
-    tailscale.enable = true;
+    tailscale = { enable = true; openFirewall = true; };
     adguardhome = {
       enable = true;
-      openFirewall = true;
-      settings.bind_port = 80;
+      openFirewall = false;
+      settings.http.address = "0.0.0.0:8081";
     };
   };
 
