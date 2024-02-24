@@ -1,7 +1,7 @@
 { config, lib, pkgs, inputs, modulesPath, ... }:
 with inputs; {
   imports = [
-    "${modulesPath}/installer/sd-card/sd-image-aarch64-new-kernel.nix" # gives bootloader, sd paritition expansion etc
+    "${modulesPath}/installer/sd-card/sd-image-aarch64-new-kernel-no-zfs-installer.nix" # gives bootloader, sd paritition expansion etc
     agenix.nixosModules.default
     nixos-generators.nixosModules.all-formats
   ];
@@ -24,13 +24,6 @@ with inputs; {
   networking.usePredictableInterfaceNames = true;
   boot.kernel.sysctl = { "net.ipv4.conf.all.forwarding" = true; };
   # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1008362877
-  nixpkgs.overlays = [
-    (final: super: {
-      zfs = super.zfs.overrideAttrs (_: { meta.platforms = [ ]; });
-      makeModulesClosure = x:
-        super.makeModulesClosure (x // { allowMissing = true; });
-    })
-  ];
 
   services = {
     tailscale.enable = true;
