@@ -25,6 +25,15 @@ with inputs; {
   boot.kernel.sysctl = { "net.ipv4.conf.all.forwarding" = true; };
   # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1008362877
 
+
+  aiden = {
+    modules = {
+      avahi.enabled = true;
+      common.enabled = true;
+    };
+  };
+
+
   services = {
     tailscale = { enable = true; openFirewall = true; };
     adguardhome = {
@@ -63,47 +72,8 @@ with inputs; {
 
       '';
     };
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
 
-  # networking = {
-  #   defaultGateway = {
-  #     address = "192.168.0.1";
-  #     interface = "eth0";
-  #   };
-  #   interfaces.eth0 = { };
-
-  #   interfaces.br0 = {
-  #     ipv4.addresses = [{
-  #       address = "10.0.0.1";
-  #       prefixLength = 24;
-  #     }];
-  #   };
-
-  #   interfaces.eth3 = {
-  #     useDHCP = true;
-  #     ipv4.addresses = [{
-  #       address = "192.168.1.2";
-  #       prefixLength = 24;
-  #     }];
-  #   };
-
-  #   bridges.br0 = { interfaces = [ "eth1" "eth2" ]; };
-
-  #   nat.enable = true;
-  #   nat.externalInterface = "eth0";
-  #   nat.internalInterfaces = [ "br0" ];
-  # };
-
-  # services.dhcpd4 = {
-  #   enable = true;
-  #   extraConfig = ''
-  #     option subnet-mask 255.255.255.0;
-  #     option routers 10.0.0.1;
-  #     option domain-name-servers 10.0.0.1, 9.9.9.9;
-  #     subnet 10.0.0.1 netmask 255.255.255.0 {
-  #         range 10.0.0.2 10.0.0.100;
-  #     }
-  #   '';
-  #   interfaces = [ "br0" ];
-  # };
 
 }
