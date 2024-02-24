@@ -22,7 +22,7 @@ with lib.aiden; {
       desktop = enabled;
       multimedia = enabled;
       emacs = enabled;
-      jellyfin.enabled = false;
+      jellyfin.enabled = true;
       steam.enabled = true;
     };
     programs = { openttd.enabled = true; };
@@ -30,9 +30,17 @@ with lib.aiden; {
 
   system.stateVersion = "22.05";
 
+
+  services.sonarr.enable = true;
+  services.sonarr.user = "aiden";
+  services.sonarr.dataDir = "/home/aiden/sonarr";
+  services.bazarr.enable = true;
+  virtualisation.podman.enable = true;
+
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.aiden = { };
+  hardware.opengl.enable = true;
 
   # services.xserver.libinput.touchpad.accelProfile = "flat";
   # services.xserver.libinput.mouse.accelProfile = "flat";

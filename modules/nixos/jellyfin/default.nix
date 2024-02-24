@@ -1,8 +1,11 @@
 params@{ pkgs, lib, config, ... }:
 with lib.aiden;
 enableableModule "jellyfin" params {
+
+  environment.systemPackages = [ pkgs.rename ];
   networking.firewall.allowedTCPPorts = [ 80 443 ];
   networking.firewall.allowPing = true;
+  networking.firewall.enable = false;
   security.acme.acceptTerms = true;
   security.acme.defaults.email = "aiden@oldstreetjournal.co.uk";
   services = {
