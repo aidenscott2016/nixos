@@ -5,6 +5,7 @@
     userName = "Aiden";
     userEmail = "aiden@oldstreetjournal.co.uk";
     extraConfig = {
+      merge.conflictstyle = "diff3";
       pull.rebase = true;
       rerere.enabled = true;
       help.autocorrect = -1;
