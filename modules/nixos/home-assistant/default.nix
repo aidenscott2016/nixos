@@ -23,8 +23,6 @@ in
     virtualisation.oci-containers = {
       backend = "podman";
       containers.homeassistant = {
-        #volumes = [ "/home/aiden/home-ass/:/config" ];
-        #volumes = [ "${./config}:/config" ];
         volumes = [ "home-assistant:/config" ];
         environment.TZ = "Europe/London";
         labels = {
