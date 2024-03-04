@@ -8,6 +8,7 @@
 
   age.secrets.mosquittoPass.file = "${inputs.self.outPath}/secrets/mosquitto-pass.age";
   age.secrets.cloudflareToken.file = "${inputs.self.outPath}/secrets/cf-token.age";
+  age.secrets.gila-tailscale-authkey.file = "${inputs.self.outPath}/secrets/gila-tailscale-authkey";
 
   networking.hostName = "gila";
   networking.networkmanager.enable = true;
@@ -32,6 +33,11 @@
 
   aiden.modules = {
     traefik.enabled = true;
+    tailscale = {
+      enabled = true;
+      router = true;
+      authKeyPath = config.age.secrets.gila-tailscale-authkey.path;
+    };
     avahi.enabled = true;
     common = {
       email = "aiden@oldstreetjournal.co.uk";
