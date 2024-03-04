@@ -12,5 +12,6 @@ in
   "secret1.age".publicKeys = [ aiden lovelace ];
   "lego-credentials.age".publicKeys = [ aiden ];
   "mosquitto-pass.age".publicKeys = [ aiden gila ];
+  "gila-tailscale-authkey".publicKeys = [ gila ];
   "cf-token.age".publicKeys = [ aiden gila ];
 }
