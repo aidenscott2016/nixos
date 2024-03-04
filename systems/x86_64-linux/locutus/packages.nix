@@ -30,6 +30,7 @@ params@{ config, pkgs, inputs, ... }: {
     ventoy-full
     minecraft
     prismlauncher
+    libva-utils
   ];
 
 }
