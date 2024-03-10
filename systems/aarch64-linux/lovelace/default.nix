@@ -28,7 +28,10 @@ with inputs; {
 
   aiden = {
     modules = {
-      tailscale = {enabled = true; authKeyPath = age.secrets.secret1.path}
+      tailscale = {
+        enabled = true;
+        authKeyPath = age.secrets.secret1.path;
+      };
       avahi.enabled = true;
       common.enabled = true;
     };
