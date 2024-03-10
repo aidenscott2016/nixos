@@ -6,7 +6,7 @@ in
 {
   services.autorandr = {
     enable = true;
-    defaultTarget = "default";
+    defaultTarget = "default1";
   };
   # I am using config files rather than the module's options becuase
   # they do not support all the attrbites required for autorandr to
