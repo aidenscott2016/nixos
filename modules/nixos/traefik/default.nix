@@ -46,6 +46,24 @@ enableableModule "traefik" params {
       };
     };
     dynamicConfigOptions = {
+      http = {
+        routers = {
+          jellyfin = {
+            service = "jellyfin";
+            entrypoints = "websecure";
+            rule = "Host(`jellyfin.sw1a1aa.uk`)";
+            tls = true;
+          };
+        };
+        services = {
+          jellyfin = {
+            loadbalancer = {
+              servers = [{ url = "http://locutus.sw1a1aa.uk:8096"; }];
+            };
+          };
+        };
+      };
+
       tls = {
         stores.default = {
           defaultCertificate = {
