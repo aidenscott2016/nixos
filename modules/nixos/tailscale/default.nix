@@ -1,18 +1,18 @@
 params@{ pkgs, lib, config, ... }:
 with lib.aiden;
+with lib;
 let cfg = config.aiden.modules.tailscale; in {
-  options.aiden.modules.tailscale = with lib; {
+  options.aiden.modules.tailscale = {
     enabled = mkEnableOption "";
     router = mkEnableOption "";
     authKeyPath = mkOption { type = types.str; };
   };
-  config = {
+  config = mkIf cfg.enabled {
     services = {
-      tailscale = { enable = true; openFirewall = true;};
+      tailscale = { enable = true; openFirewall = true; };
     };
     systemd.services.tailscale-autoconnect =
-      let authkeyPath = cfg.authKeyPath;
-      in {
+      {
         description = "Automatic connection to Tailscale";
 
         # make sure tailscale is running before trying to connect to tailscale
@@ -34,7 +34,7 @@ let cfg = config.aiden.modules.tailscale; in {
           fi
 
           # otherwise authenticate with tailscale
-          ${tailscale}/bin/tailscale up -authkey  file:${authkeyPath} ${ if cfg.router then "--advertise-routes=10.0.0.0/24" else ""}
+          ${tailscale}/bin/tailscale up -authkey  file:${cfg.authKeyPath} ${ if cfg.router then "--advertise-routes=10.0.0.0/24" else ""}
         '';
       };
   };
