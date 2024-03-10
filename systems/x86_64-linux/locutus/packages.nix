@@ -31,6 +31,7 @@ params@{ config, pkgs, inputs, ... }: {
     minecraft
     prismlauncher
     libva-utils
+    xorg.xev
   ];
 
 }
