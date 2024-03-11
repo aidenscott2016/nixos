@@ -36,9 +36,9 @@ with lib.aiden; {
 
   hardware.opengl = {
     enable = true;
-    extraPackages = with pkgs; [ mesa  amdvlk libva ];
+    extraPackages = with pkgs; [ mesa amdvlk libva ];
     driSupport32Bit = true;
-    extraPackages32 = with pkgs.pkgsi686Linux; [ mesa amdvlk libva];
+    extraPackages32 = with pkgs.pkgsi686Linux; [ mesa amdvlk libva ];
   };
 
   # services.xserver.libinput.touchpad.accelProfile = "flat";
@@ -96,6 +96,10 @@ with lib.aiden; {
     hostName = "locutus";
     networkmanager.enable = true;
   };
+
+  virtualisation.podman = { enable = true; dockerCompat = true;};
+  services.envfs.enable = true;
+  programs.nix-ld.enable = true;
 
   #programs.bash.undistract.me
 }
