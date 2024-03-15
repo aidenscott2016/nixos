@@ -32,6 +32,8 @@ params@{ config, pkgs, inputs, ... }: {
     prismlauncher
     libva-utils
     xorg.xev
+    get_iplayer
+    wol
   ];
 
 }
