@@ -38,6 +38,7 @@ with lib.aiden; {
     enable = true;
     extraPackages = with pkgs; [ mesa amdvlk libva ];
     driSupport32Bit = true;
+    driSupport = true;
     extraPackages32 = with pkgs.pkgsi686Linux; [ mesa amdvlk libva ];
   };
 
