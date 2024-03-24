@@ -59,7 +59,7 @@ enableableModule "traefik" params {
         services = {
           jellyfin = {
             loadbalancer = {
-              servers = [{ url = "http://10.0.1.218:8096"; }];
+              servers = [{ url = "http://locutus.sw1a1aa.uk:8096"; }];
             };
           };
         };
