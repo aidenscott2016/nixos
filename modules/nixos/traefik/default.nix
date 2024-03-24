@@ -13,6 +13,7 @@ enableableModule "traefik" params {
         dnsProvider = "cloudflare";
         credentialsFile = config.age.secrets.cloudflareToken.path;
         extraDomainNames = [ "*.${domainName}" ];
+        dnsResolver = "1.1.1.1:53";
       };
     };
   };
