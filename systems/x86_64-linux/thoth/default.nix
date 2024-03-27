@@ -17,7 +17,6 @@ with inputs; {
   boot.loader.efi.canTouchEfiVariables = true;
 
   age.secrets.thoth-tailscale-authkey.file = "${self.outPath}/secrets/thoth-tailscale-authkey";
-  nixpkgs.hostPlatform = "aarch64-linux";
   services.openssh.enable = true;
   services.openssh.openFirewall = true;
   security.sudo.wheelNeedsPassword = false;
