@@ -1,14 +1,19 @@
 params@{ pkgs, lib, config, ... }:
 with lib.aiden;
-enableableModule "avahi" params {
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-    publish = {
+{
+  options.aiden.modules.avahi = with lib; {
+    enabled = mkEnableOption "";
+  };
+  config = {
+    services.avahi = {
       enable = true;
-      addresses = true;
-      workstation = true;
+      nssmdns = true;
+      publish = {
+        enable = true;
+        addresses = true;
+        workstation = true;
+      };
+      openFirewall = true;
     };
-    openFirewall = true;
   };
 }
