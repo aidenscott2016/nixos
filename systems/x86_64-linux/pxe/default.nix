@@ -1,0 +1,18 @@
+{ config, pkgs, lib, modulesPath, ... }: {
+  imports = [
+    (modulesPath + "/installer/netboot/netboot-minimal.nix")
+  ];
+  config = {
+    users.users.root.initialPassword = "password";
+    system.stateVersion = "23.11";
+    aiden.modules = {
+      #avahi.enabled = true;
+      common = {
+        domainName = "pxeclient.sw1a1aa.uk";
+        enabled = true;
+      };
+    };
+    services.xserver.libinput.enable = lib.mkForce false;
+
+  };
+}
