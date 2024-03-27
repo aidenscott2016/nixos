@@ -31,7 +31,7 @@ with lib.aiden;
     services.xserver = {
       layout = "gb";
       xkbOptions = "caps:swapescape";
-      libinput.enable = true;
+      libinput.enable = false;
     };
 
     environment.sessionVariables = {
