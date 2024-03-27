@@ -34,6 +34,7 @@ params@{ config, pkgs, inputs, ... }: {
     xorg.xev
     get_iplayer
     wol
+    jellyfin-media-player
   ];
 
 }
