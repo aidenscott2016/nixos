@@ -23,7 +23,14 @@ with lib.aiden; {
       desktop = enabled;
       multimedia = enabled;
       emacs = enabled;
-      jellyfin.enabled = true;
+      jellyfin = {
+        enabled = true;
+        user = "aiden";
+        hwAccel = {
+          enabled = true;
+          arch = "amd";
+        };
+      };
       steam.enabled = false;
     };
     programs = { openttd.enabled = true; };
@@ -35,13 +42,6 @@ with lib.aiden; {
   home-manager.useUserPackages = true;
   home-manager.users.aiden = { };
 
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [ mesa amdvlk libva ];
-    driSupport32Bit = true;
-    driSupport = true;
-    extraPackages32 = with pkgs.pkgsi686Linux; [ mesa amdvlk libva ];
-  };
 
   # services.xserver.libinput.touchpad.accelProfile = "flat";
   # services.xserver.libinput.mouse.accelProfile = "flat";
