@@ -23,7 +23,7 @@ with lib.aiden; {
       multimedia = enabled;
       emacs = enabled;
       jellyfin.enabled = true;
-      steam.enabled = true;
+      steam.enabled = false;
     };
     programs = { openttd.enabled = true; };
   };
