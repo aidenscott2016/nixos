@@ -1,13 +1,16 @@
 params@{ pkgs, lib, config, ... }:
-with lib.aiden;
+with lib;
+let
+  cfg = config.aiden.modules.common;
+in
 {
-  options.aiden.modules.common = with lib; {
+  options.aiden.modules.common = {
     enabled = mkEnableOption "";
     domainName = mkOption { type = types.str; };
     email = mkOption { type = types.str; };
   };
 
-  config = {
+  config = mkIf cfg.enabled {
     nix.extraOptions = "experimental-features = nix-command flakes";
     nix.settings.auto-optimise-store = true;
     nix.settings.trusted-users = [ "aiden" ];
