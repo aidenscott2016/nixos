@@ -64,7 +64,7 @@ inputs@{ ... }: {
             };
             root = {
               type = "lvm_lv";
-              size = "50G";
+              size = "50G"; #too small
               content = {
                 type = "filesystem";
                 format = "ext4";

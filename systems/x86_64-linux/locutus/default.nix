@@ -5,6 +5,7 @@ with lib.aiden; {
     ./packages.nix
     ./autorandr
     inputs.dwm.nixosModules.default
+    inputs.agenix.nixosModules.default
   ];
 
   environment.systemPackages = with pkgs;
@@ -98,9 +99,92 @@ with lib.aiden; {
     networkmanager.enable = true;
   };
 
-  virtualisation.podman = { enable = true; dockerCompat = true;};
+  virtualisation.podman = { enable = true; dockerCompat = true; };
   services.envfs.enable = true;
   programs.nix-ld.enable = true;
 
-  #programs.bash.undistract.me
+  services.prometheus.exporters.node = {
+    enable = true;
+    enabledCollectors = [ "systemd" ];
+    port = 9002;
+  };
+
+  age.secrets.cloudflareToken.file = "${inputs.self.outPath}/secrets/cf-token.age";
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "aiden@oldstreetjournal.co.uk";
+    certs = {
+      "locutus.sw1a1aa.uk" = {
+        dnsProvider = "cloudflare";
+        credentialsFile = config.age.secrets.cloudflareToken.path;
+        dnsResolver = "1.1.1.1:53";
+      };
+    };
+  };
+
+  users.users.traefik.extraGroups = [ "acme" "podman" ]; # to read acme folder
+  services.traefik = {
+    enable = true;
+    staticConfigOptions = {
+      log ={level = "debug";};
+      accessLog = { };
+      global = {
+        checkNewVersion = false;
+        sendAnonymousUsage = false;
+      };
+      providers.docker = {
+        exposedByDefault = false;
+        endpoint = "unix:///var/run/podman/podman.sock";
+      };
+      api.dashboard = true;
+      api.insecure = true;
+      entrypoints = {
+        web = {
+          address = ":80";
+          http.redirections.entrypoint = {
+            to = "websecure";
+            scheme = "https";
+          };
+        };
+        websecure.address = ":443";
+      };
+    };
+    dynamicConfigOptions = {
+      http = {
+        routers = {
+          metrics = {
+            service = "nodeexporter";
+            entrypoints = "websecure";
+            rule = "Host(`locutus.sw1a1aa.uk`) && PathPrefix(`/metrics/node`)";
+            tls = true;
+            middlewares = "metricsRewrite";
+          };
+        };
+        middlewares = {
+          metricsRewrite = {
+            replacepath.path = "/metrics";
+          };
+        };
+        services = {
+          nodeexporter = {
+            loadbalancer = {
+              servers = [{ url = "http://locutus.sw1a1aa.uk:${toString config.services.prometheus.exporters.node.port}"; }];
+              #servers = [{ url = "http://locutus.sw1a1aa.uk:9999"; }];
+            };
+          };
+        };
+      };
+
+      tls = {
+        stores.default = {
+          defaultCertificate = {
+            certFile = "/var/lib/acme/locutus.sw1a1aa.uk/fullchain.pem";
+            keyFile = "/var/lib/acme/locutus.sw1a1aa.uk/key.pem";
+          };
+        };
+      };
+    };
+  };
+
+  networking.firewall.allowedTCPPorts = [443];
 }

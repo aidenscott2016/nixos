@@ -1,5 +1,5 @@
 { config, pkgs, inputs, lib, ... }:
-let ip = "10.0.1.1"; in
+let ip = "10.0.0.1"; in
 {
   networking.hosts."${ip}" = [ "grafana.sw1a1aa.uk" ];
   services.grafana = {
@@ -23,6 +23,14 @@ let ip = "10.0.1.1"; in
       };
     };
     scrapeConfigs = [
+      {
+        job_name = "locutus-node-exporter";
+        metrics_path = "/metrics/node";
+        scheme = "https";
+        static_configs = [{
+          targets = [ "locutus.sw1a1aa.uk" ];
+        }];
+      }
       {
         job_name = "gila-node-exporter";
         static_configs = [{
