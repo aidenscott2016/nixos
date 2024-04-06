@@ -1,5 +1,8 @@
 params@{ config, pkgs, inputs, ... }: {
   environment.systemPackages = with pkgs; [
+    (jellyfin-media-player.override {
+      withDbus = false;
+    })
     imagemagick
     powertop
     #google-chrome chromium is not cached?
@@ -34,7 +37,6 @@ params@{ config, pkgs, inputs, ... }: {
     xorg.xev
     get_iplayer
     wol
-    jellyfin-media-player
   ];
 
 }
