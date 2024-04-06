@@ -30,7 +30,7 @@ with inputs; {
     modules = {
       tailscale = {
         enabled = true;
-        authKeyPath = age.secrets.secret1.path;
+        authKeyPath = config.age.secrets.secret1.path;
       };
       avahi.enabled = true;
       common.enabled = true;
@@ -46,8 +46,7 @@ with inputs; {
     };
   };
 
-  services.gvfs.enable = true;
-  services.udisks2.enable = true;
-
+  #services.gvfs.enable = true;
+  #services.udisks2.enable = true;
 
 }

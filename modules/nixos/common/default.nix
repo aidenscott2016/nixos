@@ -36,7 +36,7 @@ in
     services.xserver = {
       layout = "gb";
       xkbOptions = "caps:swapescape";
-      libinput.enable = false;
+      libinput.enable = mkDefault false;
     };
 
     environment.sessionVariables = {
