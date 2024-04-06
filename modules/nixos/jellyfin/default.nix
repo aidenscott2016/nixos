@@ -28,6 +28,7 @@ in
     };
   };
   config = mkIf cfg.enabled {
+    users.users.jellyfin.extraGroups = ["video"];
     environment.systemPackages = with pkgs; [ rename jellyfin-ffmpeg libva-utils ];
     services = {
       jellyfin = {
