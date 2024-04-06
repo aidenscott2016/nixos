@@ -4,7 +4,7 @@ with lib;
 let cfg = config.aiden.modules.tailscale; in {
   options.aiden.modules.tailscale = {
     enabled = mkEnableOption "";
-    router = mkEnableOption "";
+    advertiseRoutes = mkEnableOption "";
     authKeyPath = mkOption { type = types.str; };
   };
   config = mkIf cfg.enabled {
@@ -34,7 +34,7 @@ let cfg = config.aiden.modules.tailscale; in {
           fi
 
           # otherwise authenticate with tailscale
-          ${tailscale}/bin/tailscale up -authkey  file:${cfg.authKeyPath} ${ if cfg.router then "--advertise-routes=10.0.0.0/24" else ""}
+          ${tailscale}/bin/tailscale up -authkey  file:${cfg.authKeyPath} ${strings.optionalString cfg.advertiseRoutes "--advertise-routes=10.0.0.0/22"}
         '';
       };
   };

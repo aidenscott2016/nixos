@@ -37,7 +37,7 @@
     traefik.enabled = true;
     tailscale = {
       enabled = true;
-      router = true;
+      advertiseRoutes = true;
       authKeyPath = config.age.secrets.gila-tailscale-authkey.path;
     };
     avahi.enabled = true;
