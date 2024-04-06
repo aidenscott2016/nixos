@@ -67,7 +67,7 @@ with lib.aiden; {
     upower.enable = true;
     auto-cpufreq.enable = true;
     xserver.videoDrivers = [ "amdgpu" ];
-    xserver.enable = true;
+    xserver = { enable = true; libinput.enable = true; };
     tlp = {
       enable = true;
       settings = {
@@ -126,7 +126,7 @@ with lib.aiden; {
   services.traefik = {
     enable = true;
     staticConfigOptions = {
-      log ={level = "debug";};
+      log = { level = "debug"; };
       accessLog = { };
       global = {
         checkNewVersion = false;
@@ -186,5 +186,5 @@ with lib.aiden; {
     };
   };
 
-  networking.firewall.allowedTCPPorts = [443];
+  networking.firewall.allowedTCPPorts = [ 443 ];
 }
