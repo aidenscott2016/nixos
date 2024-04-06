@@ -30,6 +30,9 @@
         "defaults"
         "users"
         "nofail"
+        "uid=1000"
+        "gid=26"
+        "umask=002"
       ];
     };
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

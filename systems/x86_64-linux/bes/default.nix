@@ -24,5 +24,10 @@
         enabled = true;
       };
     };
+    fileSystems."/media" = {
+      device = "/mnt/t7";
+      options = [ "bind" ];
+    };
+
   };
 }
