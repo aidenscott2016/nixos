@@ -8,8 +8,7 @@ with lib.aiden; {
     inputs.agenix.nixosModules.default
   ];
 
-  environment.systemPackages = with pkgs;
-    [ inputs.disko.packages.x86_64-linux.disko ];
+  environment.systemPackages = with pkgs; [ inputs.disko.packages.x86_64-linux.disko docker-compose ];
   aiden = {
     modules = {
       avahi = enabled;
@@ -23,14 +22,6 @@ with lib.aiden; {
       desktop = enabled;
       multimedia = enabled;
       emacs = enabled;
-      jellyfin = {
-        enabled = true;
-        user = "aiden";
-        hwAccel = {
-          enabled = true;
-          arch = "amd";
-        };
-      };
       steam.enabled = false;
     };
     programs = { openttd.enabled = true; };
@@ -38,13 +29,10 @@ with lib.aiden; {
 
   system.stateVersion = "22.05";
 
+  services.openssh.openFirewall = true;
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.aiden = { };
-
-
-  # services.xserver.libinput.touchpad.accelProfile = "flat";
-  # services.xserver.libinput.mouse.accelProfile = "flat";
 
   boot = {
     supportedFilesystems = [ "ntfs" ];
@@ -184,6 +172,12 @@ with lib.aiden; {
         };
       };
     };
+  };
+
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs;[ mesa amdvlk libva ];
+    driSupport = true;
   };
 
   networking.firewall.allowedTCPPorts = [ 443 ];
