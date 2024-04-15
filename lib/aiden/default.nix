@@ -15,4 +15,37 @@ with lib; {
 
       config = mkIf cfg.enabled configToEnable;
     };
+
+  types = {
+    mkReverseProxyAppsOption = mkOption {
+      type = with types; listOf (submodule {
+        options = {
+          name = mkOption {
+            type = str;
+          };
+          port = mkOption {
+            type = int;
+          };
+        };
+      });
+      default = [ ];
+    };
+  };
+
+  toLocalReverseProxy = foldl'
+    (acc: _@{ name, port }:
+      recursiveUpdate acc {
+        routers."${name}" = {
+          service = name;
+          rule = "Host(`${name}.sw1a1aa.uk`)";
+          tls = true;
+        };
+        services."${name}" = {
+          loadbalancer = {
+            servers = [{ url = "http://localhost:${toString port}"; }];
+          };
+        };
+      }
+    )
+    { };
 }

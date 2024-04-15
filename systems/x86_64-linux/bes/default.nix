@@ -10,7 +10,24 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
     system.stateVersion = "23.11";
+    services.bazarr = { enable = true; };
+    services.sonarr = { enable = true; };
+    networking.firewall.allowedTCPPorts = [ 443 ];
+    services.sabnzbd = { enable = true; # configFile = config.age.secrets.sabnzbd.path;
+                       };
+    users.users.sabnzbd.extraGroups = [ "video" ];
+    users.users.sonarr.extraGroups = [ "video" "sabnzbd" ];
+    users.users.bazarr.extraGroups = [ "video" "sabnzbd" ];
     aiden.modules = {
+      reverseProxy = {
+        enabled = true;
+        apps = [
+          { name = "bazarr"; port = 6767; }
+          { name = "sonarr"; port = 8989; }
+          { name = "sab"; port = 8080; }
+          { name = "jellyfin"; port = 8096; }
+        ];
+      };
       avahi.enabled = true;
       jellyfin = {
         enabled = true;
