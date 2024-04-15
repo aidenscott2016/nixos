@@ -15,7 +15,6 @@
   networking.hostName = "gila";
   networking.networkmanager.enable = true;
   networking.dhcpcd.enable = true;
-  networking.hosts."10.0.0.1" = [ "gila.sw1a1aa.uk" "jellyfin.sw1a1aa.uk" ];
 
   environment.systemPackages = with pkgs; [ tcpdump dnsutils ];
   boot.loader.systemd-boot.enable = true;

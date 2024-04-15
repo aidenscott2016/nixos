@@ -11,6 +11,8 @@ in
       enable = true;
       resolveLocalQueries = false;
       settings = {
+        address="/sw1a1aa.uk/10.0.1.1";
+
         domain = "sw1a1aa.uk,10.0.0.0/16,local";
         # upstream DNS
         server = [
