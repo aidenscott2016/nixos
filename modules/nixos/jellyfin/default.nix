@@ -35,7 +35,7 @@ in
         user = cfg.user;
         group = "render";
         enable = true;
-        openFirewall = true;
+        openFirewall = false;
       };
     };
 
