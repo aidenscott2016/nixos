@@ -24,7 +24,6 @@ enableableModule "traefik" params {
     enable = true;
     group = "podman";
     staticConfigOptions = {
-      accessLog = { };
       global = {
         checkNewVersion = false;
         sendAnonymousUsage = false;
@@ -33,33 +32,27 @@ enableableModule "traefik" params {
         exposedByDefault = false;
         endpoint = "unix:///var/run/podman/podman.sock";
       };
-      api.dashboard = true;
-      api.insecure = true;
       entrypoints = {
-        web = {
-          address = ":80";
-          http.redirections.entrypoint = {
-            to = "websecure";
-            scheme = "https";
-          };
-        };
         websecure.address = ":443";
       };
     };
     dynamicConfigOptions = {
       http = {
+        serversTransports.bes.insecureSkipVerify = true;
         routers = {
-          jellyfin = {
-            service = "jellyfin";
+          bes = {
+            service = "bes";
             entrypoints = "websecure";
-            rule = "Host(`jellyfin.sw1a1aa.uk`)";
+            rule = "HostRegexp(`{name:(sonarr|bazarr|sab|jellyfin)\.sw1a1aa\.uk}`)";
             tls = true;
           };
         };
         services = {
-          jellyfin = {
+          bes = {
             loadbalancer = {
-              servers = [{ url = "http://bes.sw1a1aa.uk:8096"; }];
+              serversTransport = "bes";
+              passHostHeader = true;
+              servers = [{ url = "https://bes.sw1a1aa.uk"; }];
             };
           };
         };
