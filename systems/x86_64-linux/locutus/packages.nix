@@ -7,7 +7,7 @@ params@{ config, pkgs, inputs, channels, ... }: {
     powertop
     acpi # seems to provide more accurate charging status than upower. see the underpowered anker charger
     discord
-    jetbrains.idea-community
+    #jetbrains.idea-community
     chromium
     inputs.agenix.packages.x86_64-linux.default
     dnsutils # nslookup
@@ -18,14 +18,15 @@ params@{ config, pkgs, inputs, channels, ... }: {
     cargo
     xclip
     ventoy-full
-    minecraft
-    prismlauncher
+    # minecraft
+    # prismlauncher
     libva-utils
     xorg.xev
     get_iplayer
     wol
     # hledger
     # haskellPackages.hledger-flow
+
   ];
 
 }

@@ -20,7 +20,7 @@ with lib.aiden; {
       gc = enabled;
       cli-base = enabled;
       desktop = enabled;
-      multimedia = enabled;
+      #multimedia = enabled;
       emacs = enabled;
       steam.enabled = false;
     };
@@ -110,69 +110,69 @@ with lib.aiden; {
     };
   };
 
-  users.users.traefik.extraGroups = [ "acme" "podman" ]; # to read acme folder
-  services.traefik = {
-    enable = true;
-    staticConfigOptions = {
-      log = { level = "debug"; };
-      accessLog = { };
-      global = {
-        checkNewVersion = false;
-        sendAnonymousUsage = false;
-      };
-      providers.docker = {
-        exposedByDefault = false;
-        endpoint = "unix:///var/run/podman/podman.sock";
-      };
-      api.dashboard = true;
-      api.insecure = true;
-      entrypoints = {
-        web = {
-          address = ":80";
-          http.redirections.entrypoint = {
-            to = "websecure";
-            scheme = "https";
-          };
-        };
-        websecure.address = ":443";
-      };
-    };
-    dynamicConfigOptions = {
-      http = {
-        routers = {
-          metrics = {
-            service = "nodeexporter";
-            entrypoints = "websecure";
-            rule = "Host(`locutus.sw1a1aa.uk`) && PathPrefix(`/metrics/node`)";
-            tls = true;
-            middlewares = "metricsRewrite";
-          };
-        };
-        middlewares = {
-          metricsRewrite = {
-            replacepath.path = "/metrics";
-          };
-        };
-        services = {
-          nodeexporter = {
-            loadbalancer = {
-              servers = [{ url = "http://locutus.sw1a1aa.uk:${toString config.services.prometheus.exporters.node.port}"; }];
-              #servers = [{ url = "http://locutus.sw1a1aa.uk:9999"; }];
-            };
-          };
-        };
-      };
+  #users.users.traefik.extraGroups = [ "acme" "podman" ]; # to read acme folder
+  # services.traefik = {
+  #   enable = false;
+  #   staticConfigOptions = {
+  #     log = { level = "debug"; };
+  #     accessLog = { };
+  #     global = {
+  #       checkNewVersion = false;
+  #       sendAnonymousUsage = false;
+  #     };
+  #     providers.docker = {
+  #       exposedByDefault = false;
+  #       endpoint = "unix:///var/run/podman/podman.sock";
+  #     };
+  #     api.dashboard = true;
+  #     api.insecure = true;
+  #     entrypoints = {
+  #       web = {
+  #         address = ":80";
+  #         http.redirections.entrypoint = {
+  #           to = "websecure";
+  #           scheme = "https";
+  #         };
+  #       };
+  #       websecure.address = ":443";
+  #     };
+  #   };
+  #   dynamicConfigOptions = {
+  #     http = {
+  #       routers = {
+  #         metrics = {
+  #           service = "nodeexporter";
+  #           entrypoints = "websecure";
+  #           rule = "Host(`locutus.sw1a1aa.uk`) && PathPrefix(`/metrics/node`)";
+  #           tls = true;
+  #           middlewares = "metricsRewrite";
+  #         };
+  #       };
+  #       middlewares = {
+  #         metricsRewrite = {
+  #           replacepath.path = "/metrics";
+  #         };
+  #       };
+  #       services = {
+  #         nodeexporter = {
+  #           loadbalancer = {
+  #             servers = [{ url = "http://locutus.sw1a1aa.uk:${toString config.services.prometheus.exporters.node.port}"; }];
+  #             #servers = [{ url = "http://locutus.sw1a1aa.uk:9999"; }];
+  #           };
+  #         };
+  #       };
+  #     };
 
-      tls = {
-        stores.default = {
-          defaultCertificate = {
-            certFile = "/var/lib/acme/locutus.sw1a1aa.uk/fullchain.pem";
-            keyFile = "/var/lib/acme/locutus.sw1a1aa.uk/key.pem";
-          };
-        };
-      };
-    };
-  };
+  #     tls = {
+  #       stores.default = {
+  #         defaultCertificate = {
+  #           certFile = "/var/lib/acme/locutus.sw1a1aa.uk/fullchain.pem";
+  #           keyFile = "/var/lib/acme/locutus.sw1a1aa.uk/key.pem";
+  #         };
+  #       };
+  #     };
+  #   };
+  # };
 
   hardware.opengl = {
     enable = true;
@@ -180,5 +180,4 @@ with lib.aiden; {
     driSupport = true;
   };
 
-  networking.firewall.allowedTCPPorts = [ 443 ];
 }
