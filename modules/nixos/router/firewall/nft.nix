@@ -26,6 +26,9 @@ table ip filter {
         ip protocol icmp counter accept 
 
         tcp dport { ssh, http, https, $MQTT} accept 
+
+        tcp dport {9080 } accept comment pxe
+        udp dport {67, 69, 4011 } accept comment pxe
     }
 
     chain inbound_private_iot {
