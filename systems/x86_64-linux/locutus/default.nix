@@ -8,6 +8,7 @@ with lib.aiden; {
     inputs.agenix.nixosModules.default
   ];
 
+  programs.steam.enable = true;
   environment.systemPackages = with pkgs; [ inputs.disko.packages.x86_64-linux.disko docker-compose ];
   aiden = {
     modules = {

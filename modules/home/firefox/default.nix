@@ -1,6 +1,7 @@
 { pkgs, inputs, ... }:
 let addons = inputs.firefox-addons.packages.${pkgs.system};
 in {
+  home.file.".tridactylrc".source = ./tridactylrc;
   programs.firefox = {
     enable = true;
     profiles.aiden = {
