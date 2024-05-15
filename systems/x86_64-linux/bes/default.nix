@@ -1,9 +1,14 @@
 { config, inputs, lib, pkgs, systems, ... }:
 {
-  imports = [ ./hardware-configuration.nix ./disk-config.nix inputs.disko.nixosModules.default ];
+  imports = [
+    ./hardware-configuration.nix
+    ./disk-config.nix
+    inputs.agenix.nixosModules.default
+    inputs.disko.nixosModules.default
+    ./samba.nix
+  ];
 
   config = {
-    # make it a module
     services.openssh.enable = true;
     services.openssh.openFirewall = true;
     security.sudo.wheelNeedsPassword = false;
@@ -41,10 +46,7 @@
         enabled = true;
       };
     };
-    fileSystems."/media" = {
-      device = "/mnt/t7";
-      options = [ "bind" ];
-    };
 
+    environment.systemPackages = with pkgs; [ get_iplayer ];
   };
 }

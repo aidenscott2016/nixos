@@ -22,18 +22,18 @@
   # networking.interfaces.enp1s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  fileSystems."/mnt/t7" =
-    {
-      device = "/dev/disk/by-uuid/BAD0-2BCC";
-      fsType = "exfat";
+ #   };
+
+  fileSystems."/media/t7" =
+    { device = "/dev/disk/by-label/element";
+      fsType = "ext4";
       options = [
         "defaults"
-        "users"
         "nofail"
-        "uid=1000"
-        "gid=26"
-        "umask=002"
       ];
     };
+
+
+
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
