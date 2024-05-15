@@ -27,6 +27,7 @@ params@{ config, pkgs, inputs, channels, ... }: {
     # hledger
     # haskellPackages.hledger-flow
 
+    vlc
   ];
 
 }
