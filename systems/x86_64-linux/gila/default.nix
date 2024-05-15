@@ -1,6 +1,6 @@
 { config, pkgs, inputs, lib, ... }: {
   imports = [
-    ./pxe.nix
+#    ./pxe.nix
     ./hardware-configuration.nix
     ./disko-config.nix
     ./monitoring.nix
