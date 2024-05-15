@@ -16,34 +16,23 @@ in
     services.traefik = {
       enable = true;
       staticConfigOptions = {
-        log.level = "DEBUG";
-        accessLog = { fields = {defaultMode = "keep"; headers.defaultMode = "keep";};};
+        accessLog = {
+          format = "json";
+          fields = { defaultMode = "keep"; headers.defaultMode = "keep"; };
+        };
         global = {
           checkNewVersion = false;
           sendAnonymousUsage = false;
         };
         entrypoints = {
-          web = {
-            address = ":80";
-            # http.redirections.entrypoint = {
-            #   to = "websecure";
-            #   scheme = "https";
-            # };
+          websecure = {
+            forwardedHeaders.trustedIPs = [ "10.0.1.1" ];
+            address = ":443";
           };
-          websecure = {address = ":443";};
         };
       };
       dynamicConfigOptions = {
         http = toLocalReverseProxy cfg.apps;
-
-        # tls = {
-        #   stores.default = {
-        #     defaultCertificate = {
-        #       certFile = "/var/lib/acme/${domainName}/fullchain.pem";
-        #       keyFile = "/var/lib/acme/${domainName}/key.pem";
-        #     };
-        #   };
-        # };
       };
     };
   };
