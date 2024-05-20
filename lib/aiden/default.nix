@@ -42,7 +42,7 @@ with lib; {
         };
         services."${name}" = {
           loadbalancer = {
-            servers = [{ url = "http://localhost:${toString port}"; }];
+            servers = [{ url = "http://127.0.0.1:${toString port}"; }];
           };
         };
       }

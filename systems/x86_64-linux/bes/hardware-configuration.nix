@@ -22,7 +22,7 @@
   # networking.interfaces.enp1s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
- #   };
+  #   };
 
   fileSystems."/media/t7" =
     { device = "/dev/disk/by-label/element";

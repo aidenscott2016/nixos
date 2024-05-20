@@ -21,6 +21,7 @@
     services.sabnzbd = { enable = true; # configFile = config.age.secrets.sabnzbd.path;
                        };
     users.users.sabnzbd.extraGroups = [ "video" ];
+    users.users.aiden.extraGroups = [ "video" "sabnzbd"];
     users.users.sonarr.extraGroups = [ "video" "sabnzbd" ];
     users.users.bazarr.extraGroups = [ "video" "sabnzbd" ];
     aiden.modules = {
