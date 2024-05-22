@@ -2,12 +2,12 @@
 define DEV_WAN = ${externalInterface}
 define DEV_LAN = ${internalInterface}
 define WHOLE_LAN = { "iot", "lan", "guest", "tailscale0" }
-define TRUSTED_LAN = { "lan", "tailscale0", "lo"}
+define TRUSTED_LAN = { "lan", "tailscale0", "lo" }
 define ALLOWED_INTERNET_GROUP = { "lan", "tailscale0", "guest" }
 define DNS_PORTS = {53, 54, 5354, 67} 
 define MQTT = 1883
 
-table ip filter {
+table ip myfilter {
     chain inbound {
         type filter hook input priority 0; policy drop;
         icmp type echo-request limit rate 1/second accept
@@ -45,7 +45,6 @@ table ip filter {
     chain forward {
         type filter hook forward priority 0; policy drop;
         ip protocol icmp counter accept comment "accept all ICMP types"
-	ip saddr "10.0.1.218" ip daddr "10.0.2.209" meta nftrace set 1
 
         # Allow traffic from established and related packets, drop invalid
         ct state vmap { established : accept, related : accept, invalid : drop } 
@@ -63,7 +62,7 @@ table ip filter {
 
 }
 
-table ip6 filter {
+table ip6 myfilter {
     chain input {
         type filter hook input priority 0; policy drop;
     }
