@@ -12,7 +12,7 @@ in
   };
 
   config = mkIf cfg.enabled {
-    users.users.traefik.extraGroups = [ "acme" "podman" ]; # to read acme folder
+    users.users.traefik.extraGroups = [ "acme" ]; # to read acme folder
     services.traefik = {
       enable = true;
       staticConfigOptions = {
