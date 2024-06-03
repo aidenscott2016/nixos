@@ -33,6 +33,7 @@ params@{ config, pkgs, inputs, channels, ... }: {
     podman-compose
     docker-compose
     moonlight-qt
+    nix-tree
     
   ];
 
