@@ -106,26 +106,6 @@ with lib.aiden; {
   services.envfs.enable = true;
   programs.nix-ld.enable = true;
 
-  services.prometheus.exporters.node = {
-    enable = true;
-    enabledCollectors = [ "systemd" ];
-    port = 9002;
-  };
-
-  age.secrets.cloudflareToken.file = "${inputs.self.outPath}/secrets/cf-token.age";
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "aiden@oldstreetjournal.co.uk";
-    certs = {
-      "locutus.sw1a1aa.uk" = {
-        dnsProvider = "cloudflare";
-        credentialsFile = config.age.secrets.cloudflareToken.path;
-        dnsResolver = "1.1.1.1:53";
-      };
-    };
-  };
-
-
   hardware.opengl = {
     enable = true;
     extraPackages = with pkgs;[ mesa amdvlk libva ];
