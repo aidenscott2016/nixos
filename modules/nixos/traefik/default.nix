@@ -44,7 +44,7 @@ enableableModule "traefik" params {
           bes = {
             service = "bes";
             entrypoints = "websecure";
-            rule = "HostRegexp(`{name:(sonarr|bazarr|sab|jellyfin)\.sw1a1aa\.uk}`)";
+            rule = "HostRegexp(`{name:(.*)\.sw1a1aa\.uk}`)";
             tls = true;
           };
         };
