@@ -6,7 +6,9 @@ params@{ config, pkgs, inputs, channels, ... }: {
     imagemagick
     powertop
     acpi # seems to provide more accurate charging status than upower. see the underpowered anker charger
-    discord
+    (discord.override {
+      withTTS = false;
+    })
     #jetbrains.idea-community
     chromium
     inputs.agenix.packages.x86_64-linux.default
