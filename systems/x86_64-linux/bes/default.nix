@@ -5,6 +5,7 @@
     ./disk-config.nix
     inputs.agenix.nixosModules.default
     inputs.disko.nixosModules.default
+    ./portainer.nix
     ./samba.nix
   ];
 
@@ -55,6 +56,7 @@
           { name = "sonarr"; port = 8989; }
           { name = "sab"; port = 8080; }
           { name = "jellyfin"; port = 8096; }
+          { name = "portainer"; port = 5043; }
           { name = "deluge"; port = 8112; }
           { name = "radarr"; port = 7878; }
         ];
