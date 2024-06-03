@@ -73,6 +73,6 @@
       };
     };
 
-    environment.systemPackages = with pkgs; [ get_iplayer ];
+    environment.systemPackages = with pkgs; [ get_iplayer wol ];
   };
 }
