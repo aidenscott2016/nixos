@@ -15,22 +15,38 @@
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
     system.stateVersion = "23.11";
-    services.bazarr = { enable = true; };
-    services.sonarr = { enable = true; };
-    networking.firewall.allowedTCPPorts = [ 443 ];
-    services.sabnzbd = { enable = true; # configFile = config.age.secrets.sabnzbd.path;
-                       };
+
     services.deluge = { enable = true; web = { enable = true; port = 8112; }; };
     users.users.deluge.extraGroups = [ "video" ];
+
+    services.bazarr = {
+      enable = true;
+      group = "video";
+    };
+    users.users.bazarr.extraGroups = [ "video" ];
+
+    services.sonarr = {
+      enable = true;
+      group = "video";
+    };
+    users.users.sonarr.extraGroups = [ "video" ];
+
     services.radarr = {
       enable = true;
       group = "video";
     };
     users.users.radarr.extraGroups = [ "video" ];
+
+    services.sabnzbd = {
+      enable = true; # configFile = config.age.secrets.sabnzbd.path;
+      group = "video";
+    };
     users.users.sabnzbd.extraGroups = [ "video" ];
-    users.users.aiden.extraGroups = [ "video" "sabnzbd"];
-    users.users.sonarr.extraGroups = [ "video" "sabnzbd" ];
-    users.users.bazarr.extraGroups = [ "video" "sabnzbd" ];
+
+    users.users.aiden.extraGroups = [ "video" "sadnzbd" "deluge" ];
+
+    networking.firewall.allowedTCPPorts = [ 443 ];
+
     aiden.modules = {
       reverseProxy = {
         enabled = true;
