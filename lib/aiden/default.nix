@@ -33,7 +33,7 @@ with lib; {
   };
 
   toLocalReverseProxy = foldl'
-    (acc: _@{ name, port }:
+    (acc: _@{ name, port, proto ? "http" }:
       recursiveUpdate acc {
         routers."${name}" = {
           service = name;
@@ -42,7 +42,7 @@ with lib; {
         };
         services."${name}" = {
           loadbalancer = {
-            servers = [{ url = "http://127.0.0.1:${toString port}"; }];
+            servers = [{ url = "${proto}://127.0.0.1:${toString port}"; }];
           };
         };
       }
