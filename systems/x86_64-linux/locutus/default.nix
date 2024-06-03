@@ -8,7 +8,7 @@ with lib.aiden; {
     inputs.agenix.nixosModules.default
   ];
 
-  programs.steam.enable = true;
+  programs.steam.enable = false;
   environment.systemPackages = with pkgs; [ inputs.disko.packages.x86_64-linux.disko docker-compose ];
   aiden = {
     modules = {
@@ -52,11 +52,12 @@ with lib.aiden; {
   programs.nm-applet.enable = true;
 
   services = {
+    libinput.enable = true;
     fstrim.enable = true;
     upower.enable = true;
     auto-cpufreq.enable = true;
     xserver.videoDrivers = [ "amdgpu" ];
-    xserver = { enable = true; libinput.enable = true; };
+    xserver = { enable = true;  };
     tlp = {
       enable = true;
       settings = {
@@ -88,7 +89,20 @@ with lib.aiden; {
     networkmanager.enable = true;
   };
 
-  virtualisation.podman = { enable = true; dockerCompat = true; };
+  virtualisation.podman = {
+    enable = false;
+    dockerSocket.enable = true;
+    dockerCompat = true;
+    defaultNetwork.settings.dns_enabled = true;
+
+  };
+  virtualisation.docker = {
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+    enable = true;
+  };
   services.envfs.enable = true;
   programs.nix-ld.enable = true;
 
@@ -111,69 +125,6 @@ with lib.aiden; {
     };
   };
 
-  #users.users.traefik.extraGroups = [ "acme" "podman" ]; # to read acme folder
-  # services.traefik = {
-  #   enable = false;
-  #   staticConfigOptions = {
-  #     log = { level = "debug"; };
-  #     accessLog = { };
-  #     global = {
-  #       checkNewVersion = false;
-  #       sendAnonymousUsage = false;
-  #     };
-  #     providers.docker = {
-  #       exposedByDefault = false;
-  #       endpoint = "unix:///var/run/podman/podman.sock";
-  #     };
-  #     api.dashboard = true;
-  #     api.insecure = true;
-  #     entrypoints = {
-  #       web = {
-  #         address = ":80";
-  #         http.redirections.entrypoint = {
-  #           to = "websecure";
-  #           scheme = "https";
-  #         };
-  #       };
-  #       websecure.address = ":443";
-  #     };
-  #   };
-  #   dynamicConfigOptions = {
-  #     http = {
-  #       routers = {
-  #         metrics = {
-  #           service = "nodeexporter";
-  #           entrypoints = "websecure";
-  #           rule = "Host(`locutus.sw1a1aa.uk`) && PathPrefix(`/metrics/node`)";
-  #           tls = true;
-  #           middlewares = "metricsRewrite";
-  #         };
-  #       };
-  #       middlewares = {
-  #         metricsRewrite = {
-  #           replacepath.path = "/metrics";
-  #         };
-  #       };
-  #       services = {
-  #         nodeexporter = {
-  #           loadbalancer = {
-  #             servers = [{ url = "http://locutus.sw1a1aa.uk:${toString config.services.prometheus.exporters.node.port}"; }];
-  #             #servers = [{ url = "http://locutus.sw1a1aa.uk:9999"; }];
-  #           };
-  #         };
-  #       };
-  #     };
-
-  #     tls = {
-  #       stores.default = {
-  #         defaultCertificate = {
-  #           certFile = "/var/lib/acme/locutus.sw1a1aa.uk/fullchain.pem";
-  #           keyFile = "/var/lib/acme/locutus.sw1a1aa.uk/key.pem";
-  #         };
-  #       };
-  #     };
-  #   };
-  # };
 
   hardware.opengl = {
     enable = true;

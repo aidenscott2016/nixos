@@ -1,4 +1,4 @@
-inputs@{ ... }:
+inputs@{pkgs, ...}:
 {
   # programs.gnupg.agent = {
   #   enable = true;
@@ -11,6 +11,6 @@ inputs@{ ... }:
     enableBashIntegration = true;
     grabKeyboardAndMouse = true;
     enableSshSupport = true;
-    pinentryFlavor = "gtk2";
+    pinentryPackage = pkgs.pinentry-gtk2;
   };
 }

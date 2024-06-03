@@ -33,10 +33,14 @@ in
       useXkbConfig = true;
     };
 
-    services.xserver = {
-      layout = "gb";
-      xkbOptions = "caps:swapescape";
+    services = {
       libinput.enable = mkDefault false;
+      xserver = {
+        xkb = {
+          layout = "gb";
+          options = "caps:swapescape";
+        };
+      };
     };
 
     environment.sessionVariables = {

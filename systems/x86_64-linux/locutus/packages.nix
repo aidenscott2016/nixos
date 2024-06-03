@@ -28,6 +28,8 @@ params@{ config, pkgs, inputs, channels, ... }: {
     # haskellPackages.hledger-flow
 
     vlc
+    podman-compose
+    docker-compose
   ];
 
 }

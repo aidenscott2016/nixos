@@ -3,7 +3,7 @@ with lib.aiden;
 enableableModule "printer" params {
   services = {
     avahi.enable = true;
-    avahi.nssmdns = true;
+    avahi.nssmdns4 = true;
     printing = {
       enable = true;
       drivers = [ pkgs.hplip ];
