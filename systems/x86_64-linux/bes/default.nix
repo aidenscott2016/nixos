@@ -20,6 +20,13 @@
     networking.firewall.allowedTCPPorts = [ 443 ];
     services.sabnzbd = { enable = true; # configFile = config.age.secrets.sabnzbd.path;
                        };
+    services.deluge = { enable = true; web = { enable = true; port = 8112; }; };
+    users.users.deluge.extraGroups = [ "video" ];
+    services.radarr = {
+      enable = true;
+      group = "video";
+    };
+    users.users.radarr.extraGroups = [ "video" ];
     users.users.sabnzbd.extraGroups = [ "video" ];
     users.users.aiden.extraGroups = [ "video" "sabnzbd"];
     users.users.sonarr.extraGroups = [ "video" "sabnzbd" ];
@@ -32,6 +39,8 @@
           { name = "sonarr"; port = 8989; }
           { name = "sab"; port = 8080; }
           { name = "jellyfin"; port = 8096; }
+          { name = "deluge"; port = 8112; }
+          { name = "radarr"; port = 7878; }
         ];
       };
       avahi.enabled = true;
