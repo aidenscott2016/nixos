@@ -30,6 +30,8 @@ params@{ config, pkgs, inputs, channels, ... }: {
     vlc
     podman-compose
     docker-compose
+    moonlight-qt
+    
   ];
 
 }

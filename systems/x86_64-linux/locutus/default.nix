@@ -112,4 +112,6 @@ with lib.aiden; {
     driSupport = true;
   };
 
+  services.gnome.gnome-keyring.enable = true;
+
 }
