@@ -26,6 +26,10 @@ with lib; {
           port = mkOption {
             type = int;
           };
+          proto = mkOption {
+            type = str;
+            default = "http";
+          };
         };
       });
       default = [ ];
@@ -33,7 +37,7 @@ with lib; {
   };
 
   toLocalReverseProxy = foldl'
-    (acc: _@{ name, port, proto ? "http" }:
+    (acc: _@{ name, port, proto}:
       recursiveUpdate acc {
         routers."${name}" = {
           service = name;

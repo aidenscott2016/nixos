@@ -16,7 +16,7 @@
       "/run/docker.sock:/var/run/docker.sock:rw,Z"
       "portainer_data:/data:rw,Z"    ];
     ports = [
-      "5043:9443/tcp"
+      "9000:9000/tcp"
     ];
     log-driver = "journald";
     extraOptions = [
