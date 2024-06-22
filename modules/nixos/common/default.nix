@@ -34,7 +34,6 @@ in
     };
 
     services = {
-      libinput.enable = mkDefault false;
       xserver = {
         xkb = {
           layout = "gb";
