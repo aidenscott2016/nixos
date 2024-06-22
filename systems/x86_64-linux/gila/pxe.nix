@@ -9,9 +9,9 @@ in
     dhcpNoBind = true;
     port = 9080;
     mode = "boot";
-    kernel = "${build.kernel}/bzImage";
-    initrd = "${build.netbootRamdisk}/initrd";
-    cmdLine = "init=${build.toplevel}/init loglevel=4";
+    # kernel = "${build.kernel}/bzImage";
+    # initrd = "${build.netbootRamdisk}/initrd";
+    # cmdLine = "init=${build.toplevel}/init loglevel=4";
     debug = true;
   };
 }
