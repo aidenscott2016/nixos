@@ -34,7 +34,7 @@ params@{ config, pkgs, inputs, channels, ... }: {
     docker-compose
     moonlight-qt
     nix-tree
-    
+    libreoffice
   ];
 
 }
