@@ -46,7 +46,7 @@
 
     users.users.aiden.extraGroups = [ "video" "sadnzbd" "deluge" ];
 
-    networking.firewall.allowedTCPPorts = [ 443 ];
+    networking.firewall.allowedTCPPorts = [ 443 5000];
 
     aiden.modules = {
       reverseProxy = {
@@ -75,6 +75,6 @@
       };
     };
 
-    environment.systemPackages = with pkgs; [ get_iplayer wol ];
+    environment.systemPackages = with pkgs; [ get_iplayer wol iperf3 ];
   };
 }
