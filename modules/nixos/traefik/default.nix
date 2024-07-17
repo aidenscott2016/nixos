@@ -47,8 +47,9 @@ enableableModule "traefik" params {
         routers = {
           bes = {
             service = "bes";
+            priority= 1; # 1 is low
             entrypoints = "websecure";
-            rule = "HostRegexp(`{name:(.*)\.sw1a1aa\.uk}`)";
+            rule = "HostRegexp(`^.+\.sw1a1aa\.uk$`)";
             tls = true;
           };
         };
