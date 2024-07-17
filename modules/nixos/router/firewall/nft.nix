@@ -25,7 +25,7 @@ table ip myfilter {
     chain inbound_private_trusted {
         ip protocol icmp counter accept 
 
-        tcp dport { ssh, http, https, $MQTT} accept 
+        tcp dport { ssh, http, https, $MQTT, 8080} accept 
 
         tcp dport {9080, 5000-6000 } accept 
         udp dport {67, 69, 4011 } accept comment pxe
