@@ -24,6 +24,10 @@ enableableModule "traefik" params {
     enable = true;
     group = "podman";
     staticConfigOptions = {
+      api = {
+        dashboard = true;
+        insecure = true;
+      };
       accessLog = { fields = { defaultMode = "keep"; headers.defaultMode = "keep"; }; };
       global = {
         checkNewVersion = false;
