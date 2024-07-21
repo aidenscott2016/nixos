@@ -20,10 +20,10 @@ with lib.aiden; {
       ssh = enabled;
       gc = enabled;
       cli-base = enabled;
-      desktop = enabled;
       #multimedia = enabled;
       emacs = enabled;
       steam.enabled = false;
+      thunar = enabled;
       locale = enabled;
     };
     programs = { openttd.enabled = true; };
