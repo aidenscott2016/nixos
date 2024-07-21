@@ -30,7 +30,6 @@ with lib.aiden; {
 
   system.stateVersion = "22.05";
 
-  services.openssh.openFirewall = true;
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
   home-manager.users.aiden = { };
@@ -55,22 +54,9 @@ with lib.aiden; {
     physlock = {enable = true; lockOn.suspend = true;};
     libinput.enable = true;
     fstrim.enable = true;
-    upower.enable = true;
     auto-cpufreq.enable = true;
     xserver.videoDrivers = [ "amdgpu" ];
     xserver = { enable = true;  };
-    tlp = {
-      enable = true;
-      settings = {
-        USB_AUTOSUSPEND = 1;
-        START_CHARGE_THRESH_BAT0 = 50;
-        STOP_CHARGE_THRESH_BAT0 = 85;
-        START_CHARGE_THRESH_BAT1 = 50;
-        STOP_CHARGE_THRESH_BAT1 = 85;
-      };
-
-    };
-
     tailscale.enable = true;
     gvfs.enable = true;
 
