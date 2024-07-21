@@ -19,7 +19,7 @@ with lib.aiden; {
       ssh = enabled;
       gc = enabled;
       cli-base = enabled;
-      #multimedia = enabled;
+      multimedia = enabled;
       emacs = enabled;
       steam.enabled = false;
       thunar = enabled;
@@ -100,5 +100,6 @@ with lib.aiden; {
   };
 
   services.gnome.gnome-keyring.enable = true;
+  services.mullvad-vpn.enable = true;
 
 }
