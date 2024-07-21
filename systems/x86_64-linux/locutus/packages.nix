@@ -1,8 +1,5 @@
 params@{ config, pkgs, inputs, channels, ... }: {
   environment.systemPackages = with pkgs; [
-    (jellyfin-media-player.override {
-      withDbus = false;
-    })
     imagemagick
     powertop
     acpi # seems to provide more accurate charging status than upower. see the underpowered anker charger

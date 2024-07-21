@@ -18,6 +18,8 @@ in enableableModule "multimedia" params {
     nicotine-plus
     yt-dlp
     vlc
-    spotify
+    (jellyfin-media-player.override {
+      withDbus = false;
+    })
   ];
 }
