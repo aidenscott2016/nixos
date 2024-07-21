@@ -52,6 +52,7 @@ with lib.aiden; {
   programs.nm-applet.enable = true;
 
   services = {
+    physlock = {enable = true; lockOn.suspend = true;};
     libinput.enable = true;
     fstrim.enable = true;
     upower.enable = true;
