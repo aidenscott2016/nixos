@@ -18,7 +18,8 @@ in
     };
     services.xserver.libinput.enable = lib.mkForce false;
 
-    users.users.nixos.openssh.authorizedKeys.keys = [publicKey];
-    users.users.root.openssh.authorizedKeys.keys = [publicKey];
+    users.users.nixos.openssh.authorizedKeys.keys = [ publicKey ];
+    users.users.root.openssh.authorizedKeys.keys = [ publicKey ];
+    environment.systemPackages = with pkgs; [ rsync tmux ];
   };
 }
