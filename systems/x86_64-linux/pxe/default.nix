@@ -10,6 +10,7 @@ in
     users.users.root.initialPassword = "password";
     system.stateVersion = "23.11";
     aiden.modules = {
+      locale.enabled = true;
       avahi.enabled = true;
       common = {
         enabled = true;

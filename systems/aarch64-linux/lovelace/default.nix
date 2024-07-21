@@ -34,6 +34,7 @@ with inputs; {
       };
       avahi.enabled = true;
       common.enabled = true;
+      locale.enabled = true;
     };
   };
 

@@ -49,6 +49,7 @@
     networking.firewall.allowedTCPPorts = [ 443 5000];
 
     aiden.modules = {
+      locale.enabled = true;
       reverseProxy = {
         enabled = true;
         apps = [

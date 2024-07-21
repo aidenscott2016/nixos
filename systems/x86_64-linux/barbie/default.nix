@@ -26,7 +26,7 @@
     pulse.enable = true;
   };
 
-  aiden.modules = { common.enabled = true; ssh.enabled = true; };
+  aiden.modules = { common.enabled = true; ssh.enabled = true; locale.enabled = true; };
   services.openssh.openFirewall = true;
   services.desktopManager.plasma6.enable = true;
 

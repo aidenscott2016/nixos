@@ -11,7 +11,7 @@ enableableModule "adguard" params {
     settings = {
       http.address = "10.0.1.1:8081";
       dns.bind_hosts = [ "10.0.0.1" ];
-      dns.port = 5354; #avahi uses 5353
+      dns.port = 5354; # mdns uses 5353
       users = [{
         name = "admin";
         password =

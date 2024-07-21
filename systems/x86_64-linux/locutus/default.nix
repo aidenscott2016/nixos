@@ -24,6 +24,7 @@ with lib.aiden; {
       #multimedia = enabled;
       emacs = enabled;
       steam.enabled = false;
+      locale = enabled;
     };
     programs = { openttd.enabled = true; };
   };

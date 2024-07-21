@@ -45,6 +45,7 @@
       domainName = "sw1a1aa.uk";
       enabled = true;
     };
+    locale.enabled = true;
     adguard.enabled = true;
     home-assistant = {
       enabled = true;

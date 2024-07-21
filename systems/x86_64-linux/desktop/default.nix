@@ -3,6 +3,7 @@ with lib.aiden; {
   imports = [ ./hardware-configuration.nix ];
 
   aiden.modules = {
+    locale = enabled;
     common = enabled;
     ssh = enabled;
   };
@@ -23,15 +24,6 @@ with lib.aiden; {
   };
   networking.hostName = "desktop";
 
-  time.timeZone = "Europe/London";
-  i18n.defaultLocale = "en_GB.UTF-8";
-  console = { useXkbConfig = true; };
-
-  services.xserver = {
-    layout = "gb";
-    xkbOptions = "caps:swapescape";
-    libinput.enable = true;
-  };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
