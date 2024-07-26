@@ -6,7 +6,6 @@
     inputs.agenix.nixosModules.default
     inputs.disko.nixosModules.default
     ./portainer.nix
-    ./samba.nix
   ];
 
   config = {
@@ -73,6 +72,13 @@
       common = {
         domainName = "bes.sw1a1aa.uk";
         enabled = true;
+      };
+      samba = {
+        enabled = true;
+        shares.t7 = {
+          path = "/media/t7";
+          writable = "true";
+        };
       };
     };
 

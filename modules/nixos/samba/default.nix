@@ -1,8 +1,18 @@
-{ config, lib, pkgs, ... }: {
-  config = {
-    networking = {
-      firewall.enable = true;
+{ config, lib, pkgs, ... }:
+let
+  inherit (lib) mkEnableOption mkIf mkOption types;
+  cfg = config.aiden.modules.samba;
+in
+{
+  options.aiden.modules.samba = {
+    enabled = mkEnableOption "Samba";
+    shares = mkOption {
+      type = types.attrsOf (types.attrsOf types.unspecified);
+      default = { };
     };
+  };
+
+  config = mkIf cfg.enabled {
     services = {
       # Network shares
       samba = {
@@ -12,11 +22,7 @@
         # See https://github.com/NixOS/nixpkgs/blob/592047fc9e4f7b74a4dc85d1b9f5243dfe4899e3/pkgs/top-level/all-packages.nix#L27268
         enable = true;
         openFirewall = true;
-        shares.testshare = {
-          path = "/media";
-          writable = "true";
-          comment = "Hello World!";
-        };
+        shares = cfg.shares;
         extraConfig = ''
           server smb encrypt = required
           # ^^ Note: Breaks `smbclient -L <ip/host> -U%` by default, might require the client to set `client min protocol`?
