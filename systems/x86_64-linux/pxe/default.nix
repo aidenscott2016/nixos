@@ -15,6 +15,7 @@ in
       common = {
         enabled = true;
       };
+      cli-base = true;
     };
     services.xserver.libinput.enable = lib.mkForce false;
 
