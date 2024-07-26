@@ -3,14 +3,14 @@
 let
   inherit (lib) mkEnableOption mkIf;
 
-  cfg = config.aiden.locale;
+  cfg = config.aiden.modules.locale;
 in
 {
-  options.aiden.locale = {
-    enable = mkEnableOption "Locale";
+  options.aiden.modules.locale = {
+    enabled = mkEnableOption "Locale";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enabled {
 
     console = {
       font = "Lat2-Terminus16";
