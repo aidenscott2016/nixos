@@ -45,9 +45,11 @@
 
     users.users.aiden.extraGroups = [ "video" "sadnzbd" "deluge" ];
 
-    networking.firewall.allowedTCPPorts = [ 443 5000];
+    networking.firewall.allowedTCPPorts = [ 443 5000 ];
 
     aiden.modules = {
+      gc.enabled = true;
+      cli-base.enabled = true;
       locale.enabled = true;
       reverseProxy = {
         enabled = true;
@@ -56,7 +58,7 @@
           { name = "sonarr"; port = 8989; }
           { name = "sab"; port = 8080; }
           { name = "jellyfin"; port = 8096; }
-          { name = "portainer"; port = 9000 ;}
+          { name = "portainer"; port = 9000; }
           { name = "deluge"; port = 8112; }
           { name = "radarr"; port = 7878; }
         ];
@@ -81,7 +83,6 @@
         };
       };
     };
-
     environment.systemPackages = with pkgs; [ get_iplayer wol iperf3 ];
   };
 }
