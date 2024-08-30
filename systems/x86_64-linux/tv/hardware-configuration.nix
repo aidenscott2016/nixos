@@ -22,15 +22,6 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  hardware.opengl = mkIf cfg.hwAccel.enabled {
-    enable = true;
-    extraPackages = with pkgs;[
-      intel-media-driver # LIBVA_DRIVER_NAME=iHD
-      intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      intel-compute-runtime
-    ];
-    driSupport = true;
-  };
 
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

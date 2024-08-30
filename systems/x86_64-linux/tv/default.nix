@@ -23,7 +23,8 @@ with lib.aiden;
     services.displayManager.sddm.wayland.enable = true;
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
-    home-manager.users.aiden = { };
+    home-manager.users.aiden = {
+    };
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;
@@ -45,11 +46,24 @@ with lib.aiden;
       ssh = enabled;
       gc = enabled;
       cli-base = enabled;
-      desktop = enabled;
-      emacs = enabled;
       steam.enabled = false;
+      locale = enabled;
     };
 
+    hardware.opengl = {
+      enable = true;
+      extraPackages = with pkgs;[
+        intel-media-driver # LIBVA_DRIVER_NAME=iHD
+        intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+        intel-compute-runtime
+
+      ];
+    driSupport = true;
+    };
+
+    boot.kernelParams = [
+      "i915.enable_guc=2"
+    ];
     environment.systemPackages = with pkgs; [ firefox lm_sensors htop ];
 
   };
