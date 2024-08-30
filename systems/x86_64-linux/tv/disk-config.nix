@@ -2,14 +2,14 @@
   disko.devices = {
     disk = {
       vdb = {
-        device = "/dev/mmcblk0";
+        device = "/dev/disk/by-id/ata-LITEON_CV8-8E512-11_SATA_512GB_TW04WFGMLOH0083F00Z5";
         type = "disk";
         content = {
           type = "gpt";
           partitions = {
             ESP = {
               type = "EF00";
-              size = "500M";
+              size = "1G";
               content = {
                 type = "filesystem";
                 format = "vfat";
@@ -19,10 +19,9 @@
             root = {
               size = "100%";
               content = {
-                type = "btrfs";
-                extraArgs = [ "-f" ]; # Override existing partition
+                type = "filesystem";
+                format = "ext4";
                 mountpoint = "/";
-                mountOptions = [ "compress=zstd" "noatime" ];
               };
             };
           };
