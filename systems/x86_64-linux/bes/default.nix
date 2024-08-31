@@ -45,6 +45,7 @@
 
     users.users.aiden.extraGroups = [ "video" "sadnzbd" "deluge" ];
 
+    networking.networkmanager.enable = true;
     networking.firewall.allowedTCPPorts = [ 443 5000 ];
 
     aiden.modules = {
