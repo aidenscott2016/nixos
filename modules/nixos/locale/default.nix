@@ -18,10 +18,12 @@ in
     };
     time.timeZone = "Europe/London";
     services.xserver = {
-      layout = "gb";
-      xkbOptions = "caps:swapescape";
-      libinput.enable = true;
+      xkb = {
+        layout = "gb";
+        options = "caps:swapescape";
+      };
     };
+    services.libinput.enable = true;
 
     i18n = {
       defaultLocale = "en_GB.UTF-8";

@@ -5,7 +5,7 @@ in {
   config = mkIf enabled {
     services.avahi = {
       enable = true;
-      nssmdns = true;
+      nssmdns4 = true;
       reflector = true;
       allowInterfaces = [ "lan" "iot" "wlan" "guest" "eth3" ];
       publish = {
