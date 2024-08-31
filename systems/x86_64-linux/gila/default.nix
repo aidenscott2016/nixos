@@ -3,7 +3,7 @@
     ./pxe.nix
     ./hardware-configuration.nix
     ./disko-config.nix
-    ./monitoring.nix
+    #./monitoring.nix
     inputs.disko.nixosModules.default
     inputs.agenix.nixosModules.default
   ];
