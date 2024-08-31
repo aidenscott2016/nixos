@@ -49,7 +49,7 @@
     networking.firewall.allowedTCPPorts = [ 443 5000 ];
 
     aiden.modules = {
-      gc.enabled = true;
+      gc.enabled = false;
       cli-base.enabled = true;
       locale.enabled = true;
       reverseProxy = {
