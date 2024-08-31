@@ -2,9 +2,13 @@
 let addons = inputs.firefox-addons.packages.${pkgs.system};
 in {
   home.file.".tridactylrc".source = ./tridactylrc;
-  nixpkgs.config.firefox.speechSynthesisSupport = false;
   programs.firefox = {
     enable = true;
+    package = pkgs.firefox.override {
+      cfg = {
+        speechSynthesisSupport = false;
+      };
+    };
     profiles.aiden = {
       extensions = with addons; [
         sponsorblock
