@@ -14,7 +14,6 @@
 
   networking.hostName = "gila";
   networking.networkmanager.enable = true;
-  networking.dhcpcd.enable = true;
 
   environment.systemPackages = with pkgs; [ tcpdump dnsutils ];
   boot.loader.systemd-boot.enable = true;

@@ -11,7 +11,6 @@ with lib.aiden;
   config = {
     nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     networking.networkmanager.enable = true;
-    networking.dhcpcd.enable = true;
     services.openssh.enable = true;
     services.openssh.openFirewall = true;
     security.sudo.wheelNeedsPassword = false;
