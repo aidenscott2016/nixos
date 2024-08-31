@@ -65,5 +65,6 @@ with lib.aiden;
     ];
     environment.systemPackages = with pkgs; [ firefox lm_sensors htop ];
 
+    services.logrotate.checkConfig = false;
   };
 }
