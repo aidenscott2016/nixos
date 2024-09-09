@@ -45,7 +45,6 @@
 
     users.users.aiden.extraGroups = [ "video" "sadnzbd" "deluge" ];
 
-    networking.networkmanager.enable = true;
     networking.firewall.allowedTCPPorts = [ 443 5000 ];
 
     aiden.modules = {
@@ -85,5 +84,6 @@
       };
     };
     environment.systemPackages = with pkgs; [ get_iplayer wol iperf3 ];
+
   };
 }
