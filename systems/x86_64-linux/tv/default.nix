@@ -48,7 +48,7 @@ with lib.aiden;
       steam.enabled = false;
       locale = enabled;
     };
-
+    hardware.bluetooth.enable  = true;
     hardware.opengl = {
       enable = true;
       extraPackages = with pkgs;[
