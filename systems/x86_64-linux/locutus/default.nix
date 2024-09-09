@@ -8,7 +8,10 @@ with lib.aiden; {
     inputs.agenix.nixosModules.default
   ];
 
-  environment.systemPackages = with pkgs; [ inputs.disko.packages.x86_64-linux.disko docker-compose ];
+  environment.systemPackages = with pkgs; [
+    inputs.disko.packages.x86_64-linux.disko
+    docker-compose
+  ];
   aiden = {
     modules = {
       avahi = enabled;
@@ -51,12 +54,15 @@ with lib.aiden; {
   programs.nm-applet.enable = true;
 
   services = {
-    physlock = {enable = true; lockOn.suspend = true;};
+    physlock = {
+      enable = true;
+      lockOn.suspend = true;
+    };
     libinput.enable = true;
     fstrim.enable = true;
     auto-cpufreq.enable = true;
     xserver.videoDrivers = [ "amdgpu" ];
-    xserver = { enable = true;  };
+    xserver = { enable = true; };
     tailscale.enable = true;
     gvfs.enable = true;
 
@@ -95,11 +101,12 @@ with lib.aiden; {
 
   hardware.opengl = {
     enable = true;
-    extraPackages = with pkgs;[ mesa amdvlk libva ];
+    extraPackages = with pkgs; [ mesa amdvlk libva ];
     driSupport = true;
   };
 
   services.gnome.gnome-keyring.enable = true;
   services.mullvad-vpn.enable = true;
 
+  services.blueman.enable = true;
 }
