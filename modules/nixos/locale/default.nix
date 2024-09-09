@@ -20,7 +20,7 @@ in
     services.xserver = {
       xkb = {
         layout = "gb";
-        options = "caps:swapescape";
+        options = mkIf (!config.aiden.modules.keyd.enabled)  "caps:swapescape";
       };
     };
     services.libinput.enable = true;

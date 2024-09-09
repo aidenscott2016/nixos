@@ -27,6 +27,7 @@ with lib.aiden; {
       steam.enabled = false;
       thunar = enabled;
       locale = enabled;
+      keyd = enabled;
     };
     programs = { openttd.enabled = true; };
   };
