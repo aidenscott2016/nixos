@@ -32,6 +32,9 @@ params@{ config, pkgs, inputs, channels, ... }: {
     moonlight-qt
     nix-tree
     libreoffice
+    vscode
+    nodejs_22
+
   ];
 
 }
