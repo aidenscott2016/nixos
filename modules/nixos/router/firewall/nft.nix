@@ -14,6 +14,8 @@ table ip myfilter {
         icmp type echo-request drop
         ct state vmap { established : accept, related : accept, invalid : drop }
 
+        udp dport  41641 accept comment tailscale
+
         iifname vmap {lo : accept, $DEV_WAN : jump inbound_world, $WHOLE_LAN : jump inbound_private}
     }
     chain inbound_private{
