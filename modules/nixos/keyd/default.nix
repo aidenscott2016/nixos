@@ -22,12 +22,12 @@ in {
             # The main layer, if you choose to declare it in Nix
             main = {
               # Maps capslock to escape when pressed and control when held.
-              capslock = "overload(control, esc)";
+              capslock = "overloadt(control, esc, 150)";
+
             };
             otherlayer = { };
           };
           extraConfig = ''
-            # put here any extra-config, e.g. you can copy/paste here directly a configuration, just remove the ids part
           '';
         };
       };
