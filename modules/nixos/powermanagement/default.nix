@@ -1,10 +1,13 @@
 params@{ pkgs, lib, config, ... }:
-with lib.aiden;
+with lib;
+let
+  cfg = config.aiden.modules.powermanagement;
+in
 {
-  options.aiden.modules.powermanagement = with lib; {
+  options.aiden.modules.powermanagement =  {
     enabled = mkEnableOption "powermanagement";
   };
-  config = {
+  config = mkIf cfg.enabled {
     services.tlp.enable = true;
   };
 }
