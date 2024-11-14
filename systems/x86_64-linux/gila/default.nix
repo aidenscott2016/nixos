@@ -32,6 +32,7 @@
   services.acpid.enable = true;
 
   aiden.modules = {
+    powermanagement.enabled = true;
     traefik.enabled = true;
     tailscale = {
       enabled = true;

@@ -28,6 +28,7 @@ with lib.aiden; {
       thunar = enabled;
       locale = enabled;
       keyd = enabled;
+      powermanagement = enabled;
     };
     programs = { openttd.enabled = true; };
   };
