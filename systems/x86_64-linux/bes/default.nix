@@ -57,6 +57,7 @@
       networking.firewall.allowedTCPPorts = [ 443 5000 ];
 
       aiden.modules = {
+        k3s.enabled = true;
         powermanagement.enabled  = true;
         gc.enabled = false;
         cli-base.enabled = true;
