@@ -2,7 +2,6 @@ params@{ pkgs, lib, config, ... }:
 with lib.aiden;
 enableableModule "emacs" params {
   environment.systemPackages = with pkgs; [
-    nerdfonts
     coreutils
     fd
     clang
