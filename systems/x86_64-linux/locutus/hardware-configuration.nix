@@ -19,12 +19,19 @@
 
   fileSystems."/home" = {
     device = "/dev/disk/by-uuid/7b61d67c-fd18-4ab6-86ff-50510b7c727d";
+    neededForBoot = true;
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/31A5-7A7C";
     fsType = "vfat";
+  };
+
+  fileSystems."/nix" = {
+    device = "/home/nix";
+    neededForBoot = true;
+    options = [ "bind" "x-systemd.requires=/home" ];
   };
 
   swapDevices =
