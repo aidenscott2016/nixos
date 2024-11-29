@@ -34,7 +34,8 @@ params@{ config, pkgs, inputs, channels, ... }: {
     libreoffice
     vscode
     nodejs_22
-
+    calibre
+    okular
   ];
 
 }
