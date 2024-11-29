@@ -19,6 +19,8 @@
       boot.loader.efi.canTouchEfiVariables = true;
       system.stateVersion = "23.11";
 
+      services.cockpit.enable = true;
+      services.cockpit.openFirewall = true;
       services.deluge = {
         enable = true;
         web = {
