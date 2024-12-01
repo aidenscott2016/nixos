@@ -73,7 +73,6 @@ with lib.aiden; {
   hardware = {
     enableAllFirmware = true;
     bluetooth.enable = true;
-    pulseaudio.enable = true;
     enableRedistributableFirmware = true;
   };
 
@@ -101,14 +100,15 @@ with lib.aiden; {
   services.envfs.enable = true;
   programs.nix-ld.enable = true;
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [ mesa amdvlk libva ];
-    driSupport = true;
   };
 
   services.gnome.gnome-keyring.enable = true;
   services.mullvad-vpn.enable = true;
 
   services.blueman.enable = true;
+
+  programs.nh = { enable = true; };
 }

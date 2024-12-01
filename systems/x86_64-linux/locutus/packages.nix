@@ -36,6 +36,7 @@ params@{ config, pkgs, inputs, channels, ... }: {
     nodejs_22
     calibre
     okular
+    kubectl
   ];
 
 }

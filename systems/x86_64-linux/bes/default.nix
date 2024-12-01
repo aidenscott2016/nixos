@@ -30,17 +30,24 @@
       };
       users.users.deluge.extraGroups = [ "video" ];
 
-      services.bazarr = {
-        enable = true;
-        group = "video";
-      };
-      users.users.bazarr.extraGroups = [ "video" ];
+      # services.bazarr = {
+      #   enable = true;
+      #   group = "video";
+      # };
+      # users.users.bazarr.extraGroups = [ "video" ];
 
       services.sonarr = {
         enable = true;
         group = "video";
       };
       users.users.sonarr.extraGroups = [ "video" ];
+
+      nixpkgs.config.permittedInsecurePackages = [
+        "aspnetcore-runtime-wrapped-6.0.36"
+        "aspnetcore-runtime-6.0.36"
+        "dotnet-sdk-wrapped-6.0.428"
+        "dotnet-sdk-6.0.428"
+      ];
 
       services.radarr = {
         enable = true;
@@ -136,4 +143,5 @@
       ];
 
     };
+
 }

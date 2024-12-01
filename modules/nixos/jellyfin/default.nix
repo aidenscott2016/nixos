@@ -39,10 +39,9 @@ in
       };
     };
 
-    hardware.opengl = mkIf cfg.hwAccel.enabled {
+    hardware.graphics = mkIf cfg.hwAccel.enabled {
       enable = true;
       extraPackages = accelOptions.${cfg.hwAccel.arch};
-      driSupport = true;
     };
     boot.kernelParams = mkIf (cfg.hwAccel.enabled && cfg.hwAccel.arch == "intel") [
       "i915.enable_guc=2"
