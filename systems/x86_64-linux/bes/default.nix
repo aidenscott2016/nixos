@@ -1,12 +1,13 @@
 { config, inputs, lib, pkgs, systems, ... }:
 
- {
+{
   imports = [
     ./hardware-configuration.nix
     ./disk-config.nix
+    ./portainer.nix
     inputs.agenix.nixosModules.default
     inputs.disko.nixosModules.default
-    ./portainer.nix
+    inputs.microvm.nixosModules.host
   ];
 
   config =
@@ -66,8 +67,7 @@
       networking.firewall.allowedTCPPorts = [ 443 5000 ];
 
       aiden.modules = {
-        k3s.enabled = true;
-        powermanagement.enabled  = true;
+        powermanagement.enabled = true;
         gc.enabled = false;
         cli-base.enabled = true;
         locale.enabled = true;
@@ -150,6 +150,14 @@
       # }];
       # networking.defaultGateway = "10.0.1.1";
       # networking.nameservers = [ "10.0.1.1" ];
+      microvm.autostart = [ "k3s-microvm" ];
+      microvm.vms = {
+        k3s-microvm = {
+          # Host build-time reference to where the MicroVM NixOS is defined
+          # under nixosConfigurations
+          flake = inputs.self;
+        };
+      };
       networking.useDHCP = false;
       systemd.network.enable = true;
 
