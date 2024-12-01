@@ -142,6 +142,40 @@
         })
 
       ];
+      # networking.bridges = { "br0" = { interfaces = [ "" "vm-k3s" ]; }; };
+      # networking.interfaces.br0.useDHCP = true;
+      # networking.interfaces.br0.ipv4.addresses = [{
+      #   address = "10.0.1.200";
+      #   prefixLength = 24;
+      # }];
+      # networking.defaultGateway = "10.0.1.1";
+      # networking.nameservers = [ "10.0.1.1" ];
+      networking.useDHCP = false;
+      systemd.network.enable = true;
+
+      systemd.network.networks."10-lan" = {
+        matchConfig.Name = [ "enp1s0" "vm-*" ];
+        networkConfig = { Bridge = "br0"; };
+      };
+
+      systemd.network.netdevs."br0" = {
+        netdevConfig = {
+          Name = "br0";
+          Kind = "bridge";
+        };
+      };
+
+      systemd.network.networks."10-lan-bridge" = {
+        matchConfig.Name = "br0";
+        networkConfig = {
+          # Address = ["192.168.1.2/24" "2001:db8::a/64"];
+          # Gateway = "192.168.1.1";
+          # DNS = ["192.168.1.1"];
+          # IPv6AcceptRA = true;
+          DHCP = "yes";
+        };
+        linkConfig.RequiredForOnline = "routable";
+      };
 
     };
 
