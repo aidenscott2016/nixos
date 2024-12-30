@@ -11,6 +11,7 @@ with lib.aiden; {
   environment.systemPackages = with pkgs; [
     inputs.disko.packages.x86_64-linux.disko
     docker-compose
+    kubectl
   ];
   aiden = {
     modules = {
