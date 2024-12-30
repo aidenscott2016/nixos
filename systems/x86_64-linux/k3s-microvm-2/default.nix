@@ -28,8 +28,11 @@
   aiden.modules.cli-base.enabled = true;
   aiden.modules.locale.enabled = true;
 
-
-  services.k3s = {enable = true; extraFlags = ["--server k3s-microvm-2.sw1a1aa.uk"];};
+  services.k3s = {
+    enable = true;
+    extraFlags =
+      [ "--tls-san k3s-microvm-2.sw1a1aa.uk" "--write-kubeconfig-mode 644" ];
+  };
   networking.firewall.allowedTCPPorts = [ 80 6443 ];
 
   services.openssh.enable = true;
