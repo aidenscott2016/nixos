@@ -4,24 +4,22 @@
   imports = [ inputs.microvm.nixosModules.microvm ];
 
   microvm = {
+    mem = 4 * 1024;
+    vcpu = 4;
     interfaces = [{
       type = "tap";
       id = "vm-k3s";
       mac = "02:00:00:00:00:01";
     }];
 
-    volumes = [{
-      mountPoint = "/";
-      image = "vm-jellyfin.img";
-      size = 8 * 1024;
-    }];
-
-    shares = [{
-      source = "/nix/store";
-      mountPoint = "/nix/.ro-store";
-      tag = "ro-store";
-      proto = "virtiofs";
-    }];
+    shares = [
+      {
+        source = "/nix/store";
+        mountPoint = "/nix/.ro-store";
+        tag = "ro-store";
+        proto = "virtiofs";
+      }
+    ];
   };
   systemd.network.enable = true;
 
