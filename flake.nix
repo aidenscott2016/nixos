@@ -7,8 +7,6 @@
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     nur.url = "github:nix-community/NUR";
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-    microvm.url = "github:astro/microvm.nix";
-    microvm.inputs.nixpkgs.follows = "nixpkgs";
     dwm = {
 
       url = "github:aidenscott2016/dwm";
