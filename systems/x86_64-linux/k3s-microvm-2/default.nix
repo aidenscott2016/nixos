@@ -11,16 +11,17 @@
       id = "vm-k3s";
       mac = "02:00:00:00:00:01";
     }];
-
-    shares = [
-      {
-        source = "/nix/store";
-        mountPoint = "/nix/.ro-store";
-        tag = "ro-store";
-        proto = "virtiofs";
-      }
-    ];
-  };
+    volumes = [{
+      mountPoint = "/";
+      image = "root.img";
+      size = 10 * 1024;
+    }];
+    shares = [{
+      source = "/nix/store";
+      mountPoint = "/nix/.ro-store";
+      tag = "ro-store";
+      proto = "virtiofs";
+    }];
   };
 
   aiden.modules.common.enabled = true;
