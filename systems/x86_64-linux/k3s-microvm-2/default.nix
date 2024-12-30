@@ -21,11 +21,6 @@
       }
     ];
   };
-  systemd.network.enable = true;
-
-  systemd.network.networks."20-lan" = {
-    matchConfig.Type = "ether";
-    networkConfig = { DHCP = "yes"; };
   };
 
   aiden.modules.common.enabled = true;
