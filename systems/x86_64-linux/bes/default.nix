@@ -142,17 +142,10 @@
         })
 
       ];
-      # networking.bridges = { "br0" = { interfaces = [ "" "vm-k3s" ]; }; };
-      # networking.interfaces.br0.useDHCP = true;
-      # networking.interfaces.br0.ipv4.addresses = [{
-      #   address = "10.0.1.200";
-      #   prefixLength = 24;
-      # }];
-      # networking.defaultGateway = "10.0.1.1";
-      # networking.nameservers = [ "10.0.1.1" ];
-      microvm.autostart = [ "k3s-microvm" ];
+
+      microvm.autostart = [ "k3s-microvm-2" ];
       microvm.vms = {
-        k3s-microvm = {
+        k3s-microvm-2 = {
           # Host build-time reference to where the MicroVM NixOS is defined
           # under nixosConfigurations
           flake = inputs.self;

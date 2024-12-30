@@ -9,6 +9,13 @@
       id = "vm-k3s";
       mac = "02:00:00:00:00:01";
     }];
+
+    volumes = [{
+      mountPoint = "/";
+      image = "vm-jellyfin.img";
+      size = 8 * 1024;
+    }];
+
     shares = [{
       source = "/nix/store";
       mountPoint = "/nix/.ro-store";
@@ -27,11 +34,12 @@
   aiden.modules.cli-base.enabled = true;
   aiden.modules.locale.enabled = true;
 
-
   services.httpd.enable = true;
   services.httpd.adminAddr = "foo@example.org";
 
-  networking.firewall.allowedTCPPorts = [ 80];
+  services.k3s.enable = true;
+  networking.firewall.allowedTCPPorts = [ 80 6443 ];
+
   services.openssh.enable = true;
   services.openssh.openFirewall = true;
   security.sudo.wheelNeedsPassword = false;
