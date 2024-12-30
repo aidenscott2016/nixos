@@ -28,8 +28,6 @@
   aiden.modules.cli-base.enabled = true;
   aiden.modules.locale.enabled = true;
 
-  services.httpd.enable = true;
-  services.httpd.adminAddr = "foo@example.org";
 
   services.k3s = {enable = true; extraFlags = ["--server k3s-microvm-2.sw1a1aa.uk"];};
   networking.firewall.allowedTCPPorts = [ 80 6443 ];
