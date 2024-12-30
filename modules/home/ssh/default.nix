@@ -9,5 +9,9 @@
     forwardAgent = true;
     identityFile = "~/.ssh/local";
   };
+  programs.ssh.matchBlocks."k3s-microvm-2.sw1a1aa.uk".extraOptions = {
+    "StrictHostKeyChecking" = "no";
+    "UserKnownHostsFile" = "/dev/null";
+  };
 
 }
