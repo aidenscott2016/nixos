@@ -1,11 +1,9 @@
-params@{ config, pkgs, inputs, channels, ... }: {
+params@{ config, pkgs, inputs, channels, lib, ... }: {
   environment.systemPackages = with pkgs; [
     imagemagick
     powertop
     acpi # seems to provide more accurate charging status than upower. see the underpowered anker charger
-    (discord.override {
-      withTTS = false;
-    })
+    (discord.override { withTTS = false; })
     #jetbrains.idea-community
     chromium
     inputs.agenix.packages.x86_64-linux.default
@@ -37,6 +35,8 @@ params@{ config, pkgs, inputs, channels, ... }: {
     calibre
     okular
     kubectl
+    nixd
+    nil
   ];
 
 }
