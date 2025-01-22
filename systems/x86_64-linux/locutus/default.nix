@@ -63,8 +63,10 @@ with lib.aiden; {
     libinput.enable = true;
     fstrim.enable = true;
     auto-cpufreq.enable = true;
-    xserver.videoDrivers = [ "amdgpu" ];
-    xserver = { enable = true; };
+    xserver = {
+      videoDrivers = [ "amdgpu" ];
+      enable = true;
+    };
     tailscale.enable = true;
     gvfs.enable = true;
 
@@ -81,21 +83,6 @@ with lib.aiden; {
   networking = {
     hostName = "locutus";
     networkmanager.enable = true;
-  };
-
-  virtualisation.podman = {
-    enable = false;
-    dockerSocket.enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
-
-  };
-  virtualisation.docker = {
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
-    enable = true;
   };
   services.envfs.enable = true;
   programs.nix-ld.enable = true;
@@ -138,6 +125,14 @@ with lib.aiden; {
 
     spiceUSBRedirection.enable = true;
 
+    vmVariant = {
+      services.qemuGuest.enable = true;
+      services.spice-vdagentd.enable = true;
+      virtualisation = {
+        memorySize = 2048;
+        cores = 3;
+      };
+    };
   };
 
   environment.pathsToLink =

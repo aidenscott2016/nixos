@@ -35,8 +35,6 @@ params@{ config, pkgs, inputs, channels, lib, ... }: {
     calibre
     okular
     kubectl
-    nixd
-    nil
     yubikey-manager
     virtualbox
   ];
