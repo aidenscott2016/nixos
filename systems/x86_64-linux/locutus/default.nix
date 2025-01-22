@@ -92,7 +92,7 @@ with lib.aiden; {
     extraPackages = with pkgs; [ mesa amdvlk libva ];
   };
 
-  services.gnome.gnome-keyring.enable = true;
+  #services.gnome.gnome-keyring.enable = true;
   services.mullvad-vpn.enable = true;
 
   services.blueman.enable = true;
