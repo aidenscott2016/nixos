@@ -57,6 +57,7 @@ with lib.aiden; {
 
   services = {
     physlock = {
+      muteKernelMessages = true;
       enable = true;
       lockOn.suspend = true;
     };
@@ -98,6 +99,7 @@ with lib.aiden; {
   services.blueman.enable = true;
 
   programs.nh = { enable = true; };
+
   # yubikey support
   services.pcscd.enable = true;
   security.polkit.enable = true;
