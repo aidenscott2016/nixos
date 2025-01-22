@@ -37,6 +37,7 @@ params@{ config, pkgs, inputs, channels, lib, ... }: {
     kubectl
     nixd
     nil
+    yubikey-manager
   ];
 
 }

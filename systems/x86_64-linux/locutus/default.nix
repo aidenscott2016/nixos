@@ -111,6 +111,9 @@ with lib.aiden; {
   services.blueman.enable = true;
 
   programs.nh = { enable = true; };
+  # yubikey support
+  services.pcscd.enable = true;
+  security.polkit.enable = true;
   environment.pathsToLink =
     [ "/share/xdg-desktop-portal" "/share/applications" ];
 }
