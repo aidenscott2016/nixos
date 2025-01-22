@@ -111,4 +111,6 @@ with lib.aiden; {
   services.blueman.enable = true;
 
   programs.nh = { enable = true; };
+  environment.pathsToLink =
+    [ "/share/xdg-desktop-portal" "/share/applications" ];
 }

@@ -11,4 +11,17 @@ inputs@{ config, pkgs, lib, ... }: {
   home.file.".vimrc".source = ../files/vimrc;
   home.file.".ideavimrc".source = ../files/ideavimrc;
 
+  # nvironment.pathsToLink =[ "/share/xdg-desktop-portal" "/share/applications" ];
+  xdg.portal.enable = true;
+  xdg.portal.config = {
+    common = {
+      default = "gtk";
+      "org.freedesktop.impl.portal.Settings" = "darkman";
+      "org.freedesktop.impl.portal.Secrets" = "none";
+      "org.freedesktop.impl.portal.Inhibit" = "none";
+    };
+  };
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.darkman ];
+  xdg.portal.xdgOpenUsePortal = true;
+  services.darkman.enable = true;
 }
