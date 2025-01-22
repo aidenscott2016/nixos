@@ -11,5 +11,7 @@ enableableModule "emacs" params {
     ripgrep
     nixpkgs-fmt
     nodePackages.prettier
+    nixd
+    nil
   ];
 }
