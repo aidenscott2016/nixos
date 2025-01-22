@@ -30,11 +30,11 @@
       };
       users.users.deluge.extraGroups = [ "video" ];
 
-      # services.bazarr = {
-      #   enable = true;
-      #   group = "video";
-      # };
-      # users.users.bazarr.extraGroups = [ "video" ];
+      services.bazarr = {
+        enable = true;
+        group = "video";
+      };
+      users.users.bazarr.extraGroups = [ "video" ];
 
       services.sonarr = {
         enable = true;
