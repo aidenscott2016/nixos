@@ -38,6 +38,7 @@ params@{ config, pkgs, inputs, channels, lib, ... }: {
     nixd
     nil
     yubikey-manager
+    virtualbox
   ];
 
 }

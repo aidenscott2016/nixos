@@ -114,6 +114,32 @@ with lib.aiden; {
   # yubikey support
   services.pcscd.enable = true;
   security.polkit.enable = true;
+
+  programs.virt-manager.enable = true;
+
+  users.groups.libvirtd.members = [ "aiden" ];
+  virtualisation = {
+    podman = {
+      enable = false;
+      dockerSocket.enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+
+    };
+    docker = {
+      rootless = {
+        enable = true;
+        setSocketVariable = true;
+      };
+      enable = true;
+    };
+
+    libvirtd.enable = true;
+
+    spiceUSBRedirection.enable = true;
+
+  };
+
   environment.pathsToLink =
     [ "/share/xdg-desktop-portal" "/share/applications" ];
 }
