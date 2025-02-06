@@ -1,6 +1,6 @@
 { config, inputs, lib, pkgs, systems, ... }:
 
- {
+{
   imports = [
     ./hardware-configuration.nix
     ./disk-config.nix
@@ -12,6 +12,8 @@
   config =
 
     {
+      services.iperf3.enable = true;
+      services.iperf3.openFirewall = true;
       services.openssh.enable = true;
       services.openssh.openFirewall = true;
       security.sudo.wheelNeedsPassword = false;
@@ -66,7 +68,7 @@
       networking.firewall.allowedTCPPorts = [ 443 5000 ];
 
       aiden.modules = {
-        powermanagement.enabled  = true;
+        powermanagement.enabled = true;
         gc.enabled = false;
         cli-base.enabled = true;
         locale.enabled = true;

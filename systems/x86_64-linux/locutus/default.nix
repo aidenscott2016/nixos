@@ -53,7 +53,12 @@ with lib.aiden; {
     };
   };
 
-  programs.nm-applet.enable = true;
+  programs = {
+    nm-applet.enable = true;
+    nix-ld.enable = true;
+    nh.enable = true;
+    virt-manager.enable = true;
+  };
 
   services = {
     physlock = {
@@ -86,7 +91,6 @@ with lib.aiden; {
     networkmanager.enable = true;
   };
   services.envfs.enable = true;
-  programs.nix-ld.enable = true;
 
   hardware.graphics = {
     enable = true;
@@ -98,13 +102,9 @@ with lib.aiden; {
 
   services.blueman.enable = true;
 
-  programs.nh = { enable = true; };
-
   # yubikey support
   services.pcscd.enable = true;
   security.polkit.enable = true;
-
-  programs.virt-manager.enable = true;
 
   users.groups.libvirtd.members = [ "aiden" ];
   virtualisation = {
