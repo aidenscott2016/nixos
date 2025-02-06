@@ -24,7 +24,7 @@ with lib.aiden; {
       cli-base = enabled;
       multimedia = enabled;
       emacs = enabled;
-      steam.enabled = false;
+      steam.enabled = true;
       thunar = enabled;
       locale = enabled;
       keyd = enabled;
