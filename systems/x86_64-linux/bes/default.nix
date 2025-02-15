@@ -7,6 +7,7 @@
     inputs.agenix.nixosModules.default
     inputs.disko.nixosModules.default
     ./portainer.nix
+    inputs.agenix.nixosModules.default
   ];
 
   config =
@@ -23,6 +24,24 @@
 
       services.cockpit.enable = true;
       services.cockpit.openFirewall = true;
+
+      age.secrets.slskd.file = "${inputs.self.outPath}/secrets/slskd";
+      services.slskd = {
+        enable = true;
+        domain = null;
+        group = "video";
+        settings = {
+          shares.directories = [ "/media/t7/Music" ];
+          directories = {
+            incomplete = "/media/t7/Music/download/incomplete";
+            downloads = "/media/t7/Music/download/complete";
+          };
+
+        };
+        environmentFile = config.age.secrets.slskd.path;
+      };
+      users.users.slskd.extraGroups = [ "video" ];
+
       services.deluge = {
         enable = true;
         web = {
@@ -102,6 +121,10 @@
             {
               name = "radarr";
               port = 7878;
+            }
+            {
+              name = "slskd";
+              port = 5030;
             }
           ];
         };
