@@ -139,4 +139,5 @@ with lib.aiden; {
 
   environment.pathsToLink =
     [ "/share/xdg-desktop-portal" "/share/applications" ];
+  programs.steam.gamescopeSession.enable = true;
 }
