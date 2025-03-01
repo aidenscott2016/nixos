@@ -140,4 +140,8 @@ with lib.aiden; {
   environment.pathsToLink =
     [ "/share/xdg-desktop-portal" "/share/applications" ];
   programs.steam.gamescopeSession.enable = true;
+  services.geoclue2 = {
+    enable = true;
+    enableWifi = false;
+  };
 }
