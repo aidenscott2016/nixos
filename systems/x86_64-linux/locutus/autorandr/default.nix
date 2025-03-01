@@ -5,6 +5,7 @@ in {
   services.autorandr = {
     enable = true;
     defaultTarget = "99-default";
+    ignoreLid = true;
   };
   # I am using config files rather than the module's options becuase
   # they do not support all the attrbites required for autorandr to
