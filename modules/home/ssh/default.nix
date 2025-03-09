@@ -10,4 +10,10 @@
     identityFile = "~/.ssh/local";
   };
 
+  # virtual machines
+  programs.ssh.matchBlocks."192.168.122.*".extraOptions = {
+    "StrictHostKeyChecking" = "no";
+    "UserKnownHostsFile" = "/dev/null";
+  };
+
 }
