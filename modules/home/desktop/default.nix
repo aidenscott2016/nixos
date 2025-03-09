@@ -23,5 +23,8 @@ inputs@{ config, pkgs, lib, ... }: {
   };
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.darkman ];
   xdg.portal.xdgOpenUsePortal = true;
-  services.darkman.enable = true;
+  services.darkman = {
+    enable = true;
+    settings.usegeoclue = true;
+  };
 }

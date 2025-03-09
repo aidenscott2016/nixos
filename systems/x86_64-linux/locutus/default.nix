@@ -143,5 +143,9 @@ with lib.aiden; {
   services.geoclue2 = {
     enable = true;
     enableWifi = false;
+    appConfig.darkman = {
+      isAllowed = true;
+      isSystem = true;
+    };
   };
 }
