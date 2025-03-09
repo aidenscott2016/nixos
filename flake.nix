@@ -9,6 +9,10 @@
     firefox-addons.url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
+    steamtinkerlaunch = {
+      flake = false;
+      url = "github:sonic2kk/steamtinkerlaunch";
+    };
     dwm = {
 
       url = "github:aidenscott2016/dwm";
