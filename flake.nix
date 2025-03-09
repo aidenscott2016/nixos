@@ -36,6 +36,8 @@
       url = "github:snowfallorg/lib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
+    nixos-facter.url = "github:nix-community/nixos-facter";
   };
   outputs = inputs:
     inputs.snowfall-lib.mkFlake {
