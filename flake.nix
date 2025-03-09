@@ -38,6 +38,7 @@
     };
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
     nixos-facter.url = "github:nix-community/nixos-facter";
+    nixos-images.url = "github:nix-community/nixos-images";
   };
   outputs = inputs:
     inputs.snowfall-lib.mkFlake {
