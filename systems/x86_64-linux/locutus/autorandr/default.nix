@@ -5,7 +5,7 @@ in {
   services.autorandr = {
     enable = true;
     defaultTarget = "99-default";
-    ignoreLid = true;
+    ignoreLid = false;
   };
   # I am using config files rather than the module's options becuase
   # they do not support all the attrbites required for autorandr to
@@ -31,4 +31,3 @@ in {
   environment.etc."xdg/autorandr".source = ./profiles;
 }
 
-# ${# optionalString cfg.ignoreLid "--ignore-lid"}
