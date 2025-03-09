@@ -47,6 +47,7 @@
       snowfall = { namespace = "aiden"; };
       diskoConfigurations = { locutus = import ./hosts/locutus/disko.nix; };
       channels-config = {
+        nvidia.acceptLicense = true;
         allowUnfree = true;
         config.permittedInsecurePackages =
           [ "aspnetcore-runtime-wrapped-6.0.36" "aspnetcore-runtime-6.0.36" ];
