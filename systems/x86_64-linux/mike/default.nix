@@ -1,15 +1,16 @@
 { config, pkgs, lib, myModulesPath, inputs, ... }:
 with lib.aiden; {
   imports = [
-    ./hardware-configuration.nix
     ./packages.nix
     ./autorandr
     inputs.dwm.nixosModules.default
     inputs.agenix.nixosModules.default
+    inputs.nixos-facter-modules.nixosModules.facter
     inputs.disko.nixosModules.default
     ./disk-configuration.nix
   ];
 
+  facter.reportPath = ./facter.json;
   environment.systemPackages = with pkgs; [
     inputs.disko.packages.x86_64-linux.disko
     docker-compose
