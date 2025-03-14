@@ -47,6 +47,8 @@ with lib.aiden; {
     binfmt.emulatedSystems = [ "aarch64-linux" ];
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
+    initrd.kernelModules = [ "nvidia" ];
+    #extraModulePackages = [ pkgs.linuxPackages.nvidia_x11 ];
   };
 
   programs = {
@@ -65,7 +67,7 @@ with lib.aiden; {
     libinput.enable = true;
     fstrim.enable = true;
     xserver = {
-      videoDrivers = [ "amdgpu" ];
+      videoDrivers = [ "nvidia" ];
       enable = true;
     };
     tailscale.enable = true;
@@ -77,6 +79,24 @@ with lib.aiden; {
     enableAllFirmware = true;
     bluetooth.enable = true;
     enableRedistributableFirmware = true;
+    nvidia = {
+      prime = {
+        # Make sure to use the correct Bus ID values for your system!
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+        # amdgpuBusId = "PCI:54:0:0"; For AMD GPU
+        #
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
+      };
+      package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+      modesetting.enable = true;
+      open = false;
+      nvidiaSettings = true;
+      powerManagement.enable = true;
+    };
   };
 
   security.sudo.wheelNeedsPassword = false;
@@ -89,7 +109,7 @@ with lib.aiden; {
 
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [ mesa amdvlk libva ];
+    extraPackages = with pkgs; [ mesa vpl-gpu-rt libva ];
   };
 
   #services.gnome.gnome-keyring.enable = true;
