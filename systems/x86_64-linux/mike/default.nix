@@ -6,6 +6,8 @@ with lib.aiden; {
     ./autorandr
     inputs.dwm.nixosModules.default
     inputs.agenix.nixosModules.default
+    inputs.disko.nixosModules.default
+    ./disk-configuration.nix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -44,13 +46,6 @@ with lib.aiden; {
     binfmt.emulatedSystems = [ "aarch64-linux" ];
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    initrd.luks.devices = {
-      root = {
-        device = "/dev/nvme0n1p2";
-        preLVM = true;
-      };
-
-    };
   };
 
   programs = {
