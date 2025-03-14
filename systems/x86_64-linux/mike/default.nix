@@ -149,6 +149,13 @@ with lib.aiden; {
     };
   };
 
+  services.emacs = {
+    enable = true;
+    package =
+      pkgs.emacs; # replace with emacs-gtk, or a version provided by the community overlay if desired.
+  };
+
+  # darkman needs this
   environment.pathsToLink =
     [ "/share/xdg-desktop-portal" "/share/applications" ];
   programs.steam.gamescopeSession.enable = true;

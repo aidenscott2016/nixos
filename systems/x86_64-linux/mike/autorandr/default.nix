@@ -30,4 +30,3 @@ in {
   };
   environment.etc."xdg/autorandr".source = ./profiles;
 }
-
