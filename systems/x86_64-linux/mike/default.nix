@@ -101,10 +101,7 @@ with lib.aiden; {
 
   security.sudo.wheelNeedsPassword = false;
 
-  networking = {
-    hostName = "locutus";
-    networkmanager.enable = true;
-  };
+  networking = { networkmanager.enable = true; };
   services.envfs.enable = true;
 
   hardware.graphics = {
