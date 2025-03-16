@@ -37,6 +37,7 @@ params@{ config, pkgs, inputs, channels, lib, ... }: {
     kubectl
     yubikey-manager
     virtualbox
+    cameractrls-gtk3
     easyeffects
   ];
 

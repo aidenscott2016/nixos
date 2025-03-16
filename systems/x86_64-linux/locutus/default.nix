@@ -155,6 +155,7 @@ with lib.aiden; {
     enable = true;
     pulse.enable = true;
   };
+
   #easy effects
   programs.dconf.enable = true;
 }
