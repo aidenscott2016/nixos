@@ -147,6 +147,9 @@ with lib.aiden; {
       isSystem = true;
     };
   };
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  services.flatpak.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
