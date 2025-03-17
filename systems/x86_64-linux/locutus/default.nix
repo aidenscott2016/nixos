@@ -55,24 +55,36 @@ with lib.aiden; {
   };
 
   programs = {
+
+    # desktop
     nm-applet.enable = true;
-    nix-ld.enable = true;
+
+    # desktop
     nh.enable = true;
+
+    # virt
     virt-manager.enable = true;
   };
 
   services = {
+    # desktop
     physlock = {
       muteKernelMessages = true;
       enable = true;
       lockOn.suspend = true;
     };
     libinput.enable = true;
+
+    # hardware
     fstrim.enable = true;
+
+    # desktop
     xserver = {
       videoDrivers = [ "amdgpu" ];
       enable = true;
     };
+
+    # neworking
     tailscale.enable = true;
     gvfs.enable = true;
 
@@ -80,32 +92,35 @@ with lib.aiden; {
 
   hardware = {
     enableAllFirmware = true;
-    bluetooth.enable = true;
     enableRedistributableFirmware = true;
+
+    #bluetooth
+    bluetooth.enable = true;
   };
 
+  # desktop
   security.sudo.wheelNeedsPassword = false;
 
-  networking = {
-    hostName = "locutus";
-    networkmanager.enable = true;
-  };
+  # hardware
+  networking = { networkmanager.enable = true; };
+
   services.envfs.enable = true;
 
+  # dekstop
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [ mesa amdvlk libva ];
   };
 
   #services.gnome.gnome-keyring.enable = true;
+
+  # networking
   services.mullvad-vpn.enable = true;
 
+  # bluetooth
   services.blueman.enable = true;
 
-  # yubikey support
-  services.pcscd.enable = true;
-  security.polkit.enable = true;
-
+  # virtuvirtualisation
   users.groups.libvirtd.members = [ "aiden" ];
   virtualisation = {
     podman = {
@@ -127,6 +142,7 @@ with lib.aiden; {
 
     spiceUSBRedirection.enable = true;
 
+    # vm gues
     vmVariant = {
       services.qemuGuest.enable = true;
       services.spice-vdagentd.enable = true;
@@ -137,7 +153,11 @@ with lib.aiden; {
     };
   };
 
+  # gaming
   programs.steam.gamescopeSession.enable = true;
+
+  # dekstop
+  # geoclue
   services.geoclue2 = {
     enable = true;
     enableWifi = false;
@@ -146,15 +166,21 @@ with lib.aiden; {
       isSystem = true;
     };
   };
+
+  # flatpak
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   services.flatpak.enable = true;
+
+  # dekstop
+  # pipewire
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     pulse.enable = true;
   };
 
+  #desktop
   #easy effects
   programs.dconf.enable = true;
 }

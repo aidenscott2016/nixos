@@ -1,44 +1,66 @@
 params@{ config, pkgs, inputs, channels, lib, ... }: {
   environment.systemPackages = with pkgs; [
     imagemagick
+
+    # hardware
     powertop
     acpi # seems to provide more accurate charging status than upower. see the underpowered anker charger
+
+    # desktop
+    # communication
     (discord.override { withTTS = false; })
+    cameractrls-gtk3
+    easyeffects
+
     #jetbrains.idea-community
+
+    #desk top
     chromium
-    inputs.agenix.packages.x86_64-linux.default
+
+    # networking
+    # hardware
     dnsutils # nslookup
+
     silver-searcher
+
+    # media
     transmission-gtk
+    get_iplayer
+    vlc
+    moonlight-qt
+
+    # nix, development
     nixpkgs-fmt
-    rustc
-    cargo
+    nix-tree
+    vscode
+    nodejs_22
+
+    # desktop
     xclip
+
+    # hardware
     ventoy-full
+
+    # gaming
     # minecraft
     # prismlauncher
     libva-utils
     xorg.xev
-    get_iplayer
+
+    # gaming, hardware
     wol
     # hledger
     # haskellPackages.hledger-flow
 
-    vlc
+    # virt
     podman-compose
     docker-compose
-    moonlight-qt
-    nix-tree
-    libreoffice
-    vscode
-    nodejs_22
-    calibre
-    okular
     kubectl
-    yubikey-manager
-    virtualbox
-    cameractrls-gtk3
-    easyeffects
+
+    # productivity
+    libreoffice
+    okular
+
   ];
 
 }
