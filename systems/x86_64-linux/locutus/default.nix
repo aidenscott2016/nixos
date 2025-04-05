@@ -31,6 +31,8 @@ with lib.aiden; {
       powermanagement = enabled;
       darkman = enabled;
       yubikey = enabled;
+      flatpak = enabled;
+      appimage = enabled;
       pipewire = enabled;
       gaming = {
         steam.enabled = true;
