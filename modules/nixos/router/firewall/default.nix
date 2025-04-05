@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 with {
   inherit (config.aiden.modules.router)
-    enabled internalInterface externalInterface;
+    enable internalInterface externalInterface;
 }; {
-  config = lib.mkIf enabled {
+  config = lib.mkIf enable {
     networking = {
       firewall.enable = false;
       nftables = {

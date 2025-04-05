@@ -25,11 +25,11 @@ in {
         options = {
           latitude = mkOption {
             type = types.float;
-            default = 51;
+            default = 51.0;
           };
           longitude = mkOption {
             type = types.float;
-            default = -1;
+            default = -1.0;
           };
         };
       };
