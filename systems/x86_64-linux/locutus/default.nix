@@ -8,9 +8,6 @@ with lib.aiden; {
     inputs.agenix.nixosModules.default
   ];
 
-  environment.systemPackages = with pkgs; [
-    inputs.disko.packages.x86_64-linux.disko
-  ];
   aiden = {
     architecture = {
       cpu = "amd";
@@ -25,6 +22,7 @@ with lib.aiden; {
         moonlight.client.enabled = true;
       };
       home-manager = enabled;
+      nix = enabled;
     };
   };
 
@@ -41,13 +39,6 @@ with lib.aiden; {
         preLVM = true;
       };
     };
-  };
-
-  programs = {
-    # nix
-    nh.enable = true;
-
-    
   };
 
   services = {
