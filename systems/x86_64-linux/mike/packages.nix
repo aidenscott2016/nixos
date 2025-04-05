@@ -7,7 +7,7 @@ params@{ config, pkgs, inputs, channels, lib, ... }: {
     inputs.agenix.packages.x86_64-linux.default
     dnsutils # nslookup
     silver-searcher
-    transmission-gtk
+    transmission_3-gtk
     nixpkgs-fmt
     xclip
     libva-utils

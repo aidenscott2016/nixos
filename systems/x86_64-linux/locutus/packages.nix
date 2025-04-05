@@ -24,7 +24,7 @@ params@{ config, pkgs, inputs, channels, lib, ... }: {
     silver-searcher
 
     # media
-    transmission-gtk
+    transmission_3-gtk
     get_iplayer
     vlc
 
