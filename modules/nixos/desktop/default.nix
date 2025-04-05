@@ -1,4 +1,5 @@
 { config, lib, pkgs, ... }:
+with lib;
 with lib.aiden; {
   options.aiden.modules.desktop = {
     enable = mkEnableOption "Enable desktop configuration";
