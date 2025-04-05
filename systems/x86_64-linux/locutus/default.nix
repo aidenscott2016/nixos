@@ -10,6 +10,7 @@ with lib.aiden; {
 
   environment.systemPackages = with pkgs; [
     inputs.disko.packages.x86_64-linux.disko
+    # virtualisation
     docker-compose
   ];
   aiden = {
@@ -18,31 +19,12 @@ with lib.aiden; {
       gpu = "amd";
     };
     modules = {
-      avahi = enabled;
-      common = enabled;
-      ios = enabled;
-      redshift = enabled;
-      printer = enabled;
-      ssh = enabled;
+      desktop = enabled;
       gc = enabled;
-      cli-base = enabled;
-      multimedia = enabled;
-      emacs = enabled;
-      steam.enabled = true;
-      thunar = enabled;
-      locale = enabled;
-      keyd = enabled;
-      powermanagement = enabled;
-      darkman = enabled;
-      yubikey = enabled;
-      flatpak = enabled;
-      appimage = enabled;
-      pipewire = enabled;
       gaming = {
         steam.enabled = true;
         moonlight.client.enabled = true;
       };
-      hardware-acceleration.enable = true;
     };
   };
 
@@ -62,16 +44,11 @@ with lib.aiden; {
         device = "/dev/nvme0n1p2";
         preLVM = true;
       };
-
     };
   };
 
   programs = {
-
-    # desktop
-    nm-applet.enable = true;
-
-    # desktop
+    # nix
     nh.enable = true;
 
     # virt
@@ -79,50 +56,22 @@ with lib.aiden; {
   };
 
   services = {
-    # desktop
-    physlock = {
-      muteKernelMessages = true;
-      enable = true;
-      lockOn.suspend = true;
-    };
+    # hardware
     libinput.enable = true;
 
     # hardware
     fstrim.enable = true;
 
-    # desktop
-    xserver = {
-      enable = true;
-    };
-
     # neworking
     tailscale.enable = true;
     gvfs.enable = true;
-
   };
-
-  hardware = {
-    #bluetooth
-    bluetooth.enable = true;
-  };
-
-  # desktop
-  security.sudo.wheelNeedsPassword = false;
 
   # hardware
   networking = { networkmanager.enable = true; };
 
-  # desktop
-  services.envfs.enable = true;
-
-
-  #services.gnome.gnome-keyring.enable = true;
-
   # networking
   services.mullvad-vpn.enable = true;
-
-  # bluetooth
-  services.blueman.enable = true;
 
   # virtuvirtualisation
   users.groups.libvirtd.members = [ "aiden" ];
@@ -132,7 +81,6 @@ with lib.aiden; {
       dockerSocket.enable = true;
       dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true;
-
     };
     docker = {
       rootless = {
@@ -156,27 +104,4 @@ with lib.aiden; {
       };
     };
   };
-
-  # dekstop
-  # geoclue
-  services.geoclue2 = {
-    enable = true;
-    enableWifi = false;
-    appConfig.darkman = {
-      isAllowed = true;
-      isSystem = true;
-    };
-  };
-
-  # dekstop
-  # pipewire
-  # security.rtkit.enable = true;
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
-
-  #desktop
-  #easy effects
-  #programs.dconf.enable = true;
 }
