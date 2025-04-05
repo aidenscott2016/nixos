@@ -46,6 +46,7 @@ with lib.aiden; {
       hardware-acceleration = enabled;
       ios = enabled;
       cli-base = enabled;
+      xdg-portal = enabled;
     };
 
     hardware.bluetooth.enable = true;
