@@ -27,7 +27,6 @@ params@{ config, pkgs, inputs, channels, lib, ... }: {
     transmission-gtk
     get_iplayer
     vlc
-    moonlight-qt
 
     # nix, development
     nixpkgs-fmt
@@ -42,8 +41,6 @@ params@{ config, pkgs, inputs, channels, lib, ... }: {
     ventoy-full
 
     # gaming
-    # minecraft
-    # prismlauncher
     libva-utils
     xorg.xev
 
