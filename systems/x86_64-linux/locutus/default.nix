@@ -13,6 +13,10 @@ with lib.aiden; {
     docker-compose
   ];
   aiden = {
+    architecture = {
+      cpu = "amd";
+      gpu = "amd";
+    };
     modules = {
       avahi = enabled;
       common = enabled;
@@ -87,7 +91,6 @@ with lib.aiden; {
 
     # desktop
     xserver = {
-      videoDrivers = [ "amdgpu" ];
       enable = true;
     };
 
@@ -98,9 +101,6 @@ with lib.aiden; {
   };
 
   hardware = {
-    enableAllFirmware = true;
-    enableRedistributableFirmware = true;
-
     #bluetooth
     bluetooth.enable = true;
   };
@@ -111,13 +111,9 @@ with lib.aiden; {
   # hardware
   networking = { networkmanager.enable = true; };
 
+  # desktop
   services.envfs.enable = true;
 
-  # dekstop
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [ mesa amdvlk libva ];
-  };
 
   #services.gnome.gnome-keyring.enable = true;
 
@@ -171,20 +167,15 @@ with lib.aiden; {
     };
   };
 
-  # flatpak
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  services.flatpak.enable = true;
-
   # dekstop
   # pipewire
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
+  # security.rtkit.enable = true;
+  # services.pipewire = {
+  #   enable = true;
+  #   pulse.enable = true;
+  # };
 
   #desktop
   #easy effects
-  programs.dconf.enable = true;
+  #programs.dconf.enable = true;
 }
