@@ -1,0 +1,46 @@
+params@{ lib, pkgs, config, ... }:
+with lib;
+let moduleName = "virtualisation";
+in {
+  options = { 
+    aiden.modules.virtualisation.enabled = mkEnableOption moduleName;
+  };
+
+  config = mkIf config.aiden.modules.virtualisation.enabled {
+    environment.systemPackages = with pkgs; [
+      docker-compose
+    ];
+
+    programs.virt-manager.enable = true;
+
+    virtualisation.docker = {
+      enable = true;
+      rootless = {
+        enable = true;
+        setSocketVariable = true;
+      };
+    };
+
+    virtualisation.podman = {
+      enable = false;
+      dockerSocket.enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+
+    virtualisation.libvirtd.enable = true;
+
+    users.groups.libvirtd.members = [ "aiden" ];
+
+    virtualisation.spiceUSBRedirection.enable = true;
+
+    virtualisation.vmVariant = {
+      services.qemuGuest.enable = true;
+      services.spice-vdagentd.enable = true;
+      virtualisation = {
+        memorySize = 2048;
+        cores = 3;
+      };
+    };
+  };
+} 

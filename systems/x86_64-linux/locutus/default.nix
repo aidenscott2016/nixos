@@ -10,8 +10,6 @@ with lib.aiden; {
 
   environment.systemPackages = with pkgs; [
     inputs.disko.packages.x86_64-linux.disko
-    # virtualisation
-    docker-compose
   ];
   aiden = {
     architecture = {
@@ -21,6 +19,7 @@ with lib.aiden; {
     modules = {
       desktop = enabled;
       gc = enabled;
+      virtualisation = enabled;
       gaming = {
         steam.enabled = true;
         moonlight.client.enabled = true;
@@ -51,8 +50,7 @@ with lib.aiden; {
     # nix
     nh.enable = true;
 
-    # virt
-    virt-manager.enable = true;
+    
   };
 
   services = {
