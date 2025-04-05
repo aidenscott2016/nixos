@@ -30,8 +30,11 @@ with lib.aiden; {
       keyd = enabled;
       powermanagement = enabled;
       darkman = enabled;
+      gaming = {
+        steam.enabled = true;
+        moonlight.client.enabled = true;
+      };
     };
-    programs = { openttd.enabled = true; };
   };
 
   system.stateVersion = "22.05";
@@ -152,9 +155,6 @@ with lib.aiden; {
       };
     };
   };
-
-  # gaming
-  programs.steam.gamescopeSession.enable = true;
 
   # dekstop
   # geoclue
