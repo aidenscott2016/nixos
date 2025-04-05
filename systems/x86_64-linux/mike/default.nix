@@ -1,5 +1,4 @@
-{ config, pkgs, lib, myModulesPath, inputs, ... }:
-{
+{ config, pkgs, lib, myModulesPath, inputs, ... }: {
   imports = [
     ./packages.nix
     ./autorandr
@@ -38,5 +37,6 @@
 
   system.stateVersion = "22.05";
 
+  boot.loader.systemd-boot.enable = true;
 
 }
