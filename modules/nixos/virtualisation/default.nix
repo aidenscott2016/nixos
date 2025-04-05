@@ -3,10 +3,10 @@ with lib;
 let moduleName = "virtualisation";
 in {
   options = { 
-    aiden.modules.virtualisation.enabled = mkEnableOption moduleName;
+    aiden.modules.virtualisation.enable = mkEnableOption moduleName;
   };
 
-  config = mkIf config.aiden.modules.virtualisation.enabled {
+  config = mkIf config.aiden.modules.virtualisation.enable {
     environment.systemPackages = with pkgs; [
       docker-compose
     ];

@@ -1,19 +1,19 @@
 { lib, ... }:
 with lib.aiden;
 with lib; {
-  enabled = { enabled = true; };
+  enabled = { enable = true; };
   enableableModule = name:
     params@{ config, ... }:
     configToEnable:
     let cfg = config.aiden.modules.${name};
     in {
-      options.aiden.modules.${name}.enabled = mkOption {
+      options.aiden.modules.${name}.enable = mkOption {
         type = types.bool;
         default = false;
         description = "Enable the ${name} module";
       };
 
-      config = mkIf cfg.enabled configToEnable;
+      config = mkIf cfg.enable configToEnable;
     };
 
   types = {

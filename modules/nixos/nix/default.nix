@@ -3,10 +3,10 @@ with lib;
 let moduleName = "nix";
 in {
   options = { 
-    aiden.modules.nix.enabled = mkEnableOption moduleName;
+    aiden.modules.nix.enable = mkEnableOption moduleName;
   };
 
-  config = mkIf config.aiden.modules.nix.enabled {
+  config = mkIf config.aiden.modules.nix.enable {
     # Enable nh for better Nix helper functionality
     programs.nh.enable = true;
 

@@ -14,15 +14,15 @@ with lib.aiden; {
       gpu = "amd";
     };
     modules = {
-      desktop = enabled;
-      gc = enabled;
+      desktop.enable = true;
+      gc.enable = true;
       gaming = {
-        steam.enabled = true;
-        moonlight.client.enabled = true;
+        steam.enable = true;
+        moonlight.client.enable = true;
       };
-      virtualisation = enabled;
-      home-manager = enabled;
-      nix = enabled;
+      virtualisation.enable = true;
+      home-manager.enable = true;
+      nix.enable = true;
     };
   };
 

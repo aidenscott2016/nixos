@@ -43,7 +43,7 @@ with lib.aiden; {
       avahi = enabled;
       common = enabled;
       multimedia = enabled;
-      hardware-acceleration.enable = true;
+      hardware-acceleration = enabled;
       ios = enabled;
       cli-base = enabled;
     };

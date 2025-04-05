@@ -2,10 +2,10 @@
 with lib;
 with config.aiden.modules.router; {
   options.aiden.modules.router = {
-    enabled = mkEnableOption "router";
+    enable = mkEnableOption "router";
     internalInterface = mkOption { type = types.str; };
     externalInterface = mkOption { type = types.str; };
-    dns.enabled = mkEnableOption "unbound dns";
-    dnsmasq.enabled = mkEnableOption "dnsmasq";
+    dns.enable = mkEnableOption "unbound dns";
+    dnsmasq.enable = mkEnableOption "dnsmasq";
   };
 }

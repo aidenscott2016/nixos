@@ -3,10 +3,10 @@ with lib;
 let moduleName = "home-manager";
 in {
   options = { 
-    aiden.modules.home-manager.enabled = mkEnableOption moduleName;
+    aiden.modules.home-manager.enable = mkEnableOption moduleName;
   };
 
-  config = mkIf config.aiden.modules.home-manager.enabled {
+  config = mkIf config.aiden.modules.home-manager.enable {
     # Use global packages
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
