@@ -13,6 +13,8 @@ in {
     };
   };
   config = mkIf cfg.enable {
+
+    aiden.modules.gc.enable = true;
     nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     nix.extraOptions = "experimental-features = nix-command flakes";
     nix.settings.auto-optimise-store = true;
