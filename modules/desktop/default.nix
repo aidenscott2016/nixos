@@ -15,8 +15,15 @@ with lib.aiden; {
         enable = true;
         lockOn.suspend = true;
       };
+      tailscale.enable = true;
+      mullvad-vpn.enable = true;
+      gvfs.enable = true;
+      libinput.enable = true;
+      fstrim.enable = true;
     };
     security.sudo.wheelNeedsPassword = false;
+
+    networking = { networkmanager.enable = true; };
 
     aiden.modules = {
       redshift = enabled;
