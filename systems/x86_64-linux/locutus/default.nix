@@ -16,11 +16,11 @@ with lib.aiden; {
     modules = {
       desktop = enabled;
       gc = enabled;
-      virtualisation = enabled;
       gaming = {
         steam.enabled = true;
         moonlight.client.enabled = true;
       };
+      virtualisation = enabled;
       home-manager = enabled;
       nix = enabled;
     };
@@ -37,56 +37,6 @@ with lib.aiden; {
       root = {
         device = "/dev/nvme0n1p2";
         preLVM = true;
-      };
-    };
-  };
-
-  services = {
-    # hardware
-    libinput.enable = true;
-
-    # hardware
-    fstrim.enable = true;
-
-    # neworking
-    tailscale.enable = true;
-    gvfs.enable = true;
-  };
-
-  # hardware
-  networking = { networkmanager.enable = true; };
-
-  # networking
-  services.mullvad-vpn.enable = true;
-
-  # virtuvirtualisation
-  users.groups.libvirtd.members = [ "aiden" ];
-  virtualisation = {
-    podman = {
-      enable = false;
-      dockerSocket.enable = true;
-      dockerCompat = true;
-      defaultNetwork.settings.dns_enabled = true;
-    };
-    docker = {
-      rootless = {
-        enable = true;
-        setSocketVariable = true;
-      };
-      enable = true;
-    };
-
-    libvirtd.enable = true;
-
-    spiceUSBRedirection.enable = true;
-
-    # vm gues
-    vmVariant = {
-      services.qemuGuest.enable = true;
-      services.spice-vdagentd.enable = true;
-      virtualisation = {
-        memorySize = 2048;
-        cores = 3;
       };
     };
   };
