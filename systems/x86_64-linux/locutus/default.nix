@@ -24,14 +24,11 @@ with lib.aiden; {
         steam.enabled = true;
         moonlight.client.enabled = true;
       };
+      home-manager = enabled;
     };
   };
 
   system.stateVersion = "22.05";
-
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.users.aiden = { };
 
   boot = {
     supportedFilesystems = [ "ntfs" ];
