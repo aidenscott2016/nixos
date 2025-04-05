@@ -10,7 +10,7 @@ params@{ config, pkgs, inputs, channels, lib, ... }: {
     # communication
     (discord.override { withTTS = false; })
     cameractrls-gtk3
-    easyeffects
+    
 
     #jetbrains.idea-community
 

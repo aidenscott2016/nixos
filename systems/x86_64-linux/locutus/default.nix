@@ -31,6 +31,7 @@ with lib.aiden; {
       powermanagement = enabled;
       darkman = enabled;
       yubikey = enabled;
+      pipewire = enabled;
       gaming = {
         steam.enabled = true;
         moonlight.client.enabled = true;
