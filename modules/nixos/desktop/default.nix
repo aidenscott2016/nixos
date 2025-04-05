@@ -26,6 +26,8 @@ with lib.aiden; {
 
     networking = { networkmanager.enable = true; };
 
+    systemd.network.wait-online.enable = false;
+
     aiden.modules = {
       redshift = enabled;
       darkman = enabled;
