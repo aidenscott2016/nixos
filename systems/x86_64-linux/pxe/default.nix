@@ -5,10 +5,10 @@ in {
   config = {
     system.stateVersion = "23.11";
     aiden.modules = {
-      locale.enabled = true;
-      avahi.enabled = true;
-      common = { enabled = true; };
-      cli-base.enabled = true;
+      locale.enable = true;
+      avahi.enable = true;
+      common = { enable = true; };
+      cli-base.enable = true;
     };
     services.libinput.enable = lib.mkForce false;
 

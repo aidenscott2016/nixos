@@ -32,31 +32,31 @@
   services.acpid.enable = true;
 
   aiden.modules = {
-    powermanagement.enabled = true;
-    traefik.enabled = true;
+    powermanagement.enable = true;
+    traefik.enable = true;
     tailscale = {
-      enabled = true;
+      enable = true;
       advertiseRoutes = true;
       authKeyPath = config.age.secrets.gila-tailscale-authkey.path;
     };
-    avahi.enabled = true;
+    avahi.enable = true;
     common = {
       email = "aiden@oldstreetjournal.co.uk";
       domainName = "sw1a1aa.uk";
-      enabled = true;
+      enable = true;
     };
-    locale.enabled = true;
-    adguard.enabled = true;
+    locale.enable = true;
+    adguard.enable = true;
     home-assistant = {
-      enabled = true;
+      enable = true;
       devices = [
         "/dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_2ee577279f96ed119403c098a7669f5d-if00-port0"
       ];
     };
-    router.enabled = true;
+    router.enable = true;
     router = {
-      dns.enabled = false; # TODO: remove
-      dnsmasq.enabled = true;
+      dns.enable = false; # TODO: remove
+      dnsmasq.enable = true;
       internalInterface = "eth1";
       externalInterface = "eth0";
     };

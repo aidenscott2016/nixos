@@ -36,16 +36,16 @@ with lib.aiden;
     aiden.modules = {
       common = {
         domainName = "tv.sw1a1aa.uk";
-        enabled = true;
+        enable = true;
 
       };
 
       avahi = enabled;
       redshift = enabled;
       ssh = enabled;
-      gc = enabled;
+      gc = enable;
       cli-base = enabled;
-      steam.enabled = false;
+      steam.enable = false;
       locale = enabled;
     };
     hardware.bluetooth.enable  = true;

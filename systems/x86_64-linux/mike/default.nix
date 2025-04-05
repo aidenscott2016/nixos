@@ -27,13 +27,13 @@ with lib.aiden; {
       cli-base = enabled;
       multimedia = enabled;
       emacs = enabled;
-      steam.enabled = true;
+      steam.enable = true;
       thunar = enabled;
       locale = enabled;
       keyd = enabled;
       powermanagement = enabled;
     };
-    programs = { openttd.enabled = true; };
+    programs = { openttd.enable = true; };
   };
 
   system.stateVersion = "22.05";

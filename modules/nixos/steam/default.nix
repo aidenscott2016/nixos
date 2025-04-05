@@ -11,8 +11,8 @@ in enableableModule "steam" params {
     protontricks.enable = true;
     gamescopeSession.enable = true;
     extraCompatPackages = [ steamtinkerlaunch-git ];
-    environment.systemPackages = [ steamtinkerlaunch-git ];
   };
+  environment.systemPackages = [ steamtinkerlaunch-git ];
   programs.gamemode.enable = true;
   programs.gamemode.enableRenice = true;
 }

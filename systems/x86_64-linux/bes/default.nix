@@ -87,12 +87,12 @@
       networking.firewall.allowedTCPPorts = [ 443 5000 ];
 
       aiden.modules = {
-        powermanagement.enabled = true;
-        gc.enabled = false;
-        cli-base.enabled = true;
-        locale.enabled = true;
+        powermanagement.enable = true;
+        gc.enable = false;
+        cli-base.enable = true;
+        locale.enable = true;
         reverseProxy = {
-          enabled = true;
+          enable = true;
           apps = [
             {
               name = "bazarr";
@@ -128,20 +128,20 @@
             }
           ];
         };
-        avahi.enabled = true;
+        avahi.enable = true;
         jellyfin = {
-          enabled = true;
+          enable = true;
           hwAccel = {
-            enabled = true;
+            enable = true;
             arch = "intel";
           };
         };
         common = {
           domainName = "bes.sw1a1aa.uk";
-          enabled = true;
+          enable = true;
         };
         samba = {
-          enabled = true;
+          enable = true;
           shares.t7 = {
             path = "/media/t7";
             writable = "true";

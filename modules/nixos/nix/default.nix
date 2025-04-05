@@ -1,4 +1,4 @@
-params@{ lib, pkgs, config, ... }:
+params@{ lib, pkgs, config, inputs ? {}, ... }:
 with lib;
 let moduleName = "nix";
 in {
@@ -9,11 +9,6 @@ in {
   config = mkIf config.aiden.modules.nix.enable {
     # Enable nh for better Nix helper functionality
     programs.nh.enable = true;
-
-    # Add disko for disk management
-    environment.systemPackages = with pkgs; [
-      inputs.disko.packages.x86_64-linux.disko
-    ];
 
     # Enable garbage collection
     nix.gc = {

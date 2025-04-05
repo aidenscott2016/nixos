@@ -36,11 +36,11 @@ with inputs; {
   aiden = {
     modules = {
       tailscale = {
-        enabled = true;
+        enable = true;
         authKeyPath = config.age.secrets.thoth-tailscale-authkey.path;
       };
-      avahi.enabled = true;
-      common.enabled = true;
+      avahi.enable = true;
+      common.enable = true;
     };
   };
 
@@ -50,7 +50,7 @@ with inputs; {
       openFirewall = false;
       settings.bind_host = "0.0.0.0";
       settings.bind_port = 8081;
-      querylog.enabled = false;
+      querylog.enable = false;
     };
   };
   system.stateVersion = "23.05"; # Did you read the comment?
