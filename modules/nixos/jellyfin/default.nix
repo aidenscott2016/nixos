@@ -15,19 +15,19 @@ let
 in
 {
   options.aiden.modules.jellyfin = {
-    enabled = mkEnableOption "";
+    enable = mkEnableOption "";
     user = mkOption {
       type = types.str;
       default = "jellyfin";
     };
     hwAccel = {
-      enabled = mkEnableOption "";
+      enable = mkEnableOption "";
       arch = mkOption {
         type = types.enum [ "intel" "amd" ];
       };
     };
   };
-  config = mkIf cfg.enabled {
+  config = mkIf cfg.enable {
     users.users.jellyfin.extraGroups = ["video"];
     environment.systemPackages = with pkgs; [ rename jellyfin-ffmpeg libva-utils ];
     services = {
@@ -39,11 +39,11 @@ in
       };
     };
 
-    hardware.graphics = mkIf cfg.hwAccel.enabled {
+    hardware.graphics = mkIf cfg.hwAccel.enable {
       enable = true;
       extraPackages = accelOptions.${cfg.hwAccel.arch};
     };
-    boot.kernelParams = mkIf (cfg.hwAccel.enabled && cfg.hwAccel.arch == "intel") [
+    boot.kernelParams = mkIf (cfg.hwAccel.enable && cfg.hwAccel.arch == "intel") [
       "i915.enable_guc=2"
     ];
 

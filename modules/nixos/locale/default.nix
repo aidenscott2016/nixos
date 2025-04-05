@@ -7,10 +7,10 @@ let
 in
 {
   options.aiden.modules.locale = {
-    enabled = mkEnableOption "Locale";
+    enable = mkEnableOption "Locale";
   };
 
-  config = mkIf cfg.enabled {
+  config = mkIf cfg.enable {
 
     console = {
       font = "Lat2-Terminus16";
@@ -20,7 +20,7 @@ in
     services.xserver = {
       xkb = {
         layout = "gb";
-        options = mkIf (!config.aiden.modules.keyd.enabled)  "caps:swapescape";
+        options = mkIf (!config.aiden.modules.keyd.enable)  "caps:swapescape";
       };
     };
     services.libinput.enable = true;

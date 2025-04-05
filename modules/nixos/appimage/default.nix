@@ -4,10 +4,10 @@ let
   cfg = config.aiden.modules.appimage;
 in {
   options.aiden.modules.appimage = {
-    enabled = mkEnableOption "appimage";
+    enable = mkEnableOption "appimage";
   };
 
-  config = mkIf cfg.enabled {
+  config = mkIf cfg.enable {
     programs.appimage = {
       enable = true;
       binfmt = true;

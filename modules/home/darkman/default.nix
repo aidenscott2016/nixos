@@ -2,8 +2,8 @@ params@{ lib, pkgs, config, ... }:
 with lib;
 let moduleName = "darkman";
 in {
-  options = { aiden.modules.darkman.enabled = mkEnableOption moduleName; };
-  config = mkIf config.aiden.modules.darkman.enabled {
+  options = { aiden.modules.darkman.enable = mkEnableOption moduleName; };
+  config = mkIf config.aiden.modules.darkman.enable {
     # required in system config
     # environment.pathsToLink =[ "/share/xdg-desktop-portal" "/share/applications" ];
     xdg.portal = {

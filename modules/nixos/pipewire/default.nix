@@ -4,10 +4,10 @@ let
   cfg = config.aiden.modules.pipewire;
 in {
   options.aiden.modules.pipewire = {
-    enabled = mkEnableOption "pipewire";
+    enable = mkEnableOption "pipewire";
   };
 
-  config = mkIf cfg.enabled {
+  config = mkIf cfg.enable {
     # Enable realtime scheduling for pipewire
     security.rtkit.enable = true;
 

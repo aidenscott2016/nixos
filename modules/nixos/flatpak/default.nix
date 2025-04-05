@@ -4,10 +4,10 @@ let
   cfg = config.aiden.modules.flatpak;
 in {
   options.aiden.modules.flatpak = {
-    enabled = mkEnableOption "flatpak";
+    enable = mkEnableOption "flatpak";
   };
 
-  config = mkIf cfg.enabled {
+  config = mkIf cfg.enable {
     services.flatpak.enable = true;
 
     xdg.portal = {

@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 with lib;
-let enabled = config.aiden.modules.router.dns.enabled;
+let enable = config.aiden.modules.router.dns.enable;
 in {
-  config = mkIf enabled {
+  config = mkIf enable {
     services.unbound = {
       enable = true;
       settings = {

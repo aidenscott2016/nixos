@@ -2,13 +2,15 @@ params@{ lib, pkgs, config, ... }:
 with lib;
 let moduleName = "darkman";
 in {
-  options = { aiden.modules.darkman.enabled = mkEnableOption moduleName; };
-  config = mkIf config.aiden.modules.darkman.enabled {
+  options = { 
+    aiden.modules.darkman.enable = mkEnableOption moduleName;
+  };
+  config = mkIf config.aiden.modules.darkman.enable {
     environment.pathsToLink =
       [ "/share/xdg-desktop-portal" "/share/applications" ];
 
     aiden.modules.geoclue = {
-      enabled = true;
+      enable = true;
       apps.darkman = {
         isAllowed = true;
         isSystem = true;
@@ -17,7 +19,7 @@ in {
 
     # The darkman service comes from home-manager
     home-manager.users.aiden = {
-      aiden.modules.darkman.enabled = true;
+      aiden.modules.darkman.enable = true;
     };
   };
 }
