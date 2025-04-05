@@ -24,6 +24,7 @@ in {
           mesa
           libva
         ] ++ optional (architecture.gpu == "amd") amdvlk
+          ++ optional (architecture.cpu == "intel") vpl-gpu-rt
           ++ cfg.extraPackages;
       };
     };
