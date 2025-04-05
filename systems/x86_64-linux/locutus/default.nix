@@ -42,6 +42,7 @@ with lib.aiden; {
         steam.enabled = true;
         moonlight.client.enabled = true;
       };
+      hardware-acceleration.enable = true;
     };
   };
 
