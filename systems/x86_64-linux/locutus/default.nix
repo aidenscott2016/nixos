@@ -30,6 +30,7 @@ with lib.aiden; {
       keyd = enabled;
       powermanagement = enabled;
       darkman = enabled;
+      yubikey = enabled;
       gaming = {
         steam.enabled = true;
         moonlight.client.enabled = true;

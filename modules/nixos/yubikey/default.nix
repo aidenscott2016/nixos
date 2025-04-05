@@ -1,4 +1,4 @@
-params@{ lib, pkgs, config, ... }:
+_@{ lib, pkgs, config, ... }:
 with lib;
 let moduleName = "yubikey";
 in {
@@ -6,7 +6,6 @@ in {
     aiden.modules."${moduleName}".enabled = mkEnableOption moduleName;
   };
   config = mkIf config.aiden.modules."${moduleName}".enabled {
-
     # smart card
     services.pcscd.enable = true;
     security.polkit.enable = true;
