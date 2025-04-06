@@ -86,66 +86,69 @@
 
       networking.firewall.allowedTCPPorts = [ 443 5000 ];
 
-      aiden.modules = {
-        powermanagement.enable = true;
-        gc.enable = false;
-        cli-base.enable = true;
-        locale.enable = true;
-        reverseProxy = {
-          enable = true;
-          apps = [
-            {
-              name = "bazarr";
-              port = 6767;
-            }
-            {
-              name = "sonarr";
-              port = 8989;
-            }
-            {
-              name = "sab";
-              port = 8080;
-            }
-            {
-              name = "jellyfin";
-              port = 8096;
-            }
-            {
-              name = "portainer";
-              port = 9000;
-            }
-            {
-              name = "deluge";
-              port = 8112;
-            }
-            {
-              name = "radarr";
-              port = 7878;
-            }
-            {
-              name = "slskd";
-              port = 5030;
-            }
-          ];
+      aiden = {
+
+        architecture = {
+          cpu = "amd";
+          gpu = "amd";
         };
-        avahi.enable = true;
-        jellyfin = {
-          enable = true;
-          hwAccel = {
+
         programs.beets.enable = true;
+        modules = {
+
+          powermanagement.enable = true;
+          cli-base.enable = true;
+          locale.enable = true;
+          reverseProxy = {
             enable = true;
-            arch = "intel";
+            apps = [
+              {
+                name = "bazarr";
+                port = 6767;
+              }
+              {
+                name = "sonarr";
+                port = 8989;
+              }
+              {
+                name = "sab";
+                port = 8080;
+              }
+              {
+                name = "jellyfin";
+                port = 8096;
+              }
+              {
+                name = "portainer";
+                port = 9000;
+              }
+              {
+                name = "deluge";
+                port = 8112;
+              }
+              {
+                name = "radarr";
+                port = 7878;
+              }
+              {
+                name = "slskd";
+                port = 5030;
+              }
+            ];
           };
-        };
-        common = {
-          domainName = "bes.sw1a1aa.uk";
-          enable = true;
-        };
-        samba = {
-          enable = true;
-          shares.t7 = {
-            path = "/media/t7";
-            writable = "true";
+          avahi.enable = true;
+          jellyfin.enable = true;
+
+          common = {
+            domainName = "bes.sw1a1aa.uk";
+            enable = true;
+          };
+          samba = {
+            enable = true;
+            shares.t7 = {
+              path = "/media/t7";
+              writable = "true";
+            };
           };
         };
       };
