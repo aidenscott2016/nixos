@@ -1,4 +1,11 @@
-{ config, pkgs, inputs, lib, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
+{
   imports = [
     #./pxe.nix
     ./hardware-configuration.nix
@@ -15,14 +22,24 @@
   networking.hostName = "gila";
   networking.networkmanager.enable = true;
 
-  environment.systemPackages = with pkgs; [ tcpdump dnsutils ];
+  environment.systemPackages = with pkgs; [
+    tcpdump
+    dnsutils
+  ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernel.sysctl = { "net.ipv4.conf.all.forwarding" = true; };
+  boot.kernel.sysctl = {
+    "net.ipv4.conf.all.forwarding" = true;
+  };
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.kernelParams = [ "copytoram" ];
-  boot.supportedFilesystems =
-    pkgs.lib.mkForce [ "btrfs" "vfat" "xfs" "ntfs" "cifs" ];
+  boot.supportedFilesystems = pkgs.lib.mkForce [
+    "btrfs"
+    "vfat"
+    "xfs"
+    "ntfs"
+    "cifs"
+  ];
   security.sudo.wheelNeedsPassword = false;
   services.openssh.enable = true;
   services.openssh.openFirewall = false;
@@ -61,4 +78,6 @@
       externalInterface = "eth0";
     };
   };
+
+  systemd.network.wait-online.enable = false;
 }
