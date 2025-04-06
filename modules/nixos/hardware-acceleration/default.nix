@@ -22,7 +22,7 @@ in {
         enable = true;
         extraPackages = with pkgs;
           [ mesa libva ] ++ optional (architecture.gpu == "amd") amdvlk
-          ++ optional (architecture.cpu == "intel") [
+          ++ optionals (architecture.cpu == "intel") [
             vpl-gpu-rt
             intel-media-driver # LIBVA_DRIVER_NAME=iHD
             intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
