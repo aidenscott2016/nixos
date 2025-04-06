@@ -132,6 +132,7 @@
         jellyfin = {
           enable = true;
           hwAccel = {
+        programs.beets.enable = true;
             enable = true;
             arch = "intel";
           };
@@ -152,18 +153,6 @@
         get_iplayer
         wol
         iperf3
-
-        (beets-unstable.override {
-          pluginOverrides = {
-            #fetchart
-            #badfiles.enable = true;
-            discogs.enable = true;
-            copyartifacts = {
-              enable = true;
-              propagatedBuildInputs = [ beetsPackages.copyartifacts ];
-            };
-          };
-        })
 
       ];
 
