@@ -5,7 +5,7 @@ enableableModule "emacs" params {
     coreutils
     fd
     clang
-    nixfmt-classic
+    nixfmt-rfc-style
     emacs
     racket
     ripgrep
