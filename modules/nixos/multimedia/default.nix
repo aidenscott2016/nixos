@@ -4,11 +4,12 @@ params@{ pkgs, lib, config, ... }: {
   };
   config = lib.mkIf config.aiden.modules.multimedia.enable {
     aiden = {
-      modules.transmission.enable = true;
+      modules.transmission.enable = false;
       programs.beets.enable = true;
     };
 
     environment.systemPackages = with pkgs; [
+      transmission_3-gtk
       nicotine-plus
       yt-dlp
       vlc

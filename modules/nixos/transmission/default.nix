@@ -20,6 +20,4 @@ in enableableModule "transmission" params {
   };
   networking.firewall.allowedTCPPorts = [ web-port ];
 
-  environment.systemPackages = with pkgs;
-    mkIf config.services.xserver.enable [ transmission_3-gtk ];
 }
