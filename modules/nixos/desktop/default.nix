@@ -52,5 +52,18 @@ with lib.aiden; {
     };
 
     hardware.bluetooth.enable = true;
+    environment.systemPackages = with pkgs; [
+      xorg.xev
+
+      (discord.override { withTTS = false; })
+      cameractrls-gtk3
+      chromium
+      xclip
+      libreoffice
+      okular
+
+      vscode
+      nodejs_22
+    ];
   };
 }

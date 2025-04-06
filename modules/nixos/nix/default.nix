@@ -5,9 +5,13 @@ in {
   options = { aiden.modules.nix.enable = mkEnableOption moduleName; };
 
   config = mkIf config.aiden.modules.nix.enable {
-    programs.nh.enable = true;
+    programs = { nh.enable = true; };
 
-    environment.systemPackages = [ inputs.disko.packages.x86_64-linux.disko ];
+    environment.systemPackages = with pkgs; [
+      nixpkgs-fmt
+      nix-tree
+      inputs.disko.packages.x86_64-linux.disko
+    ];
 
     # Enable garbage collection
     nix.gc = {

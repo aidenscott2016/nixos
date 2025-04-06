@@ -2,13 +2,15 @@ params@{ lib, pkgs, config, ... }:
 with lib;
 let moduleName = "virtualisation";
 in {
-  options = { 
+  options = {
     aiden.modules.virtualisation.enable = mkEnableOption moduleName;
   };
 
   config = mkIf config.aiden.modules.virtualisation.enable {
     environment.systemPackages = with pkgs; [
+      podman-compose
       docker-compose
+      kubectl
     ];
 
     programs.virt-manager.enable = true;
@@ -43,4 +45,4 @@ in {
       };
     };
   };
-} 
+}

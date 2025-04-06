@@ -13,6 +13,7 @@ let
       };
     });
 in enableableModule "multimedia" params {
+  aiden.modules.transmission.enable = true;
   environment.systemPackages = with pkgs; [
     beet-override
     nicotine-plus
@@ -21,5 +22,6 @@ in enableableModule "multimedia" params {
     (jellyfin-media-player.override {
       withDbus = false;
     })
+    imagemagick
   ];
 }
