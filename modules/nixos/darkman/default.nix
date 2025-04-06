@@ -1,13 +1,22 @@
-params@{ lib, pkgs, config, ... }:
+params@{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
-let moduleName = "darkman";
-in {
-  options = { 
+let
+  moduleName = "darkman";
+in
+{
+  options = {
     aiden.modules.darkman.enable = mkEnableOption moduleName;
   };
   config = mkIf config.aiden.modules.darkman.enable {
-    environment.pathsToLink =
-      [ "/share/xdg-desktop-portal" "/share/applications" ];
+    environment.pathsToLink = [
+      "/share/xdg-desktop-portal"
+      "/share/applications"
+    ];
 
     aiden.modules.geoclue = {
       enable = true;

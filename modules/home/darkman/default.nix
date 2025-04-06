@@ -1,12 +1,23 @@
-params@{ lib, pkgs, config, ... }:
+params@{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
-let moduleName = "darkman";
-in {
-  options = { aiden.modules.darkman.enable = mkEnableOption moduleName; };
+let
+  modulename = "darkman";
+in
+{
+  options = {
+    aiden.modules.darkman.enable = mkEnableOption modulename;
+  };
   config = mkIf config.aiden.modules.darkman.enable {
-    # required in system config
-    # environment.pathsToLink =[ "/share/xdg-desktop-portal" "/share/applications" ];
+    aiden.modules.xdg-portal.enable = true;
     xdg.portal = {
+      config.common = {
+        "org.freedesktop.impl.portal.Settings" = [ "darkman" ];
+      };
       extraPortals = [ pkgs.darkman ];
     };
 

@@ -1,8 +1,14 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.aiden.modules.flatpak;
-in {
+in
+{
   options.aiden.modules.flatpak = {
     enable = mkEnableOption "flatpak";
   };
@@ -10,10 +16,7 @@ in {
   config = mkIf cfg.enable {
     services.flatpak.enable = true;
 
-    xdg.portal = {
-      enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    };
+    aiden.modules.xdg-portal.enable = true;
 
     # Link necessary paths for flatpak
     environment.pathsToLink = [
@@ -21,4 +24,4 @@ in {
       "/share/applications"
     ];
   };
-} 
+}
