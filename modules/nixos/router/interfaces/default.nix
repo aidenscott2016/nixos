@@ -2,10 +2,10 @@
 with lib;
 let
   inherit (config.aiden.modules.router)
-    enabled internalInterface externalInterface;
+    enable internalInterface externalInterface;
 in
 {
-  config = mkIf enabled {
+  config = mkIf enable {
     networking = {
       vlans = {
         lan = {

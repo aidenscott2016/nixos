@@ -1,4 +1,11 @@
-{ config, pkgs, inputs, lib, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
+{
   imports = [
     #./pxe.nix
     ./hardware-configuration.nix
@@ -15,14 +22,24 @@
   networking.hostName = "gila";
   networking.networkmanager.enable = true;
 
-  environment.systemPackages = with pkgs; [ tcpdump dnsutils ];
+  environment.systemPackages = with pkgs; [
+    tcpdump
+    dnsutils
+  ];
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernel.sysctl = { "net.ipv4.conf.all.forwarding" = true; };
+  boot.kernel.sysctl = {
+    "net.ipv4.conf.all.forwarding" = true;
+  };
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.kernelParams = [ "copytoram" ];
-  boot.supportedFilesystems =
-    pkgs.lib.mkForce [ "btrfs" "vfat" "xfs" "ntfs" "cifs" ];
+  boot.supportedFilesystems = pkgs.lib.mkForce [
+    "btrfs"
+    "vfat"
+    "xfs"
+    "ntfs"
+    "cifs"
+  ];
   security.sudo.wheelNeedsPassword = false;
   services.openssh.enable = true;
   services.openssh.openFirewall = false;
@@ -32,33 +49,35 @@
   services.acpid.enable = true;
 
   aiden.modules = {
-    powermanagement.enabled = true;
-    traefik.enabled = true;
+    powermanagement.enable = true;
+    traefik.enable = true;
     tailscale = {
-      enabled = true;
+      enable = true;
       advertiseRoutes = true;
       authKeyPath = config.age.secrets.gila-tailscale-authkey.path;
     };
-    avahi.enabled = true;
+    avahi.enable = true;
     common = {
       email = "aiden@oldstreetjournal.co.uk";
       domainName = "sw1a1aa.uk";
-      enabled = true;
+      enable = true;
     };
-    locale.enabled = true;
-    adguard.enabled = true;
+    locale.enable = true;
+    adguard.enable = true;
     home-assistant = {
-      enabled = true;
+      enable = true;
       devices = [
         "/dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_2ee577279f96ed119403c098a7669f5d-if00-port0"
       ];
     };
-    router.enabled = true;
+    router.enable = true;
     router = {
-      dns.enabled = false; # TODO: remove
-      dnsmasq.enabled = true;
+      dns.enable = false; # TODO: remove
+      dnsmasq.enable = true;
       internalInterface = "eth1";
       externalInterface = "eth0";
     };
   };
+
+  systemd.network.wait-online.enable = false;
 }

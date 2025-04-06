@@ -29,12 +29,12 @@ with inputs; {
   aiden = {
     modules = {
       tailscale = {
-        enabled = true;
+        enable = true;
         authKeyPath = config.age.secrets.secret1.path;
       };
-      avahi.enabled = true;
-      common.enabled = true;
-      locale.enabled = true;
+      avahi.enable = true;
+      common.enable = true;
+      locale.enable = true;
     };
   };
 

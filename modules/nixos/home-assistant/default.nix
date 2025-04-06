@@ -3,7 +3,7 @@ with lib;
 let
   deviceParams =
     map (path: "--device=${path}") config.aiden.modules.home-assistant.devices;
-  enabled = config.aiden.modules.home-assistant.enabled;
+  enable = config.aiden.modules.home-assistant.enable;
   inherit (config.aiden.modules.common) domainName email;
   fqdn = "hass.${domainName}";
   container-name = "home-assistant";
@@ -11,7 +11,7 @@ let
     "${config.virtualisation.oci-containers.backend}-${container-name}";
 in {
   options.aiden.modules.home-assistant = {
-    enabled = mkEnableOption "home-assistant";
+    enable = mkEnableOption "home-assistant";
     devices = mkOption {
       type = with types; listOf str;
       example = [
@@ -21,7 +21,7 @@ in {
       default = [ ];
     };
   };
-  config = mkIf enabled {
+  config = mkIf enable {
     systemd.services.${service-name}.after = [ "traefik.service" ];
     networking.hosts."10.0.1.1" = [ fqdn ];
 

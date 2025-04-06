@@ -3,7 +3,7 @@ with lib;
 let cfg = config.aiden.modules.common;
 in {
   options.aiden.modules.common = {
-    enabled = mkEnableOption "";
+    enable = mkEnableOption "";
     domainName = mkOption { type = types.str; };
     email = mkOption { type = types.str; };
     publicKey = mkOption {
@@ -12,7 +12,9 @@ in {
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIgHxgT0rlJDXl+opb7o2JSfjd5lJZ6QTRr57N0MIAyN aiden@lars";
     };
   };
-  config = mkIf cfg.enabled {
+  config = mkIf cfg.enable {
+
+    aiden.modules.gc.enable = true;
     nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     nix.extraOptions = "experimental-features = nix-command flakes";
     nix.settings.auto-optimise-store = true;

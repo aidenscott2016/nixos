@@ -10,6 +10,6 @@ enableableModule "thunar" params {
   ];
 
   # enables unzipping
-  environment.systemPackages = with pkgs; [ gnome.file-roller ];
+  environment.systemPackages = with pkgs; [ file-roller ];
 
 }

@@ -1,15 +1,11 @@
 _@{ lib, pkgs, config, ... }:
-with lib;
-{
-
+with lib; {
   options = {
-    aiden.programs.openttd.enabled = mkEnableOption "install openttd";
+    aiden.programs.openttd.enable = mkEnableOption "install openttd";
   };
 
-  config = mkIf config.aiden.programs.openttd.enabled {
+  config = mkIf config.aiden.programs.openttd.enable {
     #  xdg.configFile."emacs/init.el".source = ../files/init.el;
     environment.systemPackages = with pkgs; [ openttd ];
-
   };
-
 }

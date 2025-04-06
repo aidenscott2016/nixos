@@ -86,65 +86,69 @@
 
       networking.firewall.allowedTCPPorts = [ 443 5000 ];
 
-      aiden.modules = {
-        powermanagement.enabled = true;
-        gc.enabled = false;
-        cli-base.enabled = true;
-        locale.enabled = true;
-        reverseProxy = {
-          enabled = true;
-          apps = [
-            {
-              name = "bazarr";
-              port = 6767;
-            }
-            {
-              name = "sonarr";
-              port = 8989;
-            }
-            {
-              name = "sab";
-              port = 8080;
-            }
-            {
-              name = "jellyfin";
-              port = 8096;
-            }
-            {
-              name = "portainer";
-              port = 9000;
-            }
-            {
-              name = "deluge";
-              port = 8112;
-            }
-            {
-              name = "radarr";
-              port = 7878;
-            }
-            {
-              name = "slskd";
-              port = 5030;
-            }
-          ];
+      aiden = {
+
+        architecture = {
+          cpu = "amd";
+          gpu = "amd";
         };
-        avahi.enabled = true;
-        jellyfin = {
-          enabled = true;
-          hwAccel = {
-            enabled = true;
-            arch = "intel";
+
+        programs.beets.enable = true;
+        modules = {
+
+          powermanagement.enable = true;
+          cli-base.enable = true;
+          locale.enable = true;
+          reverseProxy = {
+            enable = true;
+            apps = [
+              {
+                name = "bazarr";
+                port = 6767;
+              }
+              {
+                name = "sonarr";
+                port = 8989;
+              }
+              {
+                name = "sab";
+                port = 8080;
+              }
+              {
+                name = "jellyfin";
+                port = 8096;
+              }
+              {
+                name = "portainer";
+                port = 9000;
+              }
+              {
+                name = "deluge";
+                port = 8112;
+              }
+              {
+                name = "radarr";
+                port = 7878;
+              }
+              {
+                name = "slskd";
+                port = 5030;
+              }
+            ];
           };
-        };
-        common = {
-          domainName = "bes.sw1a1aa.uk";
-          enabled = true;
-        };
-        samba = {
-          enabled = true;
-          shares.t7 = {
-            path = "/media/t7";
-            writable = "true";
+          avahi.enable = true;
+          jellyfin.enable = true;
+
+          common = {
+            domainName = "bes.sw1a1aa.uk";
+            enable = true;
+          };
+          samba = {
+            enable = true;
+            shares.t7 = {
+              path = "/media/t7";
+              writable = "true";
+            };
           };
         };
       };
@@ -152,18 +156,6 @@
         get_iplayer
         wol
         iperf3
-
-        (beets-unstable.override {
-          pluginOverrides = {
-            #fetchart
-            #badfiles.enable = true;
-            discogs.enable = true;
-            copyartifacts = {
-              enable = true;
-              propagatedBuildInputs = [ beetsPackages.copyartifacts ];
-            };
-          };
-        })
 
       ];
 

@@ -4,14 +4,14 @@ let
   cfg = config.aiden.modules.samba;
 in {
   options.aiden.modules.samba = {
-    enabled = mkEnableOption "Samba";
+    enable = mkEnableOption "Samba";
     shares = mkOption {
       type = types.attrsOf (types.attrsOf types.unspecified);
       default = { };
     };
   };
 
-  config = mkIf cfg.enabled {
+  config = mkIf cfg.enable {
     services = {
       # Network shares
       samba = {

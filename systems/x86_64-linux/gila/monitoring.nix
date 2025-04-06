@@ -18,7 +18,7 @@ let ip = "10.0.0.1"; in
     exporters = {
       node = {
         enable = true;
-        enabledCollectors = [ "systemd" ];
+        enableCollectors = [ "systemd" ];
         port = 9002;
       };
     };

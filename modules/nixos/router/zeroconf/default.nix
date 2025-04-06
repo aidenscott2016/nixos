@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 with lib;
-let enabled = config.aiden.modules.router.enabled;
+let enable = config.aiden.modules.router.enable;
 in {
-  config = mkIf enabled {
+  config = mkIf enable {
     services.avahi = {
       enable = true;
       nssmdns4 = true;

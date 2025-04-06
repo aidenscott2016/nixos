@@ -3,9 +3,9 @@ with lib;
 let cfg = config.aiden.modules.powermanagement;
 in {
   options.aiden.modules.powermanagement = {
-    enabled = mkEnableOption "powermanagement";
+    enable = mkEnableOption "powermanagement";
   };
-  config = mkIf cfg.enabled {
+  config = mkIf cfg.enable {
     services.tlp = {
       enable = true;
       settings = {

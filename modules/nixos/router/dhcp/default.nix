@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  dnsmasqEnabled = config.aiden.modules.router.dnsmasq.enabled;
+  dnsmasqEnable = config.aiden.modules.router.dnsmasq.enable;
 in
 {
-  config = mkIf dnsmasqEnabled {
+  config = mkIf dnsmasqEnable {
     environment.systemPackages = with pkgs; [ dnsmasq ];
     networking.nameservers = [ "127.0.0.1" ];
     services.dnsmasq = {

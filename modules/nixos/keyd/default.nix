@@ -4,12 +4,11 @@ with lib;
 let moduleName = "keyd";
 in {
   options = {
-    aiden.modules.${moduleName}.enabled = mkEnableOption moduleName;
+    aiden.modules.${moduleName}.enable = mkEnableOption moduleName;
   };
 
-  config = mkIf config.aiden.modules.${moduleName}.enabled {
+  config = mkIf config.aiden.modules.${moduleName}.enable {
     services.keyd = {
-
       enable = true;
       keyboards = {
         # The name is just the name of the configuration file, it does not really matter

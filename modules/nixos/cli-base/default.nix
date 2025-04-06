@@ -59,6 +59,14 @@ enableableModule "cli-base" params {
     # Some compression/archiver tools.
     pkgs.unzip
     pkgs.zip
+
+
+
+    powertop
+    acpi
+    ventoy-full
+    libva-utils
+    wol
   ];
 }
 

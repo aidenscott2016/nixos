@@ -1,25 +1,19 @@
-params@{ pkgs, lib, config, ... }:
-with lib.aiden;
-let
-  beet-override = with pkgs;
-    (beets.override {
-      pluginOverrides = {
-        #fetchart
-        discogs.enable = true;
-        copyartifacts = {
-          enable = true;
-          propagatedBuildInputs = [ beetsPackages.copyartifacts ];
-        };
-      };
-    });
-in enableableModule "multimedia" params {
-  environment.systemPackages = with pkgs; [
-    beet-override
-    nicotine-plus
-    yt-dlp
-    vlc
-    (jellyfin-media-player.override {
-      withDbus = false;
-    })
-  ];
+params@{ pkgs, lib, config, ... }: {
+  options = {
+    aiden.modules.multimedia.enable = lib.mkEnableOption "multimedia";
+  };
+  config = lib.mkIf config.aiden.modules.multimedia.enable {
+    aiden = {
+      modules.transmission.enable = true;
+      programs.beets.enable = true;
+    };
+
+    environment.systemPackages = with pkgs; [
+      nicotine-plus
+      yt-dlp
+      vlc
+      (jellyfin-media-player.override { withDbus = false; })
+      imagemagick
+    ];
+  };
 }
