@@ -1,4 +1,11 @@
-{ config, inputs, lib, pkgs, systems, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  systems,
+  ...
+}:
 
 {
   imports = [
@@ -82,15 +89,22 @@
       };
       users.users.sabnzbd.extraGroups = [ "video" ];
 
-      users.users.aiden.extraGroups = [ "video" "sadnzbd" "deluge" ];
+      users.users.aiden.extraGroups = [
+        "video"
+        "sadnzbd"
+        "deluge"
+      ];
 
-      networking.firewall.allowedTCPPorts = [ 443 5000 ];
+      networking.firewall.allowedTCPPorts = [
+        443
+        5000
+      ];
 
       aiden = {
 
         architecture = {
-          cpu = "amd";
-          gpu = "amd";
+          cpu = "intel";
+          gpu = "intel";
         };
 
         programs.beets.enable = true;
@@ -158,6 +172,12 @@
         iperf3
 
       ];
+
+      users.users.syncthing.extraGroups = [ "video" ];
+      services.syncthing = {
+        enable = true;
+        openDefaultPorts = true;
+      };
 
     };
 
