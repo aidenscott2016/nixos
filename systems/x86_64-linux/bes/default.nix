@@ -109,7 +109,7 @@
 
         programs.beets.enable = true;
         modules = {
-
+          syncthing.enable = true;
           powermanagement.enable = true;
           cli-base.enable = true;
           locale.enable = true;
@@ -172,12 +172,6 @@
         iperf3
 
       ];
-
-      users.users.syncthing.extraGroups = [ "video" ];
-      services.syncthing = {
-        enable = true;
-        openDefaultPorts = true;
-      };
 
     };
 

@@ -14,10 +14,6 @@ with lib.aiden;
   config = mkIf config.aiden.modules.desktop.enable {
     programs.nm-applet.enable = true;
     services = {
-      syncthing = {
-        enable = true;
-        openDefaultPorts = true;
-      };
       xserver.enable = true;
       envfs.enable = true;
       blueman.enable = true;
@@ -41,6 +37,7 @@ with lib.aiden;
     systemd.network.wait-online.enable = false;
 
     aiden.modules = {
+      syncthing = enabled;
       redshift = enabled;
       darkman = enabled;
       printer = enabled;
@@ -74,11 +71,10 @@ with lib.aiden;
       xclip
       libreoffice
       okular
+      bitwarden-desktop
 
       vscode
       nodejs_22
     ];
-    users.users.syncthing.extraGroups = [ "video" ];
-    users.users.aiden.extraGroups = [ "syncthing" ];
   };
 }
