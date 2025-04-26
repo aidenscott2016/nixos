@@ -15,6 +15,7 @@ in
 
   config = mkIf cfg.enable {
     xdg.portal = {
+      enable = true;
       config.common = {
         default = "*";
       };
