@@ -1,9 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.aiden.modules.hardware-acceleration;
   inherit (config.aiden) architecture;
-in {
+in
+{
   options.aiden.modules.hardware-acceleration = {
     enable = mkEnableOption "hardware acceleration configuration";
     extraPackages = mkOption {
@@ -20,26 +26,34 @@ in {
 
       graphics = {
         enable = true;
-        extraPackages = with pkgs;
-          [ mesa libva ] ++ optional (architecture.gpu == "amd") amdvlk
-          ++ optionals (architecture.cpu == "intel") [
+        extraPackages =
+          with pkgs;
+          [
+            mesa
+            libva
+          ]
+          ++ optional (architecture.gpu == "amd") amdvlk
+          ++ optionals (architecture.gpu == "intel") [
             vpl-gpu-rt
             intel-media-driver # LIBVA_DRIVER_NAME=iHD
             intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
             intel-compute-runtime
-          ] ++ cfg.extraPackages;
+          ]
+          ++ cfg.extraPackages;
       };
     };
 
     services.xserver = mkIf config.services.xserver.enable {
-      videoDrivers = singleton (if architecture.gpu == "amd" then
-        "amdgpu"
-      else if architecture.gpu == "intel" then
-        "intel"
-      else
-        "nvidia");
+      videoDrivers = singleton (
+        if architecture.gpu == "amd" then
+          "amdgpu"
+        else if architecture.gpu == "intel" then
+          "intel"
+        else
+          "nvidia"
+      );
     };
 
-    boot.kernelParams = mkIf (architecture == "intel") [ "i915.enable_guc=2" ];
+    boot.kernelParams = mkIf (architecture.gpu == "intel") [ "i915.enable_guc=2" ];
   };
 }

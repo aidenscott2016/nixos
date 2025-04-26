@@ -1,9 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   cfg = config.aiden.modules.nvidia;
   inherit (config.aiden) architecture;
-in {
+in
+{
   options.aiden.modules.nvidia = {
     enable = mkEnableOption "NVIDIA GPU configuration";
     prime = {
@@ -20,7 +26,7 @@ in {
     };
     package = mkOption {
       type = types.package;
-      default = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+      default = config.boot.kernelPackages.nvidiaPackages.stable;
       description = "NVIDIA driver package to use";
     };
   };
@@ -52,4 +58,4 @@ in {
       videoDrivers = [ "nvidia" ];
     };
   };
-} 
+}
