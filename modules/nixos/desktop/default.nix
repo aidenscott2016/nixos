@@ -1,6 +1,12 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-with lib.aiden; {
+with lib.aiden;
+{
   options.aiden.modules.desktop = {
     enable = mkEnableOption "Enable desktop configuration";
   };
@@ -8,6 +14,10 @@ with lib.aiden; {
   config = mkIf config.aiden.modules.desktop.enable {
     programs.nm-applet.enable = true;
     services = {
+      syncthing = {
+        enable = true;
+        openDefaultPorts = true;
+      };
       xserver.enable = true;
       envfs.enable = true;
       blueman.enable = true;
@@ -24,7 +34,9 @@ with lib.aiden; {
     };
     security.sudo.wheelNeedsPassword = false;
 
-    networking = { networkmanager.enable = true; };
+    networking = {
+      networkmanager.enable = true;
+    };
 
     systemd.network.wait-online.enable = false;
 
@@ -38,7 +50,8 @@ with lib.aiden; {
       keyd = enabled;
       powermanagement = enabled;
       yubikey = enabled;
-      flatpak = enabled;
+
+      # flatpak = enabled;        # breaks darkman due to xdg portal
       appimage = enabled;
       pipewire = enabled;
       ssh = enabled;
@@ -48,7 +61,7 @@ with lib.aiden; {
       hardware-acceleration = enabled;
       ios = enabled;
       cli-base = enabled;
-      xdg-portal = enabled;
+      #xdg-portal = enabled;
     };
 
     hardware.bluetooth.enable = true;
@@ -65,5 +78,7 @@ with lib.aiden; {
       vscode
       nodejs_22
     ];
+    users.users.syncthing.extraGroups = [ "video" ];
+    users.users.aiden.extraGroups = [ "syncthing" ];
   };
 }
