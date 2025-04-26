@@ -1,6 +1,8 @@
 { pkgs, inputs, ... }:
-let addons = inputs.firefox-addons.packages.${pkgs.system};
-in {
+let
+  addons = inputs.firefox-addons.packages.${pkgs.system};
+in
+{
   home.file.".tridactylrc".source = ./tridactylrc;
   programs.firefox = {
     enable = true;
@@ -15,6 +17,8 @@ in {
         tridactyl
         ublock-origin
         darkreader
+        tree-style-tab
+        bitwarden
       ];
       settings = {
         "privacy.resistFingerprinting" = false; # too annoying
@@ -34,8 +38,47 @@ in {
         "browser.urlbar.suggest.topsites" = false;
         "extensions.pocket.enabled" = false;
       };
+      search.engines = {
+        "HM Options" = {
+          urls = [
+            {
+              template = "https://home-manager-options.extranix.com/";
+              params = [
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
+
+          icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          definedAliases = [ "@hm" ];
+        };
+        "Nix Options" = {
+          urls = [
+            {
+              template = "https://search.nixos.org/options";
+              params = [
+                {
+                  name = "query";
+                  value = "{searchTerms}";
+                }
+              ];
+            }
+          ];
+
+          icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+          definedAliases = [ "@nix" ];
+        };
+        "NixOS Wiki" = {
+          urls = [ { template = "https://wiki.nixos.org/w/index.php?search={searchTerms}"; } ];
+          iconUpdateURL = "https://wiki.nixos.org/favicon.png";
+          updateInterval = 24 * 60 * 60 * 1000; # every day
+          definedAliases = [ "@nw" ];
+        };
+      };
     };
 
   };
 }
-
