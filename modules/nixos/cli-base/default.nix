@@ -1,4 +1,10 @@
-params@{ pkgs, lib, config, modulesPath,  ... }:
+params@{
+  pkgs,
+  lib,
+  config,
+  modulesPath,
+  ...
+}:
 with lib.aiden;
 enableableModule "cli-base" params {
   environment.systemPackages = with pkgs; [
@@ -60,13 +66,11 @@ enableableModule "cli-base" params {
     pkgs.unzip
     pkgs.zip
 
-
-
     powertop
     acpi
     ventoy-full
     libva-utils
     wol
+    htop
   ];
 }
-
