@@ -1,4 +1,9 @@
-_@{ lib, pkgs, config, ... }:
+_@{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
 with pkgs;
 let
@@ -10,7 +15,8 @@ let
   ];
   moonlightClient = optionals cfg.moonlight.client.enable [ moonlight-qt ];
 
-in {
+in
+{
   options = {
     aiden.modules."${moduleName}" = {
       steam.enable = mkEnableOption moduleName;
@@ -25,8 +31,16 @@ in {
     };
   };
   config = {
-    aiden.modules = { steam.enable = cfg.steam.enable; };
-    aiden.programs = { openttd.enable = cfg.games.openttd.enable; };
+    aiden.modules = {
+      steam.enable = cfg.steam.enable;
+    };
+    aiden.programs = {
+      openttd.enable = cfg.games.openttd.enable;
+    };
     environment.systemPackages = minecraftPackages ++ moonlightClient;
+
+    boot.kernelParams = [
+      "preempt=full" # may help with audio stuttering in proton games
+    ];
   };
 }
