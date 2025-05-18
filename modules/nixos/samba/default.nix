@@ -1,8 +1,19 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
-  inherit (lib) mkEnableOption mkIf mkOption types;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    types
+    ;
   cfg = config.aiden.modules.samba;
-in {
+in
+{
   options.aiden.modules.samba = {
     enable = mkEnableOption "Samba";
     shares = mkOption {

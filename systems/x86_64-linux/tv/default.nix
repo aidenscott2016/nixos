@@ -1,4 +1,11 @@
-{ config, inputs, lib, pkgs, systems, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  systems,
+  ...
+}:
 with lib.aiden;
 {
   imports = [
@@ -32,7 +39,6 @@ with lib.aiden;
       pulse.enable = true;
     };
 
-
     aiden.modules = {
       common = {
         domainName = "tv.sw1a1aa.uk";
@@ -48,10 +54,10 @@ with lib.aiden;
       steam.enable = false;
       locale = enabled;
     };
-    hardware.bluetooth.enable  = true;
+    hardware.bluetooth.enable = true;
     hardware.opengl = {
       enable = true;
-      extraPackages = with pkgs;[
+      extraPackages = with pkgs; [
         intel-media-driver # LIBVA_DRIVER_NAME=iHD
         intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
         intel-compute-runtime
@@ -60,7 +66,12 @@ with lib.aiden;
       driSupport = true;
     };
 
-    environment.systemPackages = with pkgs; [ firefox lm_sensors htop moonlight-qt];
+    environment.systemPackages = with pkgs; [
+      firefox
+      lm_sensors
+      htop
+      moonlight-qt
+    ];
 
     services.logrotate.checkConfig = false;
     boot = {

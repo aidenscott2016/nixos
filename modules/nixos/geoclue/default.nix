@@ -1,22 +1,31 @@
-params@{ pkgs, lib, config, ... }:
+params@{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let moduleName = "geoclue";
-in {
+let
+  moduleName = "geoclue";
+in
+{
   options = {
     aiden.modules.geoclue.enable = mkEnableOption moduleName;
     aiden.modules.geoclue.apps = mkOption {
-      type = types.attrsOf (types.submodule {
-        options = {
-          isAllowed = mkOption {
-            type = types.bool;
-            default = false;
+      type = types.attrsOf (
+        types.submodule {
+          options = {
+            isAllowed = mkOption {
+              type = types.bool;
+              default = false;
+            };
+            isSystem = mkOption {
+              type = types.bool;
+              default = false;
+            };
           };
-          isSystem = mkOption {
-            type = types.bool;
-            default = false;
-          };
-        };
-      });
+        }
+      );
       default = { };
       description = "Applications that need geolocation access";
     };
@@ -34,8 +43,7 @@ in {
         };
       };
       default = { };
-      description =
-        "Static location configuration when WiFi-based location is disabled";
+      description = "Static location configuration when WiFi-based location is disabled";
     };
   };
 
@@ -48,12 +56,8 @@ in {
 
     environment.etc = lib.mkIf (!config.services.geoclue2.enableWifi) {
       "geolocation".text = ''
-        ${
-          toString config.aiden.modules.geoclue.staticLocation.latitude
-        }   # latitude
-        ${
-          toString config.aiden.modules.geoclue.staticLocation.longitude
-        }  # longitude
+        ${toString config.aiden.modules.geoclue.staticLocation.latitude}   # latitude
+        ${toString config.aiden.modules.geoclue.staticLocation.longitude}  # longitude
         96           # altitude
         1.83         # accuracy radius
       '';

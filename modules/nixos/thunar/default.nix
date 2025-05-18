@@ -1,7 +1,11 @@
-params@{ pkgs, lib, config, ... }:
+params@{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib.aiden;
 enableableModule "thunar" params {
-
 
   programs.thunar.enable = true;
   programs.thunar.plugins = with pkgs.xfce; [

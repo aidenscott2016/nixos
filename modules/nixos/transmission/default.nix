@@ -1,8 +1,15 @@
-params@{ pkgs, lib, config, ... }:
+params@{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib.aiden;
 with lib;
-let web-port = 9091;
-in enableableModule "transmission" params {
+let
+  web-port = 9091;
+in
+enableableModule "transmission" params {
   services.transmission = {
     user = "aiden";
     openFirewall = true;

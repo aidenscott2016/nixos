@@ -4,8 +4,8 @@
 # sudo cryptsetup open /dev/nvme0n1p2
 # sudo ./result
 
-
-inputs@{ ... }: {
+inputs@{ ... }:
+{
   disko = {
     enableConfig = false;
     devices = {
@@ -64,7 +64,7 @@ inputs@{ ... }: {
             };
             root = {
               type = "lvm_lv";
-              size = "50G"; #too small
+              size = "50G"; # too small
               content = {
                 type = "filesystem";
                 format = "ext4";

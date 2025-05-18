@@ -1,15 +1,19 @@
-params@{ pkgs, lib, config, ... }:
+params@{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 let
-  deviceParams =
-    map (path: "--device=${path}") config.aiden.modules.home-assistant.devices;
+  deviceParams = map (path: "--device=${path}") config.aiden.modules.home-assistant.devices;
   enable = config.aiden.modules.home-assistant.enable;
   inherit (config.aiden.modules.common) domainName email;
   fqdn = "hass.${domainName}";
   container-name = "home-assistant";
-  service-name =
-    "${config.virtualisation.oci-containers.backend}-${container-name}";
-in {
+  service-name = "${config.virtualisation.oci-containers.backend}-${container-name}";
+in
+{
   options.aiden.modules.home-assistant = {
     enable = mkEnableOption "home-assistant";
     devices = mkOption {
@@ -45,12 +49,14 @@ in {
 
     services.mosquitto = {
       enable = true;
-      listeners = [{
-        users.homeassistant = {
-          acl = [ "readwrite #" ];
-          hashedPasswordFile = config.age.secrets.mosquittoPass.path;
-        };
-      }];
+      listeners = [
+        {
+          users.homeassistant = {
+            acl = [ "readwrite #" ];
+            hashedPasswordFile = config.age.secrets.mosquittoPass.path;
+          };
+        }
+      ];
     };
   };
 }

@@ -1,4 +1,11 @@
-{ config, inputs, lib, pkgs, systems, ... }:
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  systems,
+  ...
+}:
 let
   build = inputs.self.nixosConfigurations.pxe.config.system.build;
 in

@@ -1,6 +1,12 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
-with config.aiden.modules.router; {
+with config.aiden.modules.router;
+{
   options.aiden.modules.router = {
     enable = mkEnableOption "router";
     internalInterface = mkOption { type = types.str; };

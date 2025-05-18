@@ -1,10 +1,16 @@
-params@{ pkgs, lib, config, ... }:
+params@{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib.aiden;
 with lib;
 let
   inherit (config.aiden.modules.common) domainName email;
   cfg = config.aiden.modules.reverseProxy;
-in {
+in
+{
   options.aiden.modules.reverseProxy = {
     enable = mkEnableOption "";
     apps = lib.aiden.types.mkReverseProxyAppsOption;
@@ -33,7 +39,9 @@ in {
           };
         };
       };
-      dynamicConfigOptions = { http = toLocalReverseProxy cfg.apps; };
+      dynamicConfigOptions = {
+        http = toLocalReverseProxy cfg.apps;
+      };
     };
   };
 }

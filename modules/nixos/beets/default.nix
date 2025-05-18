@@ -1,7 +1,13 @@
-_@{ lib, pkgs, config, ... }:
+_@{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
 let
-  beet-override = with pkgs;
+  beet-override =
+    with pkgs;
     (beets.override {
       pluginOverrides = {
         #fetchart
@@ -12,7 +18,8 @@ let
         };
       };
     });
-in {
+in
+{
   options = {
     aiden.programs.beets.enable = mkEnableOption "beets";
   };
@@ -20,4 +27,4 @@ in {
   config = mkIf config.aiden.programs.beets.enable {
     environment.systemPackages = [ beet-override ];
   };
-} 
+}

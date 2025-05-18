@@ -1,8 +1,15 @@
 # https://wiki.nixos.org/wiki/Keyd
-_@{ lib, pkgs, config, ... }:
+_@{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
-let moduleName = "keyd";
-in {
+let
+  moduleName = "keyd";
+in
+{
   options = {
     aiden.modules.${moduleName}.enable = mkEnableOption moduleName;
   };
@@ -26,8 +33,7 @@ in {
             };
             otherlayer = { };
           };
-          extraConfig = ''
-          '';
+          extraConfig = '''';
         };
       };
     };

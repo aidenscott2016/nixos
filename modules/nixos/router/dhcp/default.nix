@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   dnsmasqEnable = config.aiden.modules.router.dnsmasq.enable;
@@ -11,12 +16,12 @@ in
       enable = true;
       resolveLocalQueries = false;
       settings = {
-        address="/sw1a1aa.uk/10.0.1.1";
+        address = "/sw1a1aa.uk/10.0.1.1";
 
         domain = "sw1a1aa.uk,10.0.0.0/16,local";
         # upstream DNS
         server = [
-          "10.0.0.1#5354" #adguard
+          "10.0.0.1#5354" # adguard
         ];
         no-resolv = true;
         bogus-priv = true;

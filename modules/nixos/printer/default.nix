@@ -1,4 +1,9 @@
-params@{ pkgs, lib, config, ... }:
+params@{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib.aiden;
 enableableModule "printer" params {
   services = {

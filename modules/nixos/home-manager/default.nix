@@ -1,8 +1,15 @@
-params@{ lib, pkgs, config, ... }:
+params@{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
-let moduleName = "home-manager";
-in {
-  options = { 
+let
+  moduleName = "home-manager";
+in
+{
+  options = {
     aiden.modules.home-manager.enable = mkEnableOption moduleName;
   };
 
@@ -14,4 +21,4 @@ in {
     # Configure home-manager for the user
     home-manager.users.aiden = { };
   };
-} 
+}

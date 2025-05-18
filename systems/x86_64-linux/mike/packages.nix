@@ -1,4 +1,12 @@
-params@{ config, pkgs, inputs, channels, lib, ... }: {
+params@{
+  config,
+  pkgs,
+  inputs,
+  channels,
+  lib,
+  ...
+}:
+{
   environment.systemPackages = with pkgs; [
     bitwarden-desktop
   ];

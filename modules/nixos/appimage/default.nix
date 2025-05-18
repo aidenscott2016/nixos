@@ -1,8 +1,14 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.aiden.modules.appimage;
-in {
+in
+{
   options.aiden.modules.appimage = {
     enable = mkEnableOption "appimage";
   };
@@ -21,4 +27,4 @@ in {
       "/share/applications"
     ];
   };
-} 
+}

@@ -1,7 +1,14 @@
-params@{ lib, pkgs, config, ... }:
+params@{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
-let moduleName = "virtualisation";
-in {
+let
+  moduleName = "virtualisation";
+in
+{
   options = {
     aiden.modules.virtualisation.enable = mkEnableOption moduleName;
   };

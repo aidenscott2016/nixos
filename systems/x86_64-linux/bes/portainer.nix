@@ -14,7 +14,8 @@
     image = "docker.io/portainer/portainer-ce";
     volumes = [
       "/run/docker.sock:/var/run/docker.sock:rw,Z"
-      "portainer_data:/data:rw,Z"    ];
+      "portainer_data:/data:rw,Z"
+    ];
     ports = [
       "9000:9000/tcp"
     ];

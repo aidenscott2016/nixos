@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   programs.git = {
     enable = true;
     userName = "Aiden";
@@ -8,7 +14,9 @@
       pull.rebase = true;
       rerere.enabled = true;
       help.autocorrect = -1;
-      core = { excludesfile = "${./gitignore}"; };
+      core = {
+        excludesfile = "${./gitignore}";
+      };
       push = {
         autoSetupRemote = true;
         default = "current";
