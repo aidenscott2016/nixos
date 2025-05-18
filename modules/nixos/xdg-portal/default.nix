@@ -17,9 +17,15 @@ in
     xdg.portal = {
       enable = true;
       config.common = {
-        default = "*";
+        default = [ "gtk" ];
+        "org.freedesktop.impl.portal.Secrets" = [ "none" ];
+        "org.freedesktop.impl.portal.Inhibit" = [ "none" ];
+        "org.freedesktop.impl.portal.Settings" = [ "darkman" ];
       };
-      extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+        pkgs.darkman
+      ];
       xdgOpenUsePortal = true;
     };
   };

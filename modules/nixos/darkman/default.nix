@@ -18,6 +18,7 @@ in
       "/share/applications"
     ];
 
+    aiden.modules.xdg-portal.enable = false;
     aiden.modules.geoclue = {
       enable = true;
       apps.darkman = {
