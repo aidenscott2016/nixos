@@ -1,36 +1,49 @@
-{ config, pkgs, lib, ... }:
-with lib.aiden; {
-  imports = [ ./hardware-configuration.nix ];
+{
+  config,
+  pkgs,
+  lib,
+  myModulesPath,
+  inputs,
+  ...
+}:
+{
+  imports = [
+    ./packages.nix
+    inputs.dwm.nixosModules.default
+    inputs.nixos-facter-modules.nixosModules.facter
+    inputs.disko.nixosModules.default
+    ./disk-configuration.nix
+  ];
 
-  aiden.modules = {
-    locale = enabled;
-    common = enabled;
-    ssh = enabled;
+  facter.reportPath = ./facter.json;
+
+  networking.interfaces.enp6s0.wakeOnLan.enable = true;
+  services.physlock.enable = lib.mkForce false;
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "aiden";
   };
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.networkmanager.enable = true;
-
-  security.sudo.wheelNeedsPassword = false;
-  services.openssh.enable = true;
-
-  boot.initrd.luks.devices = {
-    root = {
-      device = "/dev/disk/by-label/870-evo";
-      preLVM = true;
+  aiden = {
+    architecture = {
+      cpu = "amd";
+      gpu = "amd";
+    };
+    modules = {
+      desktop.enable = true;
+      gaming = {
+        games.oblivionSync.enable = true;
+        steam.enable = true;
+        moonlight.client.enable = true;
+        moonlight.server.enable = true;
+      };
+      virtualisation.enable = true;
+      home-manager.enable = true;
+      nix.enable = true;
     };
   };
-  networking.hostName = "desktop";
 
+  system.stateVersion = "22.05";
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-
-  environment.systemPackages = with pkgs; [ git udiskie ];
-
-  system.stateVersion = "23.05";
-  services.udisks2.enable = true;
+  boot.loader.systemd-boot.enable = true;
 
 }
-
