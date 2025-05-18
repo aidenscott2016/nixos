@@ -80,4 +80,6 @@
   };
 
   systemd.network.wait-online.enable = false;
+
+  services.iperf3.enable = true;
 }
