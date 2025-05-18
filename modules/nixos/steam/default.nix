@@ -23,6 +23,8 @@ enableableModule "steam" params {
   environment.systemPackages = [
     steamtinkerlaunch-git
   ];
+
+  # game mode module
   programs.gamemode.enable = true;
   programs.gamemode.enableRenice = true;
   programs.gamemode.settings = {

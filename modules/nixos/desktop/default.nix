@@ -63,6 +63,7 @@ with lib.aiden;
 
     hardware.bluetooth.enable = true;
     environment.systemPackages = with pkgs; [
+      bindfs
       xorg.xev
 
       (discord.override { withTTS = false; })
@@ -76,5 +77,6 @@ with lib.aiden;
       vscode
       nodejs_22
     ];
+
   };
 }
