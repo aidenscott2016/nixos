@@ -25,14 +25,21 @@ in
         client.enable = mkEnableOption "enable moonlight client";
       };
       games = {
+        oblivionSync.enable = mkEnableOption "sync oblivion saves via syncthing";
         openttd.enable = mkEnableOption "enable openttd game";
         minecraft.enable = mkEnableOption "enable minecraft game";
       };
     };
   };
   config = {
+    services.sunshine = mkIf cfg.moonlight.server.enable {
+      enable = true;
+      openFirewall = true;
+    };
     aiden.modules = {
       steam.enable = cfg.steam.enable;
+      oblivionSync.enable = cfg.games.oblivionSync.enable;
+
     };
     aiden.programs = {
       openttd.enable = cfg.games.openttd.enable;

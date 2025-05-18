@@ -11,9 +11,9 @@ let
 in
 {
   options = {
-    aiden.modules.${moduleName}.enabled = mkEnableOption moduleName;
+    aiden.modules.${moduleName}.enable = mkEnableOption moduleName;
   };
-  config = mkIf cfg.enabled {
+  config = mkIf cfg.enable {
 
     users.users.syncthing.extraGroups = [ "video" ];
     users.users.aiden.extraGroups = [ "syncthing" ];

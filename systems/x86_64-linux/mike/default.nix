@@ -26,6 +26,7 @@
     modules = {
       desktop.enable = true;
       gaming = {
+        games.oblivionSync.enable = true;
         steam.enable = true;
         moonlight.client.enable = true;
       };
