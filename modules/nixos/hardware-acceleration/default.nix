@@ -33,7 +33,7 @@ in
             libva
           ]
           ++ optional (architecture.gpu == "amd") amdvlk
-          ++ optionals (architecture.gpu == "intel") [
+          ++ optionals (architecture.cpu == "intel") [
             vpl-gpu-rt
             intel-media-driver # LIBVA_DRIVER_NAME=iHD
             intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
@@ -54,6 +54,7 @@ in
       );
     };
 
-    boot.kernelParams = mkIf (architecture.gpu == "intel") [ "i915.enable_guc=2" ];
+    boot.kernelParams = mkIf (architecture.cpu == "intel") [ "i915.enable_guc=2" ];
+    environment.systemPackages = with pkgs; [ nvtopPackages.full ];
   };
 }
