@@ -1,8 +1,14 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.aiden.modules.pipewire;
-in {
+in
+{
   options.aiden.modules.pipewire = {
     enable = mkEnableOption "pipewire";
   };
@@ -22,4 +28,4 @@ in {
       easyeffects
     ];
   };
-} 
+}

@@ -1,5 +1,13 @@
-{ config, lib, pkgs, inputs, modulesPath, ... }:
-with inputs; {
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  modulesPath,
+  ...
+}:
+with inputs;
+{
   imports = [
     "${modulesPath}/installer/sd-card/sd-image-aarch64-new-kernel-no-zfs-installer.nix" # gives bootloader, sd paritition expansion etc
     agenix.nixosModules.default
@@ -16,15 +24,26 @@ with inputs; {
   networking.firewall = {
     enable = true;
     trustedInterfaces = [ "tailscale0" ];
-    allowedUDPPorts = [ 8081 53 ];
-    allowedTCPPorts = [ 8081 53 ];
+    allowedUDPPorts = [
+      8081
+      53
+    ];
+    allowedTCPPorts = [
+      8081
+      53
+    ];
   };
 
-  environment.systemPackages = with pkgs; [ dnsutils tailscale jq ];
+  environment.systemPackages = with pkgs; [
+    dnsutils
+    tailscale
+    jq
+  ];
   networking.usePredictableInterfaceNames = true;
-  boot.kernel.sysctl = { "net.ipv4.conf.all.forwarding" = true; };
+  boot.kernel.sysctl = {
+    "net.ipv4.conf.all.forwarding" = true;
+  };
   # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1008362877
-
 
   aiden = {
     modules = {
@@ -37,7 +56,6 @@ with inputs; {
       locale.enable = true;
     };
   };
-
 
   services = {
     adguardhome = {

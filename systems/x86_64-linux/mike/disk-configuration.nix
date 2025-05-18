@@ -28,7 +28,9 @@
                 # if you want to use the key for interactive login be sure there is no trailing newline
                 # for example use `echo -n "password" > /tmp/secret.key`
                 passwordFile = "/tmp/secret.key"; # Same key for both devices
-                settings = { allowDiscards = true; };
+                settings = {
+                  allowDiscards = true;
+                };
               };
             };
           };
@@ -46,7 +48,9 @@
                 type = "luks";
                 name = "p2";
                 passwordFile = "/tmp/secret.key"; # Same key for both devices
-                settings = { allowDiscards = true; };
+                settings = {
+                  allowDiscards = true;
+                };
                 content = {
                   type = "btrfs";
                   extraArgs = [
@@ -56,11 +60,19 @@
                   subvolumes = {
                     "/root" = {
                       mountpoint = "/";
-                      mountOptions = [ "rw" "relatime" "ssd" ];
+                      mountOptions = [
+                        "rw"
+                        "relatime"
+                        "ssd"
+                      ];
                     };
                     "/home" = {
                       mountpoint = "/home";
-                      mountOptions = [ "rw" "relatime" "ssd" ];
+                      mountOptions = [
+                        "rw"
+                        "relatime"
+                        "ssd"
+                      ];
                     };
                   };
                 };

@@ -1,5 +1,13 @@
-{ config, pkgs, lib, myModulesPath, inputs, ... }:
-with lib.aiden; {
+{
+  config,
+  pkgs,
+  lib,
+  myModulesPath,
+  inputs,
+  ...
+}:
+with lib.aiden;
+{
   imports = [
     ./hardware-configuration.nix
     ./packages.nix

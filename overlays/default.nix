@@ -5,11 +5,10 @@
   # with the input `nixpkgs` there will be a channel available at `channels.nixpkgs`.
   # These channels are system-specific instances of NixPkgs that can be used to quickly
   # pull packages into your overlay.
-  channels
-, # The namespace used for your Flake, defaulting to "internal" if not set.
- # Inputs from your flake.
-  inputs
-, ...
+  channels, # The namespace used for your Flake, defaulting to "internal" if not set.
+  # Inputs from your flake.
+  inputs,
+  ...
 }:
 
 final: prev: {

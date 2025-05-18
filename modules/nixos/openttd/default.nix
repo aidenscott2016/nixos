@@ -1,5 +1,11 @@
-_@{ lib, pkgs, config, ... }:
-with lib; {
+_@{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+with lib;
+{
   options = {
     aiden.programs.openttd.enable = mkEnableOption "install openttd";
   };

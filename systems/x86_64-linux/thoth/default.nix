@@ -2,10 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
 
-{ config, pkgs, inputs, modulesPath, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  modulesPath,
+  ...
+}:
 
-
-with inputs; {
+with inputs;
+{
   imports = [
     ./hardware-configuration.nix
     disko.nixosModules.disko
@@ -30,8 +36,10 @@ with inputs; {
     ];
   };
 
-  environment.systemPackages = with pkgs; [ dnsutils tailscale ];
-
+  environment.systemPackages = with pkgs; [
+    dnsutils
+    tailscale
+  ];
 
   aiden = {
     modules = {
@@ -56,4 +64,3 @@ with inputs; {
   system.stateVersion = "23.05"; # Did you read the comment?
 
 }
-

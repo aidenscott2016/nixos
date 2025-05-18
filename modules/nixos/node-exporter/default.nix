@@ -1,4 +1,11 @@
-params@{ pkgs, lib, config, inputs, ... }:{}
+params@{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}:
+{ }
 # with lib;
 # with lib.types;
 # let
@@ -10,7 +17,7 @@ params@{ pkgs, lib, config, inputs, ... }:{}
 #     fqdn = mkOption {
 #       type = types.str;
 #       default = config.modules.common.domainName;
-      
+
 #     };
 #   };
 #   config = mkIf cfg.enable {
@@ -83,4 +90,3 @@ params@{ pkgs, lib, config, inputs, ... }:{}
 #     networking.firewall.allowedTCPPorts = [ 443 ];
 #   };
 # }
-

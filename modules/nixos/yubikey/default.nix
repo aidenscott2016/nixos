@@ -1,8 +1,15 @@
-params@{ pkgs, lib, config, ... }:
+params@{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
-let moduleName = "yubikey";
-in {
-  options = { 
+let
+  moduleName = "yubikey";
+in
+{
+  options = {
     aiden.modules."${moduleName}".enable = mkEnableOption moduleName;
   };
 

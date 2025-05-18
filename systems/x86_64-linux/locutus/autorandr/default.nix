@@ -1,7 +1,14 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
-let cfg = config.services.autorandr;
-in {
+let
+  cfg = config.services.autorandr;
+in
+{
   services.autorandr = {
     enable = true;
     defaultTarget = "99-default";
@@ -30,4 +37,3 @@ in {
   };
   environment.etc."xdg/autorandr".source = ./profiles;
 }
-

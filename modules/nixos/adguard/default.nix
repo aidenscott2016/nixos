@@ -1,4 +1,9 @@
-params@{ pkgs, lib, config, ... }:
+params@{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib.aiden;
 let
   http_port = 8081;
@@ -12,17 +17,16 @@ enableableModule "adguard" params {
       http.address = "10.0.1.1:8081";
       dns.bind_hosts = [ "10.0.0.1" ];
       dns.port = 5354; # mdns uses 5353
-      users = [{
-        name = "admin";
-        password =
-          "$2a$12$IVkJmQHIbxzi1G/HbvGZCuj16cVJ.kT8RrUz8TIaqcs04DcbSnkOi ";
-      }];
+      users = [
+        {
+          name = "admin";
+          password = "$2a$12$IVkJmQHIbxzi1G/HbvGZCuj16cVJ.kT8RrUz8TIaqcs04DcbSnkOi ";
+        }
+      ];
     };
   };
 
   networking.hosts."10.0.1.1" = [ fqdn ];
-
-
 
   services.traefik = {
     dynamicConfigOptions = {
@@ -30,9 +34,7 @@ enableableModule "adguard" params {
       http.routers.adguard.entrypoints = "websecure";
       http.routers.adguard.rule = "Host(`${fqdn}`)";
       http.routers.adguard.tls = "true";
-      http.services.adguard.loadbalancer.servers = [{ url = "http://10.0.1.1:8081"; }];
+      http.services.adguard.loadbalancer.servers = [ { url = "http://10.0.1.1:8081"; } ];
     };
   };
 }
-  
-

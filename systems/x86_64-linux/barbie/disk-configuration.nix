@@ -56,7 +56,7 @@
             };
           };
           home = {
-              size = "+100%FREE";
+            size = "+100%FREE";
             content = {
               type = "filesystem";
               format = "ext4";

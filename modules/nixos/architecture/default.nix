@@ -1,16 +1,29 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 with lib;
 let
   cfg = config.aiden.architecture;
-in {
+in
+{
   options.aiden.architecture = {
     cpu = mkOption {
-      type = types.enum [ "amd" "intel" ];
+      type = types.enum [
+        "amd"
+        "intel"
+      ];
       description = "CPU architecture";
     };
     gpu = mkOption {
-      type = types.enum [ "amd" "intel" "nvidia" ];
+      type = types.enum [
+        "amd"
+        "intel"
+        "nvidia"
+      ];
       description = "GPU architecture";
     };
   };
-} 
+}

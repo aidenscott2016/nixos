@@ -1,4 +1,9 @@
-params@{ pkgs, lib, config, ... }:
+params@{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib.aiden;
 let
   inherit (config.aiden.modules.common) domainName email;
@@ -18,7 +23,6 @@ enableableModule "traefik" params {
     };
   };
 
-
   users.users.traefik.extraGroups = [ "acme" ]; # to read acme folder
   services.traefik = {
     enable = true;
@@ -28,7 +32,12 @@ enableableModule "traefik" params {
         dashboard = true;
         insecure = true;
       };
-      accessLog = { fields = { defaultMode = "keep"; headers.defaultMode = "keep"; }; };
+      accessLog = {
+        fields = {
+          defaultMode = "keep";
+          headers.defaultMode = "keep";
+        };
+      };
       global = {
         checkNewVersion = false;
         sendAnonymousUsage = false;
@@ -47,7 +56,7 @@ enableableModule "traefik" params {
         routers = {
           bes = {
             service = "bes";
-            priority= 1; # 1 is low
+            priority = 1; # 1 is low
             entrypoints = "websecure";
             rule = "HostRegexp(`^.+\.sw1a1aa\.uk$`)";
             tls = true;
@@ -58,7 +67,7 @@ enableableModule "traefik" params {
             loadbalancer = {
               serversTransport = "bes";
               passHostHeader = true;
-              servers = [{ url = "https://bes.sw1a1aa.uk"; }];
+              servers = [ { url = "https://bes.sw1a1aa.uk"; } ];
             };
           };
         };

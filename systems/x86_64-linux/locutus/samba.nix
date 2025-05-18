@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 {
   # mounts the desktop windows computer
   # For mount.cifs, required unless domain name resolution is not needed.
@@ -14,7 +19,6 @@
   #     in
   #     [ "${automount_opts},${auth} " ];
   # };
-
 
   # make shares visible for windows 10 clients
   services.samba-wsdd.enable = true;
@@ -42,12 +46,14 @@
     };
   };
 
-
-
-  networking.firewall.allowedTCPPorts = [ 445 139 ];
-  networking.firewall.allowedUDPPorts = [ 137 138 ];
-
-
+  networking.firewall.allowedTCPPorts = [
+    445
+    139
+  ];
+  networking.firewall.allowedUDPPorts = [
+    137
+    138
+  ];
 
   # mDNS
   #
