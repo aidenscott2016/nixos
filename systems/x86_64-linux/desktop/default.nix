@@ -29,6 +29,7 @@
     };
     modules = {
       desktop.enable = true;
+      desktop.powermanagement.enable = false;
       gaming = {
         games.oblivionSync.enable = true;
         steam.enable = true;

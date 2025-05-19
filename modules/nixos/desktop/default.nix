@@ -4,11 +4,16 @@
   pkgs,
   ...
 }:
-with lib;
 with lib.aiden;
+with lib;
 {
   options.aiden.modules.desktop = {
     enable = mkEnableOption "Enable desktop configuration";
+    powermanagement.enable = mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "fuck you";
+    };
   };
 
   config = mkIf config.aiden.modules.desktop.enable {
@@ -40,7 +45,7 @@ with lib.aiden;
       thunar = enabled;
       locale = enabled;
       keyd = enabled;
-      powermanagement = enabled;
+      powermanagement.enable = config.aiden.modules.desktop.powermanagement.enable;
       yubikey = enabled;
 
       # flatpak = enabled;        # breaks darkman due to xdg portal
