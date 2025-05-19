@@ -17,11 +17,6 @@ with lib.aiden;
       xserver.enable = true;
       envfs.enable = true;
       blueman.enable = true;
-      physlock = {
-        muteKernelMessages = true;
-        enable = true;
-        lockOn.suspend = true;
-      };
       tailscale.enable = true;
       mullvad-vpn.enable = true;
       gvfs.enable = true;

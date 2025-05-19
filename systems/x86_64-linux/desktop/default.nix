@@ -18,7 +18,6 @@
   facter.reportPath = ./facter.json;
 
   networking.interfaces.enp6s0.wakeOnLan.enable = true;
-  services.physlock.enable = lib.mkForce false;
   services.displayManager.autoLogin = {
     enable = true;
     user = "aiden";
