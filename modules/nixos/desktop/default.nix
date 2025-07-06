@@ -71,7 +71,7 @@ with lib;
       chromium
       xclip
       libreoffice
-      okular
+      kdePackages.okular
       bitwarden-desktop
 
       vscode

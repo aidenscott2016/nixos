@@ -68,7 +68,7 @@ enableableModule "cli-base" params {
 
     powertop
     acpi
-    ventoy-full
+    #ventoy-full
     libva-utils
     wol
     htop

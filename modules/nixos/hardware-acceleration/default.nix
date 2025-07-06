@@ -8,6 +8,8 @@ with lib;
 let
   cfg = config.aiden.modules.hardware-acceleration;
   inherit (config.aiden) architecture;
+  jovian = config.aiden.modules.jovian;
+  hasJovianMesa = jovian.enable && config.jovian.steamos.enableMesaPatches;
 in
 {
   options.aiden.modules.hardware-acceleration = {
@@ -23,16 +25,24 @@ in
     hardware = {
       enableAllFirmware = true;
       enableRedistributableFirmware = true;
+      amdgpu = mkIf (architecture.gpu == "amd") {
+        amdvlk = {
+          enable = true;
+          support32Bit.enable = true;
+        };
+
+        initrd.enable = true;
+      };
 
       graphics = {
         enable = true;
         extraPackages =
           with pkgs;
           [
-            mesa
             libva
           ]
-          ++ optional (architecture.gpu == "amd") amdvlk
+          ++ optionals (!hasJovianMesa) [ mesa ]
+          ++ optionals (architecture.gpu == "amd") [ amdvlk ]
           ++ optionals (architecture.cpu == "intel") [
             vpl-gpu-rt
             intel-media-driver # LIBVA_DRIVER_NAME=iHD
@@ -54,7 +64,8 @@ in
       );
     };
 
-    boot.kernelParams = mkIf (architecture.cpu == "intel") [ "i915.enable_guc=2" ];
+    boot.kernelParams = optionals (architecture.cpu == "intel") [ "i915.enable_guc=2" ];
+
     environment.systemPackages = with pkgs; [ nvtopPackages.full ];
   };
 }

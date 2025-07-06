@@ -6,7 +6,7 @@
 }:
 {
   services.easyeffects = {
-    enable = true;
+    enable = false;
     preset = "voice-chat";
   };
 }

@@ -35,6 +35,7 @@ in
     services.sunshine = mkIf cfg.moonlight.server.enable {
       enable = true;
       openFirewall = true;
+      capSysAdmin = true;
     };
     aiden.modules = {
       steam.enable = cfg.steam.enable;
