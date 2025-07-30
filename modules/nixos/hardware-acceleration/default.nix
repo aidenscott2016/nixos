@@ -8,8 +8,6 @@ with lib;
 let
   cfg = config.aiden.modules.hardware-acceleration;
   inherit (config.aiden) architecture;
-  jovian = config.aiden.modules.jovian;
-  hasJovianMesa = jovian.enable && config.jovian.steamos.enableMesaPatches;
 in
 {
   options.aiden.modules.hardware-acceleration = {
@@ -40,8 +38,8 @@ in
           with pkgs;
           [
             libva
+            mesa
           ]
-          ++ optionals (!hasJovianMesa) [ mesa ]
           ++ optionals (architecture.gpu == "amd") [ amdvlk ]
           ++ optionals (architecture.cpu == "intel") [
             vpl-gpu-rt
