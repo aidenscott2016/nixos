@@ -23,6 +23,7 @@ in
     hardware = {
       enableAllFirmware = true;
       enableRedistributableFirmware = true;
+      intel-gpu-tools.enable = true;
       amdgpu = mkIf (architecture.gpu == "amd") {
         amdvlk = {
           enable = true;
@@ -42,10 +43,15 @@ in
           ]
           ++ optionals (architecture.gpu == "amd") [ amdvlk ]
           ++ optionals (architecture.cpu == "intel") [
-            vpl-gpu-rt
-            intel-media-driver # LIBVA_DRIVER_NAME=iHD
-            intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-            intel-compute-runtime
+            #intel-compute-runtime
+            intel-media-driver-stable # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
+            libva-vdpau-driver # Previously vaapiVdpau
+            # # OpenCL support for intel CPUs before 12th gen
+            # # see: https://github.com/NixOS/nixpkgs/issues/356535
+            intel-compute-runtime-legacy1
+            vpl-gpu-rt # QSV on 11th gen or newer
+            intel-ocl # OpenCL support
+            onevpl-intel-gpu
           ]
           ++ cfg.extraPackages;
       };
@@ -62,7 +68,9 @@ in
       );
     };
 
-    boot.kernelParams = optionals (architecture.cpu == "intel") [ "i915.enable_guc=2" ];
+    boot.kernelParams = optionals (architecture.cpu == "intel") [
+      "i915.enable_guc=3"
+    ];
 
     environment.systemPackages = with pkgs; [ nvtopPackages.full ];
   };
