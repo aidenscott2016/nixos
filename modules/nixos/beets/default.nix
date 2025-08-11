@@ -2,6 +2,7 @@ _@{
   lib,
   pkgs,
   config,
+  inputs,
   ...
 }:
 with lib;
@@ -10,7 +11,11 @@ let
     with pkgs;
     (beets.override {
       pluginOverrides = {
-        #fetchart
+        fetchart.enable = true;
+        bandcamp = {
+          enable = true;
+          propagatedBuildInputs = [ inputs.self.packages.x86_64-linux.beetcamp ];
+        };
         discogs.enable = true;
         copyartifacts = {
           enable = true;

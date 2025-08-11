@@ -25,8 +25,11 @@ python3Packages.buildPythonApplication {
     python3Packages.poetry-core
   ];
 
-  dependencies = [
+  nativeBuildInputs = [
     beets
+  ];
+
+  dependencies = [
     python3Packages.pycountry
     python3Packages.httpx
     python3Packages.packaging
