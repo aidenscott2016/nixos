@@ -70,13 +70,6 @@
       };
       users.users.sonarr.extraGroups = [ "video" ];
 
-      nixpkgs.config.permittedInsecurePackages = [
-        "aspnetcore-runtime-wrapped-6.0.36"
-        "aspnetcore-runtime-6.0.36"
-        "dotnet-sdk-wrapped-6.0.428"
-        "dotnet-sdk-6.0.428"
-      ];
-
       services.radarr = {
         enable = true;
         group = "video";
@@ -101,18 +94,17 @@
       ];
 
       aiden = {
-
         architecture = {
           cpu = "intel";
           gpu = "intel";
         };
-
         programs.beets.enable = true;
         modules = {
           syncthing.enable = true;
           powermanagement.enable = true;
           cli-base.enable = true;
           locale.enable = true;
+          navidrome.enable = true;
           reverseProxy = {
             enable = true;
             apps = [
@@ -158,7 +150,7 @@
             enable = true;
           };
           samba = {
-            enable = true;
+            enable = false;
             shares.t7 = {
               path = "/media/t7";
               writable = "true";
