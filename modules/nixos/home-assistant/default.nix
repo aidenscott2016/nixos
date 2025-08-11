@@ -29,6 +29,8 @@ in
     systemd.services.${service-name}.after = [ "traefik.service" ];
     networking.hosts."10.0.1.1" = [ fqdn ];
 
+    virtualisation.podman.dockerSocket.enable = true;
+    virtualisation.podman.dockerCompat = true;
     virtualisation.oci-containers = {
       backend = "podman";
       containers.${container-name} = {
@@ -38,8 +40,8 @@ in
           "traefik.enable" = "true";
           "traefik.http.routers.hass.rule" = "Host(`${fqdn}`)";
           "traefik.http.routers.hass.tls" = "true";
-          "traefik.http.services.hass.loadbalancer.server.url" = "10.0.0.1";
-          "traefik.http.services.hass.loadbalancer.server.port" = "8123";
+          "traefik.http.services.hass.loadbalancer.server.url" = "http://10.0.0.1:8123";
+          #"traefik.http.services.hass.loadbalancer.server.port" = "8123";
           "traefik.http.routers.hass.entrypoints" = "websecure";
         };
         image = "ghcr.io/home-assistant/home-assistant:stable";
@@ -58,5 +60,16 @@ in
         }
       ];
     };
+
+    # services.traefik = {
+    #   dynamicConfigOptions = {
+    #     http.routers.hass.service = "hass";
+    #     http.routers.hass.entrypoints = "websecure";
+    #     http.routers.hass.rule = "Host(`${fqdn}`)";
+    #     http.routers.hass.tls = "true";
+    #     "http.services.hass.loadbalancer.server.url" = "10.0.0.1";
+    #     "http.services.hass.loadbalancer.server.port" = "8123";
+    #   };
+    # };
   };
 }
