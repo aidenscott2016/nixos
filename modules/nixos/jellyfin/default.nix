@@ -8,6 +8,7 @@ with lib;
 with lib.options;
 let
   cfg = config.aiden.modules.jellyfin;
+  driver = "iHD";
 in
 {
   options.aiden.modules.jellyfin = {
@@ -32,6 +33,10 @@ in
         enable = true;
         openFirewall = false;
       };
+    };
+    systemd.services.jellyfin.environment.LIBVA_DRIVER_NAME = driver;
+    environment.sessionVariables = {
+      LIBVA_DRIVER_NAME = driver;
     };
 
   };
