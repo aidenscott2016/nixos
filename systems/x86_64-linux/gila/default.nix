@@ -13,6 +13,7 @@
     #./monitoring.nix
     inputs.disko.nixosModules.default
     inputs.agenix.nixosModules.default
+    inputs.switch-fix.nixosModules.switch-fix
   ];
 
   age.secrets.mosquittoPass.file = "${inputs.self.outPath}/secrets/mosquitto-pass.age";

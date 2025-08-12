@@ -748,7 +748,8 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
         "snowfall-lib": "snowfall-lib",
-        "steamtinkerlaunch": "steamtinkerlaunch"
+        "steamtinkerlaunch": "steamtinkerlaunch",
+        "switch-fix": "switch-fix"
       }
     },
     "snowfall-lib": {
@@ -802,6 +803,26 @@
       "original": {
         "owner": "sonic2kk",
         "repo": "steamtinkerlaunch",
+        "type": "github"
+      }
+    },
+    "switch-fix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1754420485,
+        "narHash": "sha256-Wpw7iS7YXoDdczIvSIUKY2Kc5eiYt0yQXwQzXquucb4=",
+        "owner": "femtodata",
+        "repo": "nix-utils",
+        "rev": "48b5069d59a5a3cec51a35ce1f03ab0d359cc070",
+        "type": "github"
+      },
+      "original": {
+        "owner": "femtodata",
+        "repo": "nix-utils",
         "type": "github"
       }
     },
