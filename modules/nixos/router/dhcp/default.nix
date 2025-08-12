@@ -28,7 +28,6 @@ in
         domain-needed = true;
         expand-hosts = true;
         dhcp-range = [
-          "set:admin,10.0.0.200,10.0.0.250,255.255.255.0,12h"
           "set:lan,10.0.1.200,10.0.1.250,255.255.255.0,12h"
           "set:iot,10.0.2.200,10.0.2.250,255.255.255.0,12h"
           "set:guest,10.0.3.200,10.0.3.250,255.255.255.0,12h"
@@ -36,9 +35,6 @@ in
 
         ];
         dhcp-option = [
-          "tag:admin,option:router,10.0.0.1"
-          "tag:admin,option:dns-server,10.0.0.1"
-
           "tag:lan,option:router,10.0.1.1"
           "tag:lan,option:dns-server,10.0.1.1"
 
