@@ -15,7 +15,7 @@ enableableModule "adguard" params {
     enable = true;
     settings = {
       http.address = "10.0.1.1:8081";
-      dns.bind_hosts = [ "10.0.0.1" ];
+      dns.bind_hosts = [ "127.0.0.2" ];
       dns.port = 5354; # mdns uses 5353
       users = [
         {

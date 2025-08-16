@@ -21,7 +21,7 @@ in
         domain = "sw1a1aa.uk,10.0.0.0/16,local";
         # upstream DNS
         server = [
-          "10.0.0.1#5354" # adguard
+          "127.0.0.2#5354" # adguard
         ];
         no-resolv = true;
         bogus-priv = true;
