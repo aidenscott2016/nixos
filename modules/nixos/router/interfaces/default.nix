@@ -14,85 +14,157 @@ let
 in
 {
   config = mkIf enable {
-    networking = {
-      vlans = {
+    systemd.network.enable = true;
+    networking.useNetworkd = true;
+
+    systemd.network = {
+      netdevs = {
+        # Bridge to trunk enp2s0 and enp3s0 together
+        "10-bridge0" = {
+          netdevConfig = {
+            Name = "bridge0";
+            Kind = "bridge";
+          };
+        };
+
         # GS308E doesn't support admin vlan
         # Can't find a way that lets router hit management interface as well as wifi
-        # admin = {
-        #   interface = internalInterface;
-        #   id = 1;
-        # };
-        lan = {
-          interface = internalInterface;
-          id = 101;
+        "20-admin" = {
+          netdevConfig = {
+            Name = "admin";
+            Kind = "vlan";
+          };
+          vlanConfig = {
+            Id = 100;
+          };
         };
-        iot = {
-          interface = internalInterface;
-          id = 102;
+        "20-lan" = {
+          netdevConfig = {
+            Name = "lan";
+            Kind = "vlan";
+          };
+          vlanConfig = {
+            Id = 101;
+          };
         };
-        guest = {
-          interface = internalInterface;
-          id = 103;
+        "20-iot" = {
+          netdevConfig = {
+            Name = "iot";
+            Kind = "vlan";
+          };
+          vlanConfig = {
+            Id = 102;
+          };
+        };
+        "20-guest" = {
+          netdevConfig = {
+            Name = "guest";
+            Kind = "vlan";
+          };
+          vlanConfig = {
+            Id = 103;
+          };
         };
       };
-      interfaces = {
-        ${externalInterface} = {
-          useDHCP = true;
+
+      networks = {
+        "30-${externalInterface}" = {
+          matchConfig = {
+            Name = externalInterface;
+          };
+          networkConfig = {
+            DHCP = "yes";
+          };
         };
-        ${internalInterface} = {
-          ipv4.addresses = [
-            {
-              address = "10.0.0.1";
-              prefixLength = 24;
-            }
-            {
-              address = "10.0.0.2";
-              prefixLength = 24;
-            }
+
+        # Add enp2s0 to bridge
+        "30-${internalInterface}" = {
+          matchConfig = {
+            Name = internalInterface;
+          };
+          networkConfig = {
+            Bridge = "bridge0";
+          };
+        };
+
+        # Add enp3s0 to bridge
+        "30-enp3s0" = {
+          matchConfig = {
+            Name = "enp3s0";
+          };
+          networkConfig = {
+            Bridge = "bridge0";
+          };
+        };
+
+        # Configure bridge with VLANs
+        "30-bridge0" = {
+          matchConfig = {
+            Name = "bridge0";
+          };
+          address = [
+            "10.0.4.1/24"
           ];
-          useDHCP = false;
-        };
-        # admin = {
-        #   ipv4.addresses = [
-        #     {
-        #       address = "10.0.0.1";
-        #       prefixLength = 24;
-        #     }
-        #   ];
-        # };
-        lan = {
-          ipv4.addresses = [
-            {
-              address = "10.0.1.1";
-              prefixLength = 24;
-            }
+          networkConfig = {
+            DHCP = "no";
+          };
+          vlan = [
+            "lan"
+            "guest"
+            "iot"
+            "admin"
           ];
+          linkConfig.RequiredForOnline = "carrier";
         };
-        iot = {
-          ipv4.addresses = [
-            {
-              address = "10.0.2.1";
-              prefixLength = 24;
-            }
+
+        "40-admin" = {
+          matchConfig = {
+            Name = "admin";
+          };
+          address = [
+            "10.0.0.1/24"
           ];
+          networkConfig = {
+            DHCP = "no";
+          };
         };
-        guest = {
-          ipv4.addresses = [
-            {
-              address = "10.0.3.1";
-              prefixLength = 24;
-            }
+
+        "40-lan" = {
+          matchConfig = {
+            Name = "lan";
+          };
+          address = [
+            "10.0.1.1/24"
           ];
+          networkConfig = {
+            DHCP = "no";
+          };
         };
-        eth3 = {
-          useDHCP = false;
-          ipv4.addresses = [
-            {
-              address = "10.0.4.1";
-              prefixLength = 24;
-            }
+
+        "40-iot" = {
+          matchConfig = {
+            Name = "iot";
+          };
+          address = [
+            "10.0.2.1/24"
           ];
+          networkConfig = {
+            DHCP = "no";
+          };
         };
+
+        "40-guest" = {
+          matchConfig = {
+            Name = "guest";
+          };
+          address = [
+            "10.0.3.1/24"
+          ];
+          networkConfig = {
+            DHCP = "no";
+          };
+        };
+
       };
     };
   };

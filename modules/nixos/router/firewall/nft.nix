@@ -8,7 +8,7 @@
      "guest",
      "tailscale0",
      "admin",
-     "eth1",
+     "enp2s0",
   }
 
    define TRUSTED_LAN = {
@@ -16,7 +16,7 @@
      "tailscale0",
      "lo",
      "admin",
-     "eth1",
+     "enp2s0",
   }
 
    define ALLOWED_INTERNET_GROUP = {
@@ -24,7 +24,7 @@
      "tailscale0",
      "guest",
      "admin",
-     "eth1",
+     "enp2s0",
    }
 
    define DNS_PORTS = {53, 54, 5354, 67}

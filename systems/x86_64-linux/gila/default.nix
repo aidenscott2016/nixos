@@ -75,8 +75,8 @@
     router = {
       dns.enable = false; # TODO: remove
       dnsmasq.enable = true;
-      internalInterface = "eth1";
-      externalInterface = "eth0";
+      internalInterface = "enp2s0";
+      externalInterface = "enp1s0";
     };
   };
 
