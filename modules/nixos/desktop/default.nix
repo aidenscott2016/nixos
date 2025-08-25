@@ -34,8 +34,6 @@ with lib;
       networkmanager.enable = true;
     };
 
-    systemd.network.wait-online.enable = false;
-
     aiden.modules = {
       syncthing = enabled;
       redshift = enabled;

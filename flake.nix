@@ -57,12 +57,13 @@
       url = "github:snowfallorg/lib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
-    nixos-facter.url = "github:nix-community/nixos-facter";
+    nixos-facter-modules = {
+      url = "github:numtide/nixos-facter-modules";
+    };
     nixos-images.url = "github:nix-community/nixos-images";
     jovian = {
       url = "github:Jovian-Experiments/Jovian-NixOS";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     switch-fix = {
       url = "github:femtodata/nix-utils";
