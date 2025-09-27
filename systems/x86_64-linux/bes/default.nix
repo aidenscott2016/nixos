@@ -98,7 +98,7 @@
           cpu = "intel";
           gpu = "intel";
         };
-        programs.beets.enable = true;
+        programs.beets.enable = lib.mkForce false;
         modules = {
           syncthing.enable = true;
           powermanagement.enable = true;

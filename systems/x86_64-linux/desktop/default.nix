@@ -25,6 +25,7 @@
       cpu = "amd";
       gpu = "amd";
     };
+    programs.beets.enable = lib.mkForce false;
     modules = {
       redshift.enable = lib.mkForce false;
       hardware-acceleration.enable = lib.mkForce true;
