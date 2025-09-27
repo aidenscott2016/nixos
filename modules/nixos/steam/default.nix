@@ -9,19 +9,19 @@ params@{
 with lib.aiden;
 with pkgs;
 let
-  steamtinkerlaunch-git = pkgs.steamtinkerlaunch.overrideAttrs (_: {
-    src = inputs.steamtinkerlaunch;
-  });
 in
+# steamtinkerlaunch-git = pkgs.steamtinkerlaunch.overrideAttrs (_: {
+#   src = inputs.steamtinkerlaunch;
+# });
 enableableModule "steam" params {
   programs.steam = {
     enable = true;
     protontricks.enable = true;
     gamescopeSession.enable = true;
-    extraCompatPackages = [ steamtinkerlaunch-git ];
+    extraCompatPackages = [ steamtinkerlaunch ];
   };
   environment.systemPackages = [
-    steamtinkerlaunch-git
+    steamtinkerlaunch
   ];
 
   # game mode module

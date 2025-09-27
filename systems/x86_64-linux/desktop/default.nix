@@ -34,7 +34,7 @@
       desktop.powermanagement.enable = false;
       gaming = {
         games.oblivionSync.enable = true;
-        steam.enable = false;
+        steam.enable = true;
         moonlight.client.enable = true;
         moonlight.server.enable = true;
       };

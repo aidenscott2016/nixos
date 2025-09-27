@@ -27,10 +27,9 @@ in
         enable = true;
         autoStart = true;
         user = "aiden";
-        desktopSession = "plasmawayland";
+        desktopSession = "plasma";
       };
       steamos = {
-        enableBluetoothConfig = false;
         useSteamOSConfig = true;
       };
     };
