@@ -144,7 +144,7 @@
           };
           avahi.enable = true;
           jellyfin.enable = true;
-
+          paperless.enable = true;
           common = {
             domainName = "bes.sw1a1aa.uk";
             enable = true;
