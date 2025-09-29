@@ -1,6 +1,6 @@
 {
   nixConfig = {
-    trusted-substituters = [
+    extra-substituters = [
       "https://cachix.cachix.org"
       "https://nixpkgs.cachix.org"
       "https://nix-community.cachix.org"
@@ -13,7 +13,7 @@
     ];
   };
   inputs = {
-    #nixpkgs.url = "github:nixos/nixpkgs/release-25.05";
+    # nixpkgs.url = "github:nixos/nixpkgs/release-25.05";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/release-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
@@ -62,7 +62,7 @@
     nixos-images.url = "github:nix-community/nixos-images";
     jovian = {
       url = "github:Jovian-Experiments/Jovian-NixOS";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     switch-fix = {
       url = "github:femtodata/nix-utils";
@@ -84,9 +84,9 @@
         packageOverrides = pkgs: { firefox-addons = inputs.firefox-addons { inherit pkgs; }; };
         nvidia.acceptLicense = true;
         allowUnfree = true;
-        config.permittedInsecurePackages = [
-          "aspnetcore-runtime-wrapped-6.0.36"
-          "aspnetcore-runtime-6.0.36"
+        rocmSupport = true;
+        permittedInsecurePackages = [
+          "qtwebengine-5.15.19"
         ];
 
       };
