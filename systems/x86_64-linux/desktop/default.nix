@@ -20,6 +20,17 @@
   networking.interfaces.enp6s0.wakeOnLan.enable = true;
 
   services.xserver.enable = lib.mkForce false;
+  services.open-webui = {
+    enable = true;
+    openFirewall = true;
+    host = "0";
+  };
+  services.ollama = {
+    enable = true;
+    openFirewall = true;
+    host = "0";
+  };
+
   aiden = {
     architecture = {
       cpu = "amd";
@@ -31,6 +42,7 @@
       hardware-acceleration.enable = lib.mkForce true;
       jovian.enable = true;
       desktop.enable = true;
+      multimedia.enable = lib.mkForce false;
       desktop.powermanagement.enable = false;
       gaming = {
         games.oblivionSync.enable = true;
