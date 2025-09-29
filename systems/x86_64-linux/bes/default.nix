@@ -145,6 +145,7 @@
           avahi.enable = true;
           jellyfin.enable = true;
           paperless.enable = true;
+          jovian.enable = false;
           common = {
             domainName = "bes.sw1a1aa.uk";
             enable = true;
