@@ -15,6 +15,7 @@ final: prev: {
   # For example, to pull a package from unstable NixPkgs make sure you have the
   # input `unstable = "github:nixos/nixpkgs/nixos-unstable"` in your flake.
   inherit (channels.nixpkgs-unstable) bazarr;
+  inherit (channels.nixpkgs-unstable-pinned) navidrome paperless-ngx redis;
   intel-media-driver-stable = channels.nixpkgs-stable.intel-media-driver; # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD;
   inherit (channels.nixpkgs-stable)
     libva-vdpau-driver # Previously vaapiVdpau
