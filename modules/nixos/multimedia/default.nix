@@ -19,7 +19,7 @@ params@{
       nicotine-plus
       yt-dlp
       vlc
-      (jellyfin-media-player.override { withDbus = false; })
+      #(jellyfin-media-player.override { withDbus = false; })
       imagemagick
     ];
   };

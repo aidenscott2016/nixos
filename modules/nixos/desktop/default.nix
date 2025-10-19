@@ -72,7 +72,6 @@ with lib;
       xclip
       libreoffice
       kdePackages.okular
-      bitwarden-desktop
 
       vscode
       nodejs_22

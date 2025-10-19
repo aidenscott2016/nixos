@@ -23,6 +23,7 @@
       cpu = "intel";
       gpu = "nvidia";
     };
+    programs.beets.enable = lib.mkForce false;
     modules = {
       desktop.enable = true;
       gaming = {
