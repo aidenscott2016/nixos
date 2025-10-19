@@ -25,6 +25,7 @@
     };
     programs.beets.enable = lib.mkForce false;
     modules = {
+      scanner.enable = true;
       desktop.enable = true;
       gaming = {
         games.oblivionSync.enable = true;
