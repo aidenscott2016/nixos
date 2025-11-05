@@ -6,12 +6,12 @@
       # and the actual btrfs raid on the second disk, and the name of these entries matters!
       disk1 = {
         type = "disk";
-        device = "/dev/nvme0n1";
+        device = "/dev/disk/by-id/nvme-WDC_PC_SN720_SDAQNTW-512G-1001_1850C0804397_1";
         content = {
           type = "gpt";
           partitions = {
             ESP = {
-              size = "512M";
+              size = "10G";
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -38,7 +38,7 @@
       };
       disk2 = {
         type = "disk";
-        device = "/dev/nvme1n1";
+        device = "/dev/disk/by-id/nvme-WDC_PC_SN520_SDAPMUW-256G-1001_1951A4455704";
         content = {
           type = "gpt";
           partitions = {
@@ -73,6 +73,10 @@
                         "relatime"
                         "ssd"
                       ];
+                    };
+                    "/swap" = {
+                      mountpoint = "/.swapvol";
+                      swap.swapfile.size = "68G";
                     };
                   };
                 };
