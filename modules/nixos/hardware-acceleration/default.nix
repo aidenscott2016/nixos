@@ -51,7 +51,6 @@ in
             intel-compute-runtime-legacy1
             vpl-gpu-rt # QSV on 11th gen or newer
             intel-ocl # OpenCL support
-            onevpl-intel-gpu
           ]
           ++ cfg.extraPackages;
       };

@@ -15,7 +15,7 @@ params@{
     };
 
     environment.systemPackages = with pkgs; [
-      transmission_3-gtk
+      transmission_4-gtk
       nicotine-plus
       yt-dlp
       vlc
