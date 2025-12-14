@@ -21,11 +21,6 @@
           enableRedistributableFirmware = true;
           intel-gpu-tools.enable = true;
           amdgpu = mkIf (architecture.gpu == "amd") {
-            amdvlk = {
-              enable = true;
-              support32Bit.enable = true;
-            };
-
             initrd.enable = true;
           };
 
@@ -37,7 +32,6 @@
                 libva
                 mesa
               ]
-              ++ optionals (architecture.gpu == "amd") [ amdvlk ]
               ++ optionals (architecture.cpu == "intel") [
                 intel-media-driver-stable
                 libva-vdpau-driver
