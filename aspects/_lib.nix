@@ -1,16 +1,14 @@
-{ lib, inputs, ... }:
+{ lib, inputs, config, ... }:
 {
-  # Declare flake module outputs as mergeable
+  # Declare module outputs - these get automatically merged
   options.flake.nixosModules = lib.mkOption {
-    type = lib.types.lazyAttrsOf lib.types.unspecified;
+    type = lib.types.attrsOf lib.types.deferredModule;
     default = { };
-    description = "NixOS modules exported by this flake";
   };
 
   options.flake.homeManagerModules = lib.mkOption {
-    type = lib.types.lazyAttrsOf lib.types.unspecified;
+    type = lib.types.attrsOf lib.types.deferredModule;
     default = { };
-    description = "Home Manager modules exported by this flake";
   };
 
   # Make custom lib functions available to all aspects
