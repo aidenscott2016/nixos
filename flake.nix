@@ -76,6 +76,15 @@
       url = "github:femtodata/nix-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Dendritic pattern dependencies
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    import-tree = {
+      url = "github:vic/import-tree";
+    };
   };
   outputs =
     inputs:
