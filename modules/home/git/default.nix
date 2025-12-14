@@ -7,9 +7,11 @@
 {
   programs.git = {
     enable = true;
-    userName = "Aiden";
-    userEmail = "aiden@oldstreetjournal.co.uk";
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Aiden";
+        email = "aiden@oldstreetjournal.co.uk";
+      };
       merge.conflictstyle = "zdiff3";
       pull.rebase = true;
       rerere.enabled = true;

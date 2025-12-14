@@ -12,7 +12,7 @@ in
       };
     };
     profiles.aiden = {
-      extensions = with addons; [
+      extensions.packages = with addons; [
         sponsorblock
         tridactyl
         ublock-origin
@@ -73,7 +73,7 @@ in
         };
         "NixOS Wiki" = {
           urls = [ { template = "https://wiki.nixos.org/w/index.php?search={searchTerms}"; } ];
-          iconUpdateURL = "https://wiki.nixos.org/favicon.png";
+          icon = "https://wiki.nixos.org/favicon.png";
           definedAliases = [ "@nw" ];
         };
       };
