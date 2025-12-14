@@ -19,6 +19,7 @@
   facter.reportPath = ./facter.json;
 
   boot.initrd.systemd.enable = true;
+  services.upower.enable = true;
   aiden = {
     architecture = {
       cpu = "intel";
@@ -50,17 +51,11 @@
   system.stateVersion = "22.05";
 
   boot.loader.systemd-boot.enable = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot = {
     kernelParams = [
       "resume_offset=264448"
-    
     ];
     resumeDevice = "/dev/disk/by-uuid/ab7e09ed-d079-4ae1-95c5-8a295b40fe82";
-  
   };
-
-
-
 
 }
