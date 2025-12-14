@@ -129,9 +129,7 @@
         lib.mkHost = name: system: nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs self; };
-          modules = [
-            # Load all feature modules
-            (builtins.attrValues nixosModules)
+          modules = (builtins.attrValues nixosModules) ++ [
             # Load existing host config from systems/
             ./systems/${if system == "aarch64-linux" then "aarch64-linux" else if name == "installer" then "x86_64-install-iso" else "x86_64-linux"}/${name}
             # Home-manager integration
