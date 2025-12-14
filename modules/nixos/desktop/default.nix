@@ -75,6 +75,7 @@ with lib;
 
       vscode
       nodejs_22
+      claude-code
     ];
 
   };
