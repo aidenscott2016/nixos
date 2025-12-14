@@ -1,0 +1,47 @@
+{ lib, ... }:
+{
+  flake.modules.nixos.oblivionSync = { config, lib, pkgs, ... }:
+    with lib;
+    let
+      cfg = config.aiden.modules.oblivionSync;
+      obDataDir = cfg.obDataDir;
+      stDataDir = cfg.stDataDir;
+    in {
+      options.aiden.modules.oblivionSync = {
+        enable = mkEnableOption "sync oblivion saves via syncthing";
+        stDataDir = mkOption {
+          description = "target to mount oblivion from";
+          type = types.path;
+          default = "${config.services.syncthing.dataDir}/Oblivion";
+        };
+        obDataDir = mkOption {
+          description = "path to mount oblivion";
+          type = types.path;
+          default = "/home/aiden/oblivion-sync";
+        };
+      };
+
+      config = mkIf cfg.enable {
+        aiden.modules.syncthing.enable = true;
+
+        services.tailscale.enable = true;
+        environment.systemPackages = with pkgs; [ bindfs ];
+        systemd.services.oblivion-mount = {
+          description = "Bindfs mount for ${stDataDir} -> ${obDataDir}";
+          wantedBy = [ "multi-user.target" ];
+          serviceConfig = {
+            Type = "oneshot";
+            ExecStart = [
+              "${pkgs.coreutils}/bin/mkdir -p ${obDataDir}"
+              ''
+                ${pkgs.bindfs}/bin/bindfs --force-user=aiden --force-group=users \
+                            ${stDataDir} ${obDataDir}
+              ''
+            ];
+            ExecStop = "${pkgs.util-linux}/bin/umount ${obDataDir}";
+            RemainAfterExit = true;
+          };
+        };
+      };
+    };
+}
