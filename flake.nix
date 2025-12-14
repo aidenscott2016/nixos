@@ -84,7 +84,9 @@
 
   outputs = inputs@{ self, flake-parts, import-tree, nixpkgs, ... }:
     let
-      lib = nixpkgs.lib;
+      lib = nixpkgs.lib.extend (self: super: {
+        aiden = import ./lib/aiden { lib = self; };
+      });
 
       # Manually load and collect module definitions from aspects
       aspectFiles = lib.filesystem.listFilesRecursive ./aspects/features;
@@ -108,14 +110,20 @@
         then acc // aspect.flake.homeManagerModules
         else acc
       ) { } loadedAspects;
+
+      # Load overlay from aspects/_lib.nix
+      libAspect = import ./aspects/_lib.nix { inherit lib inputs; };
+      channelOverlay = libAspect.flake.overlays.default;
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ ./aspects/_lib.nix ];
       systems = [ "x86_64-linux" "aarch64-linux" ];
 
       flake = {
         # Expose collected modules
         inherit nixosModules homeManagerModules;
+
+        # Expose overlay
+        overlays.default = channelOverlay;
 
         # Helper to create nixosSystem with all modules
         lib.mkHost = name: system: nixpkgs.lib.nixosSystem {
