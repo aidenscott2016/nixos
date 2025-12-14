@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.reverseProxy = { config, lib, ... }:
+  flake.nixosModules.reverseProxy = { config, lib, ... }:
     with lib.aiden;
     with lib;
     let

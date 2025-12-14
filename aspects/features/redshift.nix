@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.redshift = { config, lib, ... }:
+  flake.nixosModules.redshift = { config, lib, ... }:
     with lib;
     let cfg = config.aiden.modules.redshift;
     in {

@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.syncthing = { config, lib, ... }:
+  flake.nixosModules.syncthing = { config, lib, ... }:
     with lib;
     let cfg = config.aiden.modules.syncthing;
     in {

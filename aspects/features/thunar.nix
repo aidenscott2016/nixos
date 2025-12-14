@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.thunar = { config, lib, pkgs, ... }:
+  flake.nixosModules.thunar = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.thunar;
     in {

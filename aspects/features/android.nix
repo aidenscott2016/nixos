@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.android = { config, lib, pkgs, ... }:
+  flake.nixosModules.android = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.android;
     in {

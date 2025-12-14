@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.jovian = { config, lib, ... }:
+  flake.nixosModules.jovian = { config, lib, ... }:
     with lib;
     let cfg = config.aiden.modules.jovian;
     in {

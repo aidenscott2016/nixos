@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.home-assistant = { config, lib, ... }:
+  flake.nixosModules.home-assistant = { config, lib, ... }:
     with lib;
     let
       cfg = config.aiden.modules.home-assistant;

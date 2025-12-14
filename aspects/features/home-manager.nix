@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.home-manager = { config, lib, ... }:
+  flake.nixosModules.home-manager = { config, lib, ... }:
     with lib;
     let cfg = config.aiden.modules.home-manager;
     in {

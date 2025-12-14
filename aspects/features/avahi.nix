@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.avahi = { config, lib, ... }:
+  flake.nixosModules.avahi = { config, lib, ... }:
     with lib;
     let cfg = config.aiden.modules.avahi;
     in {

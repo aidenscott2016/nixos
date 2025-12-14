@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.scanner = { config, lib, pkgs, ... }:
+  flake.nixosModules.scanner = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.scanner;
     in {

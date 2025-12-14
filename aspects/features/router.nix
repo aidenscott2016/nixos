@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.router = { config, lib, ... }:
+  flake.nixosModules.router = { config, lib, ... }:
     with lib;
     with config.aiden.modules.router; {
       options.aiden.modules.router = {

@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.flatpak = { config, lib, ... }:
+  flake.nixosModules.flatpak = { config, lib, ... }:
     with lib;
     let cfg = config.aiden.modules.flatpak;
     in {

@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.homeManager.gpg-agent = { pkgs, ... }: {
+  flake.homeManagerModules.gpg-agent = { pkgs, ... }: {
     # programs.gnupg.agent = {
     #   enable = true;
     #   pinentryFlavor = "gtk2";

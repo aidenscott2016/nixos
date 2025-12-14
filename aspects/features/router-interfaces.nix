@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.router-interfaces = { config, lib, ... }:
+  flake.nixosModules.router-interfaces = { config, lib, ... }:
     with lib;
     let
       inherit (config.aiden.modules.router)

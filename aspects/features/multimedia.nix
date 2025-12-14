@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.multimedia = { config, lib, pkgs, ... }:
+  flake.nixosModules.multimedia = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.multimedia;
     in {

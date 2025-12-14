@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.nix = { config, lib, pkgs, inputs, ... }:
+  flake.nixosModules.nix = { config, lib, pkgs, inputs, ... }:
     with lib;
     let cfg = config.aiden.modules.nix;
     in {

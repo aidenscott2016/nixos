@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.nvidia = { config, lib, ... }:
+  flake.nixosModules.nvidia = { config, lib, ... }:
     with lib;
     let
       cfg = config.aiden.modules.nvidia;

@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.router-dns = { config, lib, ... }:
+  flake.nixosModules.router-dns = { config, lib, ... }:
     with lib;
     let enable = config.aiden.modules.router.dns.enable;
     in {

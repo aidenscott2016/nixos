@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.homeManager.desktop = { config, ... }: {
+  flake.homeManagerModules.desktop = { config, ... }: {
     home.stateVersion = "23.05";
     xdg.enable = true;
 

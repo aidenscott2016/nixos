@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.homeManager.git = { ... }: {
+  flake.homeManagerModules.git = { ... }: {
     programs.git = {
       enable = true;
       settings = {

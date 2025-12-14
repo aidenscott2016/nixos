@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.cli-base = { config, lib, pkgs, ... }:
+  flake.nixosModules.cli-base = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.cli-base;
     in {

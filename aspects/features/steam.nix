@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.steam = { config, lib, pkgs, inputs, ... }:
+  flake.nixosModules.steam = { config, lib, pkgs, inputs, ... }:
     with lib;
     let
       cfg = config.aiden.modules.steam;

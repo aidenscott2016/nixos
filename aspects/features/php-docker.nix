@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.php-docker = { config, lib, ... }:
+  flake.nixosModules.php-docker = { config, lib, ... }:
     with lib;
     let cfg = config.aiden.modules.php-docker;
     in {

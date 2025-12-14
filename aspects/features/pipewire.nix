@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.pipewire = { config, lib, pkgs, ... }:
+  flake.nixosModules.pipewire = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.pipewire;
     in {

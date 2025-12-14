@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.coreboot = { config, lib, pkgs, ... }:
+  flake.nixosModules.coreboot = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.coreboot;
     in {

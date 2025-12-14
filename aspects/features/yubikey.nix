@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.yubikey = { config, lib, pkgs, ... }:
+  flake.nixosModules.yubikey = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.yubikey;
     in {

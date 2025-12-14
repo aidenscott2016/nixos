@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.desktop = { config, lib, pkgs, ... }:
+  flake.nixosModules.desktop = { config, lib, pkgs, ... }:
     with lib.aiden;
     with lib;
     let cfg = config.aiden.modules.desktop;

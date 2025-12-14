@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.adguard = { config, lib, ... }:
+  flake.nixosModules.adguard = { config, lib, ... }:
     with lib;
     let
       cfg = config.aiden.modules.adguard;

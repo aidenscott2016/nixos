@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.modules.nixos.scala = { config, lib, pkgs, ... }:
+  flake.nixosModules.scala = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.scala;
     in {
