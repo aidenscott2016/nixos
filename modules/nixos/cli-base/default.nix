@@ -8,6 +8,7 @@ params@{
 with lib.aiden;
 enableableModule "cli-base" params {
   environment.systemPackages = with pkgs; [
+    fish
     vim
     wget
     emacs
