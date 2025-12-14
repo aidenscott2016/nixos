@@ -1,5 +1,21 @@
 { lib, inputs, ... }:
 {
+  # Declare flake outputs as mergeable attribute sets
+  options.flake = lib.mkOption {
+    type = lib.types.submodule {
+      options = {
+        nixosModules = lib.mkOption {
+          type = lib.types.lazyAttrsOf lib.types.unspecified;
+          default = { };
+        };
+        homeManagerModules = lib.mkOption {
+          type = lib.types.lazyAttrsOf lib.types.unspecified;
+          default = { };
+        };
+      };
+    };
+  };
+
   # Make custom lib functions available to all aspects
   _module.args.lib = lib.extend (self: super: {
     aiden = import ../lib/aiden { lib = self; };
