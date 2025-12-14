@@ -27,4 +27,26 @@
         };
       };
     };
+
+  flake.modules.homeManager.darkman = { config, lib, pkgs, ... }:
+    with lib;
+    let cfg = config.aiden.modules.darkman;
+    in {
+      options.aiden.modules.darkman.enable = mkEnableOption "darkman home configuration";
+
+      config = mkIf cfg.enable {
+        aiden.modules.xdg-portal.enable = true;
+        xdg.portal = {
+          config.common = {
+            "org.freedesktop.impl.portal.Settings" = [ "darkman" ];
+          };
+          extraPortals = [ pkgs.darkman ];
+        };
+
+        services.darkman = {
+          enable = true;
+          settings.usegeoclue = true;
+        };
+      };
+    };
 }
