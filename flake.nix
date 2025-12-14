@@ -83,52 +83,77 @@
   };
 
   outputs = inputs@{ self, flake-parts, import-tree, nixpkgs, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } (
-      # Auto-load all aspects (filter out _template.nix and _lib.nix gets loaded specially)
-      import-tree.filterNot (path: baseNameOf path == "_template.nix") ./aspects
+    let
+      lib = nixpkgs.lib;
 
-      // {
-        systems = [ "x86_64-linux" "aarch64-linux" ];
+      # Manually load and collect module definitions from aspects
+      aspectFiles = lib.filesystem.listFilesRecursive ./aspects/features;
+      validAspects = builtins.filter
+        (path: lib.hasSuffix ".nix" (toString path) && !(lib.hasPrefix "_" (baseNameOf path)))
+        aspectFiles;
 
-        flake = {
-          # Helper to create nixosSystem with all modules
-          lib.mkHost = name: system: nixpkgs.lib.nixosSystem {
-            inherit system;
-            specialArgs = { inherit inputs self; };
-            modules = [
-              # Load all feature modules
-              (builtins.attrValues self.nixosModules)
-              # Load existing host config from systems/
-              ./systems/${if system == "aarch64-linux" then "aarch64-linux" else if name == "installer" then "x86_64-install-iso" else "x86_64-linux"}/${name}
-              # Home-manager integration
-              inputs.home-manager.nixosModules.home-manager
-              {
-                home-manager.sharedModules = builtins.attrValues self.homeManagerModules;
-              }
-            ];
-          };
+      # Load each aspect and collect its module contributions
+      loadedAspects = map (path: import path { inherit lib inputs; }) validAspects;
 
-          # Define all nixosConfigurations
-          nixosConfigurations = with self.lib; {
-            locutus = mkHost "locutus" "x86_64-linux";
-            mike = mkHost "mike" "x86_64-linux";
-            desktop = mkHost "desktop" "x86_64-linux";
-            gila = mkHost "gila" "x86_64-linux";
-            thoth = mkHost "thoth" "x86_64-linux";
-            bes = mkHost "bes" "x86_64-linux";
-            tv = mkHost "tv" "x86_64-linux";
-            barbie = mkHost "barbie" "x86_64-linux";
-            pxe = mkHost "pxe" "x86_64-linux";
-            lovelace = mkHost "lovelace" "aarch64-linux";
-            installer = mkHost "installer" "x86_64-linux";
-          };
+      # Collect nixosModules
+      nixosModules = lib.foldl' (acc: aspect:
+        if aspect ? flake.nixosModules
+        then acc // aspect.flake.nixosModules
+        else acc
+      ) { } loadedAspects;
+
+      # Collect homeManagerModules
+      homeManagerModules = lib.foldl' (acc: aspect:
+        if aspect ? flake.homeManagerModules
+        then acc // aspect.flake.homeManagerModules
+        else acc
+      ) { } loadedAspects;
+    in
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ ./aspects/_lib.nix ];
+      systems = [ "x86_64-linux" "aarch64-linux" ];
+
+      flake = {
+        # Expose collected modules
+        inherit nixosModules homeManagerModules;
+
+        # Helper to create nixosSystem with all modules
+        lib.mkHost = name: system: nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs self; };
+          modules = [
+            # Load all feature modules
+            (builtins.attrValues nixosModules)
+            # Load existing host config from systems/
+            ./systems/${if system == "aarch64-linux" then "aarch64-linux" else if name == "installer" then "x86_64-install-iso" else "x86_64-linux"}/${name}
+            # Home-manager integration
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager.sharedModules = builtins.attrValues homeManagerModules;
+            }
+          ];
         };
 
-        # Per-system outputs
-        perSystem = { config, system, pkgs, ... }: {
-          # Keep existing packages
-          packages = import ./packages { inherit pkgs; };
+        # Define all nixosConfigurations
+        nixosConfigurations = with self.lib; {
+          locutus = mkHost "locutus" "x86_64-linux";
+          mike = mkHost "mike" "x86_64-linux";
+          desktop = mkHost "desktop" "x86_64-linux";
+          gila = mkHost "gila" "x86_64-linux";
+          thoth = mkHost "thoth" "x86_64-linux";
+          bes = mkHost "bes" "x86_64-linux";
+          tv = mkHost "tv" "x86_64-linux";
+          barbie = mkHost "barbie" "x86_64-linux";
+          pxe = mkHost "pxe" "x86_64-linux";
+          lovelace = mkHost "lovelace" "aarch64-linux";
+          installer = mkHost "installer" "x86_64-linux";
         };
-      }
-    );
+      };
+
+      # Per-system outputs
+      perSystem = { config, system, pkgs, ... }: {
+        # Keep existing packages
+        packages = import ./packages { inherit pkgs; };
+      };
+    };
 }
