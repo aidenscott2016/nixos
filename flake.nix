@@ -17,9 +17,9 @@
     ];
   };
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/release-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     #:w nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/release-25.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-unstable-pinned.url = "github:nixos/nixpkgs/36226520e9f7a35bf341cbe3b6a1ff9047bec6d9";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
