@@ -25,11 +25,6 @@ in
       enableRedistributableFirmware = true;
       intel-gpu-tools.enable = true;
       amdgpu = mkIf (architecture.gpu == "amd") {
-        amdvlk = {
-          enable = true;
-          support32Bit.enable = true;
-        };
-
         initrd.enable = true;
       };
 
@@ -41,7 +36,6 @@ in
             libva
             mesa
           ]
-          ++ optionals (architecture.gpu == "amd") [ amdvlk ]
           ++ optionals (architecture.cpu == "intel") [
             #intel-compute-runtime
             intel-media-driver-stable # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
