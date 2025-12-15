@@ -1,4 +1,4 @@
-{ lib, inputs, config, ... }:
+{ lib, inputs, ... }:
 {
   # Declare module outputs - these get automatically merged
   options.flake.nixosModules = lib.mkOption {
