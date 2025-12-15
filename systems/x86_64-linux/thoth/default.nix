@@ -32,7 +32,7 @@ with inputs;
     allowedUDPPorts = [ 53 ];
     allowedTCPPorts = [
       53
-      config.services.adguardhome.settings.bind_port
+      8081
     ];
   };
 
@@ -55,10 +55,10 @@ with inputs;
   services = {
     adguardhome = {
       enable = true;
+      host = "0.0.0.0";
+      port = 8081;
       openFirewall = false;
       settings = {
-        bind_host = "0.0.0.0";
-        bind_port = 8081;
         querylog.enable = false;
       };
     };

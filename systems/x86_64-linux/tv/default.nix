@@ -62,7 +62,6 @@
         intel-compute-runtime
 
       ];
-      driSupport = true;
     };
 
     environment.systemPackages = with pkgs; [

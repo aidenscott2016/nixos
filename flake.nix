@@ -132,9 +132,10 @@
           modules = (builtins.attrValues nixosModules) ++ [
             # Load existing host config from systems/
             ./systems/${if system == "aarch64-linux" then "aarch64-linux" else if name == "installer" then "x86_64-install-iso" else "x86_64-linux"}/${name}
-            # Apply channel overlay
+            # Apply channel overlay and allow unfree packages
             {
               nixpkgs.overlays = [ channelOverlay ];
+              nixpkgs.config.allowUnfree = true;
             }
             # Home-manager integration
             inputs.home-manager.nixosModules.home-manager
