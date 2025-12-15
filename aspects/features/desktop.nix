@@ -1,9 +1,10 @@
 { lib, ... }:
 {
   flake.nixosModules.desktop = { config, lib, pkgs, ... }:
-    with lib.aiden;
     with lib;
-    let cfg = config.aiden.modules.desktop;
+    let
+      cfg = config.aiden.modules.desktop;
+      enabled = { enable = true; };
     in {
       options.aiden.modules.desktop = {
         enable = mkEnableOption "Enable desktop configuration";

@@ -1,5 +1,4 @@
 { lib, ... }:
-with lib.aiden;
 with lib;
 {
   enabled = {

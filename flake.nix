@@ -135,7 +135,14 @@
             # Home-manager integration
             inputs.home-manager.nixosModules.home-manager
             {
-              home-manager.sharedModules = builtins.attrValues homeManagerModules;
+              home-manager = {
+                sharedModules = builtins.attrValues homeManagerModules;
+                extraSpecialArgs = { inherit inputs self; };
+              };
+            }
+            # Pass extended lib with lib.aiden to all modules
+            {
+              _module.args.lib = lib;
             }
           ];
         };
