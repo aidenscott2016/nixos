@@ -56,9 +56,11 @@ with inputs;
     adguardhome = {
       enable = true;
       openFirewall = false;
-      settings.bind_host = "0.0.0.0";
-      settings.bind_port = 8081;
-      querylog.enable = false;
+      settings = {
+        bind_host = "0.0.0.0";
+        bind_port = 8081;
+        querylog.enable = false;
+      };
     };
   };
   system.stateVersion = "23.05"; # Did you read the comment?

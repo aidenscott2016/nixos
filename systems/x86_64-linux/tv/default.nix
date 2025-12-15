@@ -6,7 +6,6 @@
   systems,
   ...
 }:
-with lib.aiden;
 {
   imports = [
     ./hardware-configuration.nix
@@ -46,13 +45,13 @@ with lib.aiden;
 
       };
 
-      avahi = enabled;
-      redshift = enabled;
-      ssh = enabled;
-      gc = enable;
-      cli-base = enabled;
+      avahi.enable = true;
+      redshift.enable = true;
+      ssh.enable = true;
+      gc.enable = true;
+      cli-base.enable = true;
       steam.enable = false;
-      locale = enabled;
+      locale.enable = true;
     };
     hardware.bluetooth.enable = true;
     hardware.opengl = {

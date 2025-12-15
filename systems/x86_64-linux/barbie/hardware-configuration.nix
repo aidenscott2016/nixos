@@ -54,6 +54,5 @@
       intel-compute-runtime
 
     ];
-    driSupport = true;
   };
 }
