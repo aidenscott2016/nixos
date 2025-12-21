@@ -4,20 +4,23 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a personal NixOS flake configuration repository using Snowfall Lib for organization. It manages multiple machines, services, and modular NixOS configurations across different architectures.
+This is a personal NixOS flake configuration repository using a **dendritic pattern** with `flake-parts`. It manages multiple machines, services, and modular NixOS configurations across different architectures.
 
 ## Key Architecture
 
 ### Flake Structure
-- Uses Snowfall Lib (`snowfall-lib.mkFlake`) with namespace "aiden"
-- Multiple nixpkgs channels: stable (25.05), unstable, and pinned unstable
+- Uses `flake-parts` (`flake-parts.lib.mkFlake`)
+- Dynamic module discovery via `import-tree` (manual collection in current `flake.nix`)
+- Multiple nixpkgs channels: stable, unstable, and pinned unstable
 - Integrates home-manager, disko, agenix, and various specialized inputs
 
 ### Module System
-All custom modules use the `aiden.modules.*` namespace with a consistent pattern:
-- `lib/aiden/default.nix` provides helper functions including `enableableModule`
-- Modules follow the pattern: `options.aiden.modules.{name}.enable = mkOption`
-- Common module activated via `aiden.modules.common.enable = true`
+Commonly referred to as **aspects**. Each aspect in `aspects/features/` can contribute to:
+- `flake.nixosModules`
+- `flake.homeManagerModules`
+- Per-system packages or other outputs
+
+All custom options use the `aiden.modules.*` namespace.
 
 ### Host Categories
 - **Servers**: gila (router/home-assistant), thoth, bes (containers), tv (media)
@@ -25,11 +28,13 @@ All custom modules use the `aiden.modules.*` namespace with a consistent pattern
 - **Special**: barbie (likely test), pxe (network boot), installer ISO
 
 ### Directory Structure
-- `modules/nixos/` - System-level NixOS modules
-- `modules/home/` - Home Manager user configurations
-- `systems/{arch}/{hostname}/` - Per-machine configurations
-- `overlays/default.nix` - Package overlays pulling from different channels
-- `secrets/` - Age-encrypted secrets with `secrets.nix` defining access
+- `aspects/features/` - Feature-centric modules (NixOS + Home Manager)
+- `aspects/hosts/` - Per-machine configurations and hardware files
+- `aspects/_lib.nix` - Shared helper modules, declarations, and overlays
+- `lib/aiden/` - Core library functions used across modules
+- `packages/` - Custom package definitions
+- `secrets/` - Age-encrypted secrets
+- `_archive/` - Legacy Snowfall Lib structure (archived)
 
 ## Common Development Commands
 
@@ -60,37 +65,23 @@ nix eval .#nixosConfigurations.{hostname}.config.system.build.toplevel
 nix flake update
 ```
 
-### Secrets Management
-```bash
-# Edit secrets (requires agenix)
-agenix -e secrets/{secret-name}.age
-
-# Re-key all secrets after adding new host keys
-agenix -r
-```
-
 ## Module Development Patterns
 
-### Creating New Modules
-1. Follow the `enableableModule` pattern from `lib/aiden/default.nix`
-2. Use `aiden.modules.{name}.enable` for all modules
-3. Reference the common module pattern in `modules/nixos/common/default.nix`
+### Creating New Aspects
+1. Create a new file in `aspects/features/{name}.nix`
+2. Follow the template in `aspects/_template.nix`
+3. Contribute to `flake.nixosModules.{name}` or `flake.homeManagerModules.{name}`
 
 ### Host Configuration
-1. Import hardware-configuration.nix and disko configs
-2. Set `aiden.modules.common.enable = true` with email/domain
-3. Enable specific modules as needed
-4. Host-specific packages go in separate `packages.nix` when complex
+1. Host files are in `aspects/hosts/{hostname}/`
+2. Main entry point is usually `default.nix` in that directory
+3. Set `aiden.modules.common.enable = true` for base configuration
 
 ### Secrets Integration
-1. Add public keys to `secrets/secrets.nix`
-2. Reference secrets via `config.age.secrets.{name}.path`
-3. Declare secrets in host config: `age.secrets.{name}.file = "${inputs.self.outPath}/secrets/{file}.age"`
+1. Reference secrets via `config.age.secrets.{name}.path`
+2. Declare secrets in host config: `age.secrets.{name}.file = "${inputs.self.outPath}/secrets/{file}.age"`
 
 ## Important Configuration Details
-
-- All systems use the "aiden" user (uid 1000) configured in common module
-- Default editor is vim, trusted user for nix operations
-- Binary caches configured globally in flake.nix nixConfig
-- GPU acceleration packages pulled from specific channels via overlays
-- Router functionality concentrated in gila host with custom router modules
+- All systems use the "aiden" user (uid 1000)
+- `lib.aiden` provides helpers like `enabled` (sets `{ enable = true; }`)
+- GPU overlays and hardware acceleration are managed in `aspects/_lib.nix`

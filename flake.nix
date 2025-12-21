@@ -132,8 +132,8 @@
           modules = (builtins.attrValues nixosModules) ++ [
             # Automatically set hostname based on configuration name (matches Snowfall behavior)
             { networking.hostName = name; }
-            # Load existing host config from systems/
-            ./systems/${if system == "aarch64-linux" then "aarch64-linux" else if name == "installer" then "x86_64-install-iso" else "x86_64-linux"}/${name}
+            # Load existing host config from aspects/hosts/
+            ./aspects/hosts/${name}
             # Apply channel overlay and allow unfree packages
             {
               nixpkgs.overlays = [ channelOverlay ];
