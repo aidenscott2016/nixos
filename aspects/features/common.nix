@@ -31,7 +31,5 @@
       };
     };
   
-  flake.homeManagerModules.common = { config, lib, ... }: {
-      # Placeholder for future common home-manager config
-  };
+  flake.homeManagerModules.common = { config, lib, ... }: { };
 }
