@@ -11,18 +11,18 @@
           nh.enable = true;
         };
 
+        nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+        nix.extraOptions = "experimental-features = nix-command flakes";
+        nix.settings.auto-optimise-store = true;
+        nix.settings.trusted-users = [ "aiden" ];
+
         environment.systemPackages = with pkgs; [
           nixpkgs-fmt
           nix-tree
           inputs.disko.packages.x86_64-linux.disko
         ];
 
-        # Enable garbage collection
-        nix.gc = {
-          automatic = true;
-          dates = "weekly";
-          options = "--delete-older-than 7d";
-        };
+
 
         nix.settings = {
           experimental-features = [
