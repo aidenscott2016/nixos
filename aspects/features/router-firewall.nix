@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.router-firewall = { config, lib, ... }:
+  flake.modules.nixos.router-firewall = { config, lib, ... }:
     with lib;
     let
       inherit (config.aiden.modules.router)

@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.traefik = { config, lib, ... }:
+  flake.modules.nixos.traefik = { config, lib, ... }:
     with lib;
     let
       cfg = config.aiden.modules.traefik;

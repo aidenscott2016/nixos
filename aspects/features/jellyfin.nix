@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.jellyfin = { config, lib, pkgs, ... }:
+  flake.modules.nixos.jellyfin = { config, lib, pkgs, ... }:
     with lib;
     let
       cfg = config.aiden.modules.jellyfin;

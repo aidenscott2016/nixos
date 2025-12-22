@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.homeManagerModules.bash = { ... }: {
+  flake.modules.homeManager.bash = { ... }: {
     programs.bash = {
       enable = true;
       bashrcExtra = ''

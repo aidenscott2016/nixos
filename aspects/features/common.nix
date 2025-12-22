@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.common = { config, lib, pkgs, inputs, ... }:
+  flake.modules.nixos.common = { config, lib, pkgs, inputs, ... }:
     with lib;
     let cfg = config.aiden.modules.common;
     in {
@@ -31,5 +31,5 @@
       };
     };
   
-  flake.homeManagerModules.common = { config, lib, ... }: { };
+  flake.modules.homeManager.common = { config, lib, ... }: { };
 }

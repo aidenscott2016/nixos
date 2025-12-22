@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.homeManagerModules.easyeffects = { ... }: {
+  flake.modules.homeManager.easyeffects = { ... }: {
     services.easyeffects = {
       enable = false;
       preset = "voice-chat";

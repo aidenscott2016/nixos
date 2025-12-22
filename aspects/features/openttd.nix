@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.openttd = { config, lib, pkgs, ... }:
+  flake.modules.nixos.openttd = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.programs.openttd;
     in {

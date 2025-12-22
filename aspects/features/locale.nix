@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.locale = { config, lib, ... }:
+  flake.modules.nixos.locale = { config, lib, ... }:
     with lib;
     let cfg = config.aiden.modules.locale;
     in {

@@ -1,4 +1,4 @@
 { lib, ... }:
 {
-  flake.nixosModules.node-exporter = { ... }: { };
+  flake.modules.nixos.node-exporter = { ... }: { };
 }

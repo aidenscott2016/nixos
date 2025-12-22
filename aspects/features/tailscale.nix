@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.tailscale = { config, lib, pkgs, ... }:
+  flake.modules.nixos.tailscale = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.tailscale;
     in {

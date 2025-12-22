@@ -1,6 +1,6 @@
 { lib, inputs, ... }:
 {
-  flake.nixosModules.paperles = { config, lib, pkgs, inputs, ... }:
+  flake.modules.nixos.paperles = { config, lib, pkgs, inputs, ... }:
     with lib;
     let
       moduleName = "paperless";

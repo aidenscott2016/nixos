@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.gaming = { config, lib, pkgs, ... }:
+  flake.modules.nixos.gaming = { config, lib, pkgs, ... }:
     with lib;
     let
       cfg = config.aiden.modules.gaming;

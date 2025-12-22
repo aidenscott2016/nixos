@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   # Firefox is home-manager only, no NixOS-level config needed
-  flake.homeManagerModules.firefox = { config, pkgs, inputs, lib, ... }:
+  flake.modules.homeManager.firefox = { config, pkgs, inputs, lib, ... }:
     let addons = inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system};
     in {
       home.file.".tridactylrc".source = ./tridactylrc;

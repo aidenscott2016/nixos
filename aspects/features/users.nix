@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.users = { config, lib, ... }:
+  flake.modules.nixos.users = { config, lib, ... }:
     with lib;
     let
       cfg = config.aiden.modules.users;
@@ -28,7 +28,7 @@
       };
     };
 
-  flake.homeManagerModules.users = { config, lib, ... }:
+  flake.modules.homeManager.users = { config, lib, ... }:
     with lib;
     let
       cfg = config.aiden.modules.users;

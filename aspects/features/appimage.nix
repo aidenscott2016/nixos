@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.appimage = { config, lib, pkgs, ... }:
+  flake.modules.nixos.appimage = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.appimage;
     in {

@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.router-zeroconf = { config, lib, ... }:
+  flake.modules.nixos.router-zeroconf = { config, lib, ... }:
     with lib;
     let enable = config.aiden.modules.router.enable;
     in {

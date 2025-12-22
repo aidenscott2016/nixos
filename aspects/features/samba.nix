@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.samba = { config, lib, pkgs, ... }:
+  flake.modules.nixos.samba = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.samba;
     in {

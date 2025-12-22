@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.darkman = { config, lib, ... }:
+  flake.modules.nixos.darkman = { config, lib, ... }:
     with lib;
     let cfg = config.aiden.modules.darkman;
     in {
@@ -28,7 +28,7 @@
       };
     };
 
-  flake.homeManagerModules.darkman = { config, lib, pkgs, ... }:
+  flake.modules.homeManager.darkman = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.darkman;
     in {

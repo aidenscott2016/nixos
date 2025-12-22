@@ -1,6 +1,6 @@
 { lib, inputs, ... }:
 {
-  flake.nixosModules.reverseProxy = { config, lib, ... }:
+  flake.modules.nixos.reverseProxy = { config, lib, ... }:
     with lib;
     let
       inherit (config.aiden.modules.common) domainName email;

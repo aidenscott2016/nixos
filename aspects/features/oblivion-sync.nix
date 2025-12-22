@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.oblivionSync = { config, lib, pkgs, ... }:
+  flake.modules.nixos.oblivionSync = { config, lib, pkgs, ... }:
     with lib;
     let
       cfg = config.aiden.modules.oblivionSync;

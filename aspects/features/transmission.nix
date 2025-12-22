@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.transmission = { config, lib, ... }:
+  flake.modules.nixos.transmission = { config, lib, ... }:
     with lib;
     let
       cfg = config.aiden.modules.transmission;

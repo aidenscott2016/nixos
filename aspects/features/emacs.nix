@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.emacs = { config, lib, pkgs, ... }:
+  flake.modules.nixos.emacs = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.emacs;
     in {

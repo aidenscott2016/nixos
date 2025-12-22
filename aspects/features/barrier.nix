@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.barrier = { config, lib, pkgs, ... }:
+  flake.modules.nixos.barrier = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.barrier;
     in {

@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.architecture = { lib, ... }:
+  flake.modules.nixos.architecture = { lib, ... }:
     with lib; {
       options.aiden.architecture = {
         cpu = mkOption {

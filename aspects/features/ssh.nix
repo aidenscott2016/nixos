@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.ssh = { config, lib, ... }:
+  flake.modules.nixos.ssh = { config, lib, ... }:
     with lib;
     let cfg = config.aiden.modules.ssh;
     in {

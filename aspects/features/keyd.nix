@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.keyd = { config, lib, ... }:
+  flake.modules.nixos.keyd = { config, lib, ... }:
     with lib;
     let cfg = config.aiden.modules.keyd;
     in {

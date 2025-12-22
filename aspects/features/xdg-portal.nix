@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.xdg-portal = { config, lib, pkgs, ... }:
+  flake.modules.nixos.xdg-portal = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.xdg-portal;
     in {
@@ -24,7 +24,7 @@
       };
     };
 
-  flake.homeManagerModules.xdg-portal = { config, lib, pkgs, ... }:
+  flake.modules.homeManager.xdg-portal = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.xdg-portal;
     in {

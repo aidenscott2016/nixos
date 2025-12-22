@@ -82,98 +82,17 @@
     };
   };
 
-  outputs = inputs@{ self, flake-parts, import-tree, nixpkgs, ... }:
-    let
-      lib = nixpkgs.lib.extend (self: super: {
-        aiden = import ./lib/aiden { lib = self; };
-      });
-
-      # Manually load and collect module definitions from aspects
-      aspectFiles = lib.filesystem.listFilesRecursive ./aspects/features;
-      validAspects = builtins.filter
-        (path: lib.hasSuffix ".nix" (toString path) && !(lib.hasPrefix "_" (baseNameOf path)))
-        aspectFiles;
-
-      # Load each aspect and collect its module contributions
-      loadedAspects = map (path: import path { inherit lib inputs; }) validAspects;
-
-      # Collect nixosModules
-      nixosModules = lib.foldl' (acc: aspect:
-        if aspect ? flake.nixosModules
-        then acc // aspect.flake.nixosModules
-        else acc
-      ) { } loadedAspects;
-
-      # Collect homeManagerModules
-      homeManagerModules = lib.foldl' (acc: aspect:
-        if aspect ? flake.homeManagerModules
-        then acc // aspect.flake.homeManagerModules
-        else acc
-      ) { } loadedAspects;
-
-      # Load overlay from aspects/_lib.nix
-      libAspect = import ./aspects/_lib.nix { inherit lib inputs; };
-      channelOverlay = libAspect.flake.overlays.default;
-    in
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" "aarch64-linux" ];
-
-      flake = {
-        # Expose collected modules
-        inherit nixosModules homeManagerModules;
-
-        # Expose overlay
-        overlays.default = channelOverlay;
-
-        # Helper to create nixosSystem with all modules
-        lib.mkHost = name: system: nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs self; };
-          modules = (builtins.attrValues nixosModules) ++ [
-            # Automatically set hostname based on configuration name (matches Snowfall behavior)
-            { networking.hostName = name; }
-            # Load existing host config from aspects/hosts/
-            ./aspects/hosts/${name}
-            # Apply channel overlay and allow unfree packages
-            {
-              nixpkgs.overlays = [ channelOverlay ];
-              nixpkgs.config.allowUnfree = true;
-            }
-            # Home-manager integration
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                sharedModules = builtins.attrValues homeManagerModules;
-                extraSpecialArgs = { inherit inputs self; };
-              };
-            }
-            # Pass extended lib with lib.aiden to all modules
-            {
-              _module.args.lib = lib;
-            }
-          ];
-        };
-
-        # Define all nixosConfigurations
-        nixosConfigurations = with self.lib; {
-          locutus = mkHost "locutus" "x86_64-linux";
-          mike = mkHost "mike" "x86_64-linux";
-          desktop = mkHost "desktop" "x86_64-linux";
-          gila = mkHost "gila" "x86_64-linux";
-          thoth = mkHost "thoth" "x86_64-linux";
-          bes = mkHost "bes" "x86_64-linux";
-          tv = mkHost "tv" "x86_64-linux";
-          barbie = mkHost "barbie" "x86_64-linux";
-          pxe = mkHost "pxe" "x86_64-linux";
-          lovelace = mkHost "lovelace" "aarch64-linux";
-          installer = mkHost "installer" "x86_64-linux";
-        };
-      };
-
-      # Per-system outputs
-      perSystem = { config, system, pkgs, ... }: {
-        # Keep existing packages
-        packages = import ./packages { inherit pkgs; };
-      };
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        # Import lib.nix first to set up flake.modules option
+        ./aspects/lib.nix
+        # Import hosts.nix to declare nixosConfigurations
+        ./aspects/hosts.nix
+      ] ++ [
+        # Auto-import all feature modules
+        (inputs.import-tree ./aspects/features)
+      ];
     };
 }
+

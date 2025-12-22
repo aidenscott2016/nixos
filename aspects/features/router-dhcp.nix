@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.router-dhcp = { config, lib, pkgs, ... }:
+  flake.modules.nixos.router-dhcp = { config, lib, pkgs, ... }:
     with lib;
     let dnsmasqEnable = config.aiden.modules.router.dnsmasq.enable;
     in {

@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.beets = { config, lib, pkgs, inputs, ... }:
+  flake.modules.nixos.beets = { config, lib, pkgs, inputs, ... }:
     with lib;
     let
       cfg = config.aiden.programs.beets;

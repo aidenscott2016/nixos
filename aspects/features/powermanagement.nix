@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.powermanagement = { config, lib, ... }:
+  flake.modules.nixos.powermanagement = { config, lib, ... }:
     with lib;
     let cfg = config.aiden.modules.powermanagement;
     in {

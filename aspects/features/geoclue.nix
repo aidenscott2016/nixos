@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.geoclue = { config, lib, ... }:
+  flake.modules.nixos.geoclue = { config, lib, ... }:
     with lib;
     let cfg = config.aiden.modules.geoclue;
     in {

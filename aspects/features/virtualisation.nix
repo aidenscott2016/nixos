@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.virtualisation = { config, lib, pkgs, ... }:
+  flake.modules.nixos.virtualisation = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.virtualisation;
     in {

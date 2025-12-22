@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.homeManagerModules.vim = { config, ... }: {
+  flake.modules.homeManager.vim = { config, ... }: {
     home.file.".vimrc".source = ./vimrc;
   };
 }

@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.navidrome = { config, lib, ... }:
+  flake.modules.nixos.navidrome = { config, lib, ... }:
     with lib;
     let cfg = config.aiden.modules.navidrome;
     in {

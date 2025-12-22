@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.printer = { config, lib, pkgs, ... }:
+  flake.modules.nixos.printer = { config, lib, pkgs, ... }:
     with lib;
     let cfg = config.aiden.modules.printer;
     in {

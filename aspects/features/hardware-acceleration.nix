@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.nixosModules.hardware-acceleration = { config, lib, pkgs, ... }:
+  flake.modules.nixos.hardware-acceleration = { config, lib, pkgs, ... }:
     with lib;
     let
       cfg = config.aiden.modules.hardware-acceleration;
