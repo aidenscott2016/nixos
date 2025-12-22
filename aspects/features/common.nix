@@ -22,43 +22,16 @@
       };
 
       config = mkIf cfg.enable {
+        aiden.modules.users.enable = true;
+        aiden.modules.cli-base.enable = true;
+        aiden.modules.nix.enable = true;
         aiden.modules.gc.enable = true;
-        nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-        nix.extraOptions = "experimental-features = nix-command flakes";
-        nix.settings.auto-optimise-store = true;
-        nix.settings.trusted-users = [ "aiden" ];
-        nix.settings.substituters = [
-          "https://nix-community.cachix.org"
-        ];
 
-        nix.settings.trusted-public-keys = [
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        ];
-
-        users.users.aiden = {
-          uid = 1000;
-          initialPassword = "password";
-          isNormalUser = true;
-          extraGroups = [
-            "wheel"
-            "disk"
-            "networkmanager"
-            "video"
-          ];
-          openssh.authorizedKeys.keys = [ cfg.publicKey ];
-        };
-        users.groups.video.gid = 26;
-
-        environment.sessionVariables = {
-          EDITOR = "vim";
-          VISUAL = "vim";
-        };
-
-        environment.systemPackages = with pkgs; [ vim ];
-
-        # programs.bash.shellInit = ''
-        #   set -o vi
-        # '';
+        users.users.aiden.openssh.authorizedKeys.keys = [ cfg.publicKey ];
       };
     };
+  
+  flake.homeManagerModules.common = { config, lib, ... }: {
+      # Placeholder for future common home-manager config
+  };
 }
