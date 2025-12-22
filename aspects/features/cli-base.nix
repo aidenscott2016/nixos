@@ -7,6 +7,15 @@
       options.aiden.modules.cli-base.enable = mkEnableOption "cli-base";
 
       config = mkIf cfg.enable {
+        environment.sessionVariables = {
+          EDITOR = "vim";
+          VISUAL = "vim";
+        };
+
+        # programs.bash.shellInit = ''
+        #   set -o vi
+        # '';
+
         environment.systemPackages = with pkgs; [
           fish
           vim
