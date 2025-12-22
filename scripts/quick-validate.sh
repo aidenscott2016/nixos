@@ -21,9 +21,9 @@ for host in "${HOSTS[@]}"; do
 
   # Check enabled modules
   echo "  Enabled aiden modules:"
-  nix eval --json ".#nixosConfigurations.$host.config.aiden.modules" 2>/dev/null | \
+  nix-shell -p jq --run "nix eval --json \".#nixosConfigurations.$host.config.aiden.modules\" 2>/dev/null | \
     jq -r 'to_entries | map(select(.value.enable == true)) | .[].key' | \
-    sed 's/^/    - /' || echo "    (unable to enumerate)"
+    sed 's/^/    - /'" || echo "    (unable to enumerate)"
 
   echo ""
 done

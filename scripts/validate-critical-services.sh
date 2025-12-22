@@ -9,8 +9,8 @@ declare -A HOST_SERVICES=(
   [locutus]="sshd tailscaled"
   [mike]="sshd tailscaled"
   [desktop]="sshd tailscaled"
-  [gila]="sshd tailscaled dnsmasq unbound home-assistant traefik"
-  [thoth]="sshd tailscaled adguardhome jellyfin navidrome transmission"
+  [gila]="sshd tailscaled dnsmasq podman-home-assistant traefik"
+  [thoth]="sshd tailscaled adguardhome"
   [bes]="sshd tailscaled"
   [tv]="sshd"
   [barbie]="sshd"
@@ -32,7 +32,7 @@ for host in "${!HOST_SERVICES[@]}"; do
     TOTAL_CHECKS=$((TOTAL_CHECKS + 1))
 
     # Check if service is enabled
-    if nix eval --json ".#nixosConfigurations.$host.config.systemd.services.$service.enable" 2>/dev/null | grep -q "true"; then
+    if nix eval --json ".#nixosConfigurations.$host.config.systemd.services.\"$service\".enable" 2>/dev/null | grep -q "true"; then
       echo "  ✅ $service enabled"
       PASSED_CHECKS=$((PASSED_CHECKS + 1))
     else
@@ -54,6 +54,16 @@ for host in "${!HOST_SERVICES[@]}"; do
           else
             echo "  ⚠️  $service not configured"
             PASSED_CHECKS=$((PASSED_CHECKS + 1))  # Not critical if missing
+          fi
+          ;;
+        podman-*)
+          # Check if virtualisation.podman is enabled for podman services
+          if nix eval --json ".#nixosConfigurations.$host.config.virtualisation.podman.enable" 2>/dev/null | grep -q "true"; then
+            echo "  ✅ $service enabled (via podman)"
+            PASSED_CHECKS=$((PASSED_CHECKS + 1))
+          else
+            echo "  ❌ $service NOT enabled"
+            FAILED_CHECKS=$((FAILED_CHECKS + 1))
           fi
           ;;
         *)

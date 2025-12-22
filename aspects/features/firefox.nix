@@ -4,7 +4,7 @@
   flake.homeManagerModules.firefox = { config, pkgs, inputs, lib, ... }:
     let addons = inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system};
     in {
-      home.file.".tridactylrc".source = ../../modules/home/firefox/tridactylrc;
+      home.file.".tridactylrc".source = ./tridactylrc;
       programs.firefox = {
         enable = true;
         package = pkgs.firefox.override {

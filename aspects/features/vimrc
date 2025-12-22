@@ -1,0 +1,39 @@
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+
+set nocompatible
+set number
+set relativenumber
+set backspace=2
+filetype off
+
+call plug#begin('~/.vim/plugged')
+Plug 'jiangmiao/auto-pairs'
+Plug 'scrooloose/nerdcommenter'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/nerdtree'
+call plug#end()
+set guicursor=
+
+syntax on
+let mapleader=","
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
+
+ "size of a hard tabstop
+ set tabstop=2
+
+ " always uses spaces instead of tab characters
+ set expandtab
+
+ " size of an "indent"
+ set shiftwidth=2
+
+"set t_Co=256
+set backupcopy=yes
+set hidden 
+set term=screen-256color
+set background=dark

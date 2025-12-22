@@ -13,7 +13,7 @@
         rerere.enabled = true;
         help.autocorrect = -1;
         core = {
-          excludesfile = "${./../../modules/home/git/gitignore}";
+          excludesfile = "${./gitignore}";
         };
         push = {
           autoSetupRemote = true;
