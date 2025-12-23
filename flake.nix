@@ -85,24 +85,39 @@
   };
   outputs =
     inputs:
-    inputs.snowfall-lib.mkFlake {
-      inherit inputs;
-      src = ./.;
-      snowfall = {
-        namespace = "aiden";
-      };
-      diskoConfigurations = {
-        locutus = import ./hosts/locutus/disko.nix;
-      };
-      channels-config = {
-        packageOverrides = pkgs: { firefox-addons = inputs.firefox-addons { inherit pkgs; }; };
-        nvidia.acceptLicense = true;
-        allowUnfree = true;
-        rocmSupport = false;
-        permittedInsecurePackages = [
-          "qtwebengine-5.15.19"
-        ];
+    let
+      snowfallFlake = inputs.snowfall-lib.mkFlake {
+        inherit inputs;
+        src = ./.;
+        snowfall = {
+          namespace = "aiden";
+        };
+        diskoConfigurations = {
+          locutus = import ./hosts/locutus/disko.nix;
+        };
+        channels-config = {
+          packageOverrides = pkgs: { firefox-addons = inputs.firefox-addons { inherit pkgs; }; };
+          nvidia.acceptLicense = true;
+          allowUnfree = true;
+          rocmSupport = false;
+          permittedInsecurePackages = [
+            "qtwebengine-5.15.19"
+          ];
 
+        };
       };
-    };
+
+      flakePartsFlake = inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+        imports = [
+          ./modules/dendritic.nix
+          ./modules/namespace.nix
+        ];
+        flake.modules = inputs.import-tree.import ./modules;
+        systems = [ "x86_64-linux" "aarch64-linux" ];
+      };
+    in
+      snowfallFlake // {
+        nixosConfigurations = snowfallFlake.nixosConfigurations //
+                             (flakePartsFlake.nixosConfigurations or {});
+      };
 }
