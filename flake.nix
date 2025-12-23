@@ -65,6 +65,12 @@
       url = "github:snowfallorg/lib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-aspects.url = "github:vic/flake-aspects";
+    den.url = "github:vic/den";
+    import-tree.url = "github:vic/import-tree";
+    denful.url = "github:vic/denful";
+    flake-file.url = "github:vic/flake-file";
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
     nixos-facter.url = "github:nix-community/nixos-facter";
     nixos-images.url = "github:nix-community/nixos-images";
