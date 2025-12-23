@@ -46,7 +46,7 @@
   '';
 
   # extract me to own module
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
@@ -54,6 +54,5 @@
       intel-compute-runtime
 
     ];
-    driSupport = true;
   };
 }
