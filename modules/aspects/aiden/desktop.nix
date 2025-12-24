@@ -3,7 +3,7 @@
   # Desktop meta-aspect that includes common desktop functionality
   # Hosts can include this aspect to get a full desktop environment
 
-  den.aspects.desktop = {
+  aiden.desktop = {
     includes = [
       aiden.syncthing
       aiden.redshift

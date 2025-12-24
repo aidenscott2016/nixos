@@ -24,8 +24,8 @@
       { pkgs, lib, config, ... }:
       {
         imports = [
-          ./systems/x86_64-linux/locutus/hardware-configuration.nix
-          ./systems/x86_64-linux/locutus/autorandr
+          ../../systems/x86_64-linux/locutus/hardware-configuration.nix
+          ../../systems/x86_64-linux/locutus/autorandr
           inputs.dwm.nixosModules.default
           inputs.agenix.nixosModules.default
         ];

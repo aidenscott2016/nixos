@@ -25,8 +25,8 @@
       { pkgs, lib, config, ... }:
       {
         imports = [
-          ./systems/x86_64-linux/gila/hardware-configuration.nix
-          ./systems/x86_64-linux/gila/disko-config.nix
+          ../../systems/x86_64-linux/gila/hardware-configuration.nix
+          ../../systems/x86_64-linux/gila/disko-config.nix
           inputs.disko.nixosModules.default
           inputs.agenix.nixosModules.default
           inputs.switch-fix.nixosModules.switch-fix

@@ -26,12 +26,12 @@
       { pkgs, lib, config, ... }:
       {
         imports = [
-          ./systems/x86_64-linux/desktop/disk-configuration.nix
+          ../../systems/x86_64-linux/desktop/disk-configuration.nix
           inputs.nixos-facter-modules.nixosModules.facter
           inputs.disko.nixosModules.default
         ];
 
-        facter.reportPath = ./systems/x86_64-linux/desktop/facter.json;
+        facter.reportPath = ../../systems/x86_64-linux/desktop/facter.json;
 
         # Set architecture options
         aiden.aspects.architecture = {

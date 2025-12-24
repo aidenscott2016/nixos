@@ -27,14 +27,14 @@
       { pkgs, lib, config, ... }:
       {
         imports = [
-          ./systems/x86_64-linux/mike/disk-configuration.nix
-          ./systems/x86_64-linux/mike/autorandr
+          ../../systems/x86_64-linux/mike/disk-configuration.nix
+          ../../systems/x86_64-linux/mike/autorandr
           inputs.dwm.nixosModules.default
           inputs.nixos-facter-modules.nixosModules.facter
           inputs.disko.nixosModules.default
         ];
 
-        facter.reportPath = ./systems/x86_64-linux/mike/facter.json;
+        facter.reportPath = ../../systems/x86_64-linux/mike/facter.json;
 
         # Set architecture options
         aiden.aspects.architecture = {
