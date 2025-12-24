@@ -31,7 +31,7 @@
         ];
 
         # Set architecture options
-        aiden.aspects.architecture = {
+        aiden.architecture = {
           cpu = "amd";
           gpu = "amd";
         };

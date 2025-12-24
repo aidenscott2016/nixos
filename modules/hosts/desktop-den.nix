@@ -34,7 +34,7 @@
         facter.reportPath = ../../systems/x86_64-linux/desktop/facter.json;
 
         # Set architecture options
-        aiden.aspects.architecture = {
+        aiden.architecture = {
           cpu = "amd";
           gpu = "amd";
         };
