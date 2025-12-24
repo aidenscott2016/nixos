@@ -109,10 +109,9 @@
 
       flakePartsFlake = inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
     in
-      # Temporarily use only den (snowfall disabled for testing)
-      flakePartsFlake;
-      # snowfallFlake // {
-      #   nixosConfigurations = snowfallFlake.nixosConfigurations //
-      #                        (flakePartsFlake.nixosConfigurations or {});
-      # };
+      # Dual-mode: Snowfall hosts + den hosts
+      snowfallFlake // {
+        nixosConfigurations = snowfallFlake.nixosConfigurations //
+                             (flakePartsFlake.nixosConfigurations or {});
+      };
 }

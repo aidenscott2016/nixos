@@ -1,11 +1,12 @@
-{ aiden, pkgs, lib, config, inputs, ... }:
-with lib;
+{ aiden, inputs, ... }:
 {
   aiden.common = {
     # Include gc aspect for garbage collection
     includes = [ aiden.gc ];
 
     nixos =
+      { config, pkgs, lib, ... }:
+      with lib;
       let
         cfg = config.aiden.aspects.common;
       in
