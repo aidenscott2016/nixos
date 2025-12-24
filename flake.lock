@@ -63,21 +63,6 @@
         "type": "github"
       }
     },
-    "denful": {
-      "locked": {
-        "lastModified": 1763765117,
-        "narHash": "sha256-dIN50L0kaMxVvpgOSxTkuJinMZP822jsJ49ZlOz86ZE=",
-        "owner": "vic",
-        "repo": "denful",
-        "rev": "9e0a0ebab3f26cb4708f33ad93edc23422f24f7c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "vic",
-        "repo": "denful",
-        "type": "github"
-      }
-    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -777,7 +762,6 @@
       "inputs": {
         "agenix": "agenix",
         "den": "den",
-        "denful": "denful",
         "disko": "disko",
         "dwm": "dwm",
         "firefox-addons": "firefox-addons",

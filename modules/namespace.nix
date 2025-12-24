@@ -1,10 +1,5 @@
-{ inputs, ... }:
+{ inputs, den, ... }:
 {
-  imports = [ inputs.denful.flakeModule ];
-
-  denful.namespaces = {
-    aiden = {
-      dir = ./aspects;
-    };
-  };
+  imports = [ (inputs.den.namespace "aiden" true) ];
+  _module.args.__findFile = den.lib.__findFile;
 }
