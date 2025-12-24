@@ -104,7 +104,7 @@
         services.openssh.openFirewall = false;
 
         # Services
-        powerManagement.cpuFreqGovernor = "ondemand";
+        powerManagement.cpuFreqGovernor = lib.mkForce "ondemand";
         services.irqbalance.enable = true;
         services.acpid.enable = true;
         services.iperf3.enable = true;

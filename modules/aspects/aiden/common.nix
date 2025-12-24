@@ -28,6 +28,8 @@
         };
 
         config = {
+          nixpkgs.config.allowUnfree = true;
+
           nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
           nix.extraOptions = "experimental-features = nix-command flakes";
           nix.settings.auto-optimise-store = true;
