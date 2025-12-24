@@ -1,4 +1,4 @@
-{ __findFile, lib, pkgs, ... }:
+{ aiden, lib, pkgs, ... }:
 {
   # Register den hosts
   den.hosts.x86_64-linux.test.users.aiden = { };
@@ -6,13 +6,13 @@
   # Define aspects for hosts (name must match hostname)
   den.aspects.test = {
     includes = [
-      <aiden/architecture>
-      <aiden/locale>
-      <aiden/gc>
-      <aiden/cli-base>
-      <aiden/nix>
-      <aiden/ssh>
-      <aiden/common>
+      aiden.architecture
+      aiden.locale
+      aiden.gc
+      aiden.cli-base
+      aiden.nix
+      aiden.ssh
+      aiden.common
     ];
 
     nixos = {

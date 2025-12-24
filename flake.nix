@@ -81,6 +81,7 @@
       url = "github:femtodata/nix-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    systems.url = "github:nix-systems/default";
   };
   outputs =
     inputs:
@@ -108,8 +109,10 @@
 
       flakePartsFlake = inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
     in
-      snowfallFlake // {
-        nixosConfigurations = snowfallFlake.nixosConfigurations //
-                             (flakePartsFlake.nixosConfigurations or {});
-      };
+      # Temporarily use only den (snowfall disabled for testing)
+      flakePartsFlake;
+      # snowfallFlake // {
+      #   nixosConfigurations = snowfallFlake.nixosConfigurations //
+      #                        (flakePartsFlake.nixosConfigurations or {});
+      # };
 }

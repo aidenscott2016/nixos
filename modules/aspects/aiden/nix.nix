@@ -1,0 +1,36 @@
+{ aiden, pkgs, inputs, ... }:
+{
+  aiden.nix = {
+    # Includes gc aspect for garbage collection
+    includes = [ aiden.gc ];
+
+    nixos = {
+      programs.nh.enable = true;
+
+      environment.systemPackages = with pkgs; [
+        nixpkgs-fmt
+        nix-tree
+        inputs.disko.packages.x86_64-linux.disko
+      ];
+
+      nix.settings = {
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
+
+        substituters = [
+          "https://cache.nixos.org"
+          "https://nix-community.cachix.org"
+          "https://cache.flox.dev"
+        ];
+
+        trusted-public-keys = [
+          "cache.nixos.org-1:6NCHdD59X431o0mWqyPMV+FnfCelaCYkFdeVX6Ht7cg="
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXYLQw/aV7GEed86nQ7IsOs="
+        ];
+      };
+    };
+  };
+}
