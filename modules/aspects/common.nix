@@ -1,4 +1,4 @@
-{ pkgs, lib, config, inputs, den, ... }:
+{ __findFile, pkgs, lib, config, inputs, ... }:
 with lib;
 let
   cfg = config.aiden.aspects.common;
@@ -6,7 +6,7 @@ in
 {
   den.aspects.common = {
     # Include gc aspect for garbage collection
-    includes = [ den.aspects.gc ];
+    includes = [ <aiden/gc> ];
 
     nixos = {
       options.aiden.aspects.common = {

@@ -106,14 +106,7 @@
         };
       };
 
-      flakePartsFlake = inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-        imports = [
-          ./modules/dendritic.nix
-          ./modules/namespace.nix
-        ];
-        flake.modules = inputs.import-tree.import ./modules;
-        systems = [ "x86_64-linux" "aarch64-linux" ];
-      };
+      flakePartsFlake = inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
     in
       snowfallFlake // {
         nixosConfigurations = snowfallFlake.nixosConfigurations //

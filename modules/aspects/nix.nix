@@ -1,8 +1,8 @@
-{ pkgs, inputs, ... }:
+{ __findFile, pkgs, inputs, ... }:
 {
   den.aspects.nix = {
     # Includes gc aspect for garbage collection
-    includes = [ den.aspects.gc ];
+    includes = [ <aiden/gc> ];
 
     nixos = {
       programs.nh.enable = true;
