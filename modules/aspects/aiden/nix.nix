@@ -1,17 +1,19 @@
-{ aiden, pkgs, inputs, ... }:
+{ aiden, inputs, ... }:
 {
   aiden.nix = {
     # Includes gc aspect for garbage collection
     includes = [ aiden.gc ];
 
-    nixos = {
-      programs.nh.enable = true;
+    nixos =
+      { pkgs, ... }:
+      {
+        programs.nh.enable = true;
 
-      environment.systemPackages = with pkgs; [
-        nixpkgs-fmt
-        nix-tree
-        inputs.disko.packages.x86_64-linux.disko
-      ];
+        environment.systemPackages = with pkgs; [
+          nixpkgs-fmt
+          nix-tree
+          inputs.disko.packages.x86_64-linux.disko
+        ];
 
       nix.settings = {
         experimental-features = [
