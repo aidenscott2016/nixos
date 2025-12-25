@@ -1,91 +1,12 @@
-{ aiden, inputs, ... }:
+{ inputs, ... }:
 {
-  aiden.home-manager.nixos = { pkgs, config, ... }:
+  aiden.home.firefox.nixos = { pkgs, ... }:
     let
-      firefox-addons = inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system};
+      addons = inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system};
     in
     {
-      imports = [ inputs.home-manager.nixosModules.home-manager ];
-
-      config = {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-      
       home-manager.users.aiden = {
-        # bash
-        programs.bash = {
-          enable = true;
-          bashrcExtra = ''
-            set -o vi
-          '';
-        };
-
-        # git
-        programs.git = {
-          enable = true;
-          extraConfig = {
-            user = {
-              name = "Aiden";
-              email = "aiden@oldstreetjournal.co.uk";
-            };
-            merge.conflictstyle = "zdiff3";
-            pull.rebase = true;
-            rerere.enabled = true;
-            help.autocorrect = -1;
-            core = {
-              excludesfile = "${./home/git/gitignore}";
-            };
-            push = {
-              autoSetupRemote = true;
-              default = "current";
-            };
-          };
-        };
-
-        # vim
-        home.file.".vimrc".source = config.home-manager.users.aiden.lib.file.mkOutOfStoreSymlink ./home/vim/vimrc;
-
-        # tmux
-        programs.tmux.enable = true;
-        xdg.configFile."tmux/tmux.conf".source = ./home/tmux/tmux.conf;
-
-        # ssh
-        programs.ssh = {
-          enable = true;
-          matchBlocks = {
-            "gitlab.com".identityFile = "~/.ssh/gitlab";
-            "github.com".identityFile = "~/.ssh/github";
-            "192.168.* 10.0.* *.local *.sw1a1aa.uk" = {
-              forwardAgent = true;
-              identityFile = "~/.ssh/local";
-            };
-
-            # virtual machines
-            "192.168.122.*".extraOptions = {
-              "StrictHostKeyChecking" = "no";
-              "UserKnownHostsFile" = "/dev/null";
-            };
-
-            # Default configuration
-            "*" = {
-              compression = true;
-              serverAliveInterval = 30;
-              serverAliveCountMax = 3;
-            };
-          };
-        };
-
-        # gpg-agent
-        services.gpg-agent = {
-          enable = true;
-          enableBashIntegration = true;
-          grabKeyboardAndMouse = true;
-          enableSshSupport = true;
-          pinentryPackage = pkgs.pinentry-gtk2;
-        };
-
-        # firefox
-        home.file.".tridactylrc".source = ./home/firefox/tridactylrc;
+        home.file.".tridactylrc".source = ./firefox/tridactylrc;
         programs.firefox = {
           enable = true;
           package = pkgs.firefox.override {
@@ -94,7 +15,7 @@
             };
           };
           profiles.aiden = {
-            extensions.packages = with firefox-addons; [
+            extensions.packages = with addons; [
               sponsorblock
               tridactyl
               ublock-origin
@@ -160,22 +81,8 @@
               };
             };
           };
-        };
 
-        # desktop
-        home.stateVersion = "23.05";
-        xdg.enable = true;
-        home.file."downloads".source = config.home-manager.users.aiden.lib.file.mkOutOfStoreSymlink "/home/aiden/Downloads";
-
-        # ideavim
-        home.file.".ideavimrc".source = ./home/ideavim/ideavimrc;
-
-        # easyeffects
-        services.easyeffects = {
-          enable = false;
-          preset = "voice-chat";
         };
       };
-      };
-    };
+  };
 }

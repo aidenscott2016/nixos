@@ -12,7 +12,6 @@
       aiden.cli-base
       aiden.nix
       aiden.ssh
-      aiden.common
       aiden.desktop
       aiden.gaming
       aiden.steam
