@@ -63,6 +63,9 @@
           package = config.boot.kernelPackages.nvidiaPackages.stable;
         };
 
+        # Hostname (must be set explicitly - den doesn't derive from filename like Snowfall)
+        networking.hostName = "mike";
+
         # Boot
         boot.initrd.systemd.enable = true;
         boot.loader.systemd-boot.enable = true;
