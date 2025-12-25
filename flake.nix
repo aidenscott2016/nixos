@@ -16,102 +16,84 @@
       "cache.nixos.org-1:6NCHdD59X431o0mWqyPMV+FnfCelaCYkFdeVX6Ht7cg="
     ];
   };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    #:w nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-unstable-pinned.url = "github:nixos/nixpkgs/36226520e9f7a35bf341cbe3b6a1ff9047bec6d9";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+
     microvm = {
       url = "github:astro/microvm.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     steamtinkerlaunch = {
       flake = false;
       url = "github:sonic2kk/steamtinkerlaunch";
     };
+
     dwm = {
       url = "github:aidenscott2016/dwm";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
-      # optionally choose not to download darwin deps (saves some resources on Linux)
       inputs.darwin.follows = "";
     };
-    snowfall-lib = {
-      url = "github:snowfallorg/lib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
+    # Den/flake-parts infrastructure
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-aspects.url = "github:vic/flake-aspects";
     den.url = "github:vic/den";
     import-tree.url = "github:vic/import-tree";
     flake-file.url = "github:vic/flake-file";
+
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
     nixos-facter.url = "github:nix-community/nixos-facter";
     nixos-images.url = "github:nix-community/nixos-images";
+
     jovian = {
       url = "github:Jovian-Experiments/Jovian-NixOS";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     switch-fix = {
       url = "github:femtodata/nix-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     systems.url = "github:nix-systems/default";
   };
-  outputs =
-    inputs:
-    let
-      snowfallFlake = inputs.snowfall-lib.mkFlake {
-        inherit inputs;
-        src = ./.;
-        snowfall = {
-          namespace = "aiden";
-        };
-        diskoConfigurations = {
-          locutus = import ./hosts/locutus/disko.nix;
-        };
-        channels-config = {
-          packageOverrides = pkgs: { firefox-addons = inputs.firefox-addons { inherit pkgs; }; };
-          nvidia.acceptLicense = true;
-          allowUnfree = true;
-          rocmSupport = false;
-          permittedInsecurePackages = [
-            "qtwebengine-5.15.19"
-          ];
 
-        };
-      };
-
-      flakePartsFlake = inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
-    in
-      # Dual-mode: Snowfall hosts + den hosts
-      snowfallFlake // {
-        nixosConfigurations = snowfallFlake.nixosConfigurations //
-                             (flakePartsFlake.nixosConfigurations or {});
-      };
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 }
