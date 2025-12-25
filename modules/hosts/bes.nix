@@ -16,6 +16,10 @@
       aiden.avahi
       aiden.syncthing
       aiden.powermanagement
+      aiden.jellyfin
+      aiden.navidrome
+      aiden.paperless
+      aiden.reverse-proxy
     ];
 
     nixos =
@@ -30,11 +34,41 @@
           ../../systems/x86_64-linux/bes/portainer.nix
         ];
 
-        # Set architecture options
+        # Set architecture options (Intel, not AMD!)
         aiden.architecture = {
-          cpu = "amd";
-          gpu = "amd";
+          cpu = "intel";
+          gpu = "intel";
         };
+
+        # Enable the aspects
+        aiden.aspects.jellyfin.enable = true;
+        aiden.aspects.navidrome.enable = true;
+        aiden.aspects.paperless.enable = true;
+        aiden.aspects.reverse-proxy = {
+          enable = true;
+          apps = [
+            { name = "bazarr"; port = 6767; }
+            { name = "sonarr"; port = 8989; }
+            { name = "sab"; port = 8080; }
+            { name = "jellyfin"; port = 8096; }
+            { name = "portainer"; port = 9000; }
+            { name = "deluge"; port = 8112; }
+            { name = "radarr"; port = 7878; }
+            { name = "slskd"; port = 5030; }
+            { name = "navidrome"; port = 4533; }
+            { name = "paperless"; port = 28981; }
+          ];
+        };
+
+        # Add missing packages from old config
+        environment.systemPackages = with pkgs; [
+          get_iplayer
+          wol
+          iperf3
+        ];
+
+        # Add missing user groups
+        users.users.aiden.extraGroups = [ "video" "sabnzbd" "deluge" ];
 
         # Set common options
         aiden.aspects.common = {
@@ -112,61 +146,13 @@
 
         services.sabnzbd = {
           enable = true;
+          group = "video";
         };
         users.users.sabnzbd.extraGroups = [ "video" ];
 
-        services.jellyfin = {
-          enable = true;
-          group = "video";
-        };
-        users.users.jellyfin.extraGroups = [ "video" ];
+        # jellyfin, navidrome, paperless, and reverse-proxy are now handled by aspects
 
-        services.navidrome = {
-          enable = true;
-          settings = {
-            MusicFolder = "/media/t7/Music";
-          };
-        };
-
-        services.paperless = {
-          enable = true;
-          address = "0.0.0.0";
-          port = 28981;
-        };
-
-        # Nginx reverse proxy for services
-        services.nginx = {
-          enable = true;
-          recommendedProxySettings = true;
-          virtualHosts = {
-            "bazarr.bes.sw1a1aa.uk" = {
-              locations."/".proxyPass = "http://127.0.0.1:6767";
-            };
-            "sonarr.bes.sw1a1aa.uk" = {
-              locations."/".proxyPass = "http://127.0.0.1:8989";
-            };
-            "sab.bes.sw1a1aa.uk" = {
-              locations."/".proxyPass = "http://127.0.0.1:8080";
-            };
-            "jellyfin.bes.sw1a1aa.uk" = {
-              locations."/".proxyPass = "http://127.0.0.1:8096";
-            };
-            "portainer.bes.sw1a1aa.uk" = {
-              locations."/".proxyPass = "http://127.0.0.1:9000";
-            };
-            "deluge.bes.sw1a1aa.uk" = {
-              locations."/".proxyPass = "http://127.0.0.1:8112";
-            };
-            "radarr.bes.sw1a1aa.uk" = {
-              locations."/".proxyPass = "http://127.0.0.1:7878";
-            };
-            "slskd.bes.sw1a1aa.uk" = {
-              locations."/".proxyPass = "http://127.0.0.1:5030";
-            };
-          };
-        };
-
-        networking.firewall.allowedTCPPorts = [ 80 443 ];
+        networking.firewall.allowedTCPPorts = [ 443 5000 ];
 
         system.stateVersion = "23.11";
       };
