@@ -1,7 +1,7 @@
 { aiden, inputs, ... }:
 {
   # Register installer host
-  den.hosts.x86_64-install-iso.installer.users = {
+  den.hosts.x86_64-linux.installer.users = {
     nixos = { };
     root = { };
   };
