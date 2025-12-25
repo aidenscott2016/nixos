@@ -4,7 +4,7 @@
     with lib;
     let
       cfg = config.aiden.aspects.hardware-acceleration or { };
-      architecture = config.aiden.aspects.architecture or { };
+      architecture = config.aiden.architecture;
       extraPackages = cfg.extraPackages or [ ];
     in
     {
@@ -21,7 +21,7 @@
           enableAllFirmware = true;
           enableRedistributableFirmware = true;
           intel-gpu-tools.enable = true;
-          amdgpu = mkIf (architecture.gpu or "" == "amd") {
+          amdgpu = mkIf (architecture.gpu == "amd") {
             amdvlk = {
               enable = true;
               support32Bit.enable = true;
@@ -37,9 +37,9 @@
                 libva
                 mesa
               ]
-              ++ optionals (architecture.gpu or "" == "amd") [ amdvlk ]
-              ++ optionals (architecture.cpu or "" == "intel") [
-                intel-media-driver-stable
+              ++ optionals (architecture.gpu == "amd") [ amdvlk ]
+              ++ optionals (architecture.cpu == "intel") [
+                intel-media-driver
                 libva-vdpau-driver
                 intel-compute-runtime-legacy1
                 vpl-gpu-rt
@@ -51,16 +51,16 @@
 
         services.xserver = mkIf config.services.xserver.enable {
           videoDrivers = singleton (
-            if architecture.gpu or "" == "amd" then
+            if architecture.gpu == "amd" then
               "amdgpu"
-            else if architecture.gpu or "" == "intel" then
+            else if architecture.gpu == "intel" then
               "intel"
             else
               "nvidia"
           );
         };
 
-        boot.kernelParams = optionals (architecture.cpu or "" == "intel") [
+        boot.kernelParams = optionals (architecture.cpu == "intel") [
           "i915.enable_guc=3"
         ];
 

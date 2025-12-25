@@ -26,6 +26,9 @@
       {
         imports = [ inputs.nixos-images.nixosModules.image-installer ];
 
+        # Hostname
+        networking.hostName = "installer";
+
         # Set common options
         aiden.aspects.common = {
           domainName = "installer.sw1a1aa.uk";

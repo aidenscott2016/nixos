@@ -7,6 +7,7 @@
     includes = [
       aiden.syncthing
       aiden.redshift
+      aiden.darkman
       aiden.printer
       aiden.thunar
       aiden.keyd

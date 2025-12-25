@@ -56,6 +56,7 @@
         aiden.aspects.desktop.powermanagement.enable = false;
 
         # Networking
+        networking.hostName = "desktop";
         networking.interfaces.enp6s0.wakeOnLan.enable = true;
 
         # Override xserver from desktop aspect

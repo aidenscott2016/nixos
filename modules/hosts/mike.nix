@@ -74,6 +74,11 @@
         # Power management
         services.upower.enable = true;
 
+        # Packages
+        environment.systemPackages = with pkgs; [
+          naps2
+        ];
+
         system.stateVersion = "22.05";
       };
   };

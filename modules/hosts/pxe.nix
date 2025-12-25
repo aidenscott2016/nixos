@@ -26,6 +26,9 @@
       {
         imports = [ (modulesPath + "/installer/netboot/netboot-minimal.nix") ];
 
+        # Hostname
+        networking.hostName = "pxe";
+
         # Set common options
         aiden.aspects.common = {
           domainName = "pxe.sw1a1aa.uk";

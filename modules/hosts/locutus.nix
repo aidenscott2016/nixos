@@ -47,6 +47,9 @@
           moonlight.client.enable = true;
         };
 
+        # Hostname
+        networking.hostName = "locutus";
+
         # Boot configuration
         boot = {
           supportedFilesystems = [ "ntfs" ];
