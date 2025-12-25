@@ -1,10 +1,10 @@
 { aiden, inputs, ... }:
 {
-  # Register desktop-den host
-  den.hosts.x86_64-linux.desktop-den.users.aiden = { };
+  # Register desktop host
+  den.hosts.x86_64-linux.desktop.users.aiden = { };
 
-  # Define desktop-den host aspect
-  den.aspects.desktop-den = {
+  # Define desktop host aspect
+  den.aspects.desktop = {
     includes = [
       aiden.architecture
       aiden.locale

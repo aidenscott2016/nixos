@@ -1,10 +1,10 @@
 { aiden, inputs, ... }:
 {
-  # Register mike-den host
-  den.hosts.x86_64-linux.mike-den.users.aiden = { };
+  # Register mike host
+  den.hosts.x86_64-linux.mike.users.aiden = { };
 
-  # Define mike-den host aspect
-  den.aspects.mike-den = {
+  # Define mike host aspect
+  den.aspects.mike = {
     includes = [
       aiden.architecture
       aiden.locale

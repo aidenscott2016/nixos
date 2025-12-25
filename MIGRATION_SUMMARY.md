@@ -17,7 +17,7 @@ Successfully migrated all 12 NixOS hosts from Snowfall Lib to the dendritic (den
 
 Of the 53 original Snowfall aspects:
 - **35 converted** - All aspects actually used by the 12 hosts
-- **3 inlined** - Service-specific configs (jellyfin, navidrome, reverse-proxy) inlined in bes-den
+- **3 inlined** - Service-specific configs (jellyfin, navidrome, reverse-proxy) inlined in bes
 - **15 unused** - Never referenced by any host (android, barrier, beets, coreboot, darkman, flatpak, geoclue, node-exporter, openttd, paperless, php-docker, samba, scala, transmission, xdg-portal)
 
 **Result:** 100% of needed aspects were converted. The 18 unconverted aspects were either host-specific (inlined) or not used by any current host.
@@ -26,19 +26,19 @@ Of the 53 original Snowfall aspects:
 
 ### Production Hosts (10)
 1. ✅ test - Demo/test host  
-2. ✅ barbie-den - GPD Pocket 3 portable
-3. ✅ thoth-den - DNS server with AdGuard Home
-4. ✅ tv-den - Media center with Plasma6
-5. ✅ bes-den - Media server (Jellyfin, Sonarr, Radarr, etc.)
-6. ✅ pxe-den - Netboot minimal system
-7. ✅ locutus-den - AMD desktop with gaming
-8. ✅ desktop-den - AMD desktop with Jovian/AI services  
-9. ✅ mike-den - Intel/NVIDIA laptop
-10. ✅ gila-den - Router/gateway with Home Assistant
+2. ✅ barbie - GPD Pocket 3 portable
+3. ✅ thoth - DNS server with AdGuard Home
+4. ✅ tv - Media center with Plasma6
+5. ✅ bes - Media server (Jellyfin, Sonarr, Radarr, etc.)
+6. ✅ pxe - Netboot minimal system
+7. ✅ locutus - AMD desktop with gaming
+8. ✅ desktop - AMD desktop with Jovian/AI services  
+9. ✅ mike - Intel/NVIDIA laptop
+10. ✅ gila - Router/gateway with Home Assistant
 
 ### Special Build Types (2)
-11. ✅ lovelace-den - Raspberry Pi (aarch64 SD card image)
-12. ✅ installer-den - Installer ISO
+11. ✅ lovelace - Raspberry Pi (aarch64 SD card image)
+12. ✅ installer - Installer ISO
 
 ## Aspects Created
 

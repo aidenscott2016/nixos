@@ -1,10 +1,10 @@
 { aiden, inputs, ... }:
 {
-  # Register lovelace-den host
-  den.hosts.aarch64-linux.lovelace-den.users.aiden = { };
+  # Register lovelace host
+  den.hosts.aarch64-linux.lovelace.users.aiden = { };
 
-  # Define lovelace-den host aspect
-  den.aspects.lovelace-den = {
+  # Define lovelace host aspect
+  den.aspects.lovelace = {
     includes = [
       aiden.locale
       aiden.gc

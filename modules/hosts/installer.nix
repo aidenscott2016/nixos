@@ -1,13 +1,13 @@
 { aiden, inputs, ... }:
 {
-  # Register installer-den host
-  den.hosts.x86_64-install-iso.installer-den.users = {
+  # Register installer host
+  den.hosts.x86_64-install-iso.installer.users = {
     nixos = { };
     root = { };
   };
 
-  # Define installer-den host aspect
-  den.aspects.installer-den = {
+  # Define installer host aspect
+  den.aspects.installer = {
     includes = [
       aiden.locale
       aiden.gc

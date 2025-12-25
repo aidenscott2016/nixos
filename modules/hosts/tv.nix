@@ -1,10 +1,10 @@
 { aiden, inputs, ... }:
 {
-  # Register tv-den host
-  den.hosts.x86_64-linux.tv-den.users.aiden = { };
+  # Register tv host
+  den.hosts.x86_64-linux.tv.users.aiden = { };
 
-  # Define tv-den host aspect
-  den.aspects.tv-den = {
+  # Define tv host aspect
+  den.aspects.tv = {
     includes = [
       aiden.architecture
       aiden.locale
@@ -25,8 +25,8 @@
           inputs.disko.nixosModules.default
           inputs.agenix.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
-          ../../systems/x86_64-linux/tv-den/disk-config.nix
-          ../../systems/x86_64-linux/tv-den/hardware-configuration.nix
+          ../../systems/x86_64-linux/tv/disk-config.nix
+          ../../systems/x86_64-linux/tv/hardware-configuration.nix
         ];
 
         # Set architecture options
@@ -71,7 +71,7 @@
         ];
 
         # Networking
-        networking.hostName = "tv-den";
+        networking.hostName = "tv";
         networking.networkmanager.enable = true;
 
         # Desktop environment

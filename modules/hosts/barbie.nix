@@ -1,10 +1,10 @@
 { aiden, inputs, ... }:
 {
-  # Register barbie-den host
-  den.hosts.x86_64-linux.barbie-den.users.aiden = { };
+  # Register barbie host
+  den.hosts.x86_64-linux.barbie.users.aiden = { };
 
-  # Define barbie-den host aspect
-  den.aspects.barbie-den = {
+  # Define barbie host aspect
+  den.aspects.barbie = {
     includes = [
       aiden.architecture
       aiden.locale
@@ -23,8 +23,8 @@
           inputs.disko.nixosModules.default
           inputs.nixos-hardware.nixosModules.gpd-pocket-3
           inputs.home-manager.nixosModules.home-manager
-          ../../systems/x86_64-linux/barbie-den/disk-configuration.nix
-          ../../systems/x86_64-linux/barbie-den/hardware-configuration.nix
+          ../../systems/x86_64-linux/barbie/disk-configuration.nix
+          ../../systems/x86_64-linux/barbie/hardware-configuration.nix
         ];
 
         # Set architecture options
@@ -35,8 +35,8 @@
 
         # Set common options
         aiden.aspects.common = {
-          domainName = "barbie-den.local";
-          email = "aiden@barbie-den.local";
+          domainName = "barbie.local";
+          email = "aiden@barbie.local";
         };
 
         # Boot configuration
@@ -44,7 +44,7 @@
         boot.loader.efi.canTouchEfiVariables = true;
 
         # Networking
-        networking.hostName = "barbie-den";
+        networking.hostName = "barbie";
         networking.networkmanager.enable = true;
 
         # X11 and desktop

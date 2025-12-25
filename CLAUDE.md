@@ -74,9 +74,9 @@ Hosts are defined in `modules/hosts/*.nix` following:
 ```
 
 ### Host Categories
-- **Servers**: gila-den (router/home-assistant), thoth-den, bes-den (containers), tv-den (media)
-- **Desktops**: locutus-den, mike-den, desktop-den (with gaming, autorandr profiles)
-- **Special**: barbie-den (GPD Pocket 3), pxe-den (network boot), installer-den (ISO), lovelace-den (Raspberry Pi)
+- **Servers**: gila (router/home-assistant), thoth, bes (containers), tv (media)
+- **Desktops**: locutus, mike, desktop (with gaming, autorandr profiles)
+- **Special**: barbie (GPD Pocket 3), pxe (network boot), installer (ISO), lovelace (Raspberry Pi)
 - **Test**: test (demo host)
 
 ### Directory Structure
@@ -103,7 +103,7 @@ sudo nixos-rebuild switch --flake .#{hostname}
 nixos-rebuild switch --flake .#{hostname} --target-host {hostname}
 
 # Build installer ISO
-nix build .#nixosConfigurations.installer-den.config.system.build.isoImage
+nix build .#nixosConfigurations.installer.config.system.build.isoImage
 ```
 
 ### Testing and Evaluation
@@ -163,7 +163,7 @@ agenix -r
 - Default editor is vim, trusted user for nix operations
 - Binary caches configured globally in flake.nix nixConfig
 - GPU acceleration packages pulled from specific channels via overlays
-- Router functionality concentrated in gila-den host with custom router aspect
+- Router functionality concentrated in gila host with custom router aspect
 - allowUnfree is enabled globally in the common aspect
 
 ## Available Aspects (35)

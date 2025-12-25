@@ -1,10 +1,10 @@
 { aiden, inputs, ... }:
 {
-  # Register locutus-den host
-  den.hosts.x86_64-linux.locutus-den.users.aiden = { };
+  # Register locutus host
+  den.hosts.x86_64-linux.locutus.users.aiden = { };
 
-  # Define locutus-den host aspect
-  den.aspects.locutus-den = {
+  # Define locutus host aspect
+  den.aspects.locutus = {
     includes = [
       aiden.architecture
       aiden.locale

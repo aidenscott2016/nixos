@@ -31,8 +31,8 @@ modules/
 ├── dendritic.nix         # Den bootstrap
 ├── namespace.nix         # Creates aiden namespace
 ├── hosts/                # Per-host definitions (12 files)
-│   ├── locutus-den.nix
-│   ├── desktop-den.nix
+│   ├── locutus.nix
+│   ├── desktop.nix
 │   └── ...
 └── aspects/aiden/        # All aspects (35 aspects)
     ├── architecture.nix

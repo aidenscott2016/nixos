@@ -1,10 +1,10 @@
 { aiden, inputs, ... }:
 {
-  # Register thoth-den host
-  den.hosts.x86_64-linux.thoth-den.users.aiden = { };
+  # Register thoth host
+  den.hosts.x86_64-linux.thoth.users.aiden = { };
 
-  # Define thoth-den host aspect
-  den.aspects.thoth-den = {
+  # Define thoth host aspect
+  den.aspects.thoth = {
     includes = [
       aiden.architecture
       aiden.locale
@@ -24,8 +24,8 @@
           (modulesPath + "/installer/scan/not-detected.nix")
           inputs.disko.nixosModules.disko
           inputs.agenix.nixosModules.default
-          ../../systems/x86_64-linux/thoth-den/disk-config.nix
-          ../../systems/x86_64-linux/thoth-den/hardware-configuration.nix
+          ../../systems/x86_64-linux/thoth/disk-config.nix
+          ../../systems/x86_64-linux/thoth/hardware-configuration.nix
         ];
 
         # Set architecture options
@@ -36,8 +36,8 @@
 
         # Set common options
         aiden.aspects.common = {
-          domainName = "thoth-den.local";
-          email = "aiden@thoth-den.local";
+          domainName = "thoth.local";
+          email = "aiden@thoth.local";
         };
 
         # Tailscale configuration
@@ -60,7 +60,7 @@
         security.sudo.wheelNeedsPassword = false;
 
         # Networking and firewall
-        networking.hostName = "thoth-den";
+        networking.hostName = "thoth";
         networking.firewall = {
           enable = true;
           trustedInterfaces = [ "tailscale0" ];

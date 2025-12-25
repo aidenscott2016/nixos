@@ -1,10 +1,10 @@
 { aiden, inputs, ... }:
 {
-  # Register gila-den host
-  den.hosts.x86_64-linux.gila-den.users.aiden = { };
+  # Register gila host
+  den.hosts.x86_64-linux.gila.users.aiden = { };
 
-  # Define gila-den host aspect
-  den.aspects.gila-den = {
+  # Define gila host aspect
+  den.aspects.gila = {
     includes = [
       aiden.locale
       aiden.gc

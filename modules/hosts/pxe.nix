@@ -1,13 +1,13 @@
 { aiden, ... }:
 {
-  # Register pxe-den host
-  den.hosts.x86_64-linux.pxe-den.users = {
+  # Register pxe host
+  den.hosts.x86_64-linux.pxe.users = {
     nixos = { };
     root = { };
   };
 
-  # Define pxe-den host aspect
-  den.aspects.pxe-den = {
+  # Define pxe host aspect
+  den.aspects.pxe = {
     includes = [
       aiden.locale
       aiden.gc

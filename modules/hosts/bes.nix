@@ -1,10 +1,10 @@
 { aiden, inputs, ... }:
 {
-  # Register bes-den host
-  den.hosts.x86_64-linux.bes-den.users.aiden = { };
+  # Register bes host
+  den.hosts.x86_64-linux.bes.users.aiden = { };
 
-  # Define bes-den host aspect
-  den.aspects.bes-den = {
+  # Define bes host aspect
+  den.aspects.bes = {
     includes = [
       aiden.architecture
       aiden.locale
@@ -25,9 +25,9 @@
           (modulesPath + "/installer/scan/not-detected.nix")
           inputs.disko.nixosModules.default
           inputs.agenix.nixosModules.default
-          ../../systems/x86_64-linux/bes-den/disk-config.nix
-          ../../systems/x86_64-linux/bes-den/hardware-configuration.nix
-          ../../systems/x86_64-linux/bes-den/portainer.nix
+          ../../systems/x86_64-linux/bes/disk-config.nix
+          ../../systems/x86_64-linux/bes/hardware-configuration.nix
+          ../../systems/x86_64-linux/bes/portainer.nix
         ];
 
         # Set architecture options
@@ -47,7 +47,7 @@
         boot.loader.efi.canTouchEfiVariables = true;
 
         # Networking
-        networking.hostName = "bes-den";
+        networking.hostName = "bes";
 
         # SSH
         services.openssh.openFirewall = true;
