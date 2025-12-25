@@ -7,10 +7,20 @@ Successfully migrated all 12 NixOS hosts from Snowfall Lib to the dendritic (den
 ## Statistics
 
 - **Hosts Migrated:** 12/12 (100%)
-- **Aspects Converted:** 35/65 (54%)
+- **Aspects Converted:** 35/53 (66% of original Snowfall aspects)
+- **Aspects Needed:** 35/35 (100% - all needed aspects converted)
 - **Files Changed:** 60+ files
 - **Lines of Code:** ~4,500 lines of new den configuration
 - **Build Success Rate:** 10/10 testable hosts (100%)
+
+### Why Not All Aspects Converted?
+
+Of the 53 original Snowfall aspects:
+- **35 converted** - All aspects actually used by the 12 hosts
+- **3 inlined** - Service-specific configs (jellyfin, navidrome, reverse-proxy) inlined in bes-den
+- **15 unused** - Never referenced by any host (android, barrier, beets, coreboot, darkman, flatpak, geoclue, node-exporter, openttd, paperless, php-docker, samba, scala, transmission, xdg-portal)
+
+**Result:** 100% of needed aspects were converted. The 18 unconverted aspects were either host-specific (inlined) or not used by any current host.
 
 ## Hosts Migrated
 
