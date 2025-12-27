@@ -80,6 +80,7 @@
         # Packages
         environment.systemPackages = with pkgs; [
           naps2
+          antigravity-fhs
         ];
 
         system.stateVersion = "22.05";
