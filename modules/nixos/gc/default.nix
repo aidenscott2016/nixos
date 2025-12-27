@@ -1,14 +1,18 @@
-params@{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
-with lib.aiden;
-enableableModule "gc" params {
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 7d";
+{ config, lib, ... }:
+with lib;
+let
+  cfg = config.aiden.modules.gc;
+in
+{
+  options.aiden.modules.gc = {
+    enable = mkEnableOption "gc";
+  };
+
+  config = mkIf cfg.enable {
+    nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
   };
 }

@@ -1,21 +1,19 @@
 { config, lib, ... }:
 {
-  flake.modules.nixos.locale = {
-    console = {
-      font = "Lat2-Terminus16";
-      useXkbConfig = true;
+  console = {
+    font = "Lat2-Terminus16";
+    useXkbConfig = true;
+  };
+  time.timeZone = "Europe/London";
+  services.xserver = {
+    xkb = {
+      layout = "gb";
+      options = lib.mkIf (!(config.aiden.modules.keyd.enable or false)) "caps:swapescape";
     };
-    time.timeZone = "Europe/London";
-    services.xserver = {
-      xkb = {
-        layout = "gb";
-        options = lib.mkIf (!(config.aiden.modules.keyd.enable or false)) "caps:swapescape";
-      };
-    };
-    services.libinput.enable = true;
+  };
+  services.libinput.enable = true;
 
-    i18n = {
-      defaultLocale = "en_GB.UTF-8";
-    };
+  i18n = {
+    defaultLocale = "en_GB.UTF-8";
   };
 }

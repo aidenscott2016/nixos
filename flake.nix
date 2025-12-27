@@ -84,8 +84,8 @@
       ];
 
       imports = [
-        # Converted modules will be manually imported here
-        # Will switch to import-tree at the end after file reorganization
+        # Hosts (modules are imported directly by hosts)
+        ./systems/x86_64-linux/barbie/default.nix
       ];
     };
 }
