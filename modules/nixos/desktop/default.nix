@@ -32,7 +32,7 @@ with lib;
     powermanagement.enable = mkOption {
       type = lib.types.bool;
       default = true;
-      description = "fuck you";
+      description = "Enable power management";
     };
   };
 

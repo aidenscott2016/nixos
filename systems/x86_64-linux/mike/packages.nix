@@ -1,8 +1,7 @@
-params@{
+{
   config,
   pkgs,
   inputs,
-  channels,
   lib,
   ...
 }:

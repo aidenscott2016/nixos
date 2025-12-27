@@ -4,8 +4,16 @@
   config,
   ...
 }:
+with lib;
+let
+  cfg = config.aiden.modules.powermanagement;
+in
 {
-  config = {
+  options.aiden.modules.powermanagement = {
+    enable = mkEnableOption "powermanagement";
+  };
+
+  config = mkIf cfg.enable {
     services.auto-cpufreq.enable = false;
     services.tlp = {
       enable = true;

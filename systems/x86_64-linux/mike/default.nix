@@ -42,8 +42,8 @@ in
           programs.beets.enable = lib.mkForce false;
           modules = {
             gaming = {
-              games.oblivionSync.enable = true;
               steam.enable = true;
+              games.oblivionSync.enable = true;
               moonlight.client.enable = true;
             };
             nvidia = {

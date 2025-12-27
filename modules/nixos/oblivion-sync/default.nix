@@ -18,6 +18,7 @@ in
 
   options = {
     aiden.modules.${moduleName} = {
+      enable = mkEnableOption moduleName;
       stDataDir = mkOption {
         description = "target to mount oblivion from";
         type = types.path;
@@ -32,7 +33,7 @@ in
     };
 
   };
-  config = {
+  config = mkIf cfg.enable {
     services.tailscale.enable = true;
     environment.systemPackages = with pkgs; [ bindfs ];
     systemd.services.oblivion-mount = {
@@ -51,6 +52,5 @@ in
         RemainAfterExit = true;
       };
     };
-
   };
 }

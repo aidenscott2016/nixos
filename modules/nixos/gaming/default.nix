@@ -5,18 +5,16 @@
   ...
 }:
 with lib;
-with pkgs;
 let
   moduleName = "gaming";
   cfg = config.aiden.modules.${moduleName};
-  minecraftPackages = optionals cfg.games.minecraft.enable [
-    # minecraft -- broken package
-    prismlauncher
-  ];
-  moonlightClient = optionals cfg.moonlight.client.enable [ moonlight-qt ];
-
 in
 {
+  imports = [
+    ../steam/default.nix
+    ../oblivion-sync/default.nix
+  ];
+
   options = {
     aiden.modules."${moduleName}" = {
       steam.enable = mkEnableOption moduleName;
@@ -40,12 +38,16 @@ in
     aiden.modules = {
       steam.enable = cfg.steam.enable;
       oblivionSync.enable = cfg.games.oblivionSync.enable;
-
     };
     aiden.programs = {
       openttd.enable = cfg.games.openttd.enable;
     };
-    environment.systemPackages = minecraftPackages ++ moonlightClient;
+    environment.systemPackages =
+      optionals cfg.games.minecraft.enable [
+        # minecraft -- broken package
+        pkgs.prismlauncher
+      ]
+      ++ optionals cfg.moonlight.client.enable [ pkgs.moonlight-qt ];
 
     boot.kernelParams = [
       "preempt=full" # may help with audio stuttering in proton games

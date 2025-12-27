@@ -5,6 +5,10 @@
   ...
 }:
 {
+  imports = [
+    ../transmission/default.nix
+  ];
+
   config = {
     aiden = {
       modules.transmission.enable = false;
