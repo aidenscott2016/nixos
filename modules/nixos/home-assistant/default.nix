@@ -1,4 +1,4 @@
-params@{
+{
   pkgs,
   lib,
   config,
@@ -7,7 +7,6 @@ params@{
 with lib;
 let
   deviceParams = map (path: "--device=${path}") config.aiden.modules.home-assistant.devices;
-  enable = config.aiden.modules.home-assistant.enable;
   inherit (config.aiden.modules.common) domainName email;
   fqdn = "hass.${domainName}";
   container-name = "home-assistant";
@@ -15,7 +14,6 @@ let
 in
 {
   options.aiden.modules.home-assistant = {
-    enable = mkEnableOption "home-assistant";
     devices = mkOption {
       type = with types; listOf str;
       example = [
@@ -25,7 +23,7 @@ in
       default = [ ];
     };
   };
-  config = mkIf enable {
+  config = {
     systemd.services.${service-name}.after = [ "traefik.service" ];
     networking.hosts."10.0.1.1" = [ fqdn ];
 

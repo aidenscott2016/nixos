@@ -1,21 +1,19 @@
-params@{
+{
   pkgs,
   lib,
   config,
   ...
 }:
-with lib.aiden;
 with lib;
 let
   cfg = config.aiden.modules.tailscale;
 in
 {
   options.aiden.modules.tailscale = {
-    enable = mkEnableOption "";
     advertiseRoutes = mkEnableOption "";
     authKeyPath = mkOption { type = types.str; };
   };
-  config = mkIf cfg.enable {
+  config = {
     services = {
       tailscale = {
         enable = true;

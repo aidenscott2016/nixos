@@ -4,12 +4,8 @@
   pkgs,
   ...
 }:
-with lib;
-let
-  enable = config.aiden.modules.router.enable;
-in
 {
-  config = mkIf enable {
+  config = {
     services.avahi = {
       enable = true;
       nssmdns4 = true;

@@ -6,13 +6,12 @@
 }:
 with {
   inherit (config.aiden.modules.router)
-    enable
     internalInterface
     externalInterface
     ;
 };
 {
-  config = lib.mkIf enable {
+  config = {
     networking = {
       firewall.enable = false;
       nftables = {

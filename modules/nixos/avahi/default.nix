@@ -1,14 +1,10 @@
-params@{
+{
   pkgs,
   lib,
   config,
   ...
 }:
-with lib.aiden;
 {
-  options.aiden.modules.avahi = with lib; {
-    enable = mkEnableOption "";
-  };
   config = {
     services.avahi = {
       enable = true;

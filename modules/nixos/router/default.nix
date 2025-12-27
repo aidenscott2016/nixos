@@ -5,10 +5,16 @@
   ...
 }:
 with lib;
-with config.aiden.modules.router;
 {
+  imports = [
+    ./dhcp
+    ./dns
+    ./firewall
+    ./interfaces
+    ./zeroconf
+  ];
+
   options.aiden.modules.router = {
-    enable = mkEnableOption "router";
     internalInterface = mkOption { type = types.str; };
     externalInterface = mkOption { type = types.str; };
     dns.enable = mkEnableOption "unbound dns";

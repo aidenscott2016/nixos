@@ -8,6 +8,7 @@
     system = "x86_64-linux";
     specialArgs = { inherit inputs; };
     modules = [
+      ../../../modules/nixos/avahi/default.nix
       ../../../modules/nixos/common/default.nix
       ../../../modules/nixos/ssh/default.nix
       ../../../modules/nixos/locale/default.nix

@@ -1,14 +1,6 @@
 { config, lib, ... }:
-with lib;
-let
-  cfg = config.aiden.modules.gc;
-in
 {
-  options.aiden.modules.gc = {
-    enable = mkEnableOption "gc";
-  };
-
-  config = mkIf cfg.enable {
+  config = {
     nix.gc = {
       automatic = true;
       dates = "weekly";
