@@ -1,19 +1,6 @@
-params@{
-  lib,
-  pkgs,
-  config,
-  ...
-}:
-with lib;
-let
-  moduleName = "navidrome";
-  cfg = config.aiden.modules.${moduleName};
-in
+{ lib, pkgs, config, ... }:
 {
-  options = {
-    aiden.modules.${moduleName}.enable = mkEnableOption moduleName;
-  };
-  config = mkIf cfg.enable {
+  config = {
     services.navidrome = {
       group = "video";
       enable = true;

@@ -1,9 +1,4 @@
-params@{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
+{ pkgs, lib, config, ... }:
 with lib;
 with lib.options;
 let
@@ -11,15 +6,17 @@ let
   driver = "iHD";
 in
 {
+  imports = [
+    ../hardware-acceleration/default.nix
+  ];
+
   options.aiden.modules.jellyfin = {
-    enable = mkEnableOption "";
     user = mkOption {
       type = types.str;
       default = "jellyfin";
     };
   };
-  config = mkIf cfg.enable {
-    aiden.modules.hardware-acceleration.enable = true;
+  config = {
     users.users.jellyfin.extraGroups = [ "video" ];
     environment.systemPackages = with pkgs; [
       rename

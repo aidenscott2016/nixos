@@ -4,7 +4,7 @@
 
 This project is migrating a NixOS flake configuration from **Snowfall Lib** to the **pure dendritic (den) pattern** using flake-parts.
 
-**Working directory:** `/home/aiden/src/nixos` (branch: `20-11-den-migration`)
+**Working directory:** `/home/aiden/src/nixos` (branch: `den-12-27`)
 **Master (source of truth):** `/home/aiden/src/nixos-master`
 
 ## The Core Transformation
@@ -140,10 +140,21 @@ When converting a host:
 - `modules/nixos/router/firewall/default.nix`
 - `modules/nixos/router/interfaces/default.nix`
 - `modules/nixos/router/zeroconf/default.nix`
+- `modules/nixos/architecture/default.nix` (options only, no enable)
+- `modules/nixos/syncthing/default.nix`
+- `modules/nixos/cli-base/default.nix`
+- `modules/nixos/navidrome/default.nix`
+- `modules/nixos/reverse-proxy/default.nix` (keeps apps option)
+- `modules/nixos/jellyfin/default.nix` (keeps user option)
+- `modules/nixos/paperles/default.nix`
+- `modules/nixos/jovian/default.nix`
+- `modules/nixos/samba/default.nix` (keeps shares option)
+- `modules/nixos/hardware-acceleration/default.nix` (keeps extraPackages option)
 
 ### Converted Hosts
 - `systems/x86_64-linux/barbie/default.nix` - builds successfully
 - `systems/x86_64-linux/gila/default.nix` - builds successfully
+- `systems/x86_64-linux/bes/default.nix` - evaluates successfully (lib.aiden extension added)
 
 ### Build Verification
 Both hosts build and have been compared against master:
@@ -154,10 +165,7 @@ Both hosts build and have been compared against master:
 ## Remaining Work
 
 ### Hosts to Convert
-1. **bes** (`systems/x86_64-linux/bes/default.nix`)
-   - Needs modules: architecture, syncthing, cli-base, navidrome, reverseProxy, jellyfin, paperless, jovian, samba
-
-2. **desktop** (`systems/x86_64-linux/desktop/default.nix`)
+1. **desktop** (`systems/x86_64-linux/desktop/default.nix`)
    - Needs modules: redshift, hardware-acceleration, multimedia, jovian, desktop, gaming, virtualisation, home-manager, nix, architecture
 
 3. **mike** (`systems/x86_64-linux/mike/default.nix`)

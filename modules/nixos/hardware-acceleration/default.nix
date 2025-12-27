@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 with lib;
 let
   cfg = config.aiden.modules.hardware-acceleration;
@@ -11,7 +6,6 @@ let
 in
 {
   options.aiden.modules.hardware-acceleration = {
-    enable = mkEnableOption "hardware acceleration configuration";
     extraPackages = mkOption {
       type = types.listOf types.package;
       default = [ ];
@@ -19,7 +13,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = {
     hardware = {
       enableAllFirmware = true;
       enableRedistributableFirmware = true;
@@ -44,7 +38,7 @@ in
           #++ optionals (architecture.gpu == "amd") [ amdvlk ]
           ++ optionals (architecture.cpu == "intel") [
             #intel-compute-runtime
-            intel-media-driver-stable # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
+            intel-media-driver # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
             libva-vdpau-driver # Previously vaapiVdpau
             # # OpenCL support for intel CPUs before 12th gen
             # # see: https://github.com/NixOS/nixpkgs/issues/356535

@@ -87,6 +87,7 @@
         # Hosts (modules are imported directly by hosts)
         ./systems/x86_64-linux/barbie/default.nix
         ./systems/x86_64-linux/gila/default.nix
+        ./systems/x86_64-linux/bes/default.nix
       ];
     };
 }

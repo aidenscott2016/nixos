@@ -1,13 +1,6 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 let
   inherit (lib)
-    mkEnableOption
-    mkIf
     mkOption
     types
     ;
@@ -15,14 +8,13 @@ let
 in
 {
   options.aiden.modules.samba = {
-    enable = mkEnableOption "Samba";
     shares = mkOption {
       type = types.attrsOf (types.attrsOf types.unspecified);
       default = { };
     };
   };
 
-  config = mkIf cfg.enable {
+  config = {
     services = {
       # Network shares
       samba = {

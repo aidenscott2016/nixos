@@ -1,9 +1,4 @@
-params@{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
+{ pkgs, lib, config, ... }:
 with lib.aiden;
 with lib;
 let
@@ -12,11 +7,10 @@ let
 in
 {
   options.aiden.modules.reverseProxy = {
-    enable = mkEnableOption "";
     apps = lib.aiden.types.mkReverseProxyAppsOption;
   };
 
-  config = mkIf cfg.enable {
+  config = {
     users.users.traefik.extraGroups = [ "acme" ]; # to read acme folder
     services.traefik = {
       enable = true;

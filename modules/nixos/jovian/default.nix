@@ -1,21 +1,7 @@
-params@{
-  lib,
-  pkgs,
-  config,
-  inputs,
-  ...
-}:
-with lib;
-let
-  moduleName = "jovian";
-  cfg = config.aiden.modules.${moduleName};
-in
+{ lib, pkgs, config, inputs, ... }:
 {
   #  imports = [ inputs.jovian.nixosModules.default ];
-  options = {
-    aiden.modules.${moduleName}.enable = mkEnableOption moduleName;
-  };
-  config = mkIf cfg.enable {
+  config = {
     services.desktopManager.plasma6.enable = true;
     # jovian = {
     #   hardware = {
