@@ -7,6 +7,7 @@
 {
   imports = [
     ../geoclue/default.nix
+    ../xdg-portal/default.nix
   ];
 
   config = {

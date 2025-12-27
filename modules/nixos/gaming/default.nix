@@ -13,6 +13,7 @@ in
   imports = [
     ../steam/default.nix
     ../oblivion-sync/default.nix
+    ../openttd/default.nix
   ];
 
   options = {

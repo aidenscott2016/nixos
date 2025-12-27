@@ -7,6 +7,7 @@
 {
   imports = [
     ../transmission/default.nix
+    ../beets/default.nix
   ];
 
   config = {

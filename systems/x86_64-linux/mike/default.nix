@@ -15,7 +15,6 @@ in
       ../../../modules/nixos/desktop/default.nix
       ../../../modules/nixos/gaming/default.nix
       ../../../modules/nixos/virtualisation/default.nix
-      ../../../modules/nixos/home-manager/default.nix
       ../../../modules/nixos/nix/default.nix
 
       ({ config, pkgs, lib, inputs, ... }: {
@@ -29,10 +28,30 @@ in
           inputs.home-manager.nixosModules.home-manager
         ];
 
+        nixpkgs.config.allowUnfree = true;
+
         facter.reportPath = ./facter.json;
 
         boot.initrd.systemd.enable = true;
         services.upower.enable = true;
+
+        home-manager.extraSpecialArgs = { inherit inputs; };
+        home-manager.users.aiden = {
+          imports = [
+            ../../../modules/home/bash/default.nix
+            ../../../modules/home/darkman/default.nix
+            ../../../modules/home/desktop/default.nix
+            ../../../modules/home/easyeffects/default.nix
+            ../../../modules/home/firefox/default.nix
+            ../../../modules/home/git/default.nix
+            ../../../modules/home/gpg-agent/default.nix
+            ../../../modules/home/ideavim/default.nix
+            ../../../modules/home/ssh/default.nix
+            ../../../modules/home/tmux/default.nix
+            ../../../modules/home/vim/default.nix
+            ../../../modules/home/xdg-portal/default.nix
+          ];
+        };
 
         aiden = {
           architecture = {
