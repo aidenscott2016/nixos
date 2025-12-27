@@ -1,16 +1,12 @@
-params@{
+{
   pkgs,
   lib,
   config,
   ...
 }:
 with lib;
-let
-  moduleName = "geoclue";
-in
 {
   options = {
-    aiden.modules.geoclue.enable = mkEnableOption moduleName;
     aiden.modules.geoclue.apps = mkOption {
       type = types.attrsOf (
         types.submodule {
@@ -47,7 +43,7 @@ in
     };
   };
 
-  config = mkIf config.aiden.modules.geoclue.enable {
+  config = {
     services.geoclue2 = {
       enable = true;
       enableWifi = false;

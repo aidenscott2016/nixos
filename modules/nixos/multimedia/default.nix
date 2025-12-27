@@ -1,14 +1,11 @@
-params@{
+{
   pkgs,
   lib,
   config,
   ...
 }:
 {
-  options = {
-    aiden.modules.multimedia.enable = lib.mkEnableOption "multimedia";
-  };
-  config = lib.mkIf config.aiden.modules.multimedia.enable {
+  config = {
     aiden = {
       modules.transmission.enable = false;
       programs.beets.enable = true;

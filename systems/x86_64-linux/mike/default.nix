@@ -1,61 +1,71 @@
+{ inputs, ... }:
+let
+  lib = inputs.nixpkgs.lib.extend (final: prev: {
+    aiden = import ../../../lib/aiden { lib = final; };
+  });
+in
 {
-  config,
-  pkgs,
-  lib,
-  myModulesPath,
-  inputs,
-  ...
-}:
-{
-  imports = [
-    ./packages.nix
-    ./autorandr
-    inputs.dwm.nixosModules.default
-    inputs.nixos-facter-modules.nixosModules.facter
-    inputs.disko.nixosModules.default
-    ./disk-configuration.nix
-  ];
+  flake.nixosConfigurations.mike = lib.nixosSystem {
+    system = "x86_64-linux";
+    specialArgs = { inherit inputs lib; };
+    modules = [
+      ../../../modules/nixos/architecture/default.nix
+      ../../../modules/nixos/scanner/default.nix
+      ../../../modules/nixos/nvidia/default.nix
+      ../../../modules/nixos/desktop/default.nix
+      ../../../modules/nixos/gaming/default.nix
+      ../../../modules/nixos/virtualisation/default.nix
+      ../../../modules/nixos/home-manager/default.nix
+      ../../../modules/nixos/nix/default.nix
 
-  facter.reportPath = ./facter.json;
+      ({ config, pkgs, lib, inputs, ... }: {
+        imports = [
+          ./packages.nix
+          ./autorandr
+          inputs.dwm.nixosModules.default
+          inputs.nixos-facter-modules.nixosModules.facter
+          inputs.disko.nixosModules.default
+          ./disk-configuration.nix
+          inputs.home-manager.nixosModules.home-manager
+        ];
 
-  boot.initrd.systemd.enable = true;
-  services.upower.enable = true;
-  aiden = {
-    architecture = {
-      cpu = "intel";
-      gpu = "nvidia";
-    };
-    programs.beets.enable = lib.mkForce false;
-    modules = {
-      scanner.enable = true;
-      desktop.enable = true;
-      gaming = {
-        games.oblivionSync.enable = true;
-        steam.enable = true;
-        moonlight.client.enable = true;
-      };
-      virtualisation.enable = true;
-      home-manager.enable = true;
-      nix.enable = true;
-      nvidia = {
-        enable = true;
-        prime = {
-          intelBusId = "PCI:0:2:0";
-          nvidiaBusId = "PCI:1:0:0";
+        facter.reportPath = ./facter.json;
+
+        boot.initrd.systemd.enable = true;
+        services.upower.enable = true;
+
+        aiden = {
+          architecture = {
+            cpu = "intel";
+            gpu = "nvidia";
+          };
+          programs.beets.enable = lib.mkForce false;
+          modules = {
+            gaming = {
+              games.oblivionSync.enable = true;
+              steam.enable = true;
+              moonlight.client.enable = true;
+            };
+            nvidia = {
+              prime = {
+                intelBusId = "PCI:0:2:0";
+                nvidiaBusId = "PCI:1:0:0";
+              };
+              package = config.boot.kernelPackages.nvidiaPackages.stable;
+            };
+          };
         };
-        package = config.boot.kernelPackages.nvidiaPackages.stable;
-      };
-    };
-  };
 
-  system.stateVersion = "22.05";
+        system.stateVersion = "22.05";
 
-  boot.loader.systemd-boot.enable = true;
-  boot = {
-    kernelParams = [
-      "resume_offset=264448"
+        boot.loader.systemd-boot.enable = true;
+        boot = {
+          kernelParams = [
+            "resume_offset=264448"
+          ];
+          resumeDevice = "/dev/disk/by-uuid/ab7e09ed-d079-4ae1-95c5-8a295b40fe82";
+        };
+      })
     ];
-    resumeDevice = "/dev/disk/by-uuid/ab7e09ed-d079-4ae1-95c5-8a295b40fe82";
   };
-
 }

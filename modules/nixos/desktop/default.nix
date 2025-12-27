@@ -4,11 +4,31 @@
   pkgs,
   ...
 }:
-with lib.aiden;
 with lib;
 {
+  imports = [
+    ../syncthing/default.nix
+    ../redshift/default.nix
+    ../darkman/default.nix
+    ../printer/default.nix
+    ../emacs/default.nix
+    ../thunar/default.nix
+    ../locale/default.nix
+    ../keyd/default.nix
+    ../powermanagement/default.nix
+    ../yubikey/default.nix
+    ../appimage/default.nix
+    ../pipewire/default.nix
+    ../ssh/default.nix
+    ../avahi/default.nix
+    ../common/default.nix
+    ../multimedia/default.nix
+    ../hardware-acceleration/default.nix
+    ../ios/default.nix
+    ../cli-base/default.nix
+  ];
+
   options.aiden.modules.desktop = {
-    enable = mkEnableOption "Enable desktop configuration";
     powermanagement.enable = mkOption {
       type = lib.types.bool;
       default = true;
@@ -16,7 +36,7 @@ with lib;
     };
   };
 
-  config = mkIf config.aiden.modules.desktop.enable {
+  config = {
     programs.nm-applet.enable = true;
     services = {
       xserver.enable = true;
@@ -36,30 +56,10 @@ with lib;
 
     systemd.network.wait-online.enable = false;
 
-    aiden.modules = {
-      syncthing = enabled;
-      redshift = enabled;
-      darkman = enabled;
-      printer = enabled;
-      emacs = enabled;
-      thunar = enabled;
-      locale = enabled;
-      keyd = enabled;
-      powermanagement.enable = config.aiden.modules.desktop.powermanagement.enable;
-      yubikey = enabled;
+    aiden.modules.powermanagement.enable = config.aiden.modules.desktop.powermanagement.enable;
 
-      # flatpak = enabled;        # breaks darkman due to xdg portal
-      appimage = enabled;
-      pipewire = enabled;
-      ssh = enabled;
-      avahi = enabled;
-      common = enabled;
-      multimedia = enabled;
-      hardware-acceleration = enabled;
-      ios = enabled;
-      cli-base = enabled;
-      #xdg-portal = enabled;
-    };
+    # flatpak breaks darkman due to xdg portal
+    # aiden.modules.xdg-portal.enable = false;
 
     hardware.bluetooth.enable = true;
     environment.systemPackages = with pkgs; [

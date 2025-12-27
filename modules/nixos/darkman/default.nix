@@ -1,30 +1,24 @@
-params@{
+{
   lib,
   pkgs,
   config,
   ...
 }:
-with lib;
-let
-  moduleName = "darkman";
-in
 {
-  options = {
-    aiden.modules.darkman.enable = mkEnableOption moduleName;
-  };
-  config = mkIf config.aiden.modules.darkman.enable {
+  imports = [
+    ../geoclue/default.nix
+  ];
+
+  config = {
     environment.pathsToLink = [
       "/share/xdg-desktop-portal"
       "/share/applications"
     ];
 
     aiden.modules.xdg-portal.enable = false;
-    aiden.modules.geoclue = {
-      enable = true;
-      apps.darkman = {
-        isAllowed = true;
-        isSystem = true;
-      };
+    aiden.modules.geoclue.apps.darkman = {
+      isAllowed = true;
+      isSystem = true;
     };
 
     # The darkman service comes from home-manager

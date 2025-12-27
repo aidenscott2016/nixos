@@ -11,7 +11,6 @@ let
 in
 {
   options.aiden.modules.nvidia = {
-    enable = mkEnableOption "NVIDIA GPU configuration";
     prime = {
       intelBusId = mkOption {
         type = types.str;
@@ -31,7 +30,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = {
     boot = {
       initrd.kernelModules = [ "nvidia" ];
     };

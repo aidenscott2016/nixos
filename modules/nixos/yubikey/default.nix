@@ -1,19 +1,11 @@
-params@{
+{
   pkgs,
   lib,
   config,
   ...
 }:
-with lib;
-let
-  moduleName = "yubikey";
-in
 {
-  options = {
-    aiden.modules."${moduleName}".enable = mkEnableOption moduleName;
-  };
-
-  config = mkIf config.aiden.modules."${moduleName}".enable {
+  config = {
     # smart card
     services.pcscd.enable = true;
     security.polkit.enable = true;

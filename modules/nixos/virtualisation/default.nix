@@ -1,19 +1,11 @@
-params@{
+{
   lib,
   pkgs,
   config,
   ...
 }:
-with lib;
-let
-  moduleName = "virtualisation";
-in
 {
-  options = {
-    aiden.modules.virtualisation.enable = mkEnableOption moduleName;
-  };
-
-  config = mkIf config.aiden.modules.virtualisation.enable {
+  config = {
     environment.systemPackages = with pkgs; [
       podman-compose
       docker-compose

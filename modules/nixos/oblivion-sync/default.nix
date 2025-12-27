@@ -1,4 +1,4 @@
-params@{
+{
   lib,
   pkgs,
   config,
@@ -12,6 +12,10 @@ let
   stDataDir = cfg.stDataDir;
 in
 {
+  imports = [
+    ../syncthing/default.nix
+  ];
+
   options = {
     aiden.modules.${moduleName} = {
       stDataDir = mkOption {
@@ -25,15 +29,10 @@ in
         type = types.path;
         default = "/home/aiden/oblivion-sync";
       };
-      enable = mkEnableOption moduleName;
     };
 
   };
-  config = mkIf cfg.enable {
-    aiden.modules = {
-      syncthing.enable = true;
-    };
-
+  config = {
     services.tailscale.enable = true;
     environment.systemPackages = with pkgs; [ bindfs ];
     systemd.services.oblivion-mount = {

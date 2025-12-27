@@ -1,20 +1,12 @@
-params@{
+{
   lib,
   pkgs,
   config,
   inputs,
   ...
 }:
-with lib;
-let
-  moduleName = "nix";
-in
 {
-  options = {
-    aiden.modules.nix.enable = mkEnableOption moduleName;
-  };
-
-  config = mkIf config.aiden.modules.nix.enable {
+  config = {
     programs = {
       nh.enable = true;
     };
