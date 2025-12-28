@@ -1,20 +1,16 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
-{
-  config = {
-    services.avahi = {
-      enable = true;
-      nssmdns4 = true;
-      publish = {
+{ nd, ... }: {
+  nd.avahi = {
+    nixos = {
+      services.avahi = {
         enable = true;
-        addresses = true;
-        workstation = true;
+        nssmdns4 = true;
+        publish = {
+          enable = true;
+          addresses = true;
+          workstation = true;
+        };
+        openFirewall = true;
       };
-      openFirewall = true;
     };
   };
 }

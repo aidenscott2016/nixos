@@ -1,10 +1,11 @@
-{ config, lib, ... }:
-{
-  config = {
-    nix.gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
+{ nd, ... }: {
+  nd.gc = {
+    nixos = {
+      nix.gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 7d";
+      };
     };
   };
 }
