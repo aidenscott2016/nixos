@@ -4,17 +4,11 @@
   config,
   ...
 }:
-with lib;
 let
-  cfg = config.aiden.modules.transmission;
   web-port = 9091;
 in
 {
-  options.aiden.modules.transmission = {
-    enable = mkEnableOption "transmission";
-  };
-
-  config = mkIf cfg.enable {
+  config = {
     services.transmission = {
       user = "aiden";
       openFirewall = true;

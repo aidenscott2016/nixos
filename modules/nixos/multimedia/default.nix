@@ -12,7 +12,6 @@
 
   config = {
     aiden = {
-      modules.transmission.enable = false;
       programs.beets.enable = true;
     };
 
