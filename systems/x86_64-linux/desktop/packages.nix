@@ -6,15 +6,7 @@
   ...
 }:
 {
-  environment.systemPackages = with pkgs; [
-    # Desktop packages (from desktop composition module)
-    bindfs
-    xorg.xev
-    (discord.override { withTTS = false; })
-    cameractrls-gtk3
-    chromium
-    xclip
-    libreoffice
-    kdePackages.okular
-  ];
+  # Packages have been moved to the desktop composition module
+  # (modules/nixos/desktop/default.nix)
+  environment.systemPackages = with pkgs; [ ];
 }

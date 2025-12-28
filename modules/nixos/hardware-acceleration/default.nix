@@ -35,7 +35,6 @@ in
             libva
             mesa
           ]
-          #++ optionals (architecture.gpu == "amd") [ amdvlk ]
           ++ optionals (architecture.cpu == "intel") [
             #intel-compute-runtime
             intel-media-driver-stable # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
