@@ -28,7 +28,7 @@ with lib;
     ../cli-base/default.nix
   ];
 
-  options.aiden.modules.desktop = {
+  options.narrowdivergent.modules.desktop = {
     powermanagement.enable = mkOption {
       type = lib.types.bool;
       default = true;
@@ -56,7 +56,7 @@ with lib;
 
     systemd.network.wait-online.enable = false;
 
-    aiden.modules.powermanagement.enable = config.aiden.modules.desktop.powermanagement.enable;
+    narrowdivergent.modules.powermanagement.enable = config.narrowdivergent.modules.desktop.powermanagement.enable;
 
     # flatpak = enabled;        # breaks darkman due to xdg portal
     #xdg-portal = enabled;

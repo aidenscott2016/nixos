@@ -9,7 +9,7 @@
       };
     };
 
-    aiden.modules.reverseProxy = {
+    narrowdivergent.modules.reverseProxy = {
       apps = [
         {
           name = "navidrome";

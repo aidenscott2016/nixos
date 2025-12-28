@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.aiden.modules.xdg-portal;
+  cfg = config.narrowdivergent.modules.xdg-portal;
 in
 {
-  options.aiden.modules.xdg-portal = {
+  options.narrowdivergent.modules.xdg-portal = {
     enable = mkEnableOption "XDG portal configuration";
   };
 

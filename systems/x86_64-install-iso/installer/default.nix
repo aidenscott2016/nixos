@@ -13,7 +13,7 @@
       # Host-specific config
       ({ config, pkgs, lib, inputs, ... }:
       let
-        publicKey = config.aiden.modules.common.publicKey;
+        publicKey = config.narrowdivergent.modules.common.publicKey;
       in
       {
         imports = [ inputs.nixos-images.nixosModules.image-installer ];

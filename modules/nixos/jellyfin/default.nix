@@ -2,7 +2,7 @@
 with lib;
 with lib.options;
 let
-  cfg = config.aiden.modules.jellyfin;
+  cfg = config.narrowdivergent.modules.jellyfin;
   driver = "iHD";
 in
 {
@@ -10,7 +10,7 @@ in
     ../hardware-acceleration/default.nix
   ];
 
-  options.aiden.modules.jellyfin = {
+  options.narrowdivergent.modules.jellyfin = {
     user = mkOption {
       type = types.str;
       default = "jellyfin";

@@ -6,7 +6,7 @@
 }:
 with lib;
 let
-  inherit (config.aiden.modules.common) domainName email;
+  inherit (config.narrowdivergent.modules.common) domainName email;
 in
 {
   config = {

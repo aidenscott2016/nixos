@@ -7,7 +7,7 @@
 with lib;
 let
   moduleName = "oblivionSync";
-  cfg = config.aiden.modules.${moduleName};
+  cfg = config.narrowdivergent.modules.${moduleName};
   obDataDir = cfg.obDataDir;
   stDataDir = cfg.stDataDir;
 in
@@ -17,7 +17,7 @@ in
   ];
 
   options = {
-    aiden.modules.${moduleName} = {
+    narrowdivergent.modules.${moduleName} = {
       enable = mkEnableOption moduleName;
       stDataDir = mkOption {
         description = "target to mount oblivion from";

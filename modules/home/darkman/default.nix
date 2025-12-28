@@ -10,10 +10,10 @@ let
 in
 {
   options = {
-    aiden.modules.darkman.enable = mkEnableOption modulename;
+    narrowdivergent.modules.darkman.enable = mkEnableOption modulename;
   };
-  config = mkIf config.aiden.modules.darkman.enable {
-    aiden.modules.xdg-portal.enable = true;
+  config = mkIf config.narrowdivergent.modules.darkman.enable {
+    narrowdivergent.modules.xdg-portal.enable = true;
     xdg.portal = {
       config.common = {
         "org.freedesktop.impl.portal.Settings" = [ "darkman" ];

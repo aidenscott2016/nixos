@@ -8,13 +8,13 @@
 
 with lib;
 let
-  cfg = config.aiden.modules.steam;
+  cfg = config.narrowdivergent.modules.steam;
   steamtinkerlaunch-git = pkgs.steamtinkerlaunch.overrideAttrs (_: {
     src = inputs.steamtinkerlaunch;
   });
 in
 {
-  options.aiden.modules.steam = {
+  options.narrowdivergent.modules.steam = {
     enable = mkEnableOption "steam";
   };
 

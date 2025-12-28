@@ -4,7 +4,7 @@ params@{
   config,
   ...
 }:
-with lib.aiden;
+with lib.narrowdivergent;
 enableableModule "coreboot" params {
   environment.systemPackages = with pkgs; [
     coreboot-utils

@@ -69,7 +69,7 @@
           host = "0";
         };
 
-        aiden = {
+        narrowdivergent = {
           architecture = {
             cpu = "amd";
             gpu = "amd";
@@ -97,7 +97,7 @@
             ssh = {
               enable = true;
               port = 22;
-              authorizedKeys = [ config.aiden.modules.common.publicKey ];
+              authorizedKeys = [ config.narrowdivergent.modules.common.publicKey ];
               hostKeys = [ "/etc/secrets/initrd/ssh_host_key" ];
               shell = "/bin/cryptsetup-askpass";
             };

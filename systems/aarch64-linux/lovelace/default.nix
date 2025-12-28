@@ -49,7 +49,7 @@
         };
         # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1008362877
 
-        aiden.modules.tailscale.authKeyPath = config.age.secrets.secret1.path;
+        narrowdivergent.modules.tailscale.authKeyPath = config.age.secrets.secret1.path;
 
         services = {
           adguardhome = {

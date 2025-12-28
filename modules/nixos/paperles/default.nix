@@ -28,7 +28,7 @@ in
         ];
       };
     };
-    aiden.modules.reverseProxy.apps = [
+    narrowdivergent.modules.reverseProxy.apps = [
       {
         name = "paperless";
         port = 28981;

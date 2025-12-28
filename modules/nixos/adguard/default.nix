@@ -7,7 +7,7 @@
 with lib;
 let
   http_port = 8081;
-  inherit (config.aiden.modules.common) domainName email;
+  inherit (config.narrowdivergent.modules.common) domainName email;
   fqdn = "adguard.${domainName}";
 in
 {

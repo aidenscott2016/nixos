@@ -6,11 +6,11 @@
 }:
 with lib;
 let
-  cfg = config.aiden.modules.hardware-acceleration;
-  inherit (config.aiden) architecture;
+  cfg = config.narrowdivergent.modules.hardware-acceleration;
+  inherit (config.narrowdivergent) architecture;
 in
 {
-  options.aiden.modules.hardware-acceleration = {
+  options.narrowdivergent.modules.hardware-acceleration = {
     extraPackages = mkOption {
       type = types.listOf types.package;
       default = [ ];

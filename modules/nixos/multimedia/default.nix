@@ -11,7 +11,7 @@
   ];
 
   config = {
-    aiden = {
+    narrowdivergent = {
       programs.beets.enable = true;
     };
 

@@ -4,7 +4,7 @@ params@{
   config,
   ...
 }:
-with lib.aiden;
+with lib.narrowdivergent;
 enableableModule "android" params {
   environment.systemPackages = with pkgs; [
     android-studio

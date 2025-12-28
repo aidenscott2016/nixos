@@ -4,10 +4,10 @@ let
     mkOption
     types
     ;
-  cfg = config.aiden.modules.samba;
+  cfg = config.narrowdivergent.modules.samba;
 in
 {
-  options.aiden.modules.samba = {
+  options.narrowdivergent.modules.samba = {
     shares = mkOption {
       type = types.attrsOf (types.attrsOf types.unspecified);
       default = { };

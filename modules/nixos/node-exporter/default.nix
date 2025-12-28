@@ -9,10 +9,10 @@ params@{
 # with lib;
 # with lib.types;
 # let
-#   cfg = config.aiden.modules.node-exporter;
+#   cfg = config.narrowdivergent.modules.node-exporter;
 #   fqdn = locutus.sw1a1aa.uk
 # {
-#   options.aiden.moduels.node-exporter = {
+#   options.narrowdivergent.moduels.node-exporter = {
 #     enable = mkEnableOption "";
 #     fqdn = mkOption {
 #       type = types.str;

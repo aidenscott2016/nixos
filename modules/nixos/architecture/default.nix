@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.aiden.architecture;
+  cfg = config.narrowdivergent.architecture;
 in
 {
-  options.aiden.architecture = {
+  options.narrowdivergent.architecture = {
     cpu = mkOption {
       type = types.enum [
         "amd"

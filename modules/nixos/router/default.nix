@@ -14,7 +14,7 @@ with lib;
     ./zeroconf
   ];
 
-  options.aiden.modules.router = {
+  options.narrowdivergent.modules.router = {
     internalInterface = mkOption { type = types.str; };
     externalInterface = mkOption { type = types.str; };
     dns.enable = mkEnableOption "unbound dns";

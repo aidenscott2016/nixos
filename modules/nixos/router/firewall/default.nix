@@ -5,7 +5,7 @@
   ...
 }:
 with {
-  inherit (config.aiden.modules.router)
+  inherit (config.narrowdivergent.modules.router)
     internalInterface
     externalInterface
     ;

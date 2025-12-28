@@ -6,11 +6,11 @@
 }:
 with lib;
 let
-  cfg = config.aiden.modules.nvidia;
-  inherit (config.aiden) architecture;
+  cfg = config.narrowdivergent.modules.nvidia;
+  inherit (config.narrowdivergent) architecture;
 in
 {
-  options.aiden.modules.nvidia = {
+  options.narrowdivergent.modules.nvidia = {
     prime = {
       intelBusId = mkOption {
         type = types.str;

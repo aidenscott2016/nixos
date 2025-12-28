@@ -6,14 +6,14 @@
 }:
 with lib;
 let
-  deviceParams = map (path: "--device=${path}") config.aiden.modules.home-assistant.devices;
-  inherit (config.aiden.modules.common) domainName email;
+  deviceParams = map (path: "--device=${path}") config.narrowdivergent.modules.home-assistant.devices;
+  inherit (config.narrowdivergent.modules.common) domainName email;
   fqdn = "hass.${domainName}";
   container-name = "home-assistant";
   service-name = "${config.virtualisation.oci-containers.backend}-${container-name}";
 in
 {
-  options.aiden.modules.home-assistant = {
+  options.narrowdivergent.modules.home-assistant = {
     devices = mkOption {
       type = with types; listOf str;
       example = [

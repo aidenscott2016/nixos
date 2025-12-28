@@ -1,7 +1,7 @@
 { inputs, ... }:
 let
   lib = inputs.nixpkgs.lib.extend (final: prev: {
-    aiden = import ../../../lib/aiden { lib = final; };
+    narrowdivergent = import ../../../lib/narrowdivergent { lib = final; };
   });
 in
 {
@@ -105,7 +105,7 @@ in
           5000
         ];
 
-        aiden = {
+        narrowdivergent = {
           architecture = {
             cpu = "intel";
             gpu = "intel";
@@ -149,7 +149,7 @@ in
           };
         };
         # Samba shares config (samba module not imported as it was disabled in master)
-        # aiden.modules.samba.shares.t7 = {
+        # narrowdivergent.modules.samba.shares.t7 = {
         #   path = "/media/t7";
         #   writable = "true";
         # };

@@ -1,13 +1,13 @@
 { pkgs, lib, config, ... }:
-with lib.aiden;
+with lib.narrowdivergent;
 with lib;
 let
-  inherit (config.aiden.modules.common) domainName email;
-  cfg = config.aiden.modules.reverseProxy;
+  inherit (config.narrowdivergent.modules.common) domainName email;
+  cfg = config.narrowdivergent.modules.reverseProxy;
 in
 {
-  options.aiden.modules.reverseProxy = {
-    apps = lib.aiden.types.mkReverseProxyAppsOption;
+  options.narrowdivergent.modules.reverseProxy = {
+    apps = lib.narrowdivergent.types.mkReverseProxyAppsOption;
   };
 
   config = {

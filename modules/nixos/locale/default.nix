@@ -8,7 +8,7 @@
   services.xserver = {
     xkb = {
       layout = "gb";
-      options = lib.mkIf (!(config.aiden.modules.keyd.enable or false)) "caps:swapescape";
+      options = lib.mkIf (!(config.narrowdivergent.modules.keyd.enable or false)) "caps:swapescape";
     };
   };
   services.libinput.enable = true;

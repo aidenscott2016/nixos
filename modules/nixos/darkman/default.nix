@@ -16,14 +16,14 @@
       "/share/applications"
     ];
 
-    aiden.modules.geoclue.apps.darkman = {
+    narrowdivergent.modules.geoclue.apps.darkman = {
       isAllowed = true;
       isSystem = true;
     };
 
     # The darkman service comes from home-manager
     home-manager.users.aiden = {
-      aiden.modules.darkman.enable = true;
+      narrowdivergent.modules.darkman.enable = true;
     };
   };
 }

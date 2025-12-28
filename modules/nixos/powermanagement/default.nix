@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.aiden.modules.powermanagement;
+  cfg = config.narrowdivergent.modules.powermanagement;
 in
 {
-  options.aiden.modules.powermanagement = {
+  options.narrowdivergent.modules.powermanagement = {
     enable = mkEnableOption "powermanagement";
   };
 

@@ -1,14 +1,14 @@
 { config, lib, pkgs, inputs, ... }:
 with lib;
 let
-  cfg = config.aiden.modules.common;
+  cfg = config.narrowdivergent.modules.common;
 in
 {
   imports = [
     ../gc/default.nix
   ];
 
-  options.aiden.modules.common = {
+  options.narrowdivergent.modules.common = {
     domainName = mkOption { type = types.str; };
     email = mkOption { type = types.str; };
     publicKey = mkOption {

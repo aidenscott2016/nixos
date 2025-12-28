@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.aiden.modules.tailscale;
+  cfg = config.narrowdivergent.modules.tailscale;
 in
 {
-  options.aiden.modules.tailscale = {
+  options.narrowdivergent.modules.tailscale = {
     advertiseRoutes = mkEnableOption "";
     authKeyPath = mkOption { type = types.str; };
   };

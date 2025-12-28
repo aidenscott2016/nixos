@@ -6,7 +6,7 @@
 }:
 with lib;
 let
-  dnsmasqEnable = config.aiden.modules.router.dnsmasq.enable;
+  dnsmasqEnable = config.narrowdivergent.modules.router.dnsmasq.enable;
 in
 {
   config = mkIf dnsmasqEnable {

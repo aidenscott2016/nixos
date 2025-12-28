@@ -4,7 +4,7 @@ params@{
   config,
   ...
 }:
-with lib.aiden;
+with lib.narrowdivergent;
 enableableModule "barrier" params {
   networking.firewall = {
     allowedTCPPorts = [

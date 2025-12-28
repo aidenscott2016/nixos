@@ -58,7 +58,7 @@
         services.acpid.enable = true;
 
         # Module options (modules are imported above, no enable needed)
-        aiden.modules = {
+        narrowdivergent.modules = {
           tailscale = {
             advertiseRoutes = true;
             authKeyPath = config.age.secrets.gila-tailscale-authkey.path;

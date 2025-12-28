@@ -4,7 +4,7 @@ params@{
   config,
   ...
 }:
-with lib.aiden;
+with lib.narrowdivergent;
 enableableModule "php-docker" params {
   networking.firewall = {
     logRefusedConnections = true;
