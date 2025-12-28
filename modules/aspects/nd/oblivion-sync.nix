@@ -1,5 +1,9 @@
 { nd, ... }: {
   nd.oblivion-sync = {
+    includes = [
+      nd.syncthing
+    ];
+
     nixos =
 {
   lib,
@@ -15,9 +19,6 @@ let
   stDataDir = cfg.stDataDir;
 in
 {
-  imports = [
-    ../syncthing/default.nix
-  ];
 
   options = {
     narrowdivergent.aspects.${moduleName} = {

@@ -1,5 +1,10 @@
 { nd, ... }: {
   nd.multimedia = {
+    includes = [
+      nd.transmission
+      nd.beets
+    ];
+
     nixos =
 {
   pkgs,
@@ -8,10 +13,6 @@
   ...
 }:
 {
-  imports = [
-    ../transmission/default.nix
-    ../beets/default.nix
-  ];
 
   config = {
     narrowdivergent = {
