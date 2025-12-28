@@ -89,6 +89,9 @@
         ./systems/x86_64-linux/gila/default.nix
         ./systems/x86_64-linux/bes/default.nix
         ./systems/x86_64-linux/mike/default.nix
+        ./systems/x86_64-linux/desktop/default.nix
+        ./systems/aarch64-linux/lovelace/default.nix
+        ./systems/x86_64-install-iso/installer/default.nix
       ];
     };
 }
