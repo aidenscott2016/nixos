@@ -48,6 +48,21 @@
         "type": "github"
       }
     },
+    "den": {
+      "locked": {
+        "lastModified": 1766081768,
+        "narHash": "sha256-8Ea1DW3YZHifezfdEFHWEIpZBNKvEL+3iFOEcl3eFBU=",
+        "owner": "vic",
+        "repo": "den",
+        "rev": "7271da18c60ab4d7c275ecaab480d29729f05d17",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vic",
+        "repo": "den",
+        "type": "github"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -644,6 +659,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "den": "den",
         "disko": "disko",
         "dwm": "dwm",
         "firefox-addons": "firefox-addons",

@@ -63,6 +63,7 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
+    den.url = "github:vic/den";
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
     nixos-facter.url = "github:nix-community/nixos-facter";
     nixos-images.url = "github:nix-community/nixos-images";
@@ -77,21 +78,6 @@
   };
   outputs =
     inputs:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-      ];
-
-      imports = [
-        # Hosts (modules are imported directly by hosts)
-        ./systems/x86_64-linux/barbie/default.nix
-        ./systems/x86_64-linux/gila/default.nix
-        ./systems/x86_64-linux/bes/default.nix
-        ./systems/x86_64-linux/mike/default.nix
-        ./systems/x86_64-linux/desktop/default.nix
-        ./systems/aarch64-linux/lovelace/default.nix
-        ./systems/x86_64-install-iso/installer/default.nix
-      ];
-    };
+    inputs.flake-parts.lib.mkFlake { inherit inputs; }
+      (inputs.import-tree ./modules);
 }
