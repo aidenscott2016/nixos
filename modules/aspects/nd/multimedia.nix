@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.multimedia = {
+    nixos =
 {
   pkgs,
   lib,
@@ -23,5 +26,8 @@
       #(jellyfin-media-player.override { withDbus = false; })
       imagemagick
     ];
+  };
+}
+;
   };
 }

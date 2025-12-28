@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.ios = {
+    nixos =
 {
   pkgs,
   lib,
@@ -15,5 +18,8 @@
       libimobiledevice
       ifuse
     ];
+  };
+}
+;
   };
 }

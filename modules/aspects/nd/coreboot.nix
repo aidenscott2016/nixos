@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.coreboot = {
+    nixos =
 params@{
   pkgs,
   lib,
@@ -11,4 +14,7 @@ enableableModule "coreboot" params {
     flashrom
     bintools-unwrapped
   ];
+}
+;
+  };
 }

@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.desktop = {
+    nixos =
 {
   config,
   lib,
@@ -28,7 +31,7 @@ with lib;
     ../cli-base/default.nix
   ];
 
-  options.narrowdivergent.modules.desktop = {
+  options.narrowdivergent.aspects.desktop = {
     powermanagement.enable = mkOption {
       type = lib.types.bool;
       default = true;
@@ -56,7 +59,7 @@ with lib;
 
     systemd.network.wait-online.enable = false;
 
-    narrowdivergent.modules.powermanagement.enable = config.narrowdivergent.modules.desktop.powermanagement.enable;
+    narrowdivergent.aspects.powermanagement.enable = config.narrowdivergent.aspects.desktop.powermanagement.enable;
 
     # flatpak = enabled;        # breaks darkman due to xdg portal
     #xdg-portal = enabled;
@@ -78,5 +81,8 @@ with lib;
       claude-code
     ];
 
+  };
+}
+;
   };
 }

@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.php-docker = {
+    nixos =
 params@{
   pkgs,
   lib,
@@ -15,4 +18,7 @@ enableableModule "php-docker" params {
   };
 
   virtualisation.docker.enable = true;
+}
+;
+  };
 }

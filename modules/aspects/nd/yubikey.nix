@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.yubikey = {
+    nixos =
 {
   pkgs,
   lib,
@@ -10,5 +13,8 @@
     services.pcscd.enable = true;
     security.polkit.enable = true;
     environment.systemPackages = with pkgs; [ yubikey-manager ];
+  };
+}
+;
   };
 }

@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.router = {
+    nixos =
 {
   config,
   lib,
@@ -14,10 +17,13 @@ with lib;
     ./zeroconf
   ];
 
-  options.narrowdivergent.modules.router = {
+  options.narrowdivergent.aspects.router = {
     internalInterface = mkOption { type = types.str; };
     externalInterface = mkOption { type = types.str; };
     dns.enable = mkEnableOption "unbound dns";
     dnsmasq.enable = mkEnableOption "dnsmasq";
+  };
+}
+;
   };
 }

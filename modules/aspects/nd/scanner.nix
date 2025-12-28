@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.scanner = {
+    nixos =
 { lib, pkgs, config, ... }:
 {
   config = {
@@ -10,5 +13,8 @@
       "scanner"
       "lp"
     ];
+  };
+}
+;
   };
 }

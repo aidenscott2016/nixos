@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.openttd = {
+    nixos =
 _@{
   lib,
   pkgs,
@@ -13,5 +16,8 @@ with lib;
   config = mkIf config.narrowdivergent.programs.openttd.enable {
     #  xdg.configFile."emacs/init.el".source = ../files/init.el;
     environment.systemPackages = with pkgs; [ openttd ];
+  };
+}
+;
   };
 }

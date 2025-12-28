@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.beets = {
+    nixos =
 _@{
   lib,
   pkgs,
@@ -31,5 +34,8 @@ in
 
   config = mkIf config.narrowdivergent.programs.beets.enable {
     environment.systemPackages = [ beet-override ];
+  };
+}
+;
   };
 }

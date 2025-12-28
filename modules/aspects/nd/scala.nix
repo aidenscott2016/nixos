@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.scala = {
+    nixos =
 params@{
   pkgs,
   lib,
@@ -11,4 +14,7 @@ enableableModule "scala" params {
     sbt
     metals
   ];
+}
+;
+  };
 }

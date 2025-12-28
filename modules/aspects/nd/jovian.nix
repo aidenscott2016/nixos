@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.jovian = {
+    nixos =
 { lib, pkgs, config, inputs, ... }:
 {
   #  imports = [ inputs.jovian.nixosModules.default ];
@@ -19,5 +22,8 @@
     #     useSteamOSConfig = true;
     #   };
     # };
+  };
+}
+;
   };
 }

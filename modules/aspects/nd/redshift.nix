@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.redshift = {
+    nixos =
 {
   pkgs,
   lib,
@@ -11,5 +14,8 @@
       geoclue2.enable = true;
     };
     location.provider = "geoclue2";
+  };
+}
+;
   };
 }

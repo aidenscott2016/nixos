@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.paperles = {
+    nixos =
 { lib, inputs, pkgs, config, ... }:
 with lib;
 let
@@ -28,12 +31,15 @@ in
         ];
       };
     };
-    narrowdivergent.modules.reverseProxy.apps = [
+    narrowdivergent.aspects.reverseProxy.apps = [
       {
         name = "paperless";
         port = 28981;
       }
     ];
 
+  };
+}
+;
   };
 }

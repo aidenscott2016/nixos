@@ -1,13 +1,16 @@
+{ nd, ... }: {
+  nd.samba = {
+    nixos =
 { config, lib, pkgs, ... }:
 let
   inherit (lib)
     mkOption
     types
     ;
-  cfg = config.narrowdivergent.modules.samba;
+  cfg = config.narrowdivergent.aspects.samba;
 in
 {
-  options.narrowdivergent.modules.samba = {
+  options.narrowdivergent.aspects.samba = {
     shares = mkOption {
       type = types.attrsOf (types.attrsOf types.unspecified);
       default = { };
@@ -48,5 +51,8 @@ in
         openFirewall = true;
       };
     };
+  };
+}
+;
   };
 }

@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.pipewire = {
+    nixos =
 {
   lib,
   pkgs,
@@ -19,5 +22,8 @@
     environment.systemPackages = with pkgs; [
       easyeffects
     ];
+  };
+}
+;
   };
 }

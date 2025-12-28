@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.adguard = {
+    nixos =
 {
   pkgs,
   lib,
@@ -7,7 +10,7 @@
 with lib;
 let
   http_port = 8081;
-  inherit (config.narrowdivergent.modules.common) domainName email;
+  inherit (config.narrowdivergent.aspects.common) domainName email;
   fqdn = "adguard.${domainName}";
 in
 {
@@ -38,5 +41,8 @@ in
         http.services.adguard.loadbalancer.servers = [ { url = "http://10.0.1.1:8081"; } ];
       };
     };
+  };
+}
+;
   };
 }

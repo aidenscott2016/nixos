@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.android = {
+    nixos =
 params@{
   pkgs,
   lib,
@@ -17,4 +20,7 @@ enableableModule "android" params {
     "adbusers"
     "plugdev"
   ];
+}
+;
+  };
 }

@@ -1,12 +1,15 @@
+{ nd, ... }: {
+  nd.reverse-proxy = {
+    nixos =
 { pkgs, lib, config, ... }:
 with lib.narrowdivergent;
 with lib;
 let
-  inherit (config.narrowdivergent.modules.common) domainName email;
-  cfg = config.narrowdivergent.modules.reverseProxy;
+  inherit (config.narrowdivergent.aspects.common) domainName email;
+  cfg = config.narrowdivergent.aspects.reverseProxy;
 in
 {
-  options.narrowdivergent.modules.reverseProxy = {
+  options.narrowdivergent.aspects.reverseProxy = {
     apps = lib.narrowdivergent.types.mkReverseProxyAppsOption;
   };
 
@@ -37,5 +40,8 @@ in
         http = toLocalReverseProxy cfg.apps;
       };
     };
+  };
+}
+;
   };
 }

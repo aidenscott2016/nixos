@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.barrier = {
+    nixos =
 params@{
   pkgs,
   lib,
@@ -13,4 +16,7 @@ enableableModule "barrier" params {
   };
 
   environment.systemPackages = with pkgs; [ barrier ];
+}
+;
+  };
 }

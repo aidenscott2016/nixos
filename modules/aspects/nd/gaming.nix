@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.gaming = {
+    nixos =
 {
   lib,
   pkgs,
@@ -7,7 +10,7 @@
 with lib;
 let
   moduleName = "gaming";
-  cfg = config.narrowdivergent.modules.${moduleName};
+  cfg = config.narrowdivergent.aspects.${moduleName};
 in
 {
   imports = [
@@ -17,7 +20,7 @@ in
   ];
 
   options = {
-    narrowdivergent.modules."${moduleName}" = {
+    narrowdivergent.aspects."${moduleName}" = {
       steam.enable = mkEnableOption moduleName;
       moonlight = {
         server.enable = mkEnableOption "enable moonlight server";
@@ -53,5 +56,8 @@ in
     boot.kernelParams = [
       "preempt=full" # may help with audio stuttering in proton games
     ];
+  };
+}
+;
   };
 }

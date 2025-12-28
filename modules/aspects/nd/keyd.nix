@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.keyd = {
+    nixos =
 # https://wiki.nixos.org/wiki/Keyd
 {
   lib,
@@ -32,4 +35,7 @@
 
   };
 
+}
+;
+  };
 }

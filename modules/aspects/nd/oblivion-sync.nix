@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.oblivion-sync = {
+    nixos =
 {
   lib,
   pkgs,
@@ -7,7 +10,7 @@
 with lib;
 let
   moduleName = "oblivionSync";
-  cfg = config.narrowdivergent.modules.${moduleName};
+  cfg = config.narrowdivergent.aspects.${moduleName};
   obDataDir = cfg.obDataDir;
   stDataDir = cfg.stDataDir;
 in
@@ -17,7 +20,7 @@ in
   ];
 
   options = {
-    narrowdivergent.modules.${moduleName} = {
+    narrowdivergent.aspects.${moduleName} = {
       enable = mkEnableOption moduleName;
       stDataDir = mkOption {
         description = "target to mount oblivion from";
@@ -52,5 +55,8 @@ in
         RemainAfterExit = true;
       };
     };
+  };
+}
+;
   };
 }

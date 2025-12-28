@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.appimage = {
+    nixos =
 {
   lib,
   pkgs,
@@ -18,5 +21,8 @@
     environment.pathsToLink = [
       "/share/applications"
     ];
+  };
+}
+;
   };
 }

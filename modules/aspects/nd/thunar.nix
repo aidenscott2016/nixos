@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.thunar = {
+    nixos =
 {
   pkgs,
   lib,
@@ -14,5 +17,8 @@
 
     # enables unzipping
     environment.systemPackages = with pkgs; [ file-roller ];
+  };
+}
+;
   };
 }
