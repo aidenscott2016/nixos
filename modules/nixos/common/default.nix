@@ -18,7 +18,6 @@ in
   };
 
   config = {
-    # gc is imported above and always-on
     nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     nix.extraOptions = "experimental-features = nix-command flakes";
     nix.settings.auto-optimise-store = true;

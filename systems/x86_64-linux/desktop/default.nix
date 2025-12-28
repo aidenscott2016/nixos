@@ -31,6 +31,7 @@
       ({ config, lib, pkgs, inputs, ... }: {
         imports = [
           ./packages.nix
+          #inputs.dwm.nixosModules.default #
           inputs.nixos-facter-modules.nixosModules.facter
           inputs.disko.nixosModules.default
           inputs.home-manager.nixosModules.home-manager

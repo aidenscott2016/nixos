@@ -13,7 +13,7 @@
       # Host-specific config
       ({ config, pkgs, lib, inputs, modulesPath, ... }: {
         imports = [
-          "${modulesPath}/installer/sd-card/sd-image-aarch64-new-kernel-no-zfs-installer.nix"
+          "${modulesPath}/installer/sd-card/sd-image-aarch64-new-kernel-no-zfs-installer.nix" # gives bootloader, sd paritition expansion etc
           inputs.agenix.nixosModules.default
           inputs.nixos-generators.nixosModules.all-formats
         ];
@@ -47,6 +47,7 @@
         boot.kernel.sysctl = {
           "net.ipv4.conf.all.forwarding" = true;
         };
+        # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1008362877
 
         aiden.modules.tailscale.authKeyPath = config.age.secrets.secret1.path;
 
@@ -57,6 +58,9 @@
             settings.http.address = "0.0.0.0:8081";
           };
         };
+
+        #services.gvfs.enable = true;
+        #services.udisks2.enable = true;
       })
     ];
   };

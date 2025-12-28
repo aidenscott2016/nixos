@@ -16,7 +16,7 @@ in
       settings = {
         PAPERLESS_CONSUMER_ENABLE_BARCODES = true;
         PAPERLESS_CONSUMER_ENABLE_ASN_BARCODE = true;
-        PAPERLESS_CONSUMER_BARCODE_SCANNER = "ZXING"; # switch from pyzbar
+        PAPERLESS_CONSUMER_BARCODE_SCANNER = "ZXING"; # switch from pyzba     settings = {
 
         PAPERLESS_URL = "https://paperless.sw1a1aa.uk";
         PAPERLESS_USE_X_FORWARD_HOST = false;

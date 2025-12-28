@@ -32,7 +32,7 @@ with lib;
     powermanagement.enable = mkOption {
       type = lib.types.bool;
       default = true;
-      description = "Enable power management";
+      description = "fuck you";
     };
   };
 
@@ -58,8 +58,8 @@ with lib;
 
     aiden.modules.powermanagement.enable = config.aiden.modules.desktop.powermanagement.enable;
 
-    # flatpak breaks darkman due to xdg portal
-    # aiden.modules.xdg-portal.enable = false;
+    # flatpak = enabled;        # breaks darkman due to xdg portal
+    #xdg-portal = enabled;
 
     hardware.bluetooth.enable = true;
     environment.systemPackages = with pkgs; [
