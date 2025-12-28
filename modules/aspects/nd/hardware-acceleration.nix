@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.hardware-acceleration = {
+    nixos =
 {
   config,
   lib,
@@ -6,11 +9,11 @@
 }:
 with lib;
 let
-  cfg = config.narrowdivergent.modules.hardware-acceleration;
+  cfg = config.narrowdivergent.aspects.hardware-acceleration;
   inherit (config.narrowdivergent) architecture;
 in
 {
-  options.narrowdivergent.modules.hardware-acceleration = {
+  options.narrowdivergent.aspects.hardware-acceleration = {
     extraPackages = mkOption {
       type = types.listOf types.package;
       default = [ ];
@@ -65,5 +68,8 @@ in
     ];
 
     environment.systemPackages = with pkgs; [ nvtopPackages.full ];
+  };
+}
+;
   };
 }

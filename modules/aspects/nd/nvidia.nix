@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.nvidia = {
+    nixos =
 {
   config,
   lib,
@@ -6,11 +9,11 @@
 }:
 with lib;
 let
-  cfg = config.narrowdivergent.modules.nvidia;
+  cfg = config.narrowdivergent.aspects.nvidia;
   inherit (config.narrowdivergent) architecture;
 in
 {
-  options.narrowdivergent.modules.nvidia = {
+  options.narrowdivergent.aspects.nvidia = {
     prime = {
       intelBusId = mkOption {
         type = types.str;
@@ -56,5 +59,8 @@ in
     services.xserver = {
       videoDrivers = [ "nvidia" ];
     };
+  };
+}
+;
   };
 }

@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.home-assistant = {
+    nixos =
 {
   pkgs,
   lib,
@@ -6,14 +9,14 @@
 }:
 with lib;
 let
-  deviceParams = map (path: "--device=${path}") config.narrowdivergent.modules.home-assistant.devices;
-  inherit (config.narrowdivergent.modules.common) domainName email;
+  deviceParams = map (path: "--device=${path}") config.narrowdivergent.aspects.home-assistant.devices;
+  inherit (config.narrowdivergent.aspects.common) domainName email;
   fqdn = "hass.${domainName}";
   container-name = "home-assistant";
   service-name = "${config.virtualisation.oci-containers.backend}-${container-name}";
 in
 {
-  options.narrowdivergent.modules.home-assistant = {
+  options.narrowdivergent.aspects.home-assistant = {
     devices = mkOption {
       type = with types; listOf str;
       example = [
@@ -69,5 +72,8 @@ in
     #     "http.services.hass.loadbalancer.server.port" = "8123";
     #   };
     # };
+  };
+}
+;
   };
 }

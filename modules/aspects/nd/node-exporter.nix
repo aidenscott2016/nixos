@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.node-exporter = {
+    nixos =
 params@{
   pkgs,
   lib,
@@ -9,7 +12,7 @@ params@{
 # with lib;
 # with lib.types;
 # let
-#   cfg = config.narrowdivergent.modules.node-exporter;
+#   cfg = config.narrowdivergent.aspects.node-exporter;
 #   fqdn = locutus.sw1a1aa.uk
 # {
 #   options.narrowdivergent.moduels.node-exporter = {
@@ -90,3 +93,6 @@ params@{
 #     networking.firewall.allowedTCPPorts = [ 443 ];
 #   };
 # }
+;
+  };
+}

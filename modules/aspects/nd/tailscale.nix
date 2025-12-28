@@ -1,19 +1,21 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
-with lib;
-let
-  cfg = config.narrowdivergent.modules.tailscale;
-in
-{
-  options.narrowdivergent.modules.tailscale = {
-    advertiseRoutes = mkEnableOption "";
-    authKeyPath = mkOption { type = types.str; };
-  };
-  config = {
+{ nd, ... }: {
+  nd.tailscale = {
+    nixos = {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
+    with lib;
+    let
+      cfg = config.narrowdivergent.aspects.tailscale;
+    in
+    {
+      options.narrowdivergent.aspects.tailscale = {
+        advertiseRoutes = mkEnableOption "";
+        authKeyPath = mkOption { type = types.str; };
+      };
+      config = {
     services = {
       tailscale = {
         enable = true;
@@ -50,6 +52,8 @@ in
         # otherwise authenticate with tailscale
         ${tailscale}/bin/tailscale up -authkey  file:${cfg.authKeyPath} ${strings.optionalString cfg.advertiseRoutes "--advertise-routes=10.0.0.0/22"}
       '';
+    };
+      };
     };
   };
 }

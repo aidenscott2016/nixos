@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.syncthing = {
+    nixos =
 { lib, pkgs, config, ... }:
 {
   config = {
@@ -7,5 +10,8 @@
       enable = true;
       openDefaultPorts = true;
     };
+  };
+}
+;
   };
 }

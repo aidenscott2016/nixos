@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.emacs = {
+    nixos =
 {
   pkgs,
   lib,
@@ -19,5 +22,8 @@
       nixd
       nil
     ];
+  };
+}
+;
   };
 }

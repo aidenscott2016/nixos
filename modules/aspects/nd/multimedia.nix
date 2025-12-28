@@ -1,3 +1,11 @@
+{ nd, ... }: {
+  nd.multimedia = {
+    includes = [
+      nd.transmission
+      nd.beets
+    ];
+
+    nixos =
 {
   pkgs,
   lib,
@@ -5,10 +13,6 @@
   ...
 }:
 {
-  imports = [
-    ../transmission/default.nix
-    ../beets/default.nix
-  ];
 
   config = {
     narrowdivergent = {
@@ -23,5 +27,8 @@
       #(jellyfin-media-player.override { withDbus = false; })
       imagemagick
     ];
+  };
+}
+;
   };
 }

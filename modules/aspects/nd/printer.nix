@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.printer = {
+    nixos =
 {
   pkgs,
   lib,
@@ -14,5 +17,8 @@
         drivers = [ pkgs.hplip ];
       };
     };
+  };
+}
+;
   };
 }

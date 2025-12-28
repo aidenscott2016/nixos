@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.navidrome = {
+    nixos =
 { lib, pkgs, config, ... }:
 {
   config = {
@@ -9,7 +12,7 @@
       };
     };
 
-    narrowdivergent.modules.reverseProxy = {
+    narrowdivergent.aspects.reverseProxy = {
       apps = [
         {
           name = "navidrome";
@@ -17,5 +20,8 @@
         }
       ];
     };
+  };
+}
+;
   };
 }

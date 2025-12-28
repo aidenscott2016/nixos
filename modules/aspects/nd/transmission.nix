@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.transmission = {
+    nixos =
 {
   pkgs,
   lib,
@@ -26,5 +29,8 @@ in
       enable = true;
     };
     networking.firewall.allowedTCPPorts = [ web-port ];
+  };
+}
+;
   };
 }

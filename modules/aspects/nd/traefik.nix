@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.traefik = {
+    nixos =
 {
   pkgs,
   lib,
@@ -6,7 +9,7 @@
 }:
 with lib;
 let
-  inherit (config.narrowdivergent.modules.common) domainName email;
+  inherit (config.narrowdivergent.aspects.common) domainName email;
 in
 {
   config = {
@@ -84,5 +87,8 @@ in
         };
       };
     };
+  };
+}
+;
   };
 }

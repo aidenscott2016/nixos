@@ -1,3 +1,12 @@
+{ nd, ... }: {
+  nd.gaming = {
+    includes = [
+      nd.steam
+      nd.oblivion-sync
+      nd.openttd
+    ];
+
+    nixos =
 {
   lib,
   pkgs,
@@ -7,17 +16,12 @@
 with lib;
 let
   moduleName = "gaming";
-  cfg = config.narrowdivergent.modules.${moduleName};
+  cfg = config.narrowdivergent.aspects.${moduleName};
 in
 {
-  imports = [
-    ../steam/default.nix
-    ../oblivion-sync/default.nix
-    ../openttd/default.nix
-  ];
 
   options = {
-    narrowdivergent.modules."${moduleName}" = {
+    narrowdivergent.aspects."${moduleName}" = {
       steam.enable = mkEnableOption moduleName;
       moonlight = {
         server.enable = mkEnableOption "enable moonlight server";
@@ -53,5 +57,8 @@ in
     boot.kernelParams = [
       "preempt=full" # may help with audio stuttering in proton games
     ];
+  };
+}
+;
   };
 }

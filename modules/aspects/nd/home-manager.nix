@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.home-manager = {
+    nixos =
 {
   lib,
   pkgs,
@@ -12,5 +15,8 @@
 
     # Configure home-manager for the user
     home-manager.users.aiden = { };
+  };
+}
+;
   };
 }

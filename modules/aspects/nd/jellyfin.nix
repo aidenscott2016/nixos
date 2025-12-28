@@ -1,16 +1,20 @@
+{ nd, ... }: {
+  nd.jellyfin = {
+    includes = [
+      nd.hardware-acceleration
+    ];
+
+    nixos =
 { pkgs, lib, config, ... }:
 with lib;
 with lib.options;
 let
-  cfg = config.narrowdivergent.modules.jellyfin;
+  cfg = config.narrowdivergent.aspects.jellyfin;
   driver = "iHD";
 in
 {
-  imports = [
-    ../hardware-acceleration/default.nix
-  ];
 
-  options.narrowdivergent.modules.jellyfin = {
+  options.narrowdivergent.aspects.jellyfin = {
     user = mkOption {
       type = types.str;
       default = "jellyfin";
@@ -36,5 +40,8 @@ in
       LIBVA_DRIVER_NAME = driver;
     };
 
+  };
+}
+;
   };
 }

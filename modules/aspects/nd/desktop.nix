@@ -1,3 +1,28 @@
+{ nd, ... }: {
+  nd.desktop = {
+    includes = [
+      nd.syncthing
+      nd.redshift
+      nd.darkman
+      nd.printer
+      nd.emacs
+      nd.thunar
+      nd.locale
+      nd.keyd
+      nd.powermanagement
+      nd.yubikey
+      nd.appimage
+      nd.pipewire
+      nd.ssh
+      nd.avahi
+      nd.common
+      nd.multimedia
+      nd.hardware-acceleration
+      nd.ios
+      nd.cli-base
+    ];
+
+    nixos =
 {
   config,
   lib,
@@ -6,29 +31,8 @@
 }:
 with lib;
 {
-  imports = [
-    ../syncthing/default.nix
-    ../redshift/default.nix
-    ../darkman/default.nix
-    ../printer/default.nix
-    ../emacs/default.nix
-    ../thunar/default.nix
-    ../locale/default.nix
-    ../keyd/default.nix
-    ../powermanagement/default.nix
-    ../yubikey/default.nix
-    ../appimage/default.nix
-    ../pipewire/default.nix
-    ../ssh/default.nix
-    ../avahi/default.nix
-    ../common/default.nix
-    ../multimedia/default.nix
-    ../hardware-acceleration/default.nix
-    ../ios/default.nix
-    ../cli-base/default.nix
-  ];
 
-  options.narrowdivergent.modules.desktop = {
+  options.narrowdivergent.aspects.desktop = {
     powermanagement.enable = mkOption {
       type = lib.types.bool;
       default = true;
@@ -56,7 +60,7 @@ with lib;
 
     systemd.network.wait-online.enable = false;
 
-    narrowdivergent.modules.powermanagement.enable = config.narrowdivergent.modules.desktop.powermanagement.enable;
+    narrowdivergent.aspects.powermanagement.enable = config.narrowdivergent.aspects.desktop.powermanagement.enable;
 
     # flatpak = enabled;        # breaks darkman due to xdg portal
     #xdg-portal = enabled;
@@ -78,5 +82,8 @@ with lib;
       claude-code
     ];
 
+  };
+}
+;
   };
 }

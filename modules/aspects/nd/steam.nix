@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.steam = {
+    nixos =
 {
   pkgs,
   lib,
@@ -8,13 +11,13 @@
 
 with lib;
 let
-  cfg = config.narrowdivergent.modules.steam;
+  cfg = config.narrowdivergent.aspects.steam;
   steamtinkerlaunch-git = pkgs.steamtinkerlaunch.overrideAttrs (_: {
     src = inputs.steamtinkerlaunch;
   });
 in
 {
-  options.narrowdivergent.modules.steam = {
+  options.narrowdivergent.aspects.steam = {
     enable = mkEnableOption "steam";
   };
 
@@ -113,5 +116,8 @@ in
           '';
     in
     lib.mkIf config.programs.steam.gamescopeSession.enable ([ steam-session ]);
+  };
+}
+;
   };
 }
