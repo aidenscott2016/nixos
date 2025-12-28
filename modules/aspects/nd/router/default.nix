@@ -10,11 +10,11 @@
 with lib;
 {
   imports = [
-    ./dhcp
-    ./dns
-    ./firewall
-    ./interfaces
-    ./zeroconf
+    ./_dhcp
+    ./_dns
+    ./_firewall
+    ./_interfaces
+    ./_zeroconf
   ];
 
   options.narrowdivergent.aspects.router = {

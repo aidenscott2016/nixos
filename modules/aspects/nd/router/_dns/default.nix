@@ -6,7 +6,7 @@
 }:
 with lib;
 let
-  enable = config.narrowdivergent.modules.router.dns.enable;
+  enable = config.narrowdivergent.aspects.router.dns.enable;
 in
 {
   config = mkIf enable {

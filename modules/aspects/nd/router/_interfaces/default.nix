@@ -6,7 +6,7 @@
 }:
 with lib;
 let
-  inherit (config.narrowdivergent.modules.router)
+  inherit (config.narrowdivergent.aspects.router)
     internalInterface
     externalInterface
     ;
