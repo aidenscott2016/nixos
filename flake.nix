@@ -63,6 +63,7 @@
     };
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
+    flake-aspects.url = "github:vic/flake-aspects";
     den.url = "github:vic/den";
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
     nixos-facter.url = "github:nix-community/nixos-facter";
