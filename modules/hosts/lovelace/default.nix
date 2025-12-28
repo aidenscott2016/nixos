@@ -1,17 +1,17 @@
-{ inputs, ... }:
-{
-  flake.nixosConfigurations.lovelace = inputs.nixpkgs-unstable.lib.nixosSystem {
-    system = "aarch64-linux";
-    specialArgs = { inherit inputs; };
-    modules = [
-      # Modules
-      ../../../modules/nixos/tailscale/default.nix
-      ../../../modules/nixos/avahi/default.nix
-      ../../../modules/nixos/common/default.nix
-      ../../../modules/nixos/locale/default.nix
+{ den, nd, inputs, ... }: {
+  # Host declaration with user
+  den.hosts.aarch64-linux.lovelace.users.aiden = {};
 
-      # Host-specific config
-      ({ config, pkgs, lib, inputs, modulesPath, ... }: {
+  # Host aspect
+  den.aspects.lovelace = {
+    includes = [
+      nd.common
+      nd.locale
+      nd.avahi
+      nd.tailscale
+    ];
+
+    nixos = { config, pkgs, lib, modulesPath, ... }: {
         imports = [
           "${modulesPath}/installer/sd-card/sd-image-aarch64-new-kernel-no-zfs-installer.nix" # gives bootloader, sd paritition expansion etc
           inputs.agenix.nixosModules.default
@@ -49,7 +49,7 @@
         };
         # https://github.com/NixOS/nixpkgs/issues/154163#issuecomment-1008362877
 
-        narrowdivergent.modules.tailscale.authKeyPath = config.age.secrets.secret1.path;
+        narrowdivergent.aspects.tailscale.authKeyPath = config.age.secrets.secret1.path;
 
         services = {
           adguardhome = {
@@ -61,7 +61,6 @@
 
         #services.gvfs.enable = true;
         #services.udisks2.enable = true;
-      })
-    ];
+    };
   };
 }
