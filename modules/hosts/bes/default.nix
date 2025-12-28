@@ -24,7 +24,7 @@
         ./_disk-config.nix
         inputs.agenix.nixosModules.default
         inputs.disko.nixosModules.default
-        ./portainer.nix
+        ./_portainer.nix
       ];
 
       nixpkgs.config.allowUnfree = true;

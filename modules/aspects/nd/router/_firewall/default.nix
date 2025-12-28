@@ -5,7 +5,7 @@
   ...
 }:
 with {
-  inherit (config.narrowdivergent.modules.router)
+  inherit (config.narrowdivergent.aspects.router)
     internalInterface
     externalInterface
     ;
@@ -16,7 +16,7 @@ with {
       firewall.enable = false;
       nftables = {
         enable = true;
-        ruleset = (import ./nft.nix { inherit internalInterface externalInterface; });
+        ruleset = (import ./_nft.nix { inherit internalInterface externalInterface; });
       };
     };
   };
