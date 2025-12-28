@@ -19,11 +19,6 @@ in
       enableRedistributableFirmware = true;
       intel-gpu-tools.enable = true;
       amdgpu = mkIf (architecture.gpu == "amd") {
-        amdvlk = {
-          enable = true;
-          support32Bit.enable = true;
-        };
-
         initrd.enable = true;
       };
 
