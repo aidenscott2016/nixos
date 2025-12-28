@@ -1,5 +1,9 @@
 { nd, ... }: {
   nd.jellyfin = {
+    includes = [
+      nd.hardware-acceleration
+    ];
+
     nixos =
 { pkgs, lib, config, ... }:
 with lib;
@@ -9,9 +13,6 @@ let
   driver = "iHD";
 in
 {
-  imports = [
-    ../hardware-acceleration/default.nix
-  ];
 
   options.narrowdivergent.aspects.jellyfin = {
     user = mkOption {

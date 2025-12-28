@@ -1,5 +1,11 @@
 { nd, ... }: {
   nd.gaming = {
+    includes = [
+      nd.steam
+      nd.oblivion-sync
+      nd.openttd
+    ];
+
     nixos =
 {
   lib,
@@ -13,11 +19,6 @@ let
   cfg = config.narrowdivergent.aspects.${moduleName};
 in
 {
-  imports = [
-    ../steam/default.nix
-    ../oblivion-sync/default.nix
-    ../openttd/default.nix
-  ];
 
   options = {
     narrowdivergent.aspects."${moduleName}" = {

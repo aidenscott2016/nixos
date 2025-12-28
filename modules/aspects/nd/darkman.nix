@@ -1,5 +1,10 @@
 { nd, ... }: {
   nd.darkman = {
+    includes = [
+      nd.geoclue
+      nd.xdg-portal
+    ];
+
     nixos =
 {
   lib,
@@ -8,10 +13,6 @@
   ...
 }:
 {
-  imports = [
-    ../geoclue/default.nix
-    ../xdg-portal/default.nix
-  ];
 
   config = {
     environment.pathsToLink = [
