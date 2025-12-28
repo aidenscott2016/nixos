@@ -10,6 +10,7 @@ in
 {
   config = {
     services.transmission = {
+      package = pkgs.transmission_4;
       user = "aiden";
       openFirewall = true;
       settings = {

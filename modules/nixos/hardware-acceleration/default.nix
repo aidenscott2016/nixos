@@ -37,7 +37,7 @@ in
           ]
           ++ optionals (architecture.cpu == "intel") [
             #intel-compute-runtime
-            intel-media-driver-stable # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
+            intel-media-driver # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
             libva-vdpau-driver # Previously vaapiVdpau
             # # OpenCL support for intel CPUs before 12th gen
             # # see: https://github.com/NixOS/nixpkgs/issues/356535

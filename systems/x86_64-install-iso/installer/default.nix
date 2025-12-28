@@ -27,6 +27,8 @@
         nixpkgs.overlays = [
           (final: prev: {
             nixos-facter = inputs.nixos-facter.packages.x86_64-linux.nixos-facter;
+            # Fix for renamed ZFS package
+            zfsUnstable = prev.zfs_unstable;
           })
         ];
       })
