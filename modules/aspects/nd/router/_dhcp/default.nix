@@ -6,7 +6,7 @@
 }:
 with lib;
 let
-  dnsmasqEnable = config.narrowdivergent.modules.router.dnsmasq.enable;
+  dnsmasqEnable = config.narrowdivergent.aspects.router.dnsmasq.enable;
 in
 {
   config = mkIf dnsmasqEnable {
