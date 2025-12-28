@@ -23,7 +23,7 @@
     nixos = { config, pkgs, lib, ... }: {
       imports = [
         ./_packages.nix
-        ./autorandr
+        ./_autorandr
         inputs.dwm.nixosModules.default
         inputs.nixos-facter-modules.nixosModules.facter
         inputs.disko.nixosModules.default
