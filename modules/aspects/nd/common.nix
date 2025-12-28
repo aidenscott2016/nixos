@@ -2,7 +2,7 @@
   nd.common = {
     includes = [ nd.gc ];
 
-    nixos = { config, lib, pkgs, inputs, ... }:
+    nixos = { config, lib, pkgs, ... }:
     with lib;
     let
       cfg = config.narrowdivergent.aspects.common;
@@ -18,7 +18,6 @@
       };
 
       config = {
-        nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
         nix.extraOptions = "experimental-features = nix-command flakes";
         nix.settings.auto-optimise-store = true;
         nix.settings.trusted-users = [ "aiden" ];
