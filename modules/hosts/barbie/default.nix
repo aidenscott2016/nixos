@@ -11,18 +11,6 @@
       nd.avahi
       nd.barbie-hardware
       den.provides.home-manager
-      nd.home.bash
-      nd.home.darkman
-      nd.home.desktop
-      nd.home.easyeffects
-      nd.home.firefox
-      nd.home.git
-      nd.home.gpg-agent
-      nd.home.ideavim
-      nd.home.ssh
-      nd.home.tmux
-      nd.home.vim
-      nd.home.xdg-portal
     ];
 
     nixos = { config, pkgs, lib, ... }: {
@@ -123,6 +111,23 @@
         domainName = "narrowdivergent.com";
         email = "aiden@narrowdivergent.com";
       };
+    };
+
+    homeManager = {
+      imports = [
+        nd.home.bash
+        nd.home.darkman
+        nd.home.desktop
+        nd.home.easyeffects
+        nd.home.firefox
+        nd.home.git
+        nd.home.gpg-agent
+        nd.home.ideavim
+        nd.home.ssh
+        nd.home.tmux
+        nd.home.vim
+        nd.home.xdg-portal
+      ];
     };
   };
 }
