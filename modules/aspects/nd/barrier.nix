@@ -1,10 +1,13 @@
+{ nd, ... }: {
+  nd.barrier = {
+    nixos =
 params@{
   pkgs,
   lib,
   config,
   ...
 }:
-with lib.aiden;
+with lib.narrowdivergent;
 enableableModule "barrier" params {
   networking.firewall = {
     allowedTCPPorts = [
@@ -13,4 +16,7 @@ enableableModule "barrier" params {
   };
 
   environment.systemPackages = with pkgs; [ barrier ];
+}
+;
+  };
 }

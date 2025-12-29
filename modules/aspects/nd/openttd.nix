@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.openttd = {
+    nixos =
 _@{
   lib,
   pkgs,
@@ -7,11 +10,14 @@ _@{
 with lib;
 {
   options = {
-    aiden.programs.openttd.enable = mkEnableOption "install openttd";
+    narrowdivergent.programs.openttd.enable = mkEnableOption "install openttd";
   };
 
-  config = mkIf config.aiden.programs.openttd.enable {
+  config = mkIf config.narrowdivergent.programs.openttd.enable {
     #  xdg.configFile."emacs/init.el".source = ../files/init.el;
     environment.systemPackages = with pkgs; [ openttd ];
+  };
+}
+;
   };
 }

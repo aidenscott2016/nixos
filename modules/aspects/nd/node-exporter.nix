@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.node-exporter = {
+    nixos =
 params@{
   pkgs,
   lib,
@@ -9,10 +12,10 @@ params@{
 # with lib;
 # with lib.types;
 # let
-#   cfg = config.aiden.modules.node-exporter;
+#   cfg = config.narrowdivergent.aspects.node-exporter;
 #   fqdn = locutus.sw1a1aa.uk
 # {
-#   options.aiden.moduels.node-exporter = {
+#   options.narrowdivergent.moduels.node-exporter = {
 #     enable = mkEnableOption "";
 #     fqdn = mkOption {
 #       type = types.str;
@@ -90,3 +93,6 @@ params@{
 #     networking.firewall.allowedTCPPorts = [ 443 ];
 #   };
 # }
+;
+  };
+}

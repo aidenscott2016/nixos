@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.flatpak = {
+    nixos =
 {
   lib,
   pkgs,
@@ -6,22 +9,25 @@
 }:
 with lib;
 let
-  cfg = config.aiden.modules.flatpak;
+  cfg = config.narrowdivergent.aspects.flatpak;
 in
 {
-  options.aiden.modules.flatpak = {
+  options.narrowdivergent.aspects.flatpak = {
     enable = mkEnableOption "flatpak";
   };
 
   config = mkIf cfg.enable {
     services.flatpak.enable = true;
 
-    aiden.modules.xdg-portal.enable = true;
+    narrowdivergent.aspects.xdg-portal.enable = true;
 
     # Link necessary paths for flatpak
     environment.pathsToLink = [
       "/share/xdg-desktop-portal"
       "/share/applications"
     ];
+  };
+}
+;
   };
 }

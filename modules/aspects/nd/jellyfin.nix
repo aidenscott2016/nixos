@@ -1,25 +1,26 @@
-params@{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
+{ nd, ... }: {
+  nd.jellyfin = {
+    includes = [
+      nd.hardware-acceleration
+    ];
+
+    nixos =
+{ pkgs, lib, config, ... }:
 with lib;
 with lib.options;
 let
-  cfg = config.aiden.modules.jellyfin;
+  cfg = config.narrowdivergent.aspects.jellyfin;
   driver = "iHD";
 in
 {
-  options.aiden.modules.jellyfin = {
-    enable = mkEnableOption "";
+
+  options.narrowdivergent.aspects.jellyfin = {
     user = mkOption {
       type = types.str;
       default = "jellyfin";
     };
   };
-  config = mkIf cfg.enable {
-    aiden.modules.hardware-acceleration.enable = true;
+  config = {
     users.users.jellyfin.extraGroups = [ "video" ];
     environment.systemPackages = with pkgs; [
       rename
@@ -39,5 +40,8 @@ in
       LIBVA_DRIVER_NAME = driver;
     };
 
+  };
+}
+;
   };
 }

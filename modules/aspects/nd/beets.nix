@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.beets = {
+    nixos =
 _@{
   lib,
   pkgs,
@@ -26,10 +29,13 @@ let
 in
 {
   options = {
-    aiden.programs.beets.enable = mkEnableOption "beets";
+    narrowdivergent.programs.beets.enable = mkEnableOption "beets";
   };
 
-  config = mkIf config.aiden.programs.beets.enable {
+  config = mkIf config.narrowdivergent.programs.beets.enable {
     environment.systemPackages = [ beet-override ];
+  };
+}
+;
   };
 }

@@ -1,20 +1,15 @@
+{ nd, ... }: {
+  nd.keyd = {
+    nixos =
 # https://wiki.nixos.org/wiki/Keyd
-_@{
+{
   lib,
   pkgs,
   config,
   ...
 }:
-with lib;
-let
-  moduleName = "keyd";
-in
 {
-  options = {
-    aiden.modules.${moduleName}.enable = mkEnableOption moduleName;
-  };
-
-  config = mkIf config.aiden.modules.${moduleName}.enable {
+  config = {
     services.keyd = {
       enable = true;
       keyboards = {
@@ -40,4 +35,7 @@ in
 
   };
 
+}
+;
+  };
 }

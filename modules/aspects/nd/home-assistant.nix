@@ -1,4 +1,7 @@
-params@{
+{ nd, ... }: {
+  nd.home-assistant = {
+    nixos =
+{
   pkgs,
   lib,
   config,
@@ -6,16 +9,14 @@ params@{
 }:
 with lib;
 let
-  deviceParams = map (path: "--device=${path}") config.aiden.modules.home-assistant.devices;
-  enable = config.aiden.modules.home-assistant.enable;
-  inherit (config.aiden.modules.common) domainName email;
+  deviceParams = map (path: "--device=${path}") config.narrowdivergent.aspects.home-assistant.devices;
+  inherit (config.narrowdivergent.aspects.common) domainName email;
   fqdn = "hass.${domainName}";
   container-name = "home-assistant";
   service-name = "${config.virtualisation.oci-containers.backend}-${container-name}";
 in
 {
-  options.aiden.modules.home-assistant = {
-    enable = mkEnableOption "home-assistant";
+  options.narrowdivergent.aspects.home-assistant = {
     devices = mkOption {
       type = with types; listOf str;
       example = [
@@ -25,7 +26,7 @@ in
       default = [ ];
     };
   };
-  config = mkIf enable {
+  config = {
     systemd.services.${service-name}.after = [ "traefik.service" ];
     networking.hosts."10.0.1.1" = [ fqdn ];
 
@@ -71,5 +72,8 @@ in
     #     "http.services.hass.loadbalancer.server.port" = "8123";
     #   };
     # };
+  };
+}
+;
   };
 }

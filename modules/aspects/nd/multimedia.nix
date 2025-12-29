@@ -1,16 +1,21 @@
-params@{
+{ nd, ... }: {
+  nd.multimedia = {
+    includes = [
+      nd.transmission
+      nd.beets
+    ];
+
+    nixos =
+{
   pkgs,
   lib,
   config,
   ...
 }:
 {
-  options = {
-    aiden.modules.multimedia.enable = lib.mkEnableOption "multimedia";
-  };
-  config = lib.mkIf config.aiden.modules.multimedia.enable {
-    aiden = {
-      modules.transmission.enable = false;
+
+  config = {
+    narrowdivergent = {
       programs.beets.enable = true;
     };
 
@@ -22,5 +27,8 @@ params@{
       #(jellyfin-media-player.override { withDbus = false; })
       imagemagick
     ];
+  };
+}
+;
   };
 }

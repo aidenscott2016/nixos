@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.xdg-portal = {
+    nixos =
 {
   config,
   lib,
@@ -6,10 +9,10 @@
 }:
 with lib;
 let
-  cfg = config.aiden.modules.xdg-portal;
+  cfg = config.narrowdivergent.aspects.xdg-portal;
 in
 {
-  options.aiden.modules.xdg-portal = {
+  options.narrowdivergent.aspects.xdg-portal = {
     enable = mkEnableOption "XDG portal configuration";
   };
 
@@ -28,5 +31,8 @@ in
       ];
       xdgOpenUsePortal = true;
     };
+  };
+}
+;
   };
 }

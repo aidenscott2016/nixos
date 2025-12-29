@@ -1,17 +1,16 @@
-params@{
+{ nd, ... }: {
+  nd.geoclue = {
+    nixos =
+{
   pkgs,
   lib,
   config,
   ...
 }:
 with lib;
-let
-  moduleName = "geoclue";
-in
 {
   options = {
-    aiden.modules.geoclue.enable = mkEnableOption moduleName;
-    aiden.modules.geoclue.apps = mkOption {
+    narrowdivergent.aspects.geoclue.apps = mkOption {
       type = types.attrsOf (
         types.submodule {
           options = {
@@ -29,7 +28,7 @@ in
       default = { };
       description = "Applications that need geolocation access";
     };
-    aiden.modules.geoclue.staticLocation = mkOption {
+    narrowdivergent.aspects.geoclue.staticLocation = mkOption {
       type = types.submodule {
         options = {
           latitude = mkOption {
@@ -47,17 +46,17 @@ in
     };
   };
 
-  config = mkIf config.aiden.modules.geoclue.enable {
+  config = {
     services.geoclue2 = {
       enable = true;
       enableWifi = false;
-      appConfig = config.aiden.modules.geoclue.apps;
+      appConfig = config.narrowdivergent.aspects.geoclue.apps;
     };
 
     environment.etc = lib.mkIf (!config.services.geoclue2.enableWifi) {
       "geolocation".text = ''
-        ${toString config.aiden.modules.geoclue.staticLocation.latitude}   # latitude
-        ${toString config.aiden.modules.geoclue.staticLocation.longitude}  # longitude
+        ${toString config.narrowdivergent.aspects.geoclue.staticLocation.latitude}   # latitude
+        ${toString config.narrowdivergent.aspects.geoclue.staticLocation.longitude}  # longitude
         96           # altitude
         1.83         # accuracy radius
       '';
@@ -67,5 +66,8 @@ in
         enable=true
       '';
     };
+  };
+}
+;
   };
 }

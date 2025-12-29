@@ -1,15 +1,9 @@
-params@{
-
-  lib,
-  inputs,
-  pkgs,
-  config,
-  ...
-}:
+{ nd, ... }: {
+  nd.paperles = {
+    nixos =
+{ lib, inputs, pkgs, config, ... }:
 with lib;
 let
-  moduleName = "paperless";
-  cfg = config.aiden.modules.${moduleName};
   nixpkgs-unstable-pinned = import inputs.nixpkgs-unstable-pinned { };
 in
 {
@@ -19,10 +13,7 @@ in
   disabledModules = [
     "services/misc/paperless.nix"
   ];
-  options = {
-    aiden.modules.${moduleName}.enable = mkEnableOption moduleName;
-  };
-  config = mkIf cfg.enable {
+  config = {
     services.paperless = {
       enable = true;
       settings = {
@@ -40,12 +31,15 @@ in
         ];
       };
     };
-    aiden.modules.reverseProxy.apps = [
+    narrowdivergent.aspects.reverseProxy.apps = [
       {
         name = "paperless";
         port = 28981;
       }
     ];
 
+  };
+}
+;
   };
 }

@@ -1,29 +1,19 @@
-params@{
-  lib,
-  pkgs,
-  config,
-  ...
-}:
-with lib;
-let
-  modulename = "darkman";
-in
-{
-  options = {
-    aiden.modules.darkman.enable = mkEnableOption modulename;
-  };
-  config = mkIf config.aiden.modules.darkman.enable {
-    aiden.modules.xdg-portal.enable = true;
-    xdg.portal = {
-      config.common = {
-        "org.freedesktop.impl.portal.Settings" = [ "darkman" ];
-      };
-      extraPortals = [ pkgs.darkman ];
-    };
+{ nd, ... }: {
+  nd.home.darkman = {
+    includes = [ nd.home.xdg-portal ];
 
-    services.darkman = {
-      enable = true;
-      settings.usegeoclue = true;
+    homeManager = { config, lib, pkgs, ... }: {
+      xdg.portal = {
+        config.common = {
+          "org.freedesktop.impl.portal.Settings" = [ "darkman" ];
+        };
+        extraPortals = [ pkgs.darkman ];
+      };
+
+      services.darkman = {
+        enable = true;
+        settings.usegeoclue = true;
+      };
     };
   };
 }

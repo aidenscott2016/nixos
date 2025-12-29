@@ -1,19 +1,9 @@
-params@{
-  lib,
-  pkgs,
-  config,
-  ...
-}:
-with lib;
-let
-  moduleName = "navidrome";
-  cfg = config.aiden.modules.${moduleName};
-in
+{ nd, ... }: {
+  nd.navidrome = {
+    nixos =
+{ lib, pkgs, config, ... }:
 {
-  options = {
-    aiden.modules.${moduleName}.enable = mkEnableOption moduleName;
-  };
-  config = mkIf cfg.enable {
+  config = {
     services.navidrome = {
       group = "video";
       enable = true;
@@ -22,7 +12,7 @@ in
       };
     };
 
-    aiden.modules.reverseProxy = {
+    narrowdivergent.aspects.reverseProxy = {
       apps = [
         {
           name = "navidrome";
@@ -30,5 +20,8 @@ in
         }
       ];
     };
+  };
+}
+;
   };
 }

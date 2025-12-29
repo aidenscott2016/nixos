@@ -1,35 +1,36 @@
-params@{
+{ nd, ... }: {
+  nd.darkman = {
+    includes = [
+      nd.geoclue
+      nd.xdg-portal
+    ];
+
+    nixos =
+{
   lib,
   pkgs,
   config,
   ...
 }:
-with lib;
-let
-  moduleName = "darkman";
-in
 {
-  options = {
-    aiden.modules.darkman.enable = mkEnableOption moduleName;
-  };
-  config = mkIf config.aiden.modules.darkman.enable {
+
+  config = {
     environment.pathsToLink = [
       "/share/xdg-desktop-portal"
       "/share/applications"
     ];
 
-    aiden.modules.xdg-portal.enable = false;
-    aiden.modules.geoclue = {
-      enable = true;
-      apps.darkman = {
-        isAllowed = true;
-        isSystem = true;
-      };
+    narrowdivergent.aspects.geoclue.apps.darkman = {
+      isAllowed = true;
+      isSystem = true;
     };
 
     # The darkman service comes from home-manager
     home-manager.users.aiden = {
-      aiden.modules.darkman.enable = true;
+      narrowdivergent.aspects.darkman.enable = true;
     };
+  };
+}
+;
   };
 }

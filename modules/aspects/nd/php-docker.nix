@@ -1,10 +1,13 @@
+{ nd, ... }: {
+  nd.php-docker = {
+    nixos =
 params@{
   pkgs,
   lib,
   config,
   ...
 }:
-with lib.aiden;
+with lib.narrowdivergent;
 enableableModule "php-docker" params {
   networking.firewall = {
     logRefusedConnections = true;
@@ -15,4 +18,7 @@ enableableModule "php-docker" params {
   };
 
   virtualisation.docker.enable = true;
+}
+;
+  };
 }

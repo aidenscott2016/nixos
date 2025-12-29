@@ -1,20 +1,9 @@
-params@{
-  lib,
-  pkgs,
-  config,
-  ...
-}:
-with lib;
-let
-  moduleName = "syncthing";
-  cfg = config.aiden.modules.${moduleName};
-in
+{ nd, ... }: {
+  nd.syncthing = {
+    nixos =
+{ lib, pkgs, config, ... }:
 {
-  options = {
-    aiden.modules.${moduleName}.enable = mkEnableOption moduleName;
-  };
-  config = mkIf cfg.enable {
-
+  config = {
     users.users.syncthing.extraGroups = [ "video" ];
     users.users.aiden.extraGroups = [ "syncthing" ];
     services.syncthing = {
@@ -22,5 +11,7 @@ in
       openDefaultPorts = true;
     };
   };
-
+}
+;
+  };
 }

@@ -1,51 +1,115 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
+{ den, nd, inputs, ... }: {
+  # Host declaration with home-manager integration
+  den.hosts.x86_64-linux.barbie.users.aiden = {};
 
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
-}:
+  # Host aspect
+  den.aspects.barbie = {
+    includes = [
+      nd.common
+      nd.ssh
+      nd.locale
+      nd.avahi
+      nd.barbie-hardware
+    ];
 
-{
-  imports = [
-    inputs.disko.nixosModules.default
-    ./disk-configuration.nix
-    ./hardware-configuration.nix
-    inputs.nixos-hardware.nixosModules.gpd-pocket-3
-  ];
+    nixos = { config, pkgs, lib, ... }: {
+      imports = [
+        inputs.disko.nixosModules.default
+        inputs.nixos-hardware.nixosModules.gpd-pocket-3
+      ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+      # Disko configuration
+      disko.devices = {
+        disk = {
+          vdb = {
+            type = "disk";
+            device = "/dev/nvme0n1";
+            content = {
+              type = "gpt";
+              partitions = {
+                ESP = {
+                  size = "500M";
+                  type = "EF00";
+                  content = {
+                    type = "filesystem";
+                    format = "vfat";
+                    mountpoint = "/boot";
+                    mountOptions = [ "defaults" ];
+                  };
+                };
+                luks = {
+                  size = "100%";
+                  content = {
+                    type = "luks";
+                    name = "crypted";
+                    content = {
+                      type = "lvm_pv";
+                      vg = "pool";
+                    };
+                  };
+                };
+              };
+            };
+          };
+        };
+        lvm_vg = {
+          pool = {
+            type = "lvm_vg";
+            lvs = {
+              root = {
+                size = "75G";
+                content = {
+                  type = "filesystem";
+                  format = "ext4";
+                  mountpoint = "/";
+                  mountOptions = [ "defaults" ];
+                };
+              };
+              swap = {
+                size = "8G";
+                content = { type = "swap"; };
+              };
+              home = {
+                size = "+100%FREE";
+                content = {
+                  type = "filesystem";
+                  format = "ext4";
+                  mountpoint = "/home";
+                };
+              };
+              raw = {
+                size = "10M";
+              };
+            };
+          };
+        };
+      };
 
-  networking.hostName = "barbie";
-  networking.networkmanager.enable = true;
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
+      # Host-specific config
+      boot.loader.systemd-boot.enable = true;
+      boot.loader.efi.canTouchEfiVariables = true;
+
+      networking.hostName = "barbie";
+      networking.networkmanager.enable = true;
+
+      services.xserver.enable = true;
+      services.pipewire = {
+        enable = true;
+        pulse.enable = true;
+      };
+      services.openssh.openFirewall = true;
+      services.desktopManager.plasma6.enable = true;
+
+      security.sudo.wheelNeedsPassword = false;
+      system.stateVersion = "24.05";
+
+      environment.systemPackages = [ pkgs.maliit-keyboard ];
+
+      # Module options (using new namespace)
+      narrowdivergent.aspects.common = {
+        domainName = "narrowdivergent.com";
+        email = "aiden@narrowdivergent.com";
+      };
+    };
   };
-
-  aiden.modules = {
-    common.enable = true;
-    ssh.enable = true;
-    locale.enable = true;
-  };
-  services.openssh.openFirewall = true;
-  services.desktopManager.plasma6.enable = true;
-
-  security.sudo.wheelNeedsPassword = false; # desktop archetype
-
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.users.aiden = { };
-  system.stateVersion = "24.05"; # Did you read the comment?
-  environment.systemPackages = [
-    pkgs.maliit-keyboard
-  ];
 }

@@ -1,21 +1,21 @@
-params@{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
-with lib.aiden;
-with lib;
-let
-  cfg = config.aiden.modules.tailscale;
-in
-{
-  options.aiden.modules.tailscale = {
-    enable = mkEnableOption "";
-    advertiseRoutes = mkEnableOption "";
-    authKeyPath = mkOption { type = types.str; };
-  };
-  config = mkIf cfg.enable {
+{ nd, ... }: {
+  nd.tailscale = {
+    nixos = {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
+    with lib;
+    let
+      cfg = config.narrowdivergent.aspects.tailscale;
+    in
+    {
+      options.narrowdivergent.aspects.tailscale = {
+        advertiseRoutes = mkEnableOption "";
+        authKeyPath = mkOption { type = types.str; };
+      };
+      config = {
     services = {
       tailscale = {
         enable = true;
@@ -52,6 +52,8 @@ in
         # otherwise authenticate with tailscale
         ${tailscale}/bin/tailscale up -authkey  file:${cfg.authKeyPath} ${strings.optionalString cfg.advertiseRoutes "--advertise-routes=10.0.0.0/22"}
       '';
+    };
+      };
     };
   };
 }

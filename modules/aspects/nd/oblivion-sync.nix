@@ -1,4 +1,11 @@
-params@{
+{ nd, ... }: {
+  nd.oblivion-sync = {
+    includes = [
+      nd.syncthing
+    ];
+
+    nixos =
+{
   lib,
   pkgs,
   config,
@@ -7,13 +14,15 @@ params@{
 with lib;
 let
   moduleName = "oblivionSync";
-  cfg = config.aiden.modules.${moduleName};
+  cfg = config.narrowdivergent.aspects.${moduleName};
   obDataDir = cfg.obDataDir;
   stDataDir = cfg.stDataDir;
 in
 {
+
   options = {
-    aiden.modules.${moduleName} = {
+    narrowdivergent.aspects.${moduleName} = {
+      enable = mkEnableOption moduleName;
       stDataDir = mkOption {
         description = "target to mount oblivion from";
         type = types.path;
@@ -25,15 +34,10 @@ in
         type = types.path;
         default = "/home/aiden/oblivion-sync";
       };
-      enable = mkEnableOption moduleName;
     };
 
   };
   config = mkIf cfg.enable {
-    aiden.modules = {
-      syncthing.enable = true;
-    };
-
     services.tailscale.enable = true;
     environment.systemPackages = with pkgs; [ bindfs ];
     systemd.services.oblivion-mount = {
@@ -52,6 +56,8 @@ in
         RemainAfterExit = true;
       };
     };
-
+  };
+}
+;
   };
 }

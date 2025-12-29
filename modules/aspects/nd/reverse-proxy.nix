@@ -1,22 +1,19 @@
-params@{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
-with lib.aiden;
+{ nd, ... }: {
+  nd.reverse-proxy = {
+    nixos =
+{ pkgs, lib, config, ... }:
+with lib.narrowdivergent;
 with lib;
 let
-  inherit (config.aiden.modules.common) domainName email;
-  cfg = config.aiden.modules.reverseProxy;
+  inherit (config.narrowdivergent.aspects.common) domainName email;
+  cfg = config.narrowdivergent.aspects.reverseProxy;
 in
 {
-  options.aiden.modules.reverseProxy = {
-    enable = mkEnableOption "";
-    apps = lib.aiden.types.mkReverseProxyAppsOption;
+  options.narrowdivergent.aspects.reverseProxy = {
+    apps = lib.narrowdivergent.types.mkReverseProxyAppsOption;
   };
 
-  config = mkIf cfg.enable {
+  config = {
     users.users.traefik.extraGroups = [ "acme" ]; # to read acme folder
     services.traefik = {
       enable = true;
@@ -43,5 +40,8 @@ in
         http = toLocalReverseProxy cfg.apps;
       };
     };
+  };
+}
+;
   };
 }

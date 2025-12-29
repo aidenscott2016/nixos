@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.hardware-acceleration = {
+    nixos =
 {
   config,
   lib,
@@ -6,12 +9,11 @@
 }:
 with lib;
 let
-  cfg = config.aiden.modules.hardware-acceleration;
-  inherit (config.aiden) architecture;
+  cfg = config.narrowdivergent.aspects.hardware-acceleration;
+  inherit (config.narrowdivergent) architecture;
 in
 {
-  options.aiden.modules.hardware-acceleration = {
-    enable = mkEnableOption "hardware acceleration configuration";
+  options.narrowdivergent.aspects.hardware-acceleration = {
     extraPackages = mkOption {
       type = types.listOf types.package;
       default = [ ];
@@ -19,17 +21,12 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = {
     hardware = {
       enableAllFirmware = true;
       enableRedistributableFirmware = true;
       intel-gpu-tools.enable = true;
       amdgpu = mkIf (architecture.gpu == "amd") {
-        amdvlk = {
-          enable = true;
-          support32Bit.enable = true;
-        };
-
         initrd.enable = true;
       };
 
@@ -41,10 +38,9 @@ in
             libva
             mesa
           ]
-          #++ optionals (architecture.gpu == "amd") [ amdvlk ]
           ++ optionals (architecture.cpu == "intel") [
             #intel-compute-runtime
-            intel-media-driver-stable # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
+            intel-media-driver # For Broadwell (2014) or newer processors. LIBVA_DRIVER_NAME=iHD
             libva-vdpau-driver # Previously vaapiVdpau
             # # OpenCL support for intel CPUs before 12th gen
             # # see: https://github.com/NixOS/nixpkgs/issues/356535
@@ -72,5 +68,8 @@ in
     ];
 
     environment.systemPackages = with pkgs; [ nvtopPackages.full ];
+  };
+}
+;
   };
 }

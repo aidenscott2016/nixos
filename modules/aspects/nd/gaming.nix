@@ -1,24 +1,27 @@
-_@{
+{ nd, ... }: {
+  nd.gaming = {
+    includes = [
+      nd.steam
+      nd.oblivion-sync
+      nd.openttd
+    ];
+
+    nixos =
+{
   lib,
   pkgs,
   config,
   ...
 }:
 with lib;
-with pkgs;
 let
   moduleName = "gaming";
-  cfg = config.aiden.modules.${moduleName};
-  minecraftPackages = optionals cfg.games.minecraft.enable [
-    # minecraft -- broken package
-    prismlauncher
-  ];
-  moonlightClient = optionals cfg.moonlight.client.enable [ moonlight-qt ];
-
+  cfg = config.narrowdivergent.aspects.${moduleName};
 in
 {
+
   options = {
-    aiden.modules."${moduleName}" = {
+    narrowdivergent.aspects."${moduleName}" = {
       steam.enable = mkEnableOption moduleName;
       moonlight = {
         server.enable = mkEnableOption "enable moonlight server";
@@ -37,18 +40,25 @@ in
       openFirewall = true;
       capSysAdmin = true;
     };
-    aiden.modules = {
+    narrowdivergent.modules = {
       steam.enable = cfg.steam.enable;
       oblivionSync.enable = cfg.games.oblivionSync.enable;
-
     };
-    aiden.programs = {
+    narrowdivergent.programs = {
       openttd.enable = cfg.games.openttd.enable;
     };
-    environment.systemPackages = minecraftPackages ++ moonlightClient;
+    environment.systemPackages =
+      optionals cfg.games.minecraft.enable [
+        # minecraft -- broken package
+        pkgs.prismlauncher
+      ]
+      ++ optionals cfg.moonlight.client.enable [ pkgs.moonlight-qt ];
 
     boot.kernelParams = [
       "preempt=full" # may help with audio stuttering in proton games
     ];
+  };
+}
+;
   };
 }

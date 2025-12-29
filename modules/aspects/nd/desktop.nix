@@ -1,14 +1,38 @@
+{ nd, ... }: {
+  nd.desktop = {
+    includes = [
+      nd.syncthing
+      nd.redshift
+      nd.darkman
+      nd.printer
+      nd.emacs
+      nd.thunar
+      nd.locale
+      nd.keyd
+      nd.powermanagement
+      nd.yubikey
+      nd.appimage
+      nd.pipewire
+      nd.ssh
+      nd.avahi
+      nd.common
+      nd.multimedia
+      nd.hardware-acceleration
+      nd.ios
+      nd.cli-base
+    ];
+
+    nixos =
 {
   config,
   lib,
   pkgs,
   ...
 }:
-with lib.aiden;
 with lib;
 {
-  options.aiden.modules.desktop = {
-    enable = mkEnableOption "Enable desktop configuration";
+
+  options.narrowdivergent.aspects.desktop = {
     powermanagement.enable = mkOption {
       type = lib.types.bool;
       default = true;
@@ -16,7 +40,7 @@ with lib;
     };
   };
 
-  config = mkIf config.aiden.modules.desktop.enable {
+  config = {
     programs.nm-applet.enable = true;
     services = {
       xserver.enable = true;
@@ -36,30 +60,10 @@ with lib;
 
     systemd.network.wait-online.enable = false;
 
-    aiden.modules = {
-      syncthing = enabled;
-      redshift = enabled;
-      darkman = enabled;
-      printer = enabled;
-      emacs = enabled;
-      thunar = enabled;
-      locale = enabled;
-      keyd = enabled;
-      powermanagement.enable = config.aiden.modules.desktop.powermanagement.enable;
-      yubikey = enabled;
+    narrowdivergent.aspects.powermanagement.enable = config.narrowdivergent.aspects.desktop.powermanagement.enable;
 
-      # flatpak = enabled;        # breaks darkman due to xdg portal
-      appimage = enabled;
-      pipewire = enabled;
-      ssh = enabled;
-      avahi = enabled;
-      common = enabled;
-      multimedia = enabled;
-      hardware-acceleration = enabled;
-      ios = enabled;
-      cli-base = enabled;
-      #xdg-portal = enabled;
-    };
+    # flatpak = enabled;        # breaks darkman due to xdg portal
+    #xdg-portal = enabled;
 
     hardware.bluetooth.enable = true;
     environment.systemPackages = with pkgs; [
@@ -78,5 +82,8 @@ with lib;
       claude-code
     ];
 
+  };
+}
+;
   };
 }

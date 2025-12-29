@@ -1,3 +1,6 @@
+{ nd, ... }: {
+  nd.nvidia = {
+    nixos =
 {
   config,
   lib,
@@ -6,12 +9,11 @@
 }:
 with lib;
 let
-  cfg = config.aiden.modules.nvidia;
-  inherit (config.aiden) architecture;
+  cfg = config.narrowdivergent.aspects.nvidia;
+  inherit (config.narrowdivergent) architecture;
 in
 {
-  options.aiden.modules.nvidia = {
-    enable = mkEnableOption "NVIDIA GPU configuration";
+  options.narrowdivergent.aspects.nvidia = {
     prime = {
       intelBusId = mkOption {
         type = types.str;
@@ -31,7 +33,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = {
     boot = {
       initrd.kernelModules = [ "nvidia" ];
     };
@@ -57,5 +59,8 @@ in
     services.xserver = {
       videoDrivers = [ "nvidia" ];
     };
+  };
+}
+;
   };
 }

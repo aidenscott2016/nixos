@@ -1,4 +1,7 @@
-params@{
+{ nd, ... }: {
+  nd.steam = {
+    nixos =
+{
   pkgs,
   lib,
   config,
@@ -6,14 +9,19 @@ params@{
   ...
 }:
 
-with lib.aiden;
-with pkgs;
+with lib;
 let
+  cfg = config.narrowdivergent.aspects.steam;
   steamtinkerlaunch-git = pkgs.steamtinkerlaunch.overrideAttrs (_: {
     src = inputs.steamtinkerlaunch;
   });
 in
-enableableModule "steam" params {
+{
+  options.narrowdivergent.aspects.steam = {
+    enable = mkEnableOption "steam";
+  };
+
+  config = mkIf cfg.enable {
 
   # programs.gamescope.capSysNice = true;
   # work around for issue with capSysNice not working in gamescope.  even though it still
@@ -21,10 +29,10 @@ enableableModule "steam" params {
   # is setting it -20 (highest priority).  this could probably go into its own config since
   # ananicy-rules-cachyos has quality of life rules for a lot more then just gamescope.
   # and games.
-  services.ananicy = with pkgs; {
+  services.ananicy = {
     enable = true;
-    package = ananicy-cpp;
-    rulesProvider = ananicy-rules-cachyos;
+    package = pkgs.ananicy-cpp;
+    rulesProvider = pkgs.ananicy-rules-cachyos;
   };
   programs.gamescope.env = {
     __NV_PRIME_RENDER_OFFLOAD = "1";
@@ -108,4 +116,8 @@ enableableModule "steam" params {
           '';
     in
     lib.mkIf config.programs.steam.gamescopeSession.enable ([ steam-session ]);
+  };
+}
+;
+  };
 }

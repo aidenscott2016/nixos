@@ -1,16 +1,13 @@
-inputs@{ pkgs, ... }:
-{
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   pinentryFlavor = "gtk2";
-  #   enableSSHSupport = true;
-  # };
-
-  services.gpg-agent = {
-    enable = true;
-    enableBashIntegration = true;
-    grabKeyboardAndMouse = true;
-    enableSshSupport = true;
-    pinentry.package = pkgs.pinentry-gtk2;
+{ nd, ... }: {
+  nd.home.gpg-agent = {
+    homeManager = { pkgs, ... }: {
+      services.gpg-agent = {
+        enable = true;
+        enableBashIntegration = true;
+        grabKeyboardAndMouse = true;
+        enableSshSupport = true;
+        pinentryPackage = pkgs.pinentry-gtk2;
+      };
+    };
   };
 }

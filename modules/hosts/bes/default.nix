@@ -1,25 +1,34 @@
-{
-  config,
-  inputs,
-  lib,
-  pkgs,
-  systems,
-  ...
-}:
+{ den, nd, inputs, ... }: {
+  # Host declaration
+  den.hosts.x86_64-linux.bes.users.aiden = {};
 
-{
-  imports = [
-    ./hardware-configuration.nix
-    ./disk-config.nix
-    inputs.agenix.nixosModules.default
-    inputs.disko.nixosModules.default
-    ./portainer.nix
-    inputs.agenix.nixosModules.default
-  ];
+  # Host aspect
+  den.aspects.bes = {
+    includes = [
+      nd.common
+      nd.locale
+      nd.avahi
+      nd.architecture
+      nd.syncthing
+      nd.powermanagement
+      nd.cli-base
+      nd.navidrome
+      nd.reverse-proxy
+      nd.jellyfin
+      nd.paperles
+    ];
 
-  config =
+    nixos = { config, pkgs, lib, ... }: {
+      imports = [
+        ./_hardware-configuration.nix
+        ./_disk-config.nix
+        inputs.agenix.nixosModules.default
+        inputs.disko.nixosModules.default
+        ./_portainer.nix
+      ];
 
-    {
+      nixpkgs.config.allowUnfree = true;
+
       services.iperf3.enable = true;
       services.iperf3.openFirewall = true;
       services.openssh.enable = true;
@@ -43,7 +52,6 @@
             incomplete = "/media/t7/Music/download/incomplete";
             downloads = "/media/t7/Music/download/complete";
           };
-
         };
         environmentFile = config.age.secrets.slskd.path;
       };
@@ -77,7 +85,7 @@
       users.users.radarr.extraGroups = [ "video" ];
 
       services.sabnzbd = {
-        enable = true; # configFile = config.age.secrets.sabnzbd.path;
+        enable = true;
         group = "video";
       };
       users.users.sabnzbd.extraGroups = [ "video" ];
@@ -93,79 +101,31 @@
         5000
       ];
 
-      aiden = {
+      narrowdivergent = {
         architecture = {
           cpu = "intel";
           gpu = "intel";
         };
-        programs.beets.enable = lib.mkForce false;
-        modules = {
-          syncthing.enable = true;
-          powermanagement.enable = true;
-          cli-base.enable = true;
-          locale.enable = true;
-          navidrome.enable = true;
-          reverseProxy = {
-            enable = true;
-            apps = [
-              {
-                name = "bazarr";
-                port = 6767;
-              }
-              {
-                name = "sonarr";
-                port = 8989;
-              }
-              {
-                name = "sab";
-                port = 8080;
-              }
-              {
-                name = "jellyfin";
-                port = 8096;
-              }
-              {
-                name = "portainer";
-                port = 9000;
-              }
-              {
-                name = "deluge";
-                port = 8112;
-              }
-              {
-                name = "radarr";
-                port = 7878;
-              }
-              {
-                name = "slskd";
-                port = 5030;
-              }
-            ];
-          };
-          avahi.enable = true;
-          jellyfin.enable = true;
-          paperless.enable = true;
-          jovian.enable = false;
-          common = {
-            domainName = "bes.sw1a1aa.uk";
-            enable = true;
-          };
-          samba = {
-            enable = false;
-            shares.t7 = {
-              path = "/media/t7";
-              writable = "true";
-            };
-          };
+        aspects = {
+          reverseProxy.apps = [
+            { name = "bazarr"; port = 6767; }
+            { name = "sonarr"; port = 8989; }
+            { name = "sab"; port = 8080; }
+            { name = "jellyfin"; port = 8096; }
+            { name = "portainer"; port = 9000; }
+            { name = "deluge"; port = 8112; }
+            { name = "radarr"; port = 7878; }
+            { name = "slskd"; port = 5030; }
+          ];
+          common.domainName = "bes.sw1a1aa.uk";
         };
       };
+
       environment.systemPackages = with pkgs; [
         get_iplayer
         wol
         iperf3
-
       ];
-
     };
-
+  };
 }

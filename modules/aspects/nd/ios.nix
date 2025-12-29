@@ -1,18 +1,25 @@
-params@{
+{ nd, ... }: {
+  nd.ios = {
+    nixos =
+{
   pkgs,
   lib,
   config,
   ...
 }:
-with lib.aiden;
-enableableModule "ios" params {
-  services.usbmuxd = {
-    enable = true;
-  };
+{
+  config = {
+    services.usbmuxd = {
+      enable = true;
+    };
 
-  environment.systemPackages = with pkgs; [
-    libheif
-    libimobiledevice
-    ifuse
-  ];
+    environment.systemPackages = with pkgs; [
+      libheif
+      libimobiledevice
+      ifuse
+    ];
+  };
+}
+;
+  };
 }

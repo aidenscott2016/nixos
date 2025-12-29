@@ -1,28 +1,23 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ nd, ... }: {
+  nd.samba = {
+    nixos =
+{ config, lib, pkgs, ... }:
 let
   inherit (lib)
-    mkEnableOption
-    mkIf
     mkOption
     types
     ;
-  cfg = config.aiden.modules.samba;
+  cfg = config.narrowdivergent.aspects.samba;
 in
 {
-  options.aiden.modules.samba = {
-    enable = mkEnableOption "Samba";
+  options.narrowdivergent.aspects.samba = {
     shares = mkOption {
       type = types.attrsOf (types.attrsOf types.unspecified);
       default = { };
     };
   };
 
-  config = mkIf cfg.enable {
+  config = {
     services = {
       # Network shares
       samba = {
@@ -56,5 +51,8 @@ in
         openFirewall = true;
       };
     };
+  };
+}
+;
   };
 }

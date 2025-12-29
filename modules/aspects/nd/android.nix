@@ -1,10 +1,13 @@
+{ nd, ... }: {
+  nd.android = {
+    nixos =
 params@{
   pkgs,
   lib,
   config,
   ...
 }:
-with lib.aiden;
+with lib.narrowdivergent;
 enableableModule "android" params {
   environment.systemPackages = with pkgs; [
     android-studio
@@ -17,4 +20,7 @@ enableableModule "android" params {
     "adbusers"
     "plugdev"
   ];
+}
+;
+  };
 }
