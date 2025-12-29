@@ -61,10 +61,10 @@
       # optionally choose not to download darwin deps (saves some resources on Linux)
       inputs.darwin.follows = "";
     };
-    snowfall-lib = {
-      url = "github:snowfallorg/lib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
+    flake-aspects.url = "github:vic/flake-aspects";
+    den.url = "github:vic/den";
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
     nixos-facter.url = "github:nix-community/nixos-facter";
     nixos-images.url = "github:nix-community/nixos-images";
@@ -79,24 +79,6 @@
   };
   outputs =
     inputs:
-    inputs.snowfall-lib.mkFlake {
-      inherit inputs;
-      src = ./.;
-      snowfall = {
-        namespace = "aiden";
-      };
-      diskoConfigurations = {
-        locutus = import ./hosts/locutus/disko.nix;
-      };
-      channels-config = {
-        packageOverrides = pkgs: { firefox-addons = inputs.firefox-addons { inherit pkgs; }; };
-        nvidia.acceptLicense = true;
-        allowUnfree = true;
-        rocmSupport = false;
-        permittedInsecurePackages = [
-          "qtwebengine-5.15.19"
-        ];
-
-      };
-    };
+    inputs.flake-parts.lib.mkFlake { inherit inputs; }
+      (inputs.import-tree ./modules);
 }

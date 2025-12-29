@@ -1,5 +1,5 @@
 { lib, ... }:
-with lib.aiden;
+with lib.narrowdivergent;
 with lib;
 {
   enabled = {
@@ -10,10 +10,10 @@ with lib;
     params@{ config, ... }:
     configToEnable:
     let
-      cfg = config.aiden.modules.${name};
+      cfg = config.narrowdivergent.modules.${name};
     in
     {
-      options.aiden.modules.${name}.enable = mkOption {
+      options.narrowdivergent.modules.${name}.enable = mkOption {
         type = types.bool;
         default = false;
         description = "Enable the ${name} module";

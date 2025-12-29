@@ -4,20 +4,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a personal NixOS flake configuration repository using Snowfall Lib for organization. It manages multiple machines, services, and modular NixOS configurations across different architectures.
+This is a personal NixOS flake configuration repository using flake-parts for organization. It manages multiple machines, services, and modular NixOS configurations across different architectures.
 
 ## Key Architecture
 
 ### Flake Structure
-- Uses Snowfall Lib (`snowfall-lib.mkFlake`) with namespace "aiden"
+- Uses flake-parts with namespace "narrowdivergent"
 - Multiple nixpkgs channels: stable (25.05), unstable, and pinned unstable
 - Integrates home-manager, disko, agenix, and various specialized inputs
 
 ### Module System
-All custom modules use the `aiden.modules.*` namespace with a consistent pattern:
-- `lib/aiden/default.nix` provides helper functions including `enableableModule`
-- Modules follow the pattern: `options.aiden.modules.{name}.enable = mkOption`
-- Common module activated via `aiden.modules.common.enable = true`
+All custom modules use the `narrowdivergent.modules.*` namespace with a consistent pattern:
+- `lib/narrowdivergent/default.nix` provides helper functions including `enableableModule`
+- Modules follow the pattern: `options.narrowdivergent.modules.{name}.enable = mkOption`
+- Common module options set via `narrowdivergent.modules.common = { ... }`
 
 ### Host Categories
 - **Servers**: gila (router/home-assistant), thoth, bes (containers), tv (media)
@@ -72,14 +72,14 @@ agenix -r
 ## Module Development Patterns
 
 ### Creating New Modules
-1. Follow the `enableableModule` pattern from `lib/aiden/default.nix`
-2. Use `aiden.modules.{name}.enable` for all modules
+1. Follow the pattern from `lib/narrowdivergent/default.nix`
+2. Use `narrowdivergent.modules.{name}` namespace for module options
 3. Reference the common module pattern in `modules/nixos/common/default.nix`
 
 ### Host Configuration
 1. Import hardware-configuration.nix and disko configs
-2. Set `aiden.modules.common.enable = true` with email/domain
-3. Enable specific modules as needed
+2. Import required modules in the modules list
+3. Set module options like `narrowdivergent.modules.common = { email = "..."; domainName = "..."; }`
 4. Host-specific packages go in separate `packages.nix` when complex
 
 ### Secrets Integration
