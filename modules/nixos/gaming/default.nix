@@ -47,8 +47,8 @@ in
     };
     environment.systemPackages = minecraftPackages ++ moonlightClient;
 
-    boot.kernelParams = [
-      "preempt=full" # may help with audio stuttering in proton games
-    ];
+    # boot.kernelParams = [
+    #   "preempt=full" # re-enable if audio latency or gaming input lag is noticed
+    # ];
   };
 }
