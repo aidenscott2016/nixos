@@ -71,9 +71,6 @@ enableableModule "steam" params {
     };
   };
   users.users.aiden.extraGroups = [ "gamemode" ];
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-  };
 
   # Override the default gamescope session package to use a wrapper with proper D-Bus initialization
   # Fixes immediate crash when launching Steam session from greeter
