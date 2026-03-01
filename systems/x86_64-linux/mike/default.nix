@@ -20,6 +20,7 @@
 
   boot.initrd.systemd.enable = true;
   services.upower.enable = true;
+  services.throttled.enable = true;
   aiden = {
     architecture = {
       cpu = "intel";
