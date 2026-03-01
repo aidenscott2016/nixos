@@ -32,10 +32,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    boot = {
-      initrd.kernelModules = [ "nvidia" ];
-    };
-
     hardware = {
       nvidia = {
         prime = {
@@ -51,6 +47,7 @@ in
         open = false;
         nvidiaSettings = true;
         powerManagement.enable = true;
+        powerManagement.finegrained = true;
       };
     };
 
