@@ -10,33 +10,33 @@ todos:
     status: completed
   - id: w2-nixos-batch1
     content: "[Wave 2 - parallel] Read plan sections 'Wave 2 Task 1: NixOS batch 1' and 'Commit Guidelines'. Convert 13 NixOS modules: appimage, avahi, beets, flatpak, hardware-acceleration, home-assistant, jellyfin, jovian, keyd, locale, multimedia, navidrome, nix. Write to modules/<name>.nix. When done, run git status and confirm ONLY your 13 files are untracked -- do not stage anything else. Stage explicitly: git add modules/appimage.nix modules/avahi.nix ... (all 13). Commit: 'refactor(nixos): convert mkEnableOption batch 1 to dendritic'."
-    status: pending
+    status: completed
   - id: w2-nixos-batch2
     content: "[Wave 2 - parallel] Read plan sections 'Wave 2 Task 2: NixOS batch 2' and 'Commit Guidelines'. Convert 13 NixOS modules: nvidia, oblivion-sync, openttd, paperless, pipewire, powermanagement, samba, scanner, syncthing, tailscale, virtualisation, xdg-portal, yubikey. Write to modules/<name>.nix. When done, run git status and confirm ONLY your 13 files are untracked -- do not stage anything else. Stage explicitly: git add modules/nvidia.nix modules/oblivion-sync.nix ... (all 13). Commit: 'refactor(nixos): convert mkEnableOption batch 2 to dendritic'."
-    status: pending
+    status: completed
   - id: w2-hm-standalone
     content: "[Wave 2 - parallel] Read plan sections 'Wave 2 Task 3: HM standalone' and 'Commit Guidelines'. Convert 8 HM modules: bash, easyeffects, firefox, git, gpg-agent, ideavim, tmux, vim. Write to modules/<name>.nix or modules/<name>/ for those with companion files. When done, run git status and confirm ONLY your files are untracked -- do not stage anything else. Stage explicitly: git add modules/bash.nix modules/easyeffects.nix modules/firefox/ modules/git/ modules/gpg-agent.nix modules/ideavim/ modules/tmux/ modules/vim/. Commit: 'refactor(home-manager): convert standalone HM modules to dendritic'."
-    status: pending
+    status: completed
   - id: w2-overlays-packages
     content: "[Wave 2 - parallel] Read plan sections 'Wave 2 Task 4: Overlays + packages' and 'Commit Guidelines'. Write modules/overlays.nix and modules/beetcamp/. When done, run git status and confirm ONLY your 2 paths are untracked -- do not stage anything else. Stage: git add modules/overlays.nix modules/beetcamp/. Commit: 'refactor(overlays): convert overlay and beetcamp package to dendritic'."
+    status: completed
+  - id: w3a-complex-nixos
+    content: "[Wave 3a - parallel] Read plan sections 'Wave 3a Step 1: Complex NixOS modules' and 'Commit Guidelines'. Convert complex + grouping modules: desktop (Inheritance Aspect + include HM side in same file), gaming (Inheritance Aspect), router (directory + sub-modules). Also convert common, architecture, reverse-proxy, geoclue, steam. YOUR FILES: modules/desktop.nix, modules/gaming.nix, modules/router/, modules/common.nix, modules/architecture.nix, modules/reverse-proxy.nix, modules/geoclue.nix, modules/steam.nix. Stage only these explicitly. Commit: 'refactor(nixos): convert complex and grouping modules to dendritic'."
     status: pending
-  - id: w3-complex-nixos
-    content: "[Wave 3 - sequential] Read plan sections 'Wave 3 Step 1: Complex NixOS modules' and 'Commit Guidelines'. Convert complex + grouping modules: desktop and gaming use Inheritance Aspect (imports = with inputs.self.modules.nixos; [...]), router uses directory structure with sub-modules. Also convert common, architecture, reverse-proxy, geoclue, steam. Stage only these new files explicitly. Commit: 'refactor(nixos): convert complex and grouping modules to dendritic'."
+  - id: w3a-crosscutting
+    content: "[Wave 3a - parallel] Read plan sections 'Wave 3a Step 2: Cross-cutting unification' and 'Commit Guidelines'. Merge NixOS+HM sides for darkman (new file) and ssh (add HM side to existing). Update xdg-portal.nix to remove darkman-specific portal lines. YOUR FILES: modules/darkman.nix, modules/ssh.nix, modules/xdg-portal.nix. Stage only these explicitly. Commit: 'refactor: unify cross-cutting NixOS+HM modules'."
     status: pending
-  - id: w3-crosscutting
-    content: "[Wave 3 - sequential] Read plan sections 'Wave 3 Step 2: Cross-cutting unification' and 'Commit Guidelines'. Merge NixOS+HM sides for darkman, ssh, desktop. Delete HM xdg-portal module. Stage: git add modules/darkman.nix modules/ssh.nix modules/desktop.nix modules/xdg-portal.nix. Commit: 'refactor: unify cross-cutting NixOS+HM modules'."
+  - id: w3a-bootstrapper
+    content: "[Wave 3a - parallel] Read plan sections 'Wave 3a Step 3: HM bootstrapper' and 'Commit Guidelines'. Create modules/home-manager.nix. YOUR FILES: modules/home-manager.nix. Stage: git add modules/home-manager.nix. Commit: 'feat(nixos/home-manager): add HM bootstrapper module'."
     status: pending
-  - id: w3-hm-bootstrapper
-    content: "[Wave 3 - sequential] Read plan sections 'Wave 3 Step 3: HM bootstrapper' and 'Commit Guidelines'. Create modules/home-manager.nix. Stage: git add modules/home-manager.nix. Commit: 'feat(nixos/home-manager): add HM bootstrapper module'."
+  - id: w3a-hosts
+    content: "[Wave 3a - parallel] Read plan sections 'Wave 3a Step 4: Convert hosts' and 'Commit Guidelines'. Write all 7 host files under modules/hosts/. YOUR FILES: modules/hosts/ (entire directory). Stage: git add modules/hosts/. Commit: 'feat(hosts): convert all hosts to direct nixosSystem calls'."
     status: pending
-  - id: w3-hosts
-    content: "[Wave 3 - sequential] Read plan sections 'Wave 3 Step 4: Convert hosts' and 'Commit Guidelines'. Write all 7 host files under modules/hosts/. Stage: git add modules/hosts/. Commit: 'feat(hosts): convert all hosts to direct nixosSystem calls'."
+  - id: w3b-cleanup
+    content: "[Wave 3b - sequential, after ALL w3a tasks complete] Read plan sections 'Wave 3b Step 5: Cleanup' and 'Commit Guidelines'. Delete _old-modules/, lib/, overlays/, systems/, packages/. Update CLAUDE.md. Stage all deletions plus CLAUDE.md: git add -u && git add CLAUDE.md. Commit: 'chore: remove snowfall-lib scaffolding and update CLAUDE.md'."
     status: pending
-  - id: w3-cleanup
-    content: "[Wave 3 - sequential] Read plan sections 'Wave 3 Step 5: Cleanup' and 'Commit Guidelines'. Delete _old-modules/, lib/, overlays/, systems/, packages/. Update CLAUDE.md. Stage all deletions plus CLAUDE.md: git add -u && git add CLAUDE.md. Commit: 'chore: remove snowfall-lib scaffolding and update CLAUDE.md'."
-    status: pending
-  - id: w3-verify
-    content: "[Wave 3 - DEFERRED until user confirms upgrade complete] Read the plan section 'Verification'. Build all 7 hosts. Check desktop uses unstable, others use stable. Verify cross-cutting modules have no bridge wiring. Confirm no overlay entries for paperless-ngx or jellyfin."
+  - id: w3b-verify
+    content: "[Wave 3b - DEFERRED until user confirms upgrade complete] Read the plan section 'Verification'. Build all 7 hosts. Check desktop uses unstable, others use stable. Verify cross-cutting modules have no bridge wiring. Confirm no overlay entries for paperless-ngx or jellyfin."
     status: pending
 isProject: false
 ---
@@ -47,7 +47,7 @@ isProject: false
 
 - **Upgrade in progress:** Do NOT run `nix build`, `nixos-rebuild`, or `nix flake update` until the user confirms the upgrade is complete. Verification builds are deferred.
 - **Feature branch:** All work on a branch based on `dendritic-migration-2026`.
-- **Parallelization:** Wave 2 todos can be launched simultaneously via "Build in new agent". They touch disjoint files.
+- **Parallelization:** Wave 2 and Wave 3a todos can each be launched simultaneously via "Build in new agent". Within each wave, agents touch disjoint files. Wave 3b (cleanup) runs only after ALL Wave 3a agents are done.
 
 ---
 
@@ -78,7 +78,7 @@ chore: delete _old-modules, lib, overlays, systems, packages
 
 ### Atomic staging: NEVER use `git add .` or `git add -A`
 
-Each agent only stages the specific files it created or modified. In Wave 2, four agents write to disjoint files -- if any agent uses `git add .` it will steal another agent's uncommitted work.
+Each agent only stages the specific files it created or modified. In Wave 2 and Wave 3a, four agents write to disjoint files simultaneously -- if any agent uses `git add .` it will steal another agent's uncommitted work.
 
 Always stage by explicit path:
 ```bash
@@ -102,11 +102,11 @@ Each agent makes **one commit per logical unit of work**:
 | w2-nixos-batch2 | After writing all 13 modules | modules/nvidia.nix … modules/yubikey.nix |
 | w2-hm-standalone | After writing all 8 modules (+ companion files) | modules/bash.nix … modules/vim/ |
 | w2-overlays-packages | After writing overlays.nix and beetcamp/ | modules/overlays.nix modules/beetcamp/ |
-| w3-complex-nixos | After writing all complex + grouping modules | modules/common.nix modules/desktop.nix … |
-| w3-crosscutting | After merging all cross-cutting modules | modules/darkman.nix modules/ssh.nix modules/desktop.nix modules/xdg-portal.nix |
-| w3-hm-bootstrapper | After creating home-manager.nix | modules/home-manager.nix |
-| w3-hosts | After writing all 7 host files | modules/hosts/ |
-| w3-cleanup | After all deletions and CLAUDE.md update | deleted paths + CLAUDE.md |
+| w3a-complex-nixos | After writing all complex + grouping modules (including desktop HM side) | modules/desktop.nix modules/gaming.nix modules/router/ modules/common.nix modules/architecture.nix modules/reverse-proxy.nix modules/geoclue.nix modules/steam.nix |
+| w3a-crosscutting | After merging darkman + ssh cross-cutting modules and updating xdg-portal | modules/darkman.nix modules/ssh.nix modules/xdg-portal.nix |
+| w3a-bootstrapper | After creating home-manager.nix | modules/home-manager.nix |
+| w3a-hosts | After writing all 7 host files | modules/hosts/ |
+| w3b-cleanup | After all deletions and CLAUDE.md update | deleted paths + CLAUDE.md |
 
 ### Checking for conflicts before committing
 
@@ -138,7 +138,7 @@ Before staging, always run `git status` to confirm that only your expected files
 
 ```mermaid
 graph TD
-  subgraph wave1 [Wave 1 -- run sequentially]
+  subgraph wave1 [Wave 1 -- sequential]
     S1[w1-scaffold] --> S2[w1-codemod]
   end
 
@@ -149,16 +149,22 @@ graph TD
     D[w2-overlays-packages]
   end
 
-  subgraph wave3 [Wave 3 -- run sequentially]
-    E1[w3-complex-nixos] --> E2[w3-crosscutting]
-    E2 --> E3[w3-hm-bootstrapper]
-    E3 --> E4[w3-hosts]
-    E4 --> E5[w3-cleanup]
-    E5 --> E6["w3-verify (DEFERRED)"]
+  subgraph wave3a [Wave 3a -- launch all 4 in parallel]
+    F1[w3a-complex-nixos]
+    F2[w3a-crosscutting]
+    F3[w3a-bootstrapper]
+    F4[w3a-hosts]
+  end
+
+  subgraph wave3b [Wave 3b -- sequential after 3a]
+    G1[w3b-cleanup]
+    G2["w3b-verify (DEFERRED)"]
+    G1 --> G2
   end
 
   wave1 --> wave2
-  wave2 --> wave3
+  wave2 --> wave3a
+  wave3a --> wave3b
 ```
 
 
@@ -524,9 +530,9 @@ Copy the derivation file to `modules/beetcamp/package.nix`.
 
 ---
 
-## Wave 3: Sequential Integration
+## Wave 3a: Parallel Integration (launch all 4 todos simultaneously)
 
-### Step 1: Complex NixOS modules (todo: w3-complex-nixos)
+### Step 1: Complex NixOS modules (todo: w3a-complex-nixos)
 
 These require preserving custom options. Read each from `_old-modules/nixos/<name>/default.nix`.
 
@@ -540,7 +546,9 @@ This means:
 - The grouping module can still define its own options/config on top of what it imports.
 - Sub-modules remain independently importable by other hosts that don't want the full bundle.
 
-**desktop** (Inheritance Aspect):
+**desktop** (Inheritance Aspect + HM side in same file):
+
+This file includes BOTH the NixOS and HM sides of the desktop module. The HM side is absorbed here (rather than in the crosscutting step) to avoid a write dependency between agents.
 
 ```nix
 { inputs, ... }:
@@ -586,6 +594,14 @@ This means:
           kdePackages.okular vscode nodejs_22 claude-code
         ];
       };
+    };
+
+  flake.modules.homeManager.desktop =
+    { config, pkgs, lib, ... }:
+    {
+      home.stateVersion = "23.05";
+      xdg.enable = true;
+      home.file."downloads".source = config.lib.file.mkOutOfStoreSymlink "/home/aiden/Downloads";
     };
 }
 ```
@@ -743,9 +759,11 @@ Key: Router sub-modules are named `router-dhcp`, `router-dns`, etc. in `flake.mo
 - **geoclue**: keep `apps` and `staticLocation` options. Drop `enable`. Inner body uses `with lib;` for `mkOption`, `types`, `mkIf`.
 - **steam**: uses `enableableModule` pattern BUT also references `inputs.steamtinkerlaunch`. Add `inputs` to outer args. Strip `enableableModule` wrapper but keep the config body. Uses `with pkgs;` -- place it alongside `with lib;`.
 
-### Step 2: Cross-cutting unification (todo: w3-crosscutting)
+### Step 2: Cross-cutting unification (todo: w3a-crosscutting)
 
 Merge NixOS and HM sides into unified files. Each file defines BOTH `flake.modules.nixos.<name>` and `flake.modules.homeManager.<name>`.
+
+NOTE: desktop is NOT handled here -- its HM side is included directly in `w3a-complex-nixos` (Step 1) to avoid a file-level write dependency between parallel agents.
 
 - **darkman**: create `modules/darkman.nix` with both:
   - `flake.modules.nixos.darkman`: geoclue config, pathsToLink. Remove the `home-manager.users.aiden` bridge line. Remove `aiden.modules.xdg-portal.enable = false;` and `aiden.modules.darkman.enable` option/mkIf. Keep the `aiden.modules.geoclue.apps.darkman` config (it sets options on another module).
@@ -832,20 +850,6 @@ Merge NixOS and HM sides into unified files. Each file defines BOTH `flake.modul
 
 ```
 
-- **desktop**: `modules/desktop.nix` already converted in w3-complex. Add `flake.modules.homeManager.desktop` from `_old-modules/home/desktop/`:
-
-```nix
-  flake.modules.homeManager.desktop =
-    { config, pkgs, lib, ... }:
-    {
-      home.stateVersion = "23.05";
-      xdg.enable = true;
-      home.file."downloads".source = config.lib.file.mkOutOfStoreSymlink "/home/aiden/Downloads";
-    };
-  
-
-```
-
 - **xdg-portal**: The NixOS and HM xdg-portal modules have overlapping/conflicting portal config. Resolution: **make NixOS the single source of truth** and DELETE the HM xdg-portal module. The HM darkman module already handles the darkman-specific portal config (`org.freedesktop.impl.portal.Settings` and `extraPortals = [ pkgs.darkman ]`). The NixOS xdg-portal module handles the base portal config (gtk portal, `xdgOpenUsePortal`).
 `modules/xdg-portal.nix` (NixOS only, no HM side):
 
@@ -873,7 +877,7 @@ Merge NixOS and HM sides into unified files. Each file defines BOTH `flake.modul
 
   The HM-side darkman-specific portal settings (`org.freedesktop.impl.portal.Settings = [ "darkman" ]` and `extraPortals = [ pkgs.darkman ]`) are already handled by `flake.modules.homeManager.darkman` above. The NixOS module's `darkman`-related portal line is dropped. No HM xdg-portal module is created.
 
-### Step 3: HM bootstrapper (todo: w3-hm-bootstrapper)
+### Step 3: HM bootstrapper (todo: w3a-bootstrapper)
 
 Create `modules/home-manager.nix`:
 
@@ -892,7 +896,7 @@ Create `modules/home-manager.nix`:
 }
 ```
 
-### Step 4: Convert hosts (todo: w3-hosts)
+### Step 4: Convert hosts (todo: w3a-hosts)
 
 Each host becomes `modules/hosts/<hostname>/default.nix`. Read from `systems/<arch>/<hostname>/default.nix`. Each directly calls `nixosSystem`:
 
@@ -936,7 +940,9 @@ Per-host notes:
 - **lovelace** (aarch64-linux) -- stable; agenix+tailscale+adguard; uses SD image installer module
 - **installer** (x86_64-install-iso) -- stable; uses nixos-images; sets up nixos-facter overlay
 
-### Step 5: Cleanup (todo: w3-cleanup)
+## Wave 3b: Sequential Cleanup (run AFTER all Wave 3a agents complete)
+
+### Step 5: Cleanup (todo: w3b-cleanup)
 
 - Delete `_old-modules/`
 - Delete `lib/`
@@ -946,7 +952,7 @@ Per-host notes:
 - Verify `snowfall-lib` and `nixpkgs-unstable-pinned` removed from flake.nix inputs
 - Update `CLAUDE.md` to describe new dendritic architecture
 
-### Step 6: Verify builds (todo: w3-verify) -- DEFERRED
+### Step 6: Verify builds (todo: w3b-verify) -- DEFERRED
 
 Do NOT run until user confirms system upgrade is complete.
 
@@ -964,7 +970,7 @@ Additional checks:
 
 - `nix eval .#nixosConfigurations.desktop.config.system.nixos.release` -- should show unstable
 - `nix eval .#nixosConfigurations.mike.config.system.nixos.release` -- should show 25.11
-- Verify darkman.nix, ssh.nix, desktop.nix each contain both `flake.modules.nixos.*` and `flake.modules.homeManager.*`
+- Verify desktop.nix, darkman.nix, ssh.nix each contain both `flake.modules.nixos.*` and `flake.modules.homeManager.*`
 - Verify xdg-portal.nix contains ONLY `flake.modules.nixos.*` (no HM side -- darkman-specific portal config lives in darkman.nix's HM side)
 - Confirm no overlay entries for paperless-ngx or jellyfin
 
