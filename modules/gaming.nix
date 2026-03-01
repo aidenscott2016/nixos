@@ -39,7 +39,7 @@
         aiden.modules.oblivionSync.enable = cfg.games.oblivionSync.enable;
         aiden.programs.openttd.enable = cfg.games.openttd.enable;
         environment.systemPackages = minecraftPackages ++ moonlightClient;
-        boot.kernelParams = [ "preempt=full" ];
+        # boot.kernelParams = [ "preempt=full" ]; # re-enable if audio latency or gaming input lag is noticed
       };
     };
 }
