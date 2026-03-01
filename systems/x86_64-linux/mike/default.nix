@@ -35,7 +35,7 @@
       scanner.enable = true;
       desktop.enable = true;
       gaming = {
-        games.oblivionSync.enable = true;
+        games.oblivionSync.enable = false;
         steam.enable = true;
         moonlight.client.enable = true;
       };
