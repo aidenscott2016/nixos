@@ -7,6 +7,8 @@
       cfg = config.aiden.modules.common;
     in
     {
+      imports = [ inputs.self.modules.nixos.gc ];
+
       options.aiden.modules.common = {
         domainName = mkOption { type = types.str; };
         email = mkOption { type = types.str; };
@@ -17,6 +19,9 @@
       };
 
       config = {
+        system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or "dirty";
+        nix.registry.self.flake = inputs.self;
+
         nixpkgs.config = {
           allowUnfree = true;
           nvidia.acceptLicense = true;

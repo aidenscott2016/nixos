@@ -12,6 +12,7 @@
       services.xserver = {
         xkb = {
           layout = "gb";
+          options = "caps:swapescape";
         };
       };
       services.libinput.enable = true;
