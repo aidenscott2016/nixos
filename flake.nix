@@ -17,11 +17,14 @@
     ];
   };
   inputs = {
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    import-tree.url = "github:vic/import-tree";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    #:w nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-unstable-pinned.url = "github:nixos/nixpkgs/36226520e9f7a35bf341cbe3b6a1ff9047bec6d9";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -58,12 +61,7 @@
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
-      # optionally choose not to download darwin deps (saves some resources on Linux)
       inputs.darwin.follows = "";
-    };
-    snowfall-lib = {
-      url = "github:snowfallorg/lib";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
     nixos-facter.url = "github:nix-community/nixos-facter";
@@ -77,26 +75,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs =
-    inputs:
-    inputs.snowfall-lib.mkFlake {
-      inherit inputs;
-      src = ./.;
-      snowfall = {
-        namespace = "aiden";
-      };
-      diskoConfigurations = {
-        locutus = import ./hosts/locutus/disko.nix;
-      };
-      channels-config = {
-        packageOverrides = pkgs: { firefox-addons = inputs.firefox-addons { inherit pkgs; }; };
-        nvidia.acceptLicense = true;
-        allowUnfree = true;
-        rocmSupport = false;
-        permittedInsecurePackages = [
-          "qtwebengine-5.15.19"
-        ];
-
-      };
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ (inputs.import-tree ./modules) ];
     };
 }
