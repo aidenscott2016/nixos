@@ -3,14 +3,14 @@
   flake.nixosConfigurations.mike = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
-      ./packages.nix
-      ./autorandr
+      ./_packages.nix
+      ./_autorandr
       inputs.dwm.nixosModules.default
       inputs.nixos-facter-modules.nixosModules.facter
       inputs.disko.nixosModules.disko
-      ./disk-configuration.nix
+      ./_disk-configuration.nix
     ] ++ (with config.flake.modules.nixos; [
-      common desktop gaming nvidia virtualisation scanner nix
+      desktop gaming nvidia virtualisation scanner nix
     ]) ++ [
       config.flake.modules.nixos."home-manager"
     ] ++ [

@@ -3,13 +3,13 @@
   flake.nixosConfigurations.bes = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
-      ./hardware-configuration.nix
-      ./disk-config.nix
-      ./portainer.nix
+      ./_hardware-configuration.nix
+      ./_disk-config.nix
+      ./_portainer.nix
       inputs.agenix.nixosModules.default
       inputs.disko.nixosModules.disko
     ] ++ (with config.flake.modules.nixos; [
-      common locale avahi syncthing powermanagement navidrome jellyfin paperless
+      common architecture locale avahi syncthing powermanagement navidrome jellyfin paperless
     ]) ++ [
       config.flake.modules.nixos."cli-base"
       config.flake.modules.nixos."reverse-proxy"

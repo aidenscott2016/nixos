@@ -28,30 +28,32 @@
         };
       };
 
-      boot = {
-        initrd.kernelModules = [ "nvidia" ];
-      };
-
-      hardware = {
-        nvidia = {
-          prime = {
-            intelBusId = cfg.prime.intelBusId;
-            nvidiaBusId = cfg.prime.nvidiaBusId;
-            offload = {
-              enable = true;
-              enableOffloadCmd = true;
-            };
-          };
-          package = cfg.package;
-          modesetting.enable = true;
-          open = false;
-          nvidiaSettings = true;
-          powerManagement.enable = true;
+      config = {
+        boot = {
+          initrd.kernelModules = [ "nvidia" ];
         };
-      };
 
-      services.xserver = {
-        videoDrivers = [ "nvidia" ];
+        hardware = {
+          nvidia = {
+            prime = {
+              intelBusId = cfg.prime.intelBusId;
+              nvidiaBusId = cfg.prime.nvidiaBusId;
+              offload = {
+                enable = true;
+                enableOffloadCmd = true;
+              };
+            };
+            package = cfg.package;
+            modesetting.enable = true;
+            open = false;
+            nvidiaSettings = true;
+            powerManagement.enable = true;
+          };
+        };
+
+        services.xserver = {
+          videoDrivers = [ "nvidia" ];
+        };
       };
     };
 }

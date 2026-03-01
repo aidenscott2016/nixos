@@ -3,8 +3,8 @@
   flake.nixosConfigurations.gila = inputs.nixpkgs.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
-      ./hardware-configuration.nix
-      ./disko-config.nix
+      ./_hardware-configuration.nix
+      ./_disko-config.nix
       inputs.disko.nixosModules.disko
       inputs.agenix.nixosModules.default
       inputs.switch-fix.nixosModules.switch-fix

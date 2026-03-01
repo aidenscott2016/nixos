@@ -1,9 +1,11 @@
-{ ... }:
+{ inputs, ... }:
 {
   flake.modules.nixos.darkman =
     { lib, pkgs, config, ... }:
     with lib;
     {
+      imports = [ inputs.self.modules.nixos.geoclue ];
+
       environment.pathsToLink = [
         "/share/xdg-desktop-portal"
         "/share/applications"

@@ -14,7 +14,7 @@
         };
       };
 
-      services = {
+      config.services = {
         samba = {
           package = pkgs.samba4Full;
           enable = true;

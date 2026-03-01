@@ -4,8 +4,8 @@
     system = "x86_64-linux";
     modules = [
       inputs.disko.nixosModules.disko
-      ./disk-configuration.nix
-      ./hardware-configuration.nix
+      ./_disk-configuration.nix
+      ./_hardware-configuration.nix
       inputs.nixos-hardware.nixosModules.gpd-pocket-3
       inputs.home-manager.nixosModules.home-manager
     ] ++ (with config.flake.modules.nixos; [

@@ -3,15 +3,14 @@
   flake.nixosConfigurations.desktop = inputs.nixpkgs-unstable.lib.nixosSystem {
     system = "x86_64-linux";
     modules = [
-      ./packages.nix
+      ./_packages.nix
       inputs.nixos-facter-modules.nixosModules.facter
       inputs.disko.nixosModules.disko
-      ./disk-configuration.nix
+      ./_disk-configuration.nix
     ] ++ (with config.flake.modules.nixos; [
-      common jovian desktop gaming virtualisation nix
+      jovian desktop gaming virtualisation nix
     ]) ++ [
       config.flake.modules.nixos."home-manager"
-      config.flake.modules.nixos."hardware-acceleration"
     ] ++ [
       ({ config, lib, ... }: {
         networking.hostName = "desktop";

@@ -3,11 +3,10 @@
   flake.modules.nixos.gaming =
     { lib, pkgs, config, ... }:
     with lib;
-    with pkgs;
     let
       cfg = config.aiden.modules.gaming;
-      minecraftPackages = optionals cfg.games.minecraft.enable [ prismlauncher ];
-      moonlightClient = optionals cfg.moonlight.client.enable [ moonlight-qt ];
+      minecraftPackages = optionals cfg.games.minecraft.enable [ pkgs.prismlauncher ];
+      moonlightClient = optionals cfg.moonlight.client.enable [ pkgs.moonlight-qt ];
     in
     {
       imports = with inputs.self.modules.nixos; [

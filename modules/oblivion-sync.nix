@@ -10,6 +10,7 @@
     in
     {
       options.aiden.modules.oblivionSync = {
+        enable = mkEnableOption "oblivion sync";
         stDataDir = mkOption {
           description = "target to mount oblivion from";
           type = types.path;
@@ -22,22 +23,24 @@
         };
       };
 
-      services.tailscale.enable = true;
-      environment.systemPackages = with pkgs; [ bindfs ];
-      systemd.services.oblivion-mount = {
-        description = "Bindfs mount for ${stDataDir} -> ${obDataDir}";
-        wantedBy = [ "multi-user.target" ];
-        serviceConfig = {
-          Type = "oneshot";
-          ExecStart = [
-            "${pkgs.coreutils}/bin/mkdir -p ${obDataDir}"
-            ''
-              ${pkgs.bindfs}/bin/bindfs --force-user=aiden --force-group=users \
-                          ${stDataDir} ${obDataDir}
-            ''
-          ];
-          ExecStop = "${pkgs.util-linux}/bin/umount ${obDataDir}";
-          RemainAfterExit = true;
+      config = mkIf cfg.enable {
+        services.tailscale.enable = true;
+        environment.systemPackages = with pkgs; [ bindfs ];
+        systemd.services.oblivion-mount = {
+          description = "Bindfs mount for ${stDataDir} -> ${obDataDir}";
+          wantedBy = [ "multi-user.target" ];
+          serviceConfig = {
+            Type = "oneshot";
+            ExecStart = [
+              "${pkgs.coreutils}/bin/mkdir -p ${obDataDir}"
+              ''
+                ${pkgs.bindfs}/bin/bindfs --force-user=aiden --force-group=users \
+                            ${stDataDir} ${obDataDir}
+              ''
+            ];
+            ExecStop = "${pkgs.util-linux}/bin/umount ${obDataDir}";
+            RemainAfterExit = true;
+          };
         };
       };
     };

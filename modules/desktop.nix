@@ -5,9 +5,11 @@
     with lib;
     {
       imports = with inputs.self.modules.nixos; [
+        common architecture
         syncthing redshift darkman printer emacs thunar
         locale keyd yubikey appimage pipewire ssh avahi
-        common multimedia hardware-acceleration ios cli-base
+        multimedia hardware-acceleration ios cli-base
+        powermanagement xdg-portal beets
       ];
 
       options.aiden.modules.desktop.powermanagement.enable = mkOption {

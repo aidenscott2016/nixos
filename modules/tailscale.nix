@@ -12,13 +12,14 @@
         authKeyPath = mkOption { type = types.str; };
       };
 
-      services = {
-        tailscale = {
-          enable = true;
-          openFirewall = true;
+      config = {
+        services = {
+          tailscale = {
+            enable = true;
+            openFirewall = true;
+          };
         };
-      };
-      systemd.services.tailscale-autoconnect = {
+        systemd.services.tailscale-autoconnect = {
         description = "Automatic connection to Tailscale";
 
         after = [
@@ -45,6 +46,7 @@
           # otherwise authenticate with tailscale
           ${tailscale}/bin/tailscale up -authkey  file:${cfg.authKeyPath} ${strings.optionalString cfg.advertiseRoutes "--advertise-routes=10.0.0.0/22"}
         '';
+        };
       };
     };
 }

@@ -17,6 +17,14 @@
       };
 
       config = {
+        nixpkgs.config = {
+          allowUnfree = true;
+          nvidia.acceptLicense = true;
+          permittedInsecurePackages = [
+            "qtwebengine-5.15.19"
+          ];
+        };
+
         nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
         nix.extraOptions = "experimental-features = nix-command flakes";
         nix.settings.auto-optimise-store = true;
