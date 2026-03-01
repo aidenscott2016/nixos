@@ -9,7 +9,7 @@
       inputs.nixos-hardware.nixosModules.gpd-pocket-3
       inputs.home-manager.nixosModules.home-manager
     ] ++ (with config.flake.modules.nixos; [
-      common ssh locale
+      common ssh locale tlp
     ]) ++ [
       ({ pkgs, ... }: {
         networking.hostName = "barbie";

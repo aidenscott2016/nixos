@@ -9,18 +9,10 @@
         syncthing redshift darkman printer emacs thunar
         locale keyd yubikey appimage pipewire ssh avahi
         multimedia hardware-acceleration ios cli-base
-        powermanagement xdg-portal beets
+        xdg-portal beets
       ];
 
-      options.aiden.modules.desktop.powermanagement.enable = mkOption {
-        type = types.bool;
-        default = true;
-      };
-
       config = {
-        aiden.modules.powermanagement.enable =
-          config.aiden.modules.desktop.powermanagement.enable;
-
         programs.nm-applet.enable = true;
         services = {
           xserver.enable = true;

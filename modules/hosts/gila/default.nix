@@ -9,7 +9,7 @@
       inputs.agenix.nixosModules.default
       inputs.switch-fix.nixosModules.switch-fix
     ] ++ (with config.flake.modules.nixos; [
-      common locale adguard avahi powermanagement traefik tailscale router
+      common locale adguard avahi traefik tailscale router
     ]) ++ [
       config.flake.modules.nixos."home-assistant"
     ] ++ [

@@ -10,7 +10,7 @@
       inputs.disko.nixosModules.disko
       ./_disk-configuration.nix
     ] ++ (with config.flake.modules.nixos; [
-      desktop gaming nvidia virtualisation scanner nix
+      desktop gaming nvidia virtualisation scanner nix tlp
     ]) ++ [
       config.flake.modules.nixos."home-manager"
     ] ++ [

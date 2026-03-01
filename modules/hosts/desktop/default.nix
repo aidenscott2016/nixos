@@ -40,7 +40,6 @@
           };
           programs.beets.enable = false;
           modules = {
-            desktop.powermanagement.enable = false;
             gaming = {
               games.oblivionSync.enable = true;
               steam.enable = true;
