@@ -11,8 +11,6 @@
     ] ++ [
       ({ config, lib, pkgs, ... }: {
         networking.hostName = "installer";
-        system.stateVersion = "24.11";
-
         services.libinput.enable = lib.mkForce false;
 
         users.users.nixos.openssh.authorizedKeys.keys = [ config.aiden.modules.common.publicKey ];
