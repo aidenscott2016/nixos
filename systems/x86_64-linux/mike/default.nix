@@ -14,6 +14,7 @@
     inputs.nixos-facter-modules.nixosModules.facter
     inputs.disko.nixosModules.default
     ./disk-configuration.nix
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480
   ];
 
   facter.reportPath = ./facter.json;
