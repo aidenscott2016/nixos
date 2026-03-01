@@ -58,9 +58,6 @@
         };
       };
       users.users.aiden.extraGroups = [ "gamemode" ];
-      environment.sessionVariables = {
-        NIXOS_OZONE_WL = "1";
-      };
 
       services.displayManager.sessionPackages =
         let

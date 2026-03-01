@@ -12,7 +12,7 @@
           firewall.enable = false;
           nftables = {
             enable = true;
-            ruleset = (import ./nft.nix { inherit internalInterface externalInterface; });
+            ruleset = (import ./_nft.nix { inherit internalInterface externalInterface; });
           };
         };
       };
