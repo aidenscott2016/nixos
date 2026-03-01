@@ -23,7 +23,7 @@ in
     programs.virt-manager.enable = true;
 
     virtualisation.docker = {
-      enable = true;
+      enable = false;
       rootless = {
         enable = true;
         setSocketVariable = true;
