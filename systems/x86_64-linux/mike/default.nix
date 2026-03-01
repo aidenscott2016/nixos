@@ -20,6 +20,7 @@
   facter.reportPath = ./facter.json;
 
   boot.initrd.systemd.enable = true;
+  hardware.cpu.intel.updateMicrocode = true;
   services.upower.enable = true;
   services.throttled.enable = true;
   services.fwupd.enable = true;
