@@ -13,7 +13,7 @@
     in
     {
       inherit (unstablePkgs)
-        bazarr steamtinkerlaunch navidrome;
+        bazarr steamtinkerlaunch navidrome code-cursor;
       intel-media-driver-stable = stablePkgs.intel-media-driver;
       inherit (stablePkgs)
         libva-vdpau-driver

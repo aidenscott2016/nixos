@@ -32,7 +32,7 @@
           bindfs xorg.xev
           (discord.override { withTTS = false; })
           cameractrls-gtk3 chromium xclip libreoffice
-          kdePackages.okular vscode nodejs_22 claude-code
+          kdePackages.okular vscode nodejs_22 claude-code code-cursor
         ];
       };
     };

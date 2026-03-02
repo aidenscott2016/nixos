@@ -9,6 +9,7 @@
       inputs.nixos-facter-modules.nixosModules.facter
       inputs.disko.nixosModules.disko
       ./_disk-configuration.nix
+      inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480
     ] ++ (with config.flake.modules.nixos; [
       desktop gaming nvidia virtualisation scanner nix tlp
     ]) ++ [
@@ -22,7 +23,11 @@
         facter.reportPath = ./facter.json;
 
         boot.initrd.systemd.enable = true;
+        hardware.cpu.intel.updateMicrocode = true;
+
         services.upower.enable = true;
+        services.fwupd.enable = true;
+        services.thermald.enable = true;
 
         aiden = {
           architecture = {

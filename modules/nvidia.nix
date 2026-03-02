@@ -29,10 +29,6 @@
       };
 
       config = {
-        boot = {
-          initrd.kernelModules = [ "nvidia" ];
-        };
-
         hardware = {
           nvidia = {
             prime = {
@@ -48,6 +44,7 @@
             open = false;
             nvidiaSettings = true;
             powerManagement.enable = true;
+            powerManagement.finegrained = true;
           };
         };
 

@@ -38,7 +38,7 @@
                 libva
                 mesa
               ]
-              ++ optionals (architecture.gpu == "amd") [ amdvlk ]
+              #++ optionals (architecture.gpu == "amd") [ amdvlk ]
               ++ optionals (architecture.cpu == "intel") [
                 intel-media-driver-stable
                 libva-vdpau-driver
@@ -60,10 +60,6 @@
               "nvidia"
           );
         };
-
-        boot.kernelParams = optionals (architecture.cpu == "intel") [
-          "i915.enable_guc=3"
-        ];
 
         environment.systemPackages = with pkgs; [ nvtopPackages.full ];
       };
