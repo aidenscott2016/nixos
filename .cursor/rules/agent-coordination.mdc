@@ -1,0 +1,30 @@
+---
+description: Rules for multi-agent and multi-stage task execution in this repo
+alwaysApply: true
+---
+
+# Agent Coordination
+
+## Stop and Confirm at Milestones
+
+For multi-host or multi-stage tasks: complete the first unit (e.g. the first host, Wave 1), present the result, and **stop**. Wait for explicit confirmation before proceeding. Never batch-apply across all targets without an intermediate checkpoint.
+
+For builds: build the primary machine (mike) first, show the result, then wait before building others.
+
+## Design Tasks for Parallel Execution
+
+When breaking a large task into todos, identify which ones touch disjoint files and can run concurrently. Label them with a wave or stream. Each todo should own a clearly bounded set of files so agents never conflict.
+
+## Use Worktrees for Isolated Work
+
+For feature work, operate in a git worktree on a dedicated feature branch rather than the main working tree. For parallel multi-agent tasks, each agent works in its own temporary worktree + branch, makes atomic commits, then merges back to the shared feature branch and removes its worktree when done.
+
+```bash
+git worktree add ../nixos-<feature> -b <feature>
+# ... work, commit ...
+git worktree remove ../nixos-<feature>
+```
+
+## Don't Rebuild During Active Operations
+
+If a build or upgrade is already in progress, do not trigger additional `nix build`, `nixos-rebuild`, or `nix flake update` calls until the user confirms it is safe to do so.

@@ -1,0 +1,35 @@
+---
+description: Git commit style for this repo — format, atomicity, and why-focused messages
+alwaysApply: true
+---
+
+# Git Commit Style
+
+## Format
+
+```
+[scope]: Imperative subject, ≤50 chars
+```
+
+Use the **hostname** as scope when the change primarily affects one machine (`mike:`, `gila:`, `bes:`, `barbie:`, `desktop:`, `lovelace:`). Use a module or domain name for cross-cutting changes (`tlp:`, `common:`, `hosts:`, `overlays:`). A conventional commit type prefix is also acceptable when it adds signal: `fix(mike):`, `perf(mike):`, `feat(hosts):`.
+
+Subject line rules: imperative mood, ≤50 chars, capitalise the first word after the prefix, no trailing period. Test: "If applied, this commit will `<subject>`."
+
+## Body
+
+Write a body whenever the reason for the change is not immediately obvious from the diff. The body must explain **why** — the problem that existed before, why this approach was chosen, and any unintuitive consequences. Do not narrate what the diff already shows; the reader can see that. Wrap at 72 characters.
+
+```
+mike: Throttle nix daemon build jobs
+
+Nix was consuming all CPU cores during builds, making the desktop
+completely unresponsive. Limiting build jobs to 4 keeps the system
+usable while a build is in progress.
+```
+
+## Atomicity and Staging
+
+- One logical unit of change per commit
+- Never use `git add .` or `git add -A`
+- Stage files explicitly by path: `git add modules/foo.nix modules/bar.nix`
+- Run `git status` before staging to confirm only your expected files are touched
