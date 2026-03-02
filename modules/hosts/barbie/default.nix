@@ -9,7 +9,7 @@
       inputs.nixos-hardware.nixosModules.gpd-pocket-3
       inputs.home-manager.nixosModules.home-manager
     ] ++ (with config.flake.modules.nixos; [
-      common ssh locale tlp
+      common ssh locale
     ]) ++ [
       ({ pkgs, ... }: {
         networking.hostName = "barbie";
@@ -32,7 +32,9 @@
 
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.users.aiden = { };
+        home-manager.users.aiden = {
+          home.stateVersion = "24.05";
+        };
 
         environment.systemPackages = [ pkgs.maliit-keyboard ];
       })
