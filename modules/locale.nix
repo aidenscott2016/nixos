@@ -12,7 +12,7 @@
       services.xserver = {
         xkb = {
           layout = "gb";
-          options = "caps:swapescape";
+          options = mkIf (!config.services.keyd.enable) "caps:swapescape";
         };
       };
       services.libinput.enable = true;
