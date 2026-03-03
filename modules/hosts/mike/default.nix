@@ -11,7 +11,7 @@
       ./_disk-configuration.nix
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480
     ] ++ (with config.flake.modules.nixos; [
-      desktop gaming steam openttd nvidia virtualisation scanner nix tlp
+      desktop gaming steam oblivion-sync openttd nvidia virtualisation scanner nix tlp
       redshift multimedia
     ]) ++ [
       config.flake.modules.nixos."home-manager"
