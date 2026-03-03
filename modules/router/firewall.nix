@@ -1,13 +1,13 @@
 { ... }:
 {
   flake.modules.nixos.router-firewall =
-    { config, lib, ... }:
+    { config, ... }:
     with {
       inherit (config.aiden.modules.router)
-        enable internalInterface externalInterface;
+        internalInterface externalInterface;
     };
     {
-      config = lib.mkIf enable {
+      config = {
         networking = {
           firewall.enable = false;
           nftables = {

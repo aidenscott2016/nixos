@@ -5,12 +5,11 @@
     with lib;
     let
       inherit (config.aiden.modules.router)
-        enable
         internalInterface
         externalInterface;
     in
     {
-      config = mkIf enable {
+      config = {
         systemd.network.enable = true;
         networking.useNetworkd = true;
 

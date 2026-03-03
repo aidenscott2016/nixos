@@ -3,11 +3,8 @@
   flake.modules.nixos.router-zeroconf =
     { lib, pkgs, config, ... }:
     with lib;
-    let
-      enable = config.aiden.modules.router.enable;
-    in
     {
-      config = mkIf enable {
+      config = {
         services.avahi = {
           enable = true;
           nssmdns4 = true;

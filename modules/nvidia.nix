@@ -1,11 +1,10 @@
 { ... }:
 {
   flake.modules.nixos.nvidia =
-    { config, lib, pkgs, ... }:
+    { config, lib, ... }:
     with lib;
     let
       cfg = config.aiden.modules.nvidia;
-      inherit (config.aiden) architecture;
     in
     {
       options.aiden.modules.nvidia = {
@@ -29,6 +28,8 @@
       };
 
       config = {
+        nixpkgs.config.nvidia.acceptLicense = true;
+
         hardware = {
           nvidia = {
             prime = {
@@ -46,10 +47,6 @@
             powerManagement.enable = true;
             powerManagement.finegrained = true;
           };
-        };
-
-        services.xserver = {
-          videoDrivers = [ "nvidia" ];
         };
       };
     };

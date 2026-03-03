@@ -10,7 +10,6 @@
     in
     {
       options.aiden.modules.oblivionSync = {
-        enable = mkEnableOption "oblivion sync";
         stDataDir = mkOption {
           description = "target to mount oblivion from";
           type = types.path;
@@ -23,7 +22,7 @@
         };
       };
 
-      config = mkIf cfg.enable {
+      config = {
         services.tailscale.enable = true;
         environment.systemPackages = with pkgs; [ bindfs ];
 

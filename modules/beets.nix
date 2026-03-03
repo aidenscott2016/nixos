@@ -1,8 +1,7 @@
 { inputs, ... }:
 {
   flake.modules.nixos.beets =
-    { lib, pkgs, config, ... }:
-    with lib;
+    { pkgs, ... }:
     let
       beet-override =
         with pkgs;
@@ -22,11 +21,7 @@
         });
     in
     {
-      options = {
-        aiden.programs.beets.enable = mkEnableOption "beets";
-      };
-
-      config = mkIf config.aiden.programs.beets.enable {
+      config = {
         environment.systemPackages = [ beet-override ];
       };
     };

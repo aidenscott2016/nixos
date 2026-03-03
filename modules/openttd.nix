@@ -1,14 +1,9 @@
 { ... }:
 {
   flake.modules.nixos.openttd =
-    { lib, pkgs, config, ... }:
-    with lib;
+    { pkgs, ... }:
     {
-      options = {
-        aiden.programs.openttd.enable = mkEnableOption "install openttd";
-      };
-
-      config = mkIf config.aiden.programs.openttd.enable {
+      config = {
         environment.systemPackages = with pkgs; [ openttd ];
       };
     };

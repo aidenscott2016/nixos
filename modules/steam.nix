@@ -7,12 +7,9 @@
       steamtinkerlaunch-git = pkgs.steamtinkerlaunch.overrideAttrs (_: {
         src = inputs.steamtinkerlaunch;
       });
-      cfg = config.aiden.modules.steam;
     in
     {
-      options.aiden.modules.steam.enable = mkEnableOption "steam";
-
-      config = mkIf cfg.enable {
+      config = {
         services.ananicy = {
           enable = true;
           package = pkgs.ananicy-cpp;

@@ -11,7 +11,7 @@
       ./_disk-configuration.nix
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480
     ] ++ (with config.flake.modules.nixos; [
-      desktop gaming nvidia virtualisation scanner nix tlp
+      desktop gaming steam oblivion-sync openttd nvidia virtualisation scanner nix tlp
     ]) ++ [
       config.flake.modules.nixos."home-manager"
     ] ++ [
@@ -34,7 +34,6 @@
             cpu = "intel";
             gpu = "nvidia";
           };
-          programs.beets.enable = false;
           modules.nvidia = {
             prime = {
               intelBusId = "PCI:0:2:0";
@@ -43,8 +42,6 @@
             package = config.boot.kernelPackages.nvidiaPackages.stable;
           };
           modules.gaming = {
-            games.oblivionSync.enable = true;
-            steam.enable = true;
             moonlight.client.enable = true;
           };
         };

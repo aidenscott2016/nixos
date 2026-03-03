@@ -11,14 +11,8 @@
       environment.systemPackages = with pkgs; [
         nixpkgs-fmt
         nix-tree
-        inputs.disko.packages.x86_64-linux.disko
+        inputs.disko.packages.${pkgs.stdenv.hostPlatform.system}.disko
       ];
-
-      nix.gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 7d";
-      };
 
       nix.settings = {
         experimental-features = [

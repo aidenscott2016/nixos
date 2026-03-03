@@ -102,7 +102,7 @@
 
         users.users.aiden.extraGroups = [
           "video"
-          "sadnzbd"
+          "sabnzbd"
           "deluge"
         ];
 

@@ -15,7 +15,7 @@
     ] ++ [
       ({ config, pkgs, lib, ... }: {
         networking.hostName = "gila";
-        system.stateVersion = lib.mkForce "23.05";
+        system.stateVersion = "23.05";
         nixpkgs.overlays = [ inputs.self.overlays.default ];
 
         age.secrets.mosquittoPass.file = "${inputs.self.outPath}/secrets/mosquitto-pass.age";
@@ -65,7 +65,6 @@
             "/dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_2ee577279f96ed119403c098a7669f5d-if00-port0"
           ];
           router = {
-            enable = true;
             dns.enable = false;
             dnsmasq.enable = true;
             internalInterface = "enp2s0";

@@ -24,7 +24,6 @@
 
         nixpkgs.config = {
           allowUnfree = true;
-          nvidia.acceptLicense = true;
           permittedInsecurePackages = [
             "qtwebengine-5.15.19"
           ];

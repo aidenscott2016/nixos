@@ -9,7 +9,7 @@
         syncthing redshift darkman printer emacs thunar
         locale keyd yubikey appimage pipewire ssh avahi
         multimedia hardware-acceleration ios cli-base
-        xdg-portal beets
+        xdg-portal
       ];
 
       config = {
