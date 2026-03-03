@@ -30,16 +30,19 @@
         };
 
         nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-        nix.extraOptions = "experimental-features = nix-command flakes";
-        nix.settings.auto-optimise-store = true;
-        nix.settings.trusted-users = [ "aiden" ];
-        nix.settings.substituters = [
-          "https://nix-community.cachix.org"
-        ];
-
-        nix.settings.trusted-public-keys = [
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        ];
+        nix.settings = {
+          auto-optimise-store = true;
+          trusted-users = [ "aiden" ];
+          experimental-features = [ "nix-command" "flakes" ];
+          substituters = [
+            "https://cache.nixos.org"
+            "https://nix-community.cachix.org"
+          ];
+          trusted-public-keys = [
+            "cache.nixos.org-1:6NCHdD59X431o0mWqyPMV+FnfCelaCYkFdeVX6Ht7cg="
+            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          ];
+        };
 
         programs.fish.enable = true;
 

@@ -28,6 +28,7 @@
         services.upower.enable = true;
         services.fwupd.enable = true;
         services.thermald.enable = true;
+        services.throttled.enable = true;
 
         aiden = {
           architecture = {
