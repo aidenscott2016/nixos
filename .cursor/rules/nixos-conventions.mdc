@@ -1,0 +1,36 @@
+---
+description: NixOS-specific conventions for this repo — package sourcing, module design
+alwaysApply: true
+---
+
+# NixOS Conventions
+
+## Check Nixpkgs Before Writing Custom Derivations
+
+Before creating a custom Nix package or adding a community flake input, verify whether the package already exists in nixpkgs. Preference order:
+
+1. `nixpkgs` stable (`pkgs.<name>`)
+2. `nixpkgs-unstable` via the existing overlay (`pkgs.<name>` after overlay)
+3. Community flake input
+4. Custom derivation
+
+To verify: `nix eval nixpkgs#<name>.meta.description` (or `nixpkgs-unstable#<name>`).
+
+## Dendritic Module Pattern
+
+Every `.nix` file under `modules/` is a flake-parts module. Follow the established pattern:
+
+```nix
+{ ... }:
+{
+  flake.modules.nixos.mymodule =
+    { lib, pkgs, config, ... }:
+    {
+      # config here — no enable gate
+    };
+}
+```
+
+- No `aiden.modules.<name>.enable` gating — compose features via `imports` at the host level
+- Add `inputs` to the outer function only if the inner body references `inputs.*`
+- Grouping modules (desktop, gaming, router) use the Inheritance Aspect: `imports = with inputs.self.modules.nixos; [ ... ]`

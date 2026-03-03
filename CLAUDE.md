@@ -4,31 +4,45 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is a personal NixOS flake configuration repository using Snowfall Lib for organization. It manages multiple machines, services, and modular NixOS configurations across different architectures.
+This is a personal NixOS flake configuration repository using the **dendritic pattern** (flake-parts + import-tree) for organization. It manages multiple machines, services, and modular NixOS configurations across different architectures.
 
 ## Key Architecture
 
 ### Flake Structure
-- Uses Snowfall Lib (`snowfall-lib.mkFlake`) with namespace "aiden"
-- Multiple nixpkgs channels: stable (25.05), unstable, and pinned unstable
+- Uses `flake-parts` (`inputs.flake-parts.lib.mkFlake`) with `import-tree` for automatic module discovery
+- Every `.nix` file under `modules/` is a flake-parts module (files/dirs prefixed with `_` are ignored by import-tree)
+- Multiple nixpkgs channels: stable (25.11) and unstable
 - Integrates home-manager, disko, agenix, and various specialized inputs
 
-### Module System
-All custom modules use the `aiden.modules.*` namespace with a consistent pattern:
-- `lib/aiden/default.nix` provides helper functions including `enableableModule`
-- Modules follow the pattern: `options.aiden.modules.{name}.enable = mkOption`
-- Common module activated via `aiden.modules.common.enable = true`
+### Module System (Dendritic Pattern)
+- No `aiden.modules.<name>.enable` gating -- features are composed via `imports` at the host level
+- Each module file exposes `flake.modules.nixos.<name>` and/or `flake.modules.homeManager.<name>`
+- Cross-cutting modules (darkman, ssh) define both NixOS and HM sides in the same file
+- Grouping modules (desktop, gaming, router) use the **Inheritance Aspect** pattern: they `imports` their sub-features automatically
+
+### Module File Pattern
+```nix
+{ ... }:            # flake-parts module (add `inputs` only if body references inputs.*)
+{
+  flake.modules.nixos.mymodule =
+    { lib, pkgs, config, ... }:  # NixOS module
+    {
+      # NixOS config here
+    };
+}
+```
 
 ### Host Categories
-- **Servers**: gila (router/home-assistant), thoth, bes (containers), tv (media)
-- **Desktops**: locutus, mike, desktop (with gaming, autorandr profiles)
-- **Special**: barbie (likely test), pxe (network boot), installer ISO
+- **Servers**: gila (router/home-assistant/traefik), bes (containers/reverse-proxy), lovelace (aarch64 SD image)
+- **Desktops**: mike (stable, dwm, gaming), desktop (unstable, jovian, gaming)
+- **Special**: barbie (GPD Pocket 3, Plasma 6), installer (ISO)
 
 ### Directory Structure
-- `modules/nixos/` - System-level NixOS modules
-- `modules/home/` - Home Manager user configurations
-- `systems/{arch}/{hostname}/` - Per-machine configurations
-- `overlays/default.nix` - Package overlays pulling from different channels
+- `modules/` - All flake-parts modules (auto-discovered by import-tree)
+  - `modules/hosts/<hostname>/default.nix` - Per-machine nixosSystem calls
+  - `modules/router/` - Router sub-modules (dhcp, dns, firewall, interfaces, zeroconf)
+  - `modules/beetcamp/` - Custom beetcamp package
+  - `modules/<name>.nix` - Individual NixOS/HM feature modules
 - `secrets/` - Age-encrypted secrets with `secrets.nix` defining access
 
 ## Common Development Commands
@@ -72,15 +86,30 @@ agenix -r
 ## Module Development Patterns
 
 ### Creating New Modules
-1. Follow the `enableableModule` pattern from `lib/aiden/default.nix`
-2. Use `aiden.modules.{name}.enable` for all modules
-3. Reference the common module pattern in `modules/nixos/common/default.nix`
+1. Create `modules/<name>.nix` (or `modules/<name>/default.nix` if companion files are needed)
+2. Expose it as `flake.modules.nixos.<name>` or `flake.modules.homeManager.<name>`
+3. No enable gate needed -- hosts import exactly the modules they want
+4. Add `inputs` to outer function args only if the module body references `inputs.*`
 
 ### Host Configuration
-1. Import hardware-configuration.nix and disko configs
-2. Set `aiden.modules.common.enable = true` with email/domain
-3. Enable specific modules as needed
-4. Host-specific packages go in separate `packages.nix` when complex
+Each host at `modules/hosts/<hostname>/default.nix` calls `nixosSystem` directly:
+```nix
+{ inputs, config, ... }:
+{
+  flake.nixosConfigurations.myhostname = inputs.nixpkgs.lib.nixosSystem {
+    modules = [
+      ./_hardware-configuration.nix
+      inputs.disko.nixosModules.disko
+    ] ++ (with config.flake.modules.nixos; [
+      common desktop gaming nix home-manager
+    ]) ++ [
+      { system.stateVersion = "25.11"; }
+    ];
+  };
+}
+```
+
+Companion files (hardware-configuration, disk config, packages) are prefixed with `_` so import-tree ignores them.
 
 ### Secrets Integration
 1. Add public keys to `secrets/secrets.nix`
@@ -92,5 +121,6 @@ agenix -r
 - All systems use the "aiden" user (uid 1000) configured in common module
 - Default editor is vim, trusted user for nix operations
 - Binary caches configured globally in flake.nix nixConfig
-- GPU acceleration packages pulled from specific channels via overlays
-- Router functionality concentrated in gila host with custom router modules
+- GPU acceleration packages managed via `modules/overlays.nix` (pulling from unstable channel)
+- Router functionality in gila host using `modules/router/` sub-modules
+- HM bootstrapper in `modules/home-manager.nix` wires all `flake.modules.homeManager.*` into the aiden user

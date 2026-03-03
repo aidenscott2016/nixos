@@ -1,0 +1,24 @@
+---
+description: Scope control, anti-slop, and root-cause-first investigation
+alwaysApply: true
+---
+
+# Scope and Quality
+
+## Only Touch What Was Asked
+
+Only apply changes to the machine(s) or module(s) explicitly named in the task. Do not extend scope to other hosts. If a change seems relevant elsewhere, flag it verbally and ask — do not apply it unilaterally.
+
+## No Unsolicited Changes
+
+Do not add comments, refactor code, rename identifiers, reorganise files, or make any change not explicitly requested. Do not "improve" things that weren't mentioned. Before committing, run the de-slop skill to audit for AI artifacts (unnecessary comments, redundant docstrings, TODO leftovers).
+
+## Investigate Before Fixing
+
+When something is broken or behaving unexpectedly, investigate and explain the root cause before proposing a fix. Present your diagnosis to the user before acting. Do not apply workarounds that mask the underlying issue.
+
+> "what's caused the stateVersion to be overridden. I don't think forcing it is the right idea. we should identify where it's set globally, remove it then set it in the machine config"
+
+## Prefer the Simpler Solution
+
+When multiple approaches exist, present the simpler one first. If you're adding abstraction, explain why the direct approach is insufficient. For NixOS module design, follow the dendritic pattern: prefer `imports` over enable options.
