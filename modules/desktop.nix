@@ -6,9 +6,9 @@
     {
       imports = with inputs.self.modules.nixos; [
         common architecture
-        syncthing redshift darkman printer emacs thunar
+        syncthing darkman printer emacs thunar
         locale keyd yubikey appimage pipewire ssh avahi
-        multimedia hardware-acceleration ios cli-base
+        hardware-acceleration ios cli-base
         xdg-portal
       ];
 
