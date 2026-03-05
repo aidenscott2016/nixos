@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 {
   flake.modules.nixos.jellyfin =
     { pkgs, lib, config, ... }:
@@ -8,6 +8,9 @@
       driver = "iHD";
     in
     {
+      imports = with inputs.self.modules.nixos; [
+        hardware-acceleration
+      ];
       options.aiden.modules.jellyfin = {
         user = mkOption {
           type = types.str;
