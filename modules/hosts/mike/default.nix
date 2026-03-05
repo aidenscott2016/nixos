@@ -10,13 +10,14 @@
       inputs.disko.nixosModules.disko
       ./_disk-configuration.nix
       inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480
+      inputs.lanzaboote.nixosModules.lanzaboote
     ] ++ (with config.flake.modules.nixos; [
-      desktop gaming steam oblivion-sync openttd nvidia virtualisation scanner nix tlp
+      desktop gaming steam oblivion-sync openttd nvidia virtualisation scanner nix tlp secureboot-vm-testing secureboot
       redshift multimedia
     ]) ++ [
       config.flake.modules.nixos."home-manager"
     ] ++ [
-      ({ config, ... }: {
+      ({ config, lib, ... }: {
         networking.hostName = "mike";
         system.stateVersion = "22.05";
         nixpkgs.overlays = [ inputs.self.overlays.default ];
@@ -49,8 +50,11 @@
         };
 
         boot.loader.systemd-boot.enable = true;
-        boot.kernelParams = [ "resume_offset=264448" ];
-        boot.resumeDevice = "/dev/disk/by-uuid/ab7e09ed-d079-4ae1-95c5-8a295b40fe82";
+
+        systemd.services.NetworkManager-wait-online.wantedBy = lib.mkForce [];
+        networking.dhcpcd.enable = false;
+
+        services.upower.criticalPowerAction = "PowerOff";
 
         # i7-8650U is a 4-core/8-thread mobile chip — cap nix builds so
         # the UI stays responsive when building alongside the desktop.

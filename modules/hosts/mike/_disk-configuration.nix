@@ -24,12 +24,11 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "p1"; # device-mapper name when decrypted
-                # if you want to use the key for interactive login be sure there is no trailing newline
-                # for example use `echo -n "password" > /tmp/secret.key`
-                passwordFile = "/tmp/secret.key"; # Same key for both devices
+                name = "p1";
+                passwordFile = "/tmp/secret.key";
                 settings = {
                   allowDiscards = true;
+                  crypttabExtraOpts = [ "tpm2-device=auto" ];
                 };
               };
             };
@@ -47,9 +46,10 @@
               content = {
                 type = "luks";
                 name = "p2";
-                passwordFile = "/tmp/secret.key"; # Same key for both devices
+                passwordFile = "/tmp/secret.key";
                 settings = {
                   allowDiscards = true;
+                  crypttabExtraOpts = [ "tpm2-device=auto" ];
                 };
                 content = {
                   type = "btrfs";
