@@ -63,6 +63,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.darwin.follows = "";
     };
+    lanzaboote.url = "github:nix-community/lanzaboote/v1.0.0";
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
     nixos-facter.url = "github:nix-community/nixos-facter";
     nixos-images.url = "github:nix-community/nixos-images";
