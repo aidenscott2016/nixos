@@ -55,13 +55,6 @@
         networking.dhcpcd.enable = false;
 
         services.upower.criticalPowerAction = "PowerOff";
-
-        # i7-8650U is a 4-core/8-thread mobile chip — cap nix builds so
-        # the UI stays responsive when building alongside the desktop.
-        nix.settings.max-jobs = 2;
-        nix.settings.cores = 2;
-        nix.daemonCPUSchedPolicy = "idle";
-        nix.daemonIOSchedClass = "idle";
       })
     ];
   };
