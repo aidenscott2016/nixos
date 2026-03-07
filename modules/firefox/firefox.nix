@@ -41,6 +41,7 @@
             "browser.urlbar.suggest.topsites" = false;
             "extensions.pocket.enabled" = false;
           };
+          search.force = true;
           search.engines = {
             "HM Options" = {
               urls = [

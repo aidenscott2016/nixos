@@ -16,18 +16,15 @@
           isSystem = true;
         };
       };
+      xdg.portal = {
+        extraPortals = [ pkgs.darkman ];
+        config.common."org.freedesktop.impl.portal.Settings" = [ "darkman" ];
+      };
     };
 
   flake.modules.homeManager.darkman =
-    { lib, pkgs, config, ... }:
-    with lib;
+    { ... }:
     {
-      xdg.portal = {
-        config.common = {
-          "org.freedesktop.impl.portal.Settings" = [ "darkman" ];
-        };
-        extraPortals = [ pkgs.darkman ];
-      };
       services.darkman = {
         enable = true;
         settings.usegeoclue = true;
