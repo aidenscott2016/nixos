@@ -18,7 +18,6 @@
 
       config = {
         hardware = {
-          enableAllFirmware = true;
           enableRedistributableFirmware = true;
           intel-gpu-tools.enable = true;
           amdgpu = mkIf (architecture.gpu == "amd") {
