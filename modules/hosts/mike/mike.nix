@@ -4,7 +4,7 @@
     system = "x86_64-linux";
     modules = [
       ./_packages.nix
-      ./_autorandr
+      ./_autorandr/autorandr.nix
       inputs.dwm.nixosModules.default
       inputs.nixos-facter-modules.nixosModules.facter
       inputs.disko.nixosModules.disko
