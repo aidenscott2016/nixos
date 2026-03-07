@@ -9,7 +9,7 @@
       inputs.agenix.nixosModules.default
       inputs.disko.nixosModules.disko
     ] ++ (with config.flake.modules.nixos; [
-      common architecture locale avahi syncthing navidrome jellyfin paperless
+      common architecture locale avahi syncthing navidrome jellyfin paperless media-storage
     ]) ++ [
       config.flake.modules.nixos."cli-base"
       config.flake.modules.nixos."reverse-proxy"
@@ -55,17 +55,15 @@
         services.slskd = {
           enable = true;
           domain = null;
-          group = "video";
           settings = {
-            shares.directories = [ "/media/t7/Music" ];
+            shares.directories = [ "/srv/media/Music" ];
             directories = {
-              incomplete = "/media/t7/Music/download/incomplete";
-              downloads = "/media/t7/Music/download/complete";
+              incomplete = "/srv/media/Music/download/incomplete";
+              downloads = "/srv/media/Music/download/complete";
             };
           };
           environmentFile = config.age.secrets.slskd.path;
         };
-        users.users.slskd.extraGroups = [ "video" ];
 
         services.deluge = {
           enable = true;
@@ -74,35 +72,25 @@
             port = 8112;
           };
         };
-        users.users.deluge.extraGroups = [ "video" ];
 
-        services.bazarr = {
-          enable = true;
-          group = "video";
-        };
-        users.users.bazarr.extraGroups = [ "video" ];
+        services.bazarr.enable = true;
+        services.sonarr.enable = true;
+        services.radarr.enable = true;
+        services.sabnzbd.enable = true;
 
-        services.sonarr = {
-          enable = true;
-          group = "video";
-        };
-        users.users.sonarr.extraGroups = [ "video" ];
-
-        services.radarr = {
-          enable = true;
-          group = "video";
-        };
-        users.users.radarr.extraGroups = [ "video" ];
-
-        services.sabnzbd = {
-          enable = true;
-          group = "video";
-        };
-        users.users.sabnzbd.extraGroups = [ "video" ];
+        users.groups.media.members = [
+          "slskd"
+          "deluge"
+          "bazarr"
+          "sonarr"
+          "radarr"
+          "sabnzbd"
+          "navidrome"
+          "jellyfin"
+        ];
 
         users.users.aiden.extraGroups = [
-          "video"
-          "sabnzbd"
+          "sadnzbd"
           "deluge"
         ];
 

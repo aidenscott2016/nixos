@@ -5,12 +5,13 @@
     with lib;
     {
       services.navidrome = {
-        group = "video";
         enable = true;
         settings = {
-          MusicFolder = "/media/t7/Music/library/";
+          MusicFolder = "/srv/media/Music/library/";
         };
       };
+
+      systemd.services.navidrome.after = [ "media-bindfs.service" ];
 
       aiden.modules.reverseProxy = {
         apps = [
