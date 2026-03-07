@@ -55,8 +55,8 @@ nix build .#nixosConfigurations.{hostname}.config.system.build.toplevel
 # Switch to new configuration (on target system)
 sudo nixos-rebuild switch --flake .#{hostname}
 
-# Build and switch remotely
-nixos-rebuild switch --flake .#{hostname} --target-host {hostname}
+# Build and switch remotely (use FQDN for --target-host)
+nixos-rebuild switch --flake .#{hostname} --target-host {hostname}.sw1a1aa.uk
 
 # Build installer ISO
 nix build .#nixosConfigurations.installer.config.system.build.isoImage
@@ -118,6 +118,7 @@ Companion files (hardware-configuration, disk config, packages) are prefixed wit
 
 ## Important Configuration Details
 
+- When SSH-ing to LAN hosts, always use the FQDN (`{hostname}.sw1a1aa.uk`) — the SSH client config only matches IPs and `*.sw1a1aa.uk`; bare hostnames won't offer the correct key
 - All systems use the "aiden" user (uid 1000) configured in common module
 - Default editor is vim, trusted user for nix operations
 - Binary caches configured globally in flake.nix nixConfig
