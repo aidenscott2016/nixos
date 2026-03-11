@@ -3,15 +3,15 @@
   flake.modules.nixos.adguard =
     { pkgs, lib, config, ... }:
     let
-      http_port = 8081;
       inherit (config.aiden.modules.common) domainName email;
       fqdn = "adguard.${domainName}";
     in
     {
         services.adguardhome = {
           enable = true;
+          host = "10.0.1.1";
+          port = 8081;
           settings = {
-            http.address = "10.0.1.1:8081";
             dns.bind_hosts = [ "127.0.0.2" ];
             dns.port = 5354; # mdns uses 5353
             users = [
