@@ -57,7 +57,10 @@
             ssh = {
               enable = true;
               port = 22;
-              authorizedKeys = [ config.aiden.modules.common.publicKey ];
+              authorizedKeys = [
+                config.aiden.modules.common.publicKey
+                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOFPzeWccRjpB6jb83yXaZ8oaugea4TZ7bXmhMbeop64"
+              ];
               hostKeys = [ "/etc/secrets/initrd/ssh_host_key" ];
               shell = "/bin/cryptsetup-askpass";
             };

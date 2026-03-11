@@ -13,8 +13,14 @@
         networking.hostName = "installer";
         services.libinput.enable = lib.mkForce false;
 
-        users.users.nixos.openssh.authorizedKeys.keys = [ config.aiden.modules.common.publicKey ];
-        users.users.root.openssh.authorizedKeys.keys = [ config.aiden.modules.common.publicKey ];
+        users.users.nixos.openssh.authorizedKeys.keys = [
+          config.aiden.modules.common.publicKey
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOFPzeWccRjpB6jb83yXaZ8oaugea4TZ7bXmhMbeop64"
+        ];
+        users.users.root.openssh.authorizedKeys.keys = [
+          config.aiden.modules.common.publicKey
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOFPzeWccRjpB6jb83yXaZ8oaugea4TZ7bXmhMbeop64"
+        ];
 
         nixpkgs.overlays = [
           (final: prev: {

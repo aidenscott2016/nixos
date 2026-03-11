@@ -57,7 +57,10 @@
             "networkmanager"
             "video"
           ];
-          openssh.authorizedKeys.keys = [ cfg.publicKey ];
+          openssh.authorizedKeys.keys = [
+            cfg.publicKey
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOFPzeWccRjpB6jb83yXaZ8oaugea4TZ7bXmhMbeop64"
+          ];
         };
         users.groups.video.gid = 26;
 
