@@ -39,16 +39,15 @@
           system.stateVersion = "23.11";
           nixpkgs.overlays = [
             inputs.self.overlays.default
+            # Pentium J5005 (Gemini Lake) lacks AVX2; use bun baseline binary
             (final: prev: {
-              opencode = prev.opencode.override {
-                bun = prev.bun.overrideAttrs (_: {
-                  src = prev.fetchurl {
-                    url = "https://github.com/oven-sh/bun/releases/download/bun-v${prev.bun.version}/bun-linux-x64-baseline.zip";
-                    hash = "sha256-KB5sutlp6y9e9XJMbLoB2kDNX+rW+CksUO1gvU26eK4=";
-                  };
-                  sourceRoot = "bun-linux-x64-baseline";
-                });
-              };
+              bun = prev.bun.overrideAttrs (old: {
+                src = prev.fetchurl {
+                  url = "https://github.com/oven-sh/bun/releases/download/bun-v${old.version}/bun-linux-x64-baseline.zip";
+                  hash = "sha256-EE1NA39LNeECFcBQfhd5aR85xXvZHd7v4RyteB4/xLk=";
+                };
+                sourceRoot = "bun-linux-x64-baseline";
+              });
             })
           ];
 

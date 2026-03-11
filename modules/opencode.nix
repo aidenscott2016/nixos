@@ -1,8 +1,17 @@
-{ ... }:
+{ inputs, ... }:
 {
   flake.modules.nixos.opencode =
     { pkgs, config, ... }:
     {
+      nixpkgs.overlays = [
+        (final: prev:
+          let
+            unstable = import inputs.nixpkgs-unstable { system = prev.system; };
+          in
+          {
+            opencode = unstable.opencode.override { inherit (prev) bun; };
+          })
+      ];
       environment.systemPackages = [ pkgs.opencode ];
 
       systemd.services.opencode-web = {
