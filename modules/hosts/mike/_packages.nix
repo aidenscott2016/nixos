@@ -4,5 +4,6 @@
     naps2
     antigravity-fhs
     gh
+    ragenix
   ];
 }
