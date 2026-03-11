@@ -82,7 +82,7 @@
 
           services.restic.backups.b2 = {
             paths = [
-              "/srv/media/photos"
+              "/media/t7/photos"
               "/srv/media/Music/library/Cocteau Twins/1993 - Four-Calendar Café"
             ];
             repository = "s3:s3.eu-central-003.backblazeb2.com/backup-uwdcrk";

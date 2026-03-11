@@ -7,7 +7,7 @@
         enable = true;
         host = "0.0.0.0";
         port = 2283;
-        mediaLocation = "/srv/media/photos";
+        mediaLocation = "/media/t7/photos";
         openFirewall = false;
         accelerationDevices = null;
         environment = {
@@ -20,7 +20,7 @@
       };
 
       systemd.tmpfiles.rules = [
-        "d /srv/media/photos 0770 immich media -"
+        "d /media/t7/photos 0770 immich immich -"
       ];
     };
 }
