@@ -20,6 +20,7 @@
       paperless
       media-storage
       beets
+      opencode
     ])
     ++ [
       config.flake.modules.nixos."cli-base"
@@ -58,6 +59,7 @@
             };
           };
 
+          age.secrets.opencode-env.file = "${inputs.self.outPath}/secrets/opencode-env.age";
           age.secrets.slskd.file = "${inputs.self.outPath}/secrets/slskd";
           age.secrets.restic-b2-env.file = "${inputs.self.outPath}/secrets/restic-b2-env.age";
           age.secrets.restic-b2-password.file = "${inputs.self.outPath}/secrets/restic-b2-password.age";
@@ -140,7 +142,6 @@
             get_iplayer
             wol
             iperf3
-            opencode
           ];
         }
       )
