@@ -16,7 +16,11 @@
       };
 
       users.users.immich = {
-        extraGroups = [ "video" "render" ];
+        extraGroups = [ "video" "render" "media" ];
       };
+
+      systemd.tmpfiles.rules = [
+        "d /srv/media/photos 0770 immich media -"
+      ];
     };
 }
