@@ -36,4 +36,8 @@ in
     aiden
     bes
   ];
+  "opencode-env.age".publicKeys = [
+    aiden
+    bes
+  ];
 }
