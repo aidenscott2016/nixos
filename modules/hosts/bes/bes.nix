@@ -46,43 +46,40 @@
             modules = {
               common.domainName = "bes.sw1a1aa.uk";
               reverseProxy.apps = [
-                {
-                  name = "bazarr";
-                  port = 6767;
-                }
-                {
-                  name = "sonarr";
-                  port = 8989;
-                }
-                {
-                  name = "sab";
-                  port = 8080;
-                }
-                {
-                  name = "jellyfin";
-                  port = 8096;
-                }
-                {
-                  name = "portainer";
-                  port = 9000;
-                }
-                {
-                  name = "deluge";
-                  port = 8112;
-                }
-                {
-                  name = "radarr";
-                  port = 7878;
-                }
-                {
-                  name = "slskd";
-                  port = 5030;
-                }
+                { name = "bazarr"; port = 6767; }
+                { name = "sonarr"; port = 8989; }
+                { name = "sab"; port = 8080; }
+                { name = "jellyfin"; port = 8096; }
+                { name = "portainer"; port = 9000; }
+                { name = "deluge"; port = 8112; }
+                { name = "radarr"; port = 7878; }
+                { name = "slskd"; port = 5030; }
               ];
             };
           };
 
           age.secrets.slskd.file = "${inputs.self.outPath}/secrets/slskd";
+          age.secrets.restic-b2-env.file = "${inputs.self.outPath}/secrets/restic-b2-env.age";
+          age.secrets.restic-b2-password.file = "${inputs.self.outPath}/secrets/restic-b2-password.age";
+
+          services.restic.backups.b2 = {
+            paths = [ "/srv/media/Music/library/Cocteau Twins/1993 - Four-Calendar Café" ];
+            repository = "s3:s3.eu-central-003.backblazeb2.com/backup-uwdcrk";
+            environmentFile = config.age.secrets.restic-b2-env.path;
+            passwordFile = config.age.secrets.restic-b2-password.path;
+            initialize = true;
+            createWrapper = true;
+            timerConfig = {
+              OnCalendar = "daily";
+              Persistent = "true";
+            };
+            pruneOpts = [
+              "--keep-daily 7"
+              "--keep-weekly 4"
+              "--keep-monthly 6"
+              "--keep-yearly 2"
+            ];
+          };
 
           services.iperf3.enable = true;
           services.iperf3.openFirewall = true;
@@ -137,10 +134,7 @@
             "deluge"
           ];
 
-          networking.firewall.allowedTCPPorts = [
-            443
-            5000
-          ];
+          networking.firewall.allowedTCPPorts = [ 443 5000 ];
 
           environment.systemPackages = with pkgs; [
             get_iplayer

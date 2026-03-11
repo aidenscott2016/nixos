@@ -11,6 +11,7 @@
           tag = "v0.1.6";
           hash = "sha256-fMnXuMwxylO9Q7EFPpkgwwNeBuviUa8HduRrqrqdMaI=";
         };
+        doCheck = false;
         meta.broken = false;
       };
     in

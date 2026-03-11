@@ -28,4 +28,12 @@ in
     aiden
     bes
   ];
+  "restic-b2-env.age".publicKeys = [
+    aiden
+    bes
+  ];
+  "restic-b2-password.age".publicKeys = [
+    aiden
+    bes
+  ];
 }
