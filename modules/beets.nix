@@ -3,26 +3,33 @@
   flake.modules.nixos.beets =
     { pkgs, ... }:
     let
-      beet-override =
-        with pkgs;
-        (beets.override {
+      copyartifacts = pkgs.python3.pkgs.beets-copyartifacts.overridePythonAttrs {
+        version = "0.1.6";
+        src = pkgs.fetchFromGitHub {
+          owner = "adammillerio";
+          repo = "beets-copyartifacts";
+          tag = "v0.1.6";
+          hash = "sha256-fMnXuMwxylO9Q7EFPpkgwwNeBuviUa8HduRrqrqdMaI=";
+        };
+        meta.broken = false;
+      };
+    in
+    {
+      environment.systemPackages = [
+        (pkgs.python3.pkgs.toPythonApplication (pkgs.python3.pkgs.beets.override {
           pluginOverrides = {
             fetchart.enable = true;
+            discogs.enable = true;
             bandcamp = {
               enable = true;
               propagatedBuildInputs = [ inputs.self.packages.x86_64-linux.beetcamp ];
             };
-            discogs.enable = true;
             copyartifacts = {
               enable = true;
-              propagatedBuildInputs = [ beetsPackages.copyartifacts ];
+              propagatedBuildInputs = [ copyartifacts ];
             };
           };
-        });
-    in
-    {
-      config = {
-        environment.systemPackages = [ beet-override ];
-      };
+        }))
+      ];
     };
 }

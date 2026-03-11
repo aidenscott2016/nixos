@@ -9,7 +9,7 @@
       inputs.agenix.nixosModules.default
       inputs.disko.nixosModules.disko
     ] ++ (with config.flake.modules.nixos; [
-      common architecture locale avahi syncthing navidrome jellyfin paperless media-storage
+      common architecture locale avahi syncthing navidrome jellyfin paperless media-storage beets
     ]) ++ [
       config.flake.modules.nixos."cli-base"
       config.flake.modules.nixos."reverse-proxy"
