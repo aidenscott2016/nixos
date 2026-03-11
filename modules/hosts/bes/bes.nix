@@ -23,6 +23,9 @@
       opencode
     ])
     ++ [
+      config.flake.modules.nixos.immich
+    ]
+    ++ [
       config.flake.modules.nixos."cli-base"
       config.flake.modules.nixos."reverse-proxy"
     ]
@@ -59,6 +62,7 @@
             modules = {
               common.domainName = "bes.sw1a1aa.uk";
               reverseProxy.apps = [
+                { name = "photos"; port = 2283; }
                 { name = "bazarr"; port = 6767; }
                 { name = "sonarr"; port = 8989; }
                 { name = "sab"; port = 8080; }
@@ -77,7 +81,10 @@
           age.secrets.restic-b2-password.file = "${inputs.self.outPath}/secrets/restic-b2-password.age";
 
           services.restic.backups.b2 = {
-            paths = [ "/srv/media/Music/library/Cocteau Twins/1993 - Four-Calendar Café" ];
+            paths = [
+              "/srv/media/photos"
+              "/srv/media/Music/library/Cocteau Twins/1993 - Four-Calendar Café"
+            ];
             repository = "s3:s3.eu-central-003.backblazeb2.com/backup-uwdcrk";
             environmentFile = config.age.secrets.restic-b2-env.path;
             passwordFile = config.age.secrets.restic-b2-password.path;
