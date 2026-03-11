@@ -19,7 +19,7 @@
           Type = "oneshot";
           ExecStart = [
             "${pkgs.coreutils}/bin/mkdir -p /srv/media"
-            "${pkgs.bindfs}/bin/bindfs --force-user=aiden --force-group=media --create-for-user=aiden --create-for-group=media --perms=ug+rwX,o+rX /media/t7 /srv/media"
+            "${pkgs.bindfs}/bin/bindfs --force-user=aiden --force-group=media --create-for-user=aiden --create-for-group=media --perms=ug+rwX,o+rX --utime-ignore /media/t7 /srv/media"
           ];
           ExecStop = "${pkgs.util-linux}/bin/umount /srv/media";
           RemainAfterExit = true;
