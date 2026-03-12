@@ -5,7 +5,7 @@
     modules = [
       ./_hardware-configuration.nix
       ./_disk-config.nix
-      ./_portainer.nix
+      ./_k3s.nix
       inputs.agenix.nixosModules.default
       inputs.disko.nixosModules.disko
     ]
@@ -67,7 +67,6 @@
                 { name = "sonarr"; port = 8989; }
                 { name = "sab"; port = 8080; }
                 { name = "jellyfin"; port = 8096; }
-                { name = "portainer"; port = 9000; }
                 { name = "deluge"; port = 8112; }
                 { name = "radarr"; port = 7878; }
                 { name = "slskd"; port = 5030; }
