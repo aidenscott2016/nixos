@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      nodeName: bes
+      containers:
+        - name: sonarr
+          image: linuxserver/sonarr:latest
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: Europe/London
+          ports:
+            - containerPort: 8989
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: media
+              mountPath: /media
+            - name: downloads
+              mountPath: /downloads
+          resources:
+            requests:
+              memory: "64Mi"
+            limits:
+              memory: "512Mi"
+      volumes:
+        - name: config
+          hostPath:
+            path: /var/lib/k8s-state/sonarr
+            type: DirectoryOrCreate
+        - name: media
+          hostPath:
+            path: /srv/media
+        - name: downloads
+          hostPath:
+            path: /srv/media/Downloads

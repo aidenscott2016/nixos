@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: navidrome
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: navidrome
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: navidrome
+    spec:
+      nodeName: bes
+      containers:
+        - name: navidrome
+          image: deluan/navidrome:latest
+          env:
+            - name: ND_MUSICFOLDER
+              value: /music
+            - name: ND_DATAFOLDER
+              value: /data
+            - name: ND_LOGLEVEL
+              value: info
+          ports:
+            - containerPort: 4533
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: music
+              mountPath: /music
+              readOnly: true
+          resources:
+            requests:
+              memory: "64Mi"
+            limits:
+              memory: "512Mi"
+      volumes:
+        - name: data
+          hostPath:
+            path: /var/lib/k8s-state/navidrome
+            type: DirectoryOrCreate
+        - name: music
+          hostPath:
+            path: /srv/media/Music/library

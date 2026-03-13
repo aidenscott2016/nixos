@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paperless
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paperless
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: paperless
+    spec:
+      nodeName: bes
+      containers:
+        - name: paperless
+          image: ghcr.io/paperless-ngx/paperless-ngx:latest
+          env:
+            - name: PAPERLESS_URL
+              value: https://paperless.sw1a1aa.uk
+            - name: PAPERLESS_USE_X_FORWARD_HOST
+              value: "false"
+            - name: PAPERLESS_PROXY_SSL_HEADER
+              value: HTTP_X_FORWARDED_PROTO,https
+            - name: PAPERLESS_CONSUMER_ENABLE_BARCODES
+              value: "true"
+            - name: PAPERLESS_CONSUMER_ENABLE_ASN_BARCODE
+              value: "true"
+            - name: PAPERLESS_CONSUMER_BARCODE_SCANNER
+              value: ZXING
+            - name: PAPERLESS_DATA_DIR
+              value: /data
+            - name: PAPERLESS_MEDIA_ROOT
+              value: /media
+            - name: PAPERLESS_CONSUMPTION_DIR
+              value: /consume
+            - name: PAPERLESS_REDIS
+              value: redis://localhost:6379
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: media
+              mountPath: /media
+            - name: consume
+              mountPath: /consume
+          resources:
+            requests:
+              memory: "256Mi"
+            limits:
+              memory: "1Gi"
+        - name: redis
+          image: redis:7-alpine
+          ports:
+            - containerPort: 6379
+          resources:
+            requests:
+              memory: "32Mi"
+            limits:
+              memory: "128Mi"
+      volumes:
+        - name: data
+          hostPath:
+            path: /var/lib/k8s-state/paperless/data
+            type: DirectoryOrCreate
+        - name: media
+          hostPath:
+            path: /var/lib/k8s-state/paperless/media
+            type: DirectoryOrCreate
+        - name: consume
+          hostPath:
+            path: /var/lib/k8s-state/paperless/consume
+            type: DirectoryOrCreate

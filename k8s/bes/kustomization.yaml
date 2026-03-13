@@ -1,0 +1,36 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespace.yaml
+  - traefik-config.yaml
+  - jellyfin/deployment.yaml
+  - jellyfin/service.yaml
+  - jellyfin/ingressroute.yaml
+  - navidrome/deployment.yaml
+  - navidrome/service.yaml
+  - navidrome/ingressroute.yaml
+  - paperless/deployment.yaml
+  - paperless/service.yaml
+  - paperless/ingressroute.yaml
+  - immich/deployment.yaml
+  - immich/service.yaml
+  - immich/ingressroute.yaml
+  - deluge/deployment.yaml
+  - deluge/service.yaml
+  - deluge/ingressroute.yaml
+  - sabnzbd/deployment.yaml
+  - sabnzbd/service.yaml
+  - sabnzbd/ingressroute.yaml
+  - sonarr/deployment.yaml
+  - sonarr/service.yaml
+  - sonarr/ingressroute.yaml
+  - radarr/deployment.yaml
+  - radarr/service.yaml
+  - radarr/ingressroute.yaml
+  - bazarr/deployment.yaml
+  - bazarr/service.yaml
+  - bazarr/ingressroute.yaml
+  - slskd/deployment.yaml
+  - slskd/service.yaml
+  - slskd/ingressroute.yaml
+  - slskd/secret.enc.yaml

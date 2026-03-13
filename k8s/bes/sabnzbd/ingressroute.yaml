@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: sab
+  namespace: media
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`sab.sw1a1aa.uk`)
+      kind: Rule
+      services:
+        - name: sabnzbd
+          port: 8080
+  tls:
+    certResolver: letsencrypt

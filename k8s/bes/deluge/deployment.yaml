@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deluge
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deluge
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: deluge
+    spec:
+      nodeName: bes
+      containers:
+        - name: deluge
+          image: linuxserver/deluge:latest
+          env:
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: TZ
+              value: Europe/London
+          ports:
+            - containerPort: 8112
+            - containerPort: 6881
+              protocol: TCP
+            - containerPort: 6881
+              protocol: UDP
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: downloads
+              mountPath: /downloads
+          resources:
+            requests:
+              memory: "64Mi"
+            limits:
+              memory: "512Mi"
+      volumes:
+        - name: config
+          hostPath:
+            path: /var/lib/k8s-state/deluge
+            type: DirectoryOrCreate
+        - name: downloads
+          hostPath:
+            path: /srv/media/Downloads

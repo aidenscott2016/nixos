@@ -15,19 +15,11 @@
       locale
       avahi
       syncthing
-      navidrome
-      jellyfin
-      paperless
       media-storage
       beets
-      opencode
     ])
     ++ [
-      config.flake.modules.nixos.immich
-    ]
-    ++ [
       config.flake.modules.nixos."cli-base"
-      config.flake.modules.nixos."reverse-proxy"
     ]
     ++ [
       (
@@ -59,23 +51,9 @@
               cpu = "intel";
               gpu = "intel";
             };
-            modules = {
-              common.domainName = "bes.sw1a1aa.uk";
-              reverseProxy.apps = [
-                { name = "photos"; port = 2283; }
-                { name = "bazarr"; port = 6767; }
-                { name = "sonarr"; port = 8989; }
-                { name = "sab"; port = 8080; }
-                { name = "jellyfin"; port = 8096; }
-                { name = "deluge"; port = 8112; }
-                { name = "radarr"; port = 7878; }
-                { name = "slskd"; port = 5030; }
-              ];
-            };
+            modules.common.domainName = "bes.sw1a1aa.uk";
           };
 
-          age.secrets.opencode-env.file = "${inputs.self.outPath}/secrets/opencode-env.age";
-          age.secrets.slskd.file = "${inputs.self.outPath}/secrets/slskd";
           age.secrets.restic-b2-env.file = "${inputs.self.outPath}/secrets/restic-b2-env.age";
           age.secrets.restic-b2-password.file = "${inputs.self.outPath}/secrets/restic-b2-password.age";
 
@@ -114,54 +92,12 @@
           services.cockpit.enable = true;
           services.cockpit.openFirewall = true;
 
-          services.slskd = {
-            enable = true;
-            domain = null;
-            settings = {
-              shares.directories = [ "/srv/media/Music" ];
-              directories = {
-                incomplete = "/srv/media/Music/download/incomplete";
-                downloads = "/srv/media/Music/download/complete";
-              };
-            };
-            environmentFile = config.age.secrets.slskd.path;
-          };
-
-          services.deluge = {
-            enable = true;
-            web = {
-              enable = true;
-              port = 8112;
-            };
-          };
-
-          services.bazarr.enable = true;
-          services.sonarr.enable = true;
-          services.radarr.enable = true;
-          services.sabnzbd.enable = true;
-
-          users.groups.media.members = [
-            "slskd"
-            "deluge"
-            "bazarr"
-            "sonarr"
-            "radarr"
-            "sabnzbd"
-            "navidrome"
-            "jellyfin"
-          ];
-
-          users.users.aiden.extraGroups = [
-            "sadnzbd"
-            "deluge"
-          ];
-
-          networking.firewall.allowedTCPPorts = [ 443 5000 ];
-
           environment.systemPackages = with pkgs; [
             get_iplayer
             wol
             iperf3
+            kubectl
+            fluxcd
           ];
         }
       )

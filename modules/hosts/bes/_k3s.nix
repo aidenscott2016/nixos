@@ -4,10 +4,10 @@
     enable = true;
     role = "server";
     extraFlags = toString [
-      "--disable=traefik"
       "--disable=servicelb"
+      "--write-kubeconfig-mode=644"
     ];
   };
 
-  networking.firewall.allowedTCPPorts = [ 6443 ];
+  networking.firewall.allowedTCPPorts = [ 6443 80 443 ];
 }

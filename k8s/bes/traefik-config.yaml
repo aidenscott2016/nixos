@@ -1,0 +1,39 @@
+---
+# Configure the k3s-bundled Traefik chart with ACME TLS
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    globalArguments:
+      - "--global.checknewversion=false"
+      - "--global.sendanonymoususage=false"
+
+    additionalArguments:
+      - "--certificatesresolvers.letsencrypt.acme.email=aiden@sw1a1aa.uk"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+
+    ports:
+      web:
+        redirectTo:
+          port: websecure
+      websecure:
+        tls:
+          certResolver: letsencrypt
+
+    persistence:
+      enabled: true
+      size: 128Mi
+
+    logs:
+      access:
+        enabled: true
+        format: json
+
+    # Trust X-Forwarded-* headers from the gila router (10.0.1.1)
+    service:
+      spec:
+        externalTrafficPolicy: Local

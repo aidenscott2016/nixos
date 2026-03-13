@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slskd
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: slskd
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: slskd
+    spec:
+      nodeName: bes
+      containers:
+        - name: slskd
+          image: slskd/slskd:latest
+          envFrom:
+            - secretRef:
+                name: slskd-env
+          env:
+            - name: SLSKD_SHARED_DIR
+              value: /music
+            - name: SLSKD_DOWNLOADS_DIR
+              value: /music/download/complete
+            - name: SLSKD_INCOMPLETE_DIR
+              value: /music/download/incomplete
+          ports:
+            - containerPort: 5030
+            - containerPort: 2234  # Soulseek listener
+          volumeMounts:
+            - name: config
+              mountPath: /app
+            - name: music
+              mountPath: /music
+          resources:
+            requests:
+              memory: "64Mi"
+            limits:
+              memory: "256Mi"
+      volumes:
+        - name: config
+          hostPath:
+            path: /var/lib/k8s-state/slskd
+            type: DirectoryOrCreate
+        - name: music
+          hostPath:
+            path: /srv/media/Music

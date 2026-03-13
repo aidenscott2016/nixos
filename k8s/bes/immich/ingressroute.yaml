@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: photos
+  namespace: media
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`photos.sw1a1aa.uk`)
+      kind: Rule
+      services:
+        - name: immich
+          port: 2283
+  tls:
+    certResolver: letsencrypt

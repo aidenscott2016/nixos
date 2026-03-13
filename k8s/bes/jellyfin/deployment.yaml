@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin
+  namespace: media
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jellyfin
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: jellyfin
+    spec:
+      nodeName: bes
+      securityContext:
+        runAsUser: 65534  # nobody; jellyfin handles its own permissions
+        runAsGroup: 44    # video group
+        supplementalGroups: [44, 109]  # video, render
+      containers:
+        - name: jellyfin
+          image: jellyfin/jellyfin:latest
+          env:
+            - name: LIBVA_DRIVER_NAME
+              value: iHD
+          ports:
+            - containerPort: 8096
+          volumeMounts:
+            - name: config
+              mountPath: /config
+            - name: media
+              mountPath: /media
+              readOnly: true
+            - name: dri
+              mountPath: /dev/dri
+          resources:
+            requests:
+              memory: "256Mi"
+            limits:
+              memory: "2Gi"
+      volumes:
+        - name: config
+          hostPath:
+            path: /var/lib/k8s-state/jellyfin
+            type: DirectoryOrCreate
+        - name: media
+          hostPath:
+            path: /srv/media
+        - name: dri
+          hostPath:
+            path: /dev/dri
