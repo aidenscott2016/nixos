@@ -54,6 +54,14 @@
             })
           ];
 
+          # Static LAN IP so gila's dnsmasq can forward sw1a1aa.uk queries here.
+          # 10.0.1.2 is below the DHCP range (10.0.1.200-250) so it's safe.
+          networking.interfaces.enp1s0 = {
+            useDHCP = false;
+            ipv4.addresses = [ { address = "10.0.1.2"; prefixLength = 24; } ];
+          };
+          networking.defaultGateway = "10.0.1.1";
+
           aiden = {
             architecture = {
               cpu = "intel";
@@ -61,7 +69,13 @@
             };
             modules = {
               common.domainName = "bes.sw1a1aa.uk";
-              reverseProxy.apps = [
+              reverseProxy = {
+                dns = {
+                  enable = true;
+                  selfIP = "10.0.1.2";
+                  # ingressIP defaults to "10.0.1.1" (gila)
+                };
+                apps = [
                 { name = "photos"; port = 2283; }
                 { name = "bazarr"; port = 6767; }
                 { name = "sonarr"; port = 8989; }
@@ -72,8 +86,9 @@
                 { name = "radarr"; port = 7878; }
                 { name = "slskd"; port = 5030; }
               ];
-            };
-          };
+              };  # reverseProxy
+            };  # modules
+          };  # aiden
 
           age.secrets.opencode-env.file = "${inputs.self.outPath}/secrets/opencode-env.age";
           age.secrets.slskd.file = "${inputs.self.outPath}/secrets/slskd";

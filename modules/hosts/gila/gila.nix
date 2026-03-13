@@ -69,6 +69,7 @@
             dnsmasq.enable = true;
             internalInterface = "enp2s0";
             externalInterface = "enp1s0";
+            bes.ip = "10.0.1.2";
           };
         };
       })

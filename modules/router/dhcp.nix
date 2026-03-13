@@ -5,6 +5,7 @@
     with lib;
     let
       dnsmasqEnable = config.aiden.modules.router.dnsmasq.enable;
+      besIP = config.aiden.modules.router.bes.ip;
     in
     {
       config = mkIf dnsmasqEnable {
@@ -14,12 +15,23 @@
         services.dnsmasq = {
           enable = true;
           settings = {
+            # When bes.ip is set, delegate sw1a1aa.uk to bes's authoritative DNS
+            # rather than answering with a catch-all wildcard. Keep a direct
+            # address entry for bes.sw1a1aa.uk itself so the delegation target
+            # bootstraps even if bes is momentarily unreachable.
+          } // (if besIP != null then {
+            address = "/bes.sw1a1aa.uk/${besIP}";
+            server = [
+              "127.0.0.2#5354"
+              "/sw1a1aa.uk/${besIP}"
+            ];
+          } else {
             address = "/sw1a1aa.uk/10.0.1.1";
-
-            domain = "sw1a1aa.uk,10.0.0.0/16,local";
             server = [
               "127.0.0.2#5354"
             ];
+          }) // {
+            domain = "sw1a1aa.uk,10.0.0.0/16,local";
             bogus-priv = true;
             domain-needed = true;
             expand-hosts = true;
