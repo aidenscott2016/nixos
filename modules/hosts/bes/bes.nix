@@ -113,14 +113,25 @@
             ];
           };
 
-          # UID-based bandwidth shaping for restic via tc HTB + iptables fwmark.
+          # UID-based bandwidth shaping for restic via tc HTB + nftables fwmark.
           # Daytime (0700-2200): 5 Mbit/s upload cap. Nighttime: effectively unlimited.
+          networking.nftables.enable = true;
+          networking.nftables.tables.restic-mark = {
+            family = "ip";
+            content = ''
+              chain output-mark {
+                type filter hook output priority mangle; policy accept;
+                meta skuid restic meta mark set 0x00000001
+              }
+            '';
+          };
+
           systemd.services.restic-tc-setup = {
             description = "tc bandwidth shaping for restic (UID-based)";
             after = [ "network-online.target" ];
             wants = [ "network-online.target" ];
             wantedBy = [ "multi-user.target" ];
-            path = with pkgs; [ iproute2 iptables ];
+            path = [ pkgs.iproute2 ];
             serviceConfig = {
               Type = "oneshot";
               RemainAfterExit = true;
@@ -138,13 +149,9 @@
 
                 # Steer fwmark 0x1 → class 1:20 (restic)
                 tc filter add dev "$IFACE" parent 1: protocol ip handle 1 fw classid 1:20
-
-                # Mark outgoing packets from restic UID
-                iptables -t mangle -A OUTPUT -m owner --uid-owner restic -j MARK --set-mark 1
               '';
               ExecStop = pkgs.writeShellScript "restic-tc-teardown" ''
                 IFACE=$(ip route show default | awk '/default/ {print $5; exit}')
-                iptables -t mangle -D OUTPUT -m owner --uid-owner restic -j MARK --set-mark 1 || true
                 tc qdisc del dev "$IFACE" root || true
               '';
             };
