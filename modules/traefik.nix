@@ -47,33 +47,11 @@
             };
           };
           dynamicConfigOptions = {
-            http = {
-              serversTransports.bes.insecureSkipVerify = true;
-              routers = {
-                bes = {
-                  service = "bes";
-                  priority = 1; # 1 is low
-                  entrypoints = "websecure";
-                  rule = "HostRegexp(`^.+\.sw1a1aa\.uk$`)";
-                  tls = true;
-                };
-              };
-              services = {
-                bes = {
-                  loadbalancer = {
-                    serversTransport = "bes";
-                    passHostHeader = true;
-                    servers = [ { url = "https://bes.sw1a1aa.uk"; } ];
-                  };
-                };
-              };
-            };
-
             tls = {
               stores.default = {
                 defaultCertificate = {
                   certFile = "/var/lib/acme/${domainName}/fullchain.pem";
-                  keyFile = "/var/lib/acme/${domainName}/key.pem";
+                  keyFile  = "/var/lib/acme/${domainName}/key.pem";
                 };
               };
             };

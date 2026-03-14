@@ -60,7 +60,10 @@
               gpu = "intel";
             };
             modules = {
-              common.domainName = "bes.sw1a1aa.uk";
+              common = {
+                domainName = "bes.sw1a1aa.uk";
+                email = "aiden@oldstreetjournal.co.uk";
+              };
               reverseProxy.apps = [
                 { name = "photos"; port = 2283; }
                 { name = "bazarr"; port = 6767; }
@@ -75,6 +78,7 @@
             };
           };
 
+          age.secrets.cloudflareToken.file = "${inputs.self.outPath}/secrets/cf-token.age";
           age.secrets.opencode-env.file = "${inputs.self.outPath}/secrets/opencode-env.age";
           age.secrets.slskd.file = "${inputs.self.outPath}/secrets/slskd";
           age.secrets.restic-b2-env.file = "${inputs.self.outPath}/secrets/restic-b2-env.age";

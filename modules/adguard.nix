@@ -12,8 +12,28 @@
           host = "10.0.1.1";
           port = 8081;
           settings = {
-            dns.bind_hosts = [ "127.0.0.2" ];
-            dns.port = 5354; # mdns uses 5353
+            # AdGuard is the first-hop DNS for all VLANs so it can see client IPs.
+            # It forwards sw1a1aa.uk queries to BIND on 127.0.0.1:5353, and
+            # everything else to upstream resolvers.
+            dns = {
+              bind_hosts = [
+                "127.0.0.2"
+                "10.0.0.1"
+                "10.0.1.1"
+                "10.0.2.1"
+                "10.0.3.1"
+              ];
+              port = 53;
+              upstream_dns = [
+                "[/sw1a1aa.uk/]127.0.0.1:5353"
+                "https://dns.cloudflare.com/dns-query"
+                "https://dns.google/dns-query"
+              ];
+              bootstrap_dns = [
+                "1.1.1.1"
+                "8.8.8.8"
+              ];
+            };
             users = [
               {
                 name = "admin";
