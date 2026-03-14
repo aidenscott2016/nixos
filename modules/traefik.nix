@@ -8,7 +8,7 @@
     {
         security.acme = {
           acceptTerms = true;
-          defaults.email = lib.mkIf (email != "") email;
+          defaults.email = email;
           certs = {
             "${domainName}" = {
               dnsProvider = "cloudflare";

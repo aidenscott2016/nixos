@@ -58,7 +58,7 @@
         # The host must declare age.secrets.cloudflareToken.
         security.acme = {
           acceptTerms = true;
-          defaults.email = lib.mkIf (email != "") email;
+          defaults.email = email;
           certs."${zone}" = {
             dnsProvider = "cloudflare";
             credentialsFile = config.age.secrets.cloudflareToken.path;
