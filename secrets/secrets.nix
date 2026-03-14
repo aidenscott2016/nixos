@@ -23,6 +23,11 @@ in
     aiden
     gila
     locutus
+    bes
+  ];
+  "ddns-tsig-key.age".publicKeys = [
+    aiden
+    gila
   ];
   "slskd".publicKeys = [
     aiden

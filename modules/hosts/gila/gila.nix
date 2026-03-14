@@ -21,6 +21,7 @@
         age.secrets.mosquittoPass.file = "${inputs.self.outPath}/secrets/mosquitto-pass.age";
         age.secrets.cloudflareToken.file = "${inputs.self.outPath}/secrets/cf-token.age";
         age.secrets.gila-tailscale-authkey.file = "${inputs.self.outPath}/secrets/gila-tailscale-authkey";
+        age.secrets.ddnsTsigKey.file = "${inputs.self.outPath}/secrets/ddns-tsig-key.age";
 
         networking.networkmanager.enable = true;
 
@@ -52,6 +53,9 @@
 
         systemd.network.wait-online.enable = false;
 
+        # AdGuard is now the first-hop DNS on port 53; use it via loopback.
+        networking.nameservers = [ "127.0.0.2" ];
+
         aiden.modules = {
           common = {
             email = "aiden@oldstreetjournal.co.uk";
@@ -65,8 +69,10 @@
             "/dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_2ee577279f96ed119403c098a7669f5d-if00-port0"
           ];
           router = {
-            dns.enable = false;
-            dnsmasq.enable = true;
+            dns.enable     = false;
+            dnsmasq.enable = false;
+            kea.enable     = true;
+            bind.enable    = true;
             internalInterface = "enp2s0";
             externalInterface = "enp1s0";
           };
