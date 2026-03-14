@@ -57,10 +57,7 @@
         networking.nameservers = [ "127.0.0.2" ];
 
         aiden.modules = {
-          common = {
-            email = "aiden@oldstreetjournal.co.uk";
-            domainName = "sw1a1aa.uk";
-          };
+          common.domainName = "sw1a1aa.uk";
           tailscale = {
             advertiseRoutes = true;
             authKeyPath = config.age.secrets.gila-tailscale-authkey.path;

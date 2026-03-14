@@ -60,10 +60,7 @@
               gpu = "intel";
             };
             modules = {
-              common = {
-                domainName = "bes.sw1a1aa.uk";
-                email = "aiden@oldstreetjournal.co.uk";
-              };
+              common.domainName = "bes.sw1a1aa.uk";
               reverseProxy.apps = [
                 { name = "photos"; port = 2283; }
                 { name = "bazarr"; port = 6767; }
