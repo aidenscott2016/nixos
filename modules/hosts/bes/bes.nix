@@ -24,6 +24,7 @@
     ])
     ++ [
       config.flake.modules.nixos.immich
+      config.flake.modules.nixos.restic-b2
     ]
     ++ [
       config.flake.modules.nixos."cli-base"
@@ -77,27 +78,6 @@
 
           age.secrets.opencode-env.file = "${inputs.self.outPath}/secrets/opencode-env.age";
           age.secrets.slskd.file = "${inputs.self.outPath}/secrets/slskd";
-          age.secrets.restic-b2-env.file = "${inputs.self.outPath}/secrets/restic-b2-env.age";
-          age.secrets.restic-b2-password.file = "${inputs.self.outPath}/secrets/restic-b2-password.age";
-
-          services.restic.backups.b2 = {
-            timerConfig = null;
-            paths = [
-              "/media/t7/photos"
-              "/srv/media/Music/library/Cocteau Twins/1993 - Four-Calendar Café"
-            ];
-            repository = "s3:s3.eu-central-003.backblazeb2.com/backup-uwdcrk";
-            environmentFile = config.age.secrets.restic-b2-env.path;
-            passwordFile = config.age.secrets.restic-b2-password.path;
-            initialize = true;
-            createWrapper = true;
-            pruneOpts = [
-              "--keep-daily 7"
-              "--keep-weekly 4"
-              "--keep-monthly 6"
-              "--keep-yearly 2"
-            ];
-          };
 
           programs.mosh.enable = true;
 
