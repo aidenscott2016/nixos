@@ -48,7 +48,7 @@
       # Uses tc class change to adjust the rate in-place without interrupting uploads.
       networking.nftables.enable = true;
       networking.nftables.tables.restic-mark = {
-        family = "ip";
+        family = "inet";
         content = ''
           chain output-mark {
             type filter hook output priority mangle; policy accept;
@@ -68,6 +68,7 @@
           RemainAfterExit = true;
           ExecStart = pkgs.writeShellScript "restic-tc-setup" ''
             IFACE=$(ip route show default | awk '/default/ {print $5; exit}')
+            tc qdisc del dev "$IFACE" root 2>/dev/null || true
             tc qdisc add dev "$IFACE" root handle 1: htb default 10
             tc class add dev "$IFACE" parent 1:  classid 1:1  htb rate 1gbit ceil 1gbit
             tc class add dev "$IFACE" parent 1:1 classid 1:10 htb rate 1gbit ceil 1gbit
