@@ -25,6 +25,8 @@
     ++ [
       config.flake.modules.nixos.immich
       config.flake.modules.nixos.restic-b2
+      config.flake.modules.nixos.monitoring
+      config.flake.modules.nixos.uptime-kuma
     ]
     ++ [
       config.flake.modules.nixos."cli-base"

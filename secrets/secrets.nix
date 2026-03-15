@@ -40,4 +40,8 @@ in
     aiden
     bes
   ];
+  "grafana-admin-password.age".publicKeys = [
+    aiden
+    bes
+  ];
 }
