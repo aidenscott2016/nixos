@@ -30,7 +30,7 @@
       services.prometheus = {
         enable = true;
         listenAddress = "127.0.0.1";
-        port = 9090;
+        port = 9091;
         retentionTime = "30d";
         globalConfig.scrape_interval = "30s";
         scrapeConfigs = [
@@ -188,7 +188,7 @@
             {
               name = "Prometheus";
               type = "prometheus";
-              url = "http://127.0.0.1:9090";
+              url = "http://127.0.0.1:9091";
               isDefault = true;
               editable = false;
             }
