@@ -81,7 +81,7 @@
           age.secrets.restic-b2-password.file = "${inputs.self.outPath}/secrets/restic-b2-password.age";
 
           services.restic.backups.b2 = {
-            enable = false;
+            timerConfig = null;
             paths = [
               "/media/t7/photos"
               "/srv/media/Music/library/Cocteau Twins/1993 - Four-Calendar Café"
