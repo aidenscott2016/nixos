@@ -2,6 +2,21 @@
 {
   flake.modules.nixos.monitoring =
     { config, pkgs, ... }:
+    let
+      nodeExporterDashboard = pkgs.fetchurl {
+        url = "https://grafana.com/api/dashboards/1860/revisions/37/download";
+        hash = "sha256-1DE1aaanRHHeCOMWDGdOS1wBXxOF84UXAjJzT5Ek6mM=";
+      };
+      traefikDashboard = pkgs.fetchurl {
+        url = "https://grafana.com/api/dashboards/17346/revisions/9/download";
+        hash = "sha256-OtMp0nNxIPMvZ6qwg/JFtVTqXE7IN4/u5xlu9ruffak=";
+      };
+      dashboardsDir = pkgs.runCommand "grafana-dashboards" { } ''
+        mkdir $out
+        cp ${nodeExporterDashboard} $out/node-exporter.json
+        cp ${traefikDashboard} $out/traefik.json
+      '';
+    in
     {
       age.secrets.grafana-admin-password = {
         file = "${inputs.self.outPath}/secrets/grafana-admin-password.age";
@@ -197,6 +212,19 @@
               type = "loki";
               url = "http://127.0.0.1:3100";
               editable = false;
+            }
+          ];
+        };
+
+        provision.dashboards.settings = {
+          apiVersion = 1;
+          providers = [
+            {
+              name = "community";
+              type = "file";
+              disableDeletion = true;
+              allowUiUpdates = false;
+              options.path = "${dashboardsDir}";
             }
           ];
         };
