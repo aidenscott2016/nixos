@@ -163,7 +163,7 @@
         settings = {
           server = {
             http_addr = "127.0.0.1";
-            http_port = 3000;
+            http_port = 3005;
             domain = "grafana.sw1a1aa.uk";
             root_url = "https://grafana.sw1a1aa.uk";
           };
@@ -209,7 +209,7 @@
       # ── Reverse proxy ──────────────────────────────────────────────────────
 
       aiden.modules.reverseProxy.apps = [
-        { name = "grafana"; port = 3000; }
+        { name = "grafana"; port = 3005; }
       ];
     };
 }
