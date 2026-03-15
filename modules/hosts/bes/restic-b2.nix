@@ -14,12 +14,13 @@
 
       users.users.restic = {
         isSystemUser = true;
+        uid = 901;
         group = "restic";
         # immich group: read access to /media/t7/photos
         # media group: read access to /srv/media/Music
         extraGroups = [ "immich" "media" ];
       };
-      users.groups.restic = { };
+      users.groups.restic = { gid = 901; };
 
       services.restic.backups.b2 = {
         user = "restic";
@@ -53,7 +54,7 @@
         content = ''
           chain output-mark {
             type filter hook output priority mangle; policy accept;
-            meta skuid restic meta mark set 0x00000001
+            meta skuid 901 meta mark set 0x00000001
           }
         '';
       };
