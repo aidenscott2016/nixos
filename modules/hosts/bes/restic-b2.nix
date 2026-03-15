@@ -66,12 +66,12 @@
         after = [ "network-online.target" ];
         wants = [ "network-online.target" ];
         wantedBy = [ "multi-user.target" ];
-        path = [ pkgs.iproute2 ];
+        path = [ pkgs.iproute2 pkgs.jq ];
         serviceConfig = {
           Type = "oneshot";
           RemainAfterExit = true;
           ExecStart = pkgs.writeShellScript "restic-tc-setup" ''
-            read -r _ _ _ _ IFACE _ < <(ip route show default)
+            IFACE=$(ip -json route show default | jq -r '.[0].dev')
             tc qdisc del dev "$IFACE" root 2>/dev/null || true
             tc qdisc add dev "$IFACE" root handle 1: htb default 10
             tc class add dev "$IFACE" parent 1:  classid 1:1  htb rate 1gbit ceil 1gbit
@@ -80,7 +80,7 @@
             tc filter add dev "$IFACE" parent 1: protocol ip handle 1 fw classid 1:20
           '';
           ExecStop = pkgs.writeShellScript "restic-tc-teardown" ''
-            read -r _ _ _ _ IFACE _ < <(ip route show default)
+            IFACE=$(ip -json route show default | jq -r '.[0].dev')
             tc qdisc del dev "$IFACE" root || true
           '';
         };
@@ -90,11 +90,11 @@
         description = "Throttle restic to 5 Mbit (daytime 0700-2200)";
         after = [ "restic-tc-setup.service" ];
         requires = [ "restic-tc-setup.service" ];
-        path = [ pkgs.iproute2 ];
+        path = [ pkgs.iproute2 pkgs.jq ];
         serviceConfig = {
           Type = "oneshot";
           ExecStart = pkgs.writeShellScript "restic-tc-day" ''
-            read -r _ _ _ _ IFACE _ < <(ip route show default)
+            IFACE=$(ip -json route show default | jq -r '.[0].dev')
             tc class change dev "$IFACE" parent 1:1 classid 1:20 htb rate 5mbit ceil 5mbit
           '';
         };
@@ -110,11 +110,11 @@
         description = "Unthrottle restic (nighttime 2200-0700)";
         after = [ "restic-tc-setup.service" ];
         requires = [ "restic-tc-setup.service" ];
-        path = [ pkgs.iproute2 ];
+        path = [ pkgs.iproute2 pkgs.jq ];
         serviceConfig = {
           Type = "oneshot";
           ExecStart = pkgs.writeShellScript "restic-tc-night" ''
-            read -r _ _ _ _ IFACE _ < <(ip route show default)
+            IFACE=$(ip -json route show default | jq -r '.[0].dev')
             tc class change dev "$IFACE" parent 1:1 classid 1:20 htb rate 1gbit ceil 1gbit
           '';
         };
