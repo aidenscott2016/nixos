@@ -15,8 +15,9 @@
       users.users.restic = {
         isSystemUser = true;
         group = "restic";
-        # immich group gives read access to /media/t7/photos (immich-owned files)
-        extraGroups = [ "immich" ];
+        # immich group: read access to /media/t7/photos
+        # media group: read access to /srv/media/Music
+        extraGroups = [ "immich" "media" ];
       };
       users.groups.restic = { };
 
