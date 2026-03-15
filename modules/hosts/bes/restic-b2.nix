@@ -52,9 +52,11 @@
       networking.nftables.tables.restic-mark = {
         family = "inet";
         content = ''
+          define RESTIC_UID = 901
+
           chain output-mark {
             type filter hook output priority mangle; policy accept;
-            meta skuid 901 meta mark set 0x00000001
+            meta skuid $RESTIC_UID meta mark set 0x00000001
           }
         '';
       };
