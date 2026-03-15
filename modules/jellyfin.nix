@@ -19,7 +19,7 @@
       };
 
       config = {
-        users.users.jellyfin.extraGroups = [ "video" ];
+        users.users.jellyfin.extraGroups = [ "media" ];
         environment.systemPackages = with pkgs; [
           rename
           jellyfin-ffmpeg
