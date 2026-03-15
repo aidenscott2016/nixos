@@ -44,4 +44,5 @@ in
     aiden
     bes
   ];
+  "uptime-kuma-password.age".publicKeys = [ aiden ];
 }

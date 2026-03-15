@@ -75,6 +75,10 @@
       url = "github:femtodata/nix-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    terranix = {
+      url = "github:terranix/terranix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {

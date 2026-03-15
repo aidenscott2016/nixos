@@ -34,3 +34,24 @@ Every `.nix` file under `modules/` is a flake-parts module. Follow the establish
 - No `aiden.modules.<name>.enable` gating — compose features via `imports` at the host level
 - Add `inputs` to the outer function only if the inner body references `inputs.*`
 - Grouping modules (desktop, gaming, router) use the Inheritance Aspect: `imports = with inputs.self.modules.nixos; [ ... ]`
+
+## Pulling Unstable NixOS Modules
+
+When a service needs a newer version than nixpkgs-stable provides, swap the entire NixOS module from `nixpkgs-unstable` rather than just overlaying the package. This avoids schema mismatches between the module options and the package version.
+
+```nix
+disabledModules = [ "services/monitoring/uptime-kuma.nix" ];
+imports = [ "${inputs.nixpkgs-unstable}/nixos/modules/services/monitoring/uptime-kuma.nix" ];
+nixpkgs.overlays = [
+  (final: prev: { inherit (import inputs.nixpkgs-unstable { system = prev.system; }) uptime-kuma; })
+];
+```
+
+## Terranix Apps Pattern
+
+Modules that manage external services declaratively via Terraform use a `perSystem` block alongside the NixOS module in the same file. See `modules/uptime-kuma.nix` for the canonical example:
+
+- Terranix generates `config.tf.json` from Nix expressions
+- OpenTofu applies the config via `nix run .#<name>-apply`
+- State lives outside the repo at `~/.local/state/<name>/`
+- Secrets are injected via `TF_VAR_*` env vars from agenix
