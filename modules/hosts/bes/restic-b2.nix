@@ -71,7 +71,7 @@
           Type = "oneshot";
           RemainAfterExit = true;
           ExecStart = pkgs.writeShellScript "restic-tc-setup" ''
-            IFACE=$(ip route show default | awk '/default/ {print $5; exit}')
+            read -r _ _ _ _ IFACE _ < <(ip route show default)
             tc qdisc del dev "$IFACE" root 2>/dev/null || true
             tc qdisc add dev "$IFACE" root handle 1: htb default 10
             tc class add dev "$IFACE" parent 1:  classid 1:1  htb rate 1gbit ceil 1gbit
@@ -80,7 +80,7 @@
             tc filter add dev "$IFACE" parent 1: protocol ip handle 1 fw classid 1:20
           '';
           ExecStop = pkgs.writeShellScript "restic-tc-teardown" ''
-            IFACE=$(ip route show default | awk '/default/ {print $5; exit}')
+            read -r _ _ _ _ IFACE _ < <(ip route show default)
             tc qdisc del dev "$IFACE" root || true
           '';
         };
@@ -94,7 +94,7 @@
         serviceConfig = {
           Type = "oneshot";
           ExecStart = pkgs.writeShellScript "restic-tc-day" ''
-            IFACE=$(ip route show default | awk '/default/ {print $5; exit}')
+            read -r _ _ _ _ IFACE _ < <(ip route show default)
             tc class change dev "$IFACE" parent 1:1 classid 1:20 htb rate 5mbit ceil 5mbit
           '';
         };
@@ -114,7 +114,7 @@
         serviceConfig = {
           Type = "oneshot";
           ExecStart = pkgs.writeShellScript "restic-tc-night" ''
-            IFACE=$(ip route show default | awk '/default/ {print $5; exit}')
+            read -r _ _ _ _ IFACE _ < <(ip route show default)
             tc class change dev "$IFACE" parent 1:1 classid 1:20 htb rate 1gbit ceil 1gbit
           '';
         };
