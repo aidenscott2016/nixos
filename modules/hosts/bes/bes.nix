@@ -91,10 +91,6 @@
             passwordFile = config.age.secrets.restic-b2-password.path;
             initialize = true;
             createWrapper = true;
-            timerConfig = {
-              OnCalendar = "daily";
-              Persistent = "true";
-            };
             pruneOpts = [
               "--keep-daily 7"
               "--keep-weekly 4"
