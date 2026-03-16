@@ -24,6 +24,7 @@
         extraOptions = [ "--device=/dev/dri/renderD128" ];
         environment = {
           MPLCONFIGDIR = "/cache/matplotlib";
+          MACHINE_LEARNING_WORKERS = "2";
         };
       };
 
