@@ -11,10 +11,21 @@
         url = "https://grafana.com/api/dashboards/17346/revisions/9/download";
         hash = "sha256-OtMp0nNxIPMvZ6qwg/JFtVTqXE7IN4/u5xlu9ruffak=";
       };
+      authelia_dashboard = pkgs.fetchurl {
+        url = "https://github.com/authelia/authelia/raw/master/examples/grafana-dashboards/simple.json";
+        hash = "sha256-y+WbEev4ezdJyorjnnZi37CL1Pd9PxYAvl5N0hsFJnk=";
+      };
+      crowdsecDashboard = pkgs.fetchurl {
+        name = "crowdsec-overview.json";
+        url = "https://raw.githubusercontent.com/crowdsecurity/grafana-dashboards/master/dashboards_v5/Crowdsec%20Overview.json";
+        hash = "sha256-/boB/qkOyJoiIkLdiq9vadU9plvuhxfMT30FyBDKNs8=";
+      };
       dashboardsDir = pkgs.runCommand "grafana-dashboards" { } ''
         mkdir $out
         cp ${nodeExporterDashboard} $out/node-exporter.json
         cp ${traefikDashboard} $out/traefik.json
+        cp ${authelia_dashboard} $out/authelia.json
+        cp ${crowdsecDashboard} $out/crowdsec-overview.json
       '';
     in
     {
@@ -55,6 +66,10 @@
           {
             job_name = "traefik";
             static_configs = [ { targets = [ "127.0.0.1:8082" ]; } ];
+          }
+          {
+            job_name = "authelia";
+            static_configs = [ { targets = [ "127.0.0.1:9959" ]; } ];
           }
         ];
       };
@@ -143,6 +158,12 @@
                 {
                   source_labels = [ "__journal_priority_keyword" ];
                   target_label = "priority";
+                }
+                {
+                  source_labels = [ "__journal__systemd_unit" ];
+                  regex = "authelia-main\\.service";
+                  target_label = "service";
+                  replacement = "authelia";
                 }
               ];
             }
