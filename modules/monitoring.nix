@@ -213,7 +213,7 @@
       systemd.services.grafana.wants = [ "agenix.service" ];
 
       aiden.modules.reverseProxy.apps = [
-        { name = "grafana"; port = 3005; }
+        { name = "grafana"; port = 3005; auth = false; }
       ];
     };
 }

@@ -22,6 +22,10 @@
                 type = str;
                 default = "http";
               };
+              auth = mkOption {
+                type = bool;
+                default = true;
+              };
             };
           });
         default = [ ];
@@ -29,13 +33,15 @@
 
       toLocalReverseProxy = foldl' (
         acc:
-        { name, port, proto, ... }:
+        { name, port, proto, auth, ... }:
         recursiveUpdate acc {
           routers."${name}" = {
             service = name;
             rule = "Host(`${name}.sw1a1aa.uk`)";
             tls = true;
-          };
+          } // (optionalAttrs auth {
+            middlewares = [ "authelia" ];
+          });
           services."${name}" = {
             loadbalancer = {
               servers = [ { url = "${proto}://127.0.0.1:${toString port}"; } ];
@@ -73,7 +79,18 @@
             };
           };
           dynamicConfigOptions = {
-            http = toLocalReverseProxy cfg.apps;
+            http = recursiveUpdate (toLocalReverseProxy cfg.apps) {
+              middlewares.authelia.forwardAuth = {
+                address = "http://127.0.0.1:9092/api/authz/forward-auth";
+                trustForwardHeader = true;
+                authResponseHeaders = [
+                  "Remote-User"
+                  "Remote-Groups"
+                  "Remote-Email"
+                  "Remote-Name"
+                ];
+              };
+            };
           };
         };
       };

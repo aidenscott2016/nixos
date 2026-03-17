@@ -27,6 +27,7 @@
       config.flake.modules.nixos.restic-b2
       config.flake.modules.nixos.monitoring
       config.flake.modules.nixos.uptime-kuma
+      config.flake.modules.nixos.authelia
     ]
     ++ [
       config.flake.modules.nixos."cli-base"
@@ -65,12 +66,12 @@
             modules = {
               common.domainName = "bes.sw1a1aa.uk";
               reverseProxy.apps = [
-                { name = "photos"; port = 2283; }
+                { name = "photos"; port = 2283; auth = false; }
                 { name = "bazarr"; port = 6767; }
                 { name = "sonarr"; port = 8989; }
                 { name = "sab"; port = 8080; }
-                { name = "jellyfin"; port = 8096; }
-                { name = "portainer"; port = 9000; }
+                { name = "jellyfin"; port = 8096; auth = false; }
+                { name = "portainer"; port = 9000; auth = false; }
                 { name = "deluge"; port = 8112; }
                 { name = "radarr"; port = 7878; }
                 { name = "slskd"; port = 5030; }

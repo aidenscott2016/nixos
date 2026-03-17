@@ -18,6 +18,7 @@
           {
             name = "navidrome";
             port = 4533;
+            auth = false;
           }
         ];
       };

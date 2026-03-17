@@ -51,4 +51,8 @@ in
   "authelia-oidc-hmac-secret.age".publicKeys = [ aiden bes ];
   "authelia-oidc-issuer-private-key.age".publicKeys = [ aiden bes ];
   "crowdsec-enroll-key.age".publicKeys = [ aiden gila ];
+  "authelia-oidc-client-grafana.age".publicKeys = [ aiden bes ];
+  "authelia-oidc-client-immich.age".publicKeys = [ aiden bes ];
+  "authelia-oidc-client-paperless.age".publicKeys = [ aiden bes ];
+  "authelia-oidc-client-portainer.age".publicKeys = [ aiden bes ];
 }
