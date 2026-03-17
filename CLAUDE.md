@@ -52,11 +52,8 @@ This is a personal NixOS flake configuration repository using the **dendritic pa
 # Build a specific system
 nix build .#nixosConfigurations.{hostname}.config.system.build.toplevel
 
-# Switch to new configuration (on target system)
-sudo nixos-rebuild switch --flake .#{hostname}
-
-# Build and switch remotely (use FQDN for --target-host)
-nixos-rebuild switch --flake .#{hostname} --target-host {hostname}.sw1a1aa.uk
+# Deploy remotely (always use FQDN so the correct SSH key is matched)
+nixos-rebuild switch --flake .#{hostname} --target-host aiden@{hostname}.sw1a1aa.uk --use-remote-sudo
 
 # Build installer ISO
 nix build .#nixosConfigurations.installer.config.system.build.isoImage
@@ -115,6 +112,13 @@ Companion files (hardware-configuration, disk config, packages) are prefixed wit
 1. Add public keys to `secrets/secrets.nix`
 2. Reference secrets via `config.age.secrets.{name}.path`
 3. Declare secrets in host config: `age.secrets.{name}.file = "${inputs.self.outPath}/secrets/{file}.age"`
+
+## Workflow Rules
+
+- All work must happen on a feature branch, never directly on master. Before creating a new branch, check whether you are already on a feature branch.
+- Commit regularly as you make progress.
+- Never push to or merge into master without explicit permission from the user.
+- Never deploy (`nixos-rebuild switch`, `nixos-rebuild boot`, etc.) to any host without explicit permission from the user.
 
 ## Important Configuration Details
 
