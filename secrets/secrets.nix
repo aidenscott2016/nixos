@@ -45,4 +45,10 @@ in
     bes
   ];
   "uptime-kuma-password.age".publicKeys = [ aiden ];
+  "authelia-jwt-secret.age".publicKeys = [ aiden bes ];
+  "authelia-session-secret.age".publicKeys = [ aiden bes ];
+  "authelia-storage-encryption-key.age".publicKeys = [ aiden bes ];
+  "authelia-oidc-hmac-secret.age".publicKeys = [ aiden bes ];
+  "authelia-oidc-issuer-private-key.age".publicKeys = [ aiden bes ];
+  "crowdsec-enroll-key.age".publicKeys = [ aiden gila ];
 }
