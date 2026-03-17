@@ -24,13 +24,10 @@
         mode = "0400";
       };
 
-      # ── Exporters (localhost-only) ─────────────────────────────────────────
-
       services.prometheus.exporters.node = {
         enable = true;
         listenAddress = "127.0.0.1";
         port = 9100;
-        # systemd and processes are not enabled by default; the rest are.
         enabledCollectors = [ "systemd" "processes" ];
       };
 
@@ -39,8 +36,6 @@
         listenAddress = "127.0.0.1";
         port = 9633;
       };
-
-      # ── Prometheus ─────────────────────────────────────────────────────────
 
       services.prometheus = {
         enable = true;
@@ -64,11 +59,6 @@
         ];
       };
 
-      # ── Traefik metrics endpoint ───────────────────────────────────────────
-      # Merges with the existing reverse-proxy.nix Traefik config. The
-      # "metrics" entrypoint is bound to loopback so it is never reachable
-      # from the network.
-
       services.traefik.staticConfigOptions = {
         entrypoints.metrics.address = "127.0.0.1:8082";
         metrics.prometheus = {
@@ -78,8 +68,6 @@
           addServicesLabels = true;
         };
       };
-
-      # ── Loki ───────────────────────────────────────────────────────────────
 
       services.loki = {
         enable = true;
@@ -127,10 +115,6 @@
         };
       };
 
-      # ── Promtail ───────────────────────────────────────────────────────────
-      # The NixOS module automatically adds promtail to the systemd-journal
-      # group when a journal scrape_config is detected.
-
       services.promtail = {
         enable = true;
         configuration = {
@@ -166,11 +150,8 @@
         };
       };
 
-      # Ensure Promtail waits for Loki to be ready before pushing.
       systemd.services.promtail.after = [ "loki.service" ];
       systemd.services.promtail.wants = [ "loki.service" ];
-
-      # ── Grafana ─────────────────────────────────────────────────────────────
 
       services.grafana = {
         enable = true;
@@ -184,8 +165,6 @@
           };
 
           security = {
-            # $__file{} reads the password from the agenix-decrypted secret
-            # at runtime; it is never embedded in the Nix store.
             admin_password = "$__file{${config.age.secrets.grafana-admin-password.path}}";
             disable_initial_admin_creation = false;
           };
@@ -230,11 +209,8 @@
         };
       };
 
-      # Grafana must start after the agenix secret is decrypted.
       systemd.services.grafana.after = [ "agenix.service" ];
       systemd.services.grafana.wants = [ "agenix.service" ];
-
-      # ── Reverse proxy ──────────────────────────────────────────────────────
 
       aiden.modules.reverseProxy.apps = [
         { name = "grafana"; port = 3005; }
