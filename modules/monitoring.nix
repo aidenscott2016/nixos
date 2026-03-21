@@ -69,6 +69,7 @@
           }
           {
             job_name = "authelia";
+            metrics_path = "/";
             static_configs = [ { targets = [ "127.0.0.1:9959" ]; } ];
           }
         ];
