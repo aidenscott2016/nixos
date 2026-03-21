@@ -51,6 +51,9 @@
       services.crowdsec = {
         enable = true;
 
+        settings.general.api.server.enable = true;
+        settings.lapi.credentialsFile = "/var/lib/crowdsec/state/local_api_credentials.yaml";
+
         hub = {
           collections = [
             "crowdsecurity/traefik"
