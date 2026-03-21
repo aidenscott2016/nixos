@@ -72,6 +72,10 @@
             metrics_path = "/";
             static_configs = [ { targets = [ "127.0.0.1:9959" ]; } ];
           }
+          {
+            job_name = "crowdsec";
+            static_configs = [ { targets = [ "gila.sw1a1aa.uk:6060" ]; } ];
+          }
         ];
       };
 
