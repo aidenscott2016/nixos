@@ -2,8 +2,6 @@ users:
   aiden:
     displayname: Aiden
     email: aiden@sw1a1aa.uk
-    # Password hash generated with: authelia crypto hash generate argon2 --random
-    # Replace this hash by running: authelia crypto hash generate argon2 --password 'yourpassword'
-    password: "$argon2id$v=19$m=65536,t=3,p=4$wSD2n5oPKugBSBKaTAKwPA$2xYdMjywcwI+dqs+3LafPpCeeceYpFBVLxud6pRDAb4"
+    password: "$argon2id$v=19$m=65536,t=3,p=4$R6xfi9YWS+rfr8BtMsjdmQ$J/5PYko8ohy7VEc1GZXzg0/gpXtSQk0NLLCuB3gfDHY"
     groups:
       - admins
