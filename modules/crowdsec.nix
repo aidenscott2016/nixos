@@ -96,6 +96,8 @@
         settings.mode = "nftables";
       };
 
+      systemd.services.crowdsec-firewall-bouncer.after = [ "crowdsec-firewall-bouncer-register.service" ];
+
       systemd.services.geoip-update = {
         description = "Update GeoIP nftables allowlist with GB/IM ranges";
         wantedBy = [ "multi-user.target" ];
