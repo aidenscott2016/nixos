@@ -22,6 +22,14 @@
               };
             };
 
+            # Bridge joining VLAN 105 (WiFi) and enp3s0 (wired) for work devices
+            "10-work-br" = {
+              netdevConfig = {
+                Name = "work-br";
+                Kind = "bridge";
+              };
+            };
+
             "20-admin" = {
               netdevConfig = {
                 Name = "admin";
@@ -58,6 +66,15 @@
                 Id = 103;
               };
             };
+            "20-work" = {
+              netdevConfig = {
+                Name = "work";
+                Kind = "vlan";
+              };
+              vlanConfig = {
+                Id = 105;
+              };
+            };
           };
 
           networks = {
@@ -79,12 +96,13 @@
               };
             };
 
+            # enp3s0 (wired work devices) is a bridge port of work-br
             "30-enp3s0" = {
               matchConfig = {
                 Name = "enp3s0";
               };
               networkConfig = {
-                Bridge = "bridge0";
+                Bridge = "work-br";
               };
             };
 
@@ -103,6 +121,7 @@
                 "guest"
                 "iot"
                 "admin"
+                "work"
               ];
               linkConfig.RequiredForOnline = "carrier";
             };
@@ -149,6 +168,29 @@
               };
               address = [
                 "10.0.3.1/24"
+              ];
+              networkConfig = {
+                DHCP = "no";
+              };
+            };
+
+            # work VLAN sub-interface is a bridge port of work-br
+            "40-work" = {
+              matchConfig = {
+                Name = "work";
+              };
+              networkConfig = {
+                Bridge = "work-br";
+              };
+            };
+
+            # work-br carries 10.0.5.0/24 for both WiFi (VLAN 105) and wired work devices
+            "40-work-br" = {
+              matchConfig = {
+                Name = "work-br";
+              };
+              address = [
+                "10.0.5.1/24"
               ];
               networkConfig = {
                 DHCP = "no";

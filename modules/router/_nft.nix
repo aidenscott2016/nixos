@@ -9,6 +9,7 @@
      "tailscale0",
      "admin",
      "enp2s0",
+     "work-br",
   }
 
    define TRUSTED_LAN = {
@@ -25,6 +26,7 @@
      "guest",
      "admin",
      "enp2s0",
+     "work-br",
    }
 
    define DNS_PORTS = {53, 54, 5354, 67}
@@ -105,6 +107,7 @@
        chain postrouting {
            type nat hook postrouting priority 100; policy accept;
            oifname $DEV_WAN masquerade
+           oifname "admin" masquerade
        }
 
    }
