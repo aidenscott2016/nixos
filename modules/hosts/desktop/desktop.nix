@@ -7,9 +7,12 @@
       inputs.nixos-facter-modules.nixosModules.facter
       inputs.disko.nixosModules.disko
       ./_disk-configuration.nix
+      inputs.lanzaboote.nixosModules.lanzaboote
     ] ++ (with config.flake.modules.nixos; [
       jovian desktop gaming steam oblivion-sync virtualisation nix
+      secureboot
     ]) ++ [
+      config.flake.modules.nixos."initrd-ssh"
       config.flake.modules.nixos."home-manager"
     ] ++ [
       ({ config, lib, ... }: {
@@ -47,22 +50,14 @@
         };
 
         boot.loader.systemd-boot.enable = true;
-        boot.kernelParams = [ "ip=dhcp" ];
+
         boot.initrd = {
           availableKernelModules = [ "r8169" ];
-          network = {
-            enable = true;
-            ssh = {
-              enable = true;
-              port = 22;
-              authorizedKeys = [
-                config.aiden.modules.common.publicKey
-                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOFPzeWccRjpB6jb83yXaZ8oaugea4TZ7bXmhMbeop64"
-              ];
-              hostKeys = [ "/etc/secrets/initrd/ssh_host_key" ];
-              shell = "/bin/cryptsetup-askpass";
-            };
+          systemd.network.networks."10-ethernet" = {
+            matchConfig.Name = "enp6s0";
+            networkConfig.DHCP = "yes";
           };
+          network.ssh.hostKeys = [ "/etc/secrets/initrd/ssh_host_key" ];
         };
       })
     ];
