@@ -29,7 +29,7 @@
           ];
         };
 
-        nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+        nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
         nix.settings = {
           auto-optimise-store = true;
           trusted-users = [ "aiden" ];
