@@ -8,7 +8,7 @@
       inputs.disko.nixosModules.disko
       ./_disk-configuration.nix
     ] ++ (with config.flake.modules.nixos; [
-      jovian desktop gaming virtualisation nix
+      jovian desktop gaming steam oblivion-sync virtualisation nix
     ]) ++ [
       config.flake.modules.nixos."home-manager"
     ] ++ [
@@ -40,8 +40,6 @@
           };
           modules = {
             gaming = {
-              games.oblivionSync.enable = true;
-              steam.enable = true;
               moonlight.client.enable = true;
               moonlight.server.enable = true;
             };

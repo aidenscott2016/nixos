@@ -69,7 +69,7 @@
     nixos-images.url = "github:nix-community/nixos-images";
     jovian = {
       url = "github:Jovian-Experiments/Jovian-NixOS";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     switch-fix = {
       url = "github:femtodata/nix-utils";

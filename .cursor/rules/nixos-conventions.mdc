@@ -35,6 +35,21 @@ Every `.nix` file under `modules/` is a flake-parts module. Follow the establish
 - Add `inputs` to the outer function only if the inner body references `inputs.*`
 - Grouping modules (desktop, gaming, router) use the Inheritance Aspect: `imports = with inputs.self.modules.nixos; [ ... ]`
 
+## Per-Host Nixpkgs Channel Selection
+
+Each host chooses its nixpkgs channel at the `nixosSystem` call in its host config. Stable hosts use `inputs.nixpkgs.lib.nixosSystem`, unstable hosts use `inputs.nixpkgs-unstable.lib.nixosSystem`. Shared modules are channel-agnostic because they receive `pkgs` from whichever nixpkgs built the host.
+
+When updating flake inputs, always target a single input:
+
+```bash
+nix flake update nixpkgs-unstable   # only bumps unstable
+nix flake update nixpkgs             # only bumps stable
+```
+
+Never use bare `nix flake update` — it bumps every input simultaneously and may break hosts that depend on a specific pin.
+
+Flake inputs consumed only by unstable hosts (e.g. `jovian`) must set `inputs.nixpkgs.follows = "nixpkgs-unstable"`. Inputs shared across both stable and unstable hosts should follow `"nixpkgs"` (stable).
+
 ## Pulling Unstable NixOS Modules
 
 When a service needs a newer version than nixpkgs-stable provides, swap the entire NixOS module from `nixpkgs-unstable` rather than just overlaying the package. This avoids schema mismatches between the module options and the package version.
