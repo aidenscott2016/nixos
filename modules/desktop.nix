@@ -29,7 +29,7 @@
         systemd.network.wait-online.enable = false;
         hardware.bluetooth.enable = true;
         environment.systemPackages = with pkgs; [
-          bindfs xorg.xev
+          bindfs xev
           (discord.override { withTTS = false; })
           cameractrls-gtk3 chromium xclip libreoffice
           kdePackages.okular vscode nodejs_22 claude-code code-cursor
