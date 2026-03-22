@@ -30,6 +30,9 @@
               "set:guest,10.0.3.200,10.0.3.250,255.255.255.0,12h"
               "set:work,10.0.5.200,10.0.5.250,255.255.255.0,12h"
             ];
+            dhcp-host = [
+              "3c:6d:66:4c:fa:b6,shield,10.0.1.215"
+            ];
             dhcp-option = [
               "tag:admin,option:router,10.0.0.1"
               "tag:admin,option:dns-server,10.0.0.1"
