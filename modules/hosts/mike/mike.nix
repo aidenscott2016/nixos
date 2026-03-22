@@ -37,8 +37,11 @@
           options thinkpad_acpi fan_control=1
         '';
 
-        # Thinkfan for proper fan curves (uses sensible ThinkPad defaults)
-        services.thinkfan.enable = true;
+        services.thinkfan = {
+          enable = true;
+          sensors = [{ type = "tpacpi"; query = "/proc/acpi/ibm/thermal"; }];
+          fans = [{ type = "tpacpi"; query = "/proc/acpi/ibm/fan"; }];
+        };
 
         aiden = {
           architecture = {

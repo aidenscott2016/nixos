@@ -24,10 +24,10 @@
           enable = true;
           group = "podman";
           staticConfigOptions = {
-            api = {
-              dashboard = true;
-              insecure = true;
-            };
+          api = {
+            dashboard = false;
+            insecure = false;
+          };
             accessLog = {
               fields = {
                 defaultMode = "keep";

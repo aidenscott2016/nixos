@@ -13,6 +13,7 @@
 
       systemd.services.navidrome.after = [ "media-bindfs.service" ];
 
+      # Subsonic API (/rest/*) bypassed in Authelia access_control
       aiden.modules.reverseProxy = {
         apps = [
           {

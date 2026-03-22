@@ -27,6 +27,7 @@
       config.flake.modules.nixos.restic-b2
       config.flake.modules.nixos.monitoring
       config.flake.modules.nixos.uptime-kuma
+      config.flake.modules.nixos.authelia
     ]
     ++ [
       config.flake.modules.nixos."cli-base"
@@ -50,7 +51,7 @@
               bun = prev.bun.overrideAttrs (old: {
                 src = prev.fetchurl {
                   url = "https://github.com/oven-sh/bun/releases/download/bun-v${old.version}/bun-linux-x64-baseline.zip";
-                  hash = "sha256-EE1NA39LNeECFcBQfhd5aR85xXvZHd7v4RyteB4/xLk=";
+                  hash = "sha256-KB5sutlp6y9e9XJMbLoB2kDNX+rW+CksUO1gvU26eK4=";
                 };
                 sourceRoot = "bun-linux-x64-baseline";
               });
@@ -65,12 +66,12 @@
             modules = {
               common.domainName = "bes.sw1a1aa.uk";
               reverseProxy.apps = [
-                { name = "photos"; port = 2283; }
+                { name = "photos"; port = 2283; auth = false; } # native OIDC; mobile app uses OAuth token flow
                 { name = "bazarr"; port = 6767; }
                 { name = "sonarr"; port = 8989; }
                 { name = "sab"; port = 8080; }
-                { name = "jellyfin"; port = 8096; }
-                { name = "portainer"; port = 9000; }
+                { name = "jellyfin"; port = 8096; auth = false; } # API clients use Jellyfin auth; forward-auth breaks websockets
+                { name = "portainer"; port = 9000; auth = false; } # native OIDC; Edge agent uses API tokens
                 { name = "deluge"; port = 8112; }
                 { name = "radarr"; port = 7878; }
                 { name = "slskd"; port = 5030; }
