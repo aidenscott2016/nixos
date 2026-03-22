@@ -41,6 +41,15 @@
           enable = true;
           sensors = [{ type = "tpacpi"; query = "/proc/acpi/ibm/thermal"; }];
           fans = [{ type = "tpacpi"; query = "/proc/acpi/ibm/fan"; }];
+          levels = [
+            [ 0              0  55 ]
+            [ 1             48  60 ]
+            [ 2             50  61 ]
+            [ 3             52  63 ]
+            [ 6             56  65 ]
+            [ 7             60  80 ]
+            [ "level disengaged" 75 32767 ]
+          ];
         };
 
         aiden = {
