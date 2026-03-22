@@ -22,11 +22,14 @@
       };
       users.groups.restic = { gid = 901; };
 
+      systemd.services.restic-backups-b2.serviceConfig.AmbientCapabilities = [ "CAP_DAC_READ_SEARCH" ];
+
       services.restic.backups.b2 = {
         user = "restic";
         paths = [
           "/media/t7/photos"
           "/srv/media/Music/library/Cocteau Twins/1993 - Four-Calendar Café"
+          "/var/lib/paperless"
         ];
         repository = "s3:s3.eu-central-003.backblazeb2.com/backup-uwdcrk";
         environmentFile = config.age.secrets.restic-b2-env.path;

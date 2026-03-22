@@ -13,7 +13,7 @@
       secureboot
     ]) ++ [
       config.flake.modules.nixos."initrd-ssh"
-      config.flake.modules.nixos."home-manager"
+      config.flake.modules.nixos."home-manager-unstable"
     ] ++ [
       ({ config, lib, ... }: {
         networking.hostName = "desktop";

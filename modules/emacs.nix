@@ -8,7 +8,7 @@
           coreutils
           fd
           clang
-          nixfmt-rfc-style
+          nixfmt
           emacs
           racket
           ripgrep

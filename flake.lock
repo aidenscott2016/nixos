@@ -304,6 +304,26 @@
         "type": "github"
       }
     },
+    "home-manager-unstable": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1774210133,
+        "narHash": "sha256-yeiWCY9aAUUJ3ebMVjs0UZXRnT5x90MCtpbpOWiXrvM=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "c6fe2944ad9f2444b2d767c4a5edee7c166e8a95",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "home-manager_2": {
       "inputs": {
         "nixpkgs": [
@@ -755,6 +775,7 @@
         "firefox-addons": "firefox-addons",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager_2",
+        "home-manager-unstable": "home-manager-unstable",
         "import-tree": "import-tree",
         "jovian": "jovian",
         "lanzaboote": "lanzaboote",

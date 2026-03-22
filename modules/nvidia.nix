@@ -30,23 +30,33 @@
       config = {
         nixpkgs.config.nvidia.acceptLicense = true;
 
-        hardware = {
-          nvidia = {
-            prime = {
-              intelBusId = cfg.prime.intelBusId;
-              nvidiaBusId = cfg.prime.nvidiaBusId;
-              offload = {
-                enable = true;
-                enableOffloadCmd = true;
-              };
+        hardware.nvidia = {
+          prime = {
+            intelBusId = cfg.prime.intelBusId;
+            nvidiaBusId = cfg.prime.nvidiaBusId;
+            offload = {
+              enable = true;
+              enableOffloadCmd = true;
             };
-            package = cfg.package;
-            modesetting.enable = true;
-            open = false;
-            nvidiaSettings = true;
-            powerManagement.enable = true;
-            powerManagement.finegrained = true;
           };
+          package = cfg.package;
+          modesetting.enable = true;
+          open = false;
+          nvidiaSettings = true;
+          powerManagement.enable = true;
+          powerManagement.finegrained = true;
+        };
+
+        programs.gamescope.env = {
+          __NV_PRIME_RENDER_OFFLOAD = "1";
+          __VK_LAYER_NV_optimus = "NVIDIA_only";
+          __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+        };
+
+        programs.gamemode.settings.gpu = {
+          apply_gpu_optimisations = "accept-responsibility";
+          gpu_device = 0;
+          nv_powermizer_mode = 1;
         };
       };
     };
