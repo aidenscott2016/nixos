@@ -18,12 +18,15 @@
             "HTTP_X_FORWARDED_PROTO"
             "https"
           ];
+
+          PAPERLESS_APPS = "allauth.socialaccount.providers.openid_connect";
         };
       };
       aiden.modules.reverseProxy.apps = [
         {
           name = "paperless";
           port = 28981;
+          auth = false; # native OIDC via Authelia
         }
       ];
     };

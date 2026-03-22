@@ -24,6 +24,7 @@
       "--network-alias=portainer-ce"
       "--network=portainer_default"
       "--security-opt=label=disable"
+      "--dns=10.0.1.1"
     ];
   };
   systemd.services."docker-portainer" = {

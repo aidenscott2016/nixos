@@ -34,6 +34,11 @@
         owner = "grafana";
         mode = "0400";
       };
+      age.secrets.authelia-oidc-client-grafana = {
+        file = "${inputs.self.outPath}/secrets/authelia-oidc-client-grafana.age";
+        owner = "grafana";
+        mode = "0400";
+      };
 
       services.prometheus.exporters.node = {
         enable = true;
@@ -195,6 +200,20 @@
             disable_initial_admin_creation = false;
           };
 
+          "auth.generic_oauth" = {
+            enabled = true;
+            name = "Authelia";
+            client_id = "grafana";
+            client_secret = "$__file{${config.age.secrets.authelia-oidc-client-grafana.path}}";
+            auth_url = "https://auth.sw1a1aa.uk/api/oidc/authorization";
+            token_url = "https://auth.sw1a1aa.uk/api/oidc/token";
+            api_url = "https://auth.sw1a1aa.uk/api/oidc/userinfo";
+            scopes = "openid email profile groups";
+            role_attribute_path = "contains(groups[*], 'admins') && 'Admin' || 'Viewer'";
+            allow_sign_up = true;
+            auto_login = true;
+          };
+
           analytics = {
             reporting_enabled = false;
             check_for_updates = false;
@@ -239,7 +258,7 @@
       systemd.services.grafana.wants = [ "agenix.service" ];
 
       aiden.modules.reverseProxy.apps = [
-        { name = "grafana"; port = 3005; }
+        { name = "grafana"; port = 3005; auth = false; } # native OIDC via Authelia
       ];
     };
 }
