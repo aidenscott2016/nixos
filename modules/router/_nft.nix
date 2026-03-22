@@ -48,6 +48,7 @@
 
            udp dport  41641 accept comment tailscale
 
+           # Sample-log 10 GeoIP drops/sec for visibility; silently drop the rest
            iifname $DEV_WAN ip saddr != @geoip_allowed limit rate 10/second log prefix "geoip-drop: " counter drop
            iifname $DEV_WAN ip saddr != @geoip_allowed counter drop
 
@@ -79,7 +80,8 @@
              8080
            } accept
 
-           tcp dport {9080, 5000-6000, 6060 } accept comment crowdsec-metrics
+           tcp dport {9080, 5000-6000 } accept
+           tcp dport 6060 accept comment crowdsec-metrics
            udp dport {67, 69, 4011 } accept comment pxe
        }
 

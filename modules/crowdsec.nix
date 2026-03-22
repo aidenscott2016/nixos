@@ -83,7 +83,7 @@
           prometheus = {
             enabled = true;
             level = "full";
-            listen_addr = "0.0.0.0";
+            listen_addr = "10.0.1.1";
             listen_port = 6060;
           };
         };

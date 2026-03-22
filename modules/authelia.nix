@@ -2,10 +2,12 @@
 {
   flake.modules.nixos.authelia =
     { config, pkgs, ... }:
-    let
-      usersFile = pkgs.writeText "authelia-users.yml" (builtins.readFile ./_authelia-users.yml);
-    in
     {
+      age.secrets.authelia-users = {
+        file = "${inputs.self.outPath}/secrets/authelia-users.age";
+        owner = "authelia-main";
+        mode = "0400";
+      };
       age.secrets.authelia-jwt-secret = {
         file = "${inputs.self.outPath}/secrets/authelia-jwt-secret.age";
         owner = "authelia-main";
@@ -81,6 +83,11 @@
                 policy = "bypass";
               }
               {
+                domain = "navidrome.sw1a1aa.uk";
+                resources = [ "^/rest([/?].*)?$" ];
+                policy = "bypass";
+              }
+              {
                 domain = "*.sw1a1aa.uk";
                 networks = [ "10.0.0.0/8" "100.64.0.0/10" ];
                 policy = "one_factor";
@@ -151,11 +158,11 @@
       systemd.services.authelia-main.after = [ "agenix.service" ];
 
       systemd.tmpfiles.rules = [
-        "C /var/lib/authelia-main/users.yml 0600 authelia-main authelia-main - ${usersFile}"
+        "L /var/lib/authelia-main/users.yml - - - - ${config.age.secrets.authelia-users.path}"
       ];
 
       aiden.modules.reverseProxy.apps = [
-        { name = "auth"; port = 9092; auth = false; }
+        { name = "auth"; port = 9092; auth = false; } # Authelia is the auth provider
       ];
     };
 }

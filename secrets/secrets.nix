@@ -55,4 +55,5 @@ in
   "authelia-oidc-client-immich.age".publicKeys = [ aiden bes ];
   "authelia-oidc-client-paperless.age".publicKeys = [ aiden bes ];
   "authelia-oidc-client-portainer.age".publicKeys = [ aiden bes ];
+  "authelia-users.age".publicKeys = [ aiden bes ];
 }

@@ -1,7 +1,0 @@
-users:
-  aiden:
-    displayname: Aiden
-    email: aiden@sw1a1aa.uk
-    password: "$argon2id$v=19$m=65536,t=3,p=4$R6xfi9YWS+rfr8BtMsjdmQ$J/5PYko8ohy7VEc1GZXzg0/gpXtSQk0NLLCuB3gfDHY"
-    groups:
-      - admins

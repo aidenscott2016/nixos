@@ -24,7 +24,7 @@
         {
           name = "paperless";
           port = 28981;
-          auth = false;
+          auth = false; # native OIDC via Authelia
         }
       ];
     };
