@@ -32,6 +32,23 @@ This is a personal NixOS flake configuration repository using the **dendritic pa
 }
 ```
 
+### Multi-Nixpkgs Channels
+Each host selects its nixpkgs channel at the `nixosSystem` call site:
+- **Stable hosts** use `inputs.nixpkgs.lib.nixosSystem` (pinned to 25.11)
+- **Unstable hosts** use `inputs.nixpkgs-unstable.lib.nixosSystem`
+
+Currently only `desktop` runs on unstable; all others run on stable. Shared modules work on both channels because they reference `pkgs` from whichever nixpkgs built the host.
+
+To update channels independently:
+```bash
+nix flake update nixpkgs-unstable   # bumps only unstable, stable hosts unaffected
+nix flake update nixpkgs             # bumps only stable, unstable hosts unaffected
+```
+
+Never use bare `nix flake update` -- it bumps every input at once.
+
+The overlay in `modules/overlays.nix` provides cross-channel packages: it pulls specific unstable packages into stable hosts and vice versa. Inputs that only serve unstable hosts (e.g. `jovian`) should `follows = "nixpkgs-unstable"`.
+
 ### Host Categories
 - **Servers**: gila (router/home-assistant/traefik), bes (containers/reverse-proxy), lovelace (aarch64 SD image)
 - **Desktops**: mike (stable, dwm, gaming), desktop (unstable, jovian, gaming)
