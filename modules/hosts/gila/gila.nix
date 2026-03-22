@@ -11,6 +11,7 @@
     ] ++ (with config.flake.modules.nixos; [
       common locale adguard avahi traefik tailscale router crowdsec
     ]) ++ [
+      config.flake.modules.nixos."geoip-filter"
       config.flake.modules.nixos."home-assistant"
     ] ++ [
       ({ config, pkgs, lib, ... }: {

@@ -31,11 +31,6 @@
    define MQTT = 1883
 
    table ip myfilter {
-       set geoip_allowed {
-           type ipv4_addr
-           flags interval
-       }
-
        chain inbound {
            type filter hook input priority 0; policy drop;
            icmp type echo-request limit rate 1/second accept
@@ -47,10 +42,6 @@
            }
 
            udp dport  41641 accept comment tailscale
-
-           # Sample-log 10 GeoIP drops/sec for visibility; silently drop the rest
-           iifname $DEV_WAN ip saddr != @geoip_allowed limit rate 10/second log prefix "geoip-drop: " counter drop
-           iifname $DEV_WAN ip saddr != @geoip_allowed counter drop
 
            iifname vmap {
              lo : accept,
