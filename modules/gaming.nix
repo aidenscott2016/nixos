@@ -26,7 +26,7 @@
           capSysAdmin = true;
         };
         environment.systemPackages = minecraftPackages ++ moonlightClient;
-        # boot.kernelParams = [ "preempt=full" ]; # re-enable if audio latency or gaming input lag is noticed
+        boot.kernelParams = [ "preempt=full" ];
       };
     };
 }

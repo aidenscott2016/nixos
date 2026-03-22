@@ -29,8 +29,12 @@
 
         services.upower.enable = true;
         services.fwupd.enable = true;
-        services.thermald.enable = true;
         services.throttled.enable = true;
+        services.irqbalance.enable = true;
+
+        boot.kernel.sysctl."vm.swappiness" = 10;
+
+        environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
 
         # Enable thinkpad_acpi fan control so thinkfan can manage the fan
         boot.extraModprobeConfig = ''

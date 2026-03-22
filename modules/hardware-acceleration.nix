@@ -33,7 +33,7 @@
                 mesa
               ]
               #++ optionals (architecture.gpu == "amd") [ amdvlk ]
-              ++ optionals (architecture.gpu == "intel") [
+              ++ optionals (architecture.gpu == "intel" || architecture.gpu == "nvidia") [
                 intel-media-driver-stable
                 libva-vdpau-driver
                 intel-compute-runtime-legacy1
