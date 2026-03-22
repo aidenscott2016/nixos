@@ -211,6 +211,7 @@
             scopes = "openid email profile groups";
             role_attribute_path = "contains(groups[*], 'admins') && 'Admin' || 'Viewer'";
             allow_sign_up = true;
+            auto_login = true;
           };
 
           analytics = {
