@@ -4,32 +4,32 @@
     { config, pkgs, ... }:
     {
       age.secrets.authelia-users = {
-        file = "${inputs.self.outPath}/secrets/authelia-users.age";
+        file = "${inputs.secrets}/authelia-users.age";
         owner = "authelia-main";
         mode = "0400";
       };
       age.secrets.authelia-jwt-secret = {
-        file = "${inputs.self.outPath}/secrets/authelia-jwt-secret.age";
+        file = "${inputs.secrets}/authelia-jwt-secret.age";
         owner = "authelia-main";
         mode = "0400";
       };
       age.secrets.authelia-session-secret = {
-        file = "${inputs.self.outPath}/secrets/authelia-session-secret.age";
+        file = "${inputs.secrets}/authelia-session-secret.age";
         owner = "authelia-main";
         mode = "0400";
       };
       age.secrets.authelia-storage-encryption-key = {
-        file = "${inputs.self.outPath}/secrets/authelia-storage-encryption-key.age";
+        file = "${inputs.secrets}/authelia-storage-encryption-key.age";
         owner = "authelia-main";
         mode = "0400";
       };
       age.secrets.authelia-oidc-hmac-secret = {
-        file = "${inputs.self.outPath}/secrets/authelia-oidc-hmac-secret.age";
+        file = "${inputs.secrets}/authelia-oidc-hmac-secret.age";
         owner = "authelia-main";
         mode = "0400";
       };
       age.secrets.authelia-oidc-issuer-private-key = {
-        file = "${inputs.self.outPath}/secrets/authelia-oidc-issuer-private-key.age";
+        file = "${inputs.secrets}/authelia-oidc-issuer-private-key.age";
         owner = "authelia-main";
         mode = "0400";
       };

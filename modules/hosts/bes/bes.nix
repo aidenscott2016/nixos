@@ -79,8 +79,8 @@
             };
           };
 
-          age.secrets.opencode-env.file = "${inputs.self.outPath}/secrets/opencode-env.age";
-          age.secrets.slskd.file = "${inputs.self.outPath}/secrets/slskd";
+          age.secrets.opencode-env.file = "${inputs.secrets}/opencode-env.age";
+          age.secrets.slskd.file = "${inputs.secrets}/slskd";
 
           programs.mosh.enable = true;
 

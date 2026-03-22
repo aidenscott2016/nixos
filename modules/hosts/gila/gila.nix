@@ -18,9 +18,9 @@
         system.stateVersion = "23.05";
         nixpkgs.overlays = [ inputs.self.overlays.default ];
 
-        age.secrets.mosquittoPass.file = "${inputs.self.outPath}/secrets/mosquitto-pass.age";
-        age.secrets.cloudflareToken.file = "${inputs.self.outPath}/secrets/cf-token.age";
-        age.secrets.gila-tailscale-authkey.file = "${inputs.self.outPath}/secrets/gila-tailscale-authkey";
+        age.secrets.mosquittoPass.file = "${inputs.secrets}/mosquitto-pass.age";
+        age.secrets.cloudflareToken.file = "${inputs.secrets}/cf-token.age";
+        age.secrets.gila-tailscale-authkey.file = "${inputs.secrets}/gila-tailscale-authkey";
 
         networking.networkmanager.enable = true;
 

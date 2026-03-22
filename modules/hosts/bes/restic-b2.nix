@@ -4,11 +4,11 @@
     { config, pkgs, ... }:
     {
       age.secrets.restic-b2-env = {
-        file = "${inputs.self.outPath}/secrets/restic-b2-env.age";
+        file = "${inputs.secrets}/restic-b2-env.age";
         owner = "restic";
       };
       age.secrets.restic-b2-password = {
-        file = "${inputs.self.outPath}/secrets/restic-b2-password.age";
+        file = "${inputs.secrets}/restic-b2-password.age";
         owner = "restic";
       };
 

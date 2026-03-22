@@ -30,12 +30,12 @@
     in
     {
       age.secrets.grafana-admin-password = {
-        file = "${inputs.self.outPath}/secrets/grafana-admin-password.age";
+        file = "${inputs.secrets}/grafana-admin-password.age";
         owner = "grafana";
         mode = "0400";
       };
       age.secrets.authelia-oidc-client-grafana = {
-        file = "${inputs.self.outPath}/secrets/authelia-oidc-client-grafana.age";
+        file = "${inputs.secrets}/authelia-oidc-client-grafana.age";
         owner = "grafana";
         mode = "0400";
       };

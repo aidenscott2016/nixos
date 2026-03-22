@@ -79,6 +79,10 @@
       url = "github:terranix/terranix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    secrets = {
+      url = "github:aidenscott2016/nixos-secrets";
+      flake = false;
+    };
   };
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {

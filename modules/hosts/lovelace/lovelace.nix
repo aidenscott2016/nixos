@@ -14,7 +14,7 @@
         system.stateVersion = "22.05";
         nixpkgs.hostPlatform = "aarch64-linux";
 
-        age.secrets.secret1.file = "${inputs.self.outPath}/secrets/secret1.age";
+        age.secrets.secret1.file = "${inputs.secrets}/secret1.age";
 
         services.openssh.enable = true;
         services.openssh.openFirewall = true;

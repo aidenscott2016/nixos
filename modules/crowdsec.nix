@@ -4,7 +4,7 @@
     { config, pkgs, lib, ... }:
     {
       age.secrets.crowdsec-enroll-key = {
-        file = "${inputs.self.outPath}/secrets/crowdsec-enroll-key.age";
+        file = "${inputs.secrets}/crowdsec-enroll-key.age";
         owner = "crowdsec";
         mode = "0400";
       };
