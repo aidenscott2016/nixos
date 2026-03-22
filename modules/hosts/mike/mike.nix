@@ -32,6 +32,14 @@
         services.thermald.enable = true;
         services.throttled.enable = true;
 
+        # Enable thinkpad_acpi fan control so thinkfan can manage the fan
+        boot.extraModprobeConfig = ''
+          options thinkpad_acpi fan_control=1
+        '';
+
+        # Thinkfan for proper fan curves (uses sensible ThinkPad defaults)
+        services.thinkfan.enable = true;
+
         aiden = {
           architecture = {
             cpu = "intel";
