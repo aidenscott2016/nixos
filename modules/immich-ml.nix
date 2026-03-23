@@ -19,8 +19,13 @@
         ];
         environment = {
           MPLCONFIGDIR = "/cache/matplotlib";
-          MACHINE_LEARNING_WORKERS = "2";
+          MACHINE_LEARNING_WORKERS = "1";
+          MACHINE_LEARNING_WORKER_TIMEOUT = "300";
           MACHINE_LEARNING_MODEL_TTL = "300";
+          # rocMLIR kernel generation crashes MIGraphX on gfx1030 (RDNA2)
+          # with SIGSEGV during model compilation for InsightFace buffalo_l.
+          # Disabling MLIR forces MIOpen/hipBLASLt kernels instead.
+          MIGRAPHX_DISABLE_MLIR = "1";
         };
       };
 
