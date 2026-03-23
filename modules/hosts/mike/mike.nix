@@ -13,7 +13,7 @@
       inputs.lanzaboote.nixosModules.lanzaboote
     ] ++ (with config.flake.modules.nixos; [
       desktop gaming steam oblivion-sync openttd nvidia virtualisation scanner nix tlp secureboot-vm-testing secureboot
-      redshift multimedia
+      redshift multimedia cursor-prime
     ]) ++ [
       config.flake.modules.nixos."home-manager"
     ] ++ [
@@ -46,13 +46,13 @@
           sensors = [{ type = "tpacpi"; query = "/proc/acpi/ibm/thermal"; }];
           fans = [{ type = "tpacpi"; query = "/proc/acpi/ibm/fan"; }];
           levels = [
-            [ 0              0  55 ]
-            [ 1             48  60 ]
-            [ 2             50  61 ]
-            [ 3             52  63 ]
-            [ 6             56  65 ]
-            [ 7             60  80 ]
-            [ "level disengaged" 75 32767 ]
+            [ 0              0  50 ]
+            [ 1             43  55 ]
+            [ 2             48  58 ]
+            [ 3             50  61 ]
+            [ 6             54  63 ]
+            [ 7             58  70 ]
+            [ "level disengaged" 65 32767 ]
           ];
         };
 
