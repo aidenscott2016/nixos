@@ -12,6 +12,7 @@
       jovian desktop gaming steam oblivion-sync virtualisation nix
       secureboot
     ]) ++ [
+      config.flake.modules.nixos."immich-ml"
       config.flake.modules.nixos."initrd-ssh"
       config.flake.modules.nixos."home-manager-unstable"
     ] ++ [

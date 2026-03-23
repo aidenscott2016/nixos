@@ -12,7 +12,7 @@
       programs.virt-manager.enable = true;
 
       virtualisation.docker = {
-        enable = false;
+        enable = lib.mkDefault false;
         rootless = {
           enable = true;
           setSocketVariable = true;
@@ -20,7 +20,7 @@
       };
 
       virtualisation.podman = {
-        enable = false;
+        enable = lib.mkDefault false;
         dockerSocket.enable = true;
         dockerCompat = true;
         defaultNetwork.settings.dns_enabled = true;

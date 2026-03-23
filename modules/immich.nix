@@ -13,19 +13,9 @@
         environment = {
           LIBVA_DRIVER_NAME = "iHD";
           LIBVA_DRIVERS_PATH = "/run/opengl-driver/lib/dri";
+          IMMICH_MACHINE_LEARNING_URL = lib.mkForce "http://desktop.sw1a1aa.uk:3003";
         };
         machine-learning.enable = false;
-      };
-
-      virtualisation.oci-containers.containers.immich-machine-learning = {
-        image = "ghcr.io/immich-app/immich-machine-learning:release-openvino";
-        volumes = [ "/var/cache/immich:/cache" ];
-        ports = [ "127.0.0.1:3003:3003" ];
-        extraOptions = [ "--device=/dev/dri/renderD128" ];
-        environment = {
-          MPLCONFIGDIR = "/cache/matplotlib";
-          MACHINE_LEARNING_WORKERS = "2";
-        };
       };
 
       users.users.immich = {
@@ -37,7 +27,6 @@
       # immich writes, allowing the restic backup user (a member of the immich group)
       # to read the photo library without ACLs.
       systemd.services.immich-server.serviceConfig.UMask = lib.mkForce "0027";
-      systemd.services.immich-machine-learning.serviceConfig.UMask = lib.mkForce "0027";
 
       # Upstream's tmpfiles `e` rule resets the mediaLocation to mode 0700 on every
       # boot. Override it to 0750 so the group read bit isn't stripped.
