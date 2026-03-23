@@ -2,7 +2,6 @@
 {
   flake.modules.nixos.thunar =
     { pkgs, lib, config, ... }:
-    with pkgs;
     {
         programs.thunar.enable = true;
         programs.thunar.plugins = with pkgs; [
@@ -11,6 +10,6 @@
         ];
 
         # enables unzipping
-        environment.systemPackages =  [ file-roller ];
+        environment.systemPackages = with pkgs; [ file-roller ];
     };
 }
