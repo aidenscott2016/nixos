@@ -18,6 +18,7 @@
         lib.optionals (pkgs.stdenv.hostPlatform.system == "x86_64-linux") [ "aarch64-linux" ];
 
       nix.settings = {
+        accept-flake-config = true;
         substituters = [ "https://cache.flox.dev" ];
         trusted-public-keys = [
           "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXYLQw/aV7GEed86nQ7IsOs="
