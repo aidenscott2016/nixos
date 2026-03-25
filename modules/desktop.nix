@@ -9,7 +9,7 @@
         syncthing darkman printer emacs thunar
         locale keyd yubikey appimage pipewire ssh avahi
         hardware-acceleration ios cli-base
-        xdg-portal
+        xdg-portal vpn-chain
       ];
 
       config = {
@@ -18,8 +18,6 @@
           xserver.enable = true;
           envfs.enable = true;
           blueman.enable = true;
-          tailscale.enable = true;
-          mullvad-vpn.enable = true;
           gvfs.enable = true;
           libinput.enable = true;
           fstrim.enable = true;
