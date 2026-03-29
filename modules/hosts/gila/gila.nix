@@ -27,6 +27,9 @@
         environment.systemPackages = with pkgs; [
           tcpdump
           dnsutils
+          tmux
+          git
+          wol
         ];
 
         boot.loader.systemd-boot.enable = true;
