@@ -20,6 +20,8 @@
   flake.modules.homeManager.ssh =
     { config, pkgs, lib, ... }:
     {
+      services.ssh-agent.enable = true;
+
       programs.ssh = {
         enable = true;
         enableDefaultConfig = false;
