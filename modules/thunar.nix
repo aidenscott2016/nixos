@@ -4,7 +4,7 @@
     { pkgs, lib, config, ... }:
     {
         programs.thunar.enable = true;
-        programs.thunar.plugins = with pkgs; [
+        programs.thunar.plugins = with pkgs.xfce; [
           thunar-archive-plugin
           thunar-volman
         ];
