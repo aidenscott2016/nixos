@@ -17,10 +17,12 @@
     in
     {
       environment.systemPackages = [
+        pkgs.chromaprint
         (pkgs.python3.pkgs.toPythonApplication (pkgs.python3.pkgs.beets.override {
           pluginOverrides = {
             fetchart.enable = true;
             discogs.enable = true;
+            chroma.enable = true;
             bandcamp = {
               enable = true;
               propagatedBuildInputs = [ inputs.self.packages.x86_64-linux.beetcamp ];
