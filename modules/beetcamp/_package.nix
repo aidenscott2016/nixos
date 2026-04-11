@@ -6,7 +6,7 @@
 }:
 
 let
-  version = "0.22.0";
+  version = "0.24.1";
 in
 
 python3Packages.buildPythonApplication {
@@ -17,8 +17,8 @@ python3Packages.buildPythonApplication {
   src = fetchFromGitHub {
     owner = "snejus";
     repo = "beetcamp";
-    tag = "0.22.0";
-    hash = "sha256-5tcQtvYmXT213mZnzKz2kwE5K22rro++lRF65PjC5X0=";
+    tag = "0.24.1";
+    hash = "sha256-Oe5pZ4gYgqBHuzt9LBe4G14+RYXrNL+L5GIGMMflyMI=";
   };
 
   build-system = [
@@ -35,7 +35,13 @@ python3Packages.buildPythonApplication {
     python3Packages.packaging
   ];
 
-  # Needs unpackaged `rich-tables`.
+  postPatch = ''
+    substituteInPlace beetcamp/helpers.py \
+      --replace-fail 'data.pop("genres")' 'data.pop("genres", None)'
+    substituteInPlace beetcamp/__init__.py \
+      --replace-fail '"truncate_comments": False,' '"truncate_comments": False, "data_source_mismatch_penalty": 0.5,'
+  '';
+
   doCheck = false;
 
   meta = {
