@@ -17,6 +17,8 @@
       boot.binfmt.emulatedSystems =
         lib.optionals (pkgs.stdenv.hostPlatform.system == "x86_64-linux") [ "aarch64-linux" ];
 
+      nixpkgs.config.allowUnfree = true;
+
       nix.settings = {
         accept-flake-config = true;
         substituters = [ "https://cache.flox.dev" ];
