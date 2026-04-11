@@ -7,7 +7,7 @@
       inputs.agenix.nixosModules.default
       inputs.nixos-generators.nixosModules.all-formats
     ] ++ (with config.flake.modules.nixos; [
-      common locale avahi tailscale
+      common locale avahi
     ]) ++ [
       ({ config, pkgs, ... }: {
         networking.hostName = "lovelace";
@@ -28,12 +28,8 @@
         };
 
         networking.usePredictableInterfaceNames = true;
-        boot.kernel.sysctl."net.ipv4.conf.all.forwarding" = true;
-
         environment.systemPackages = with pkgs; [
           dnsutils
-          tailscale
-          jq
         ];
 
         services.adguardhome = {
@@ -42,7 +38,11 @@
           settings.http.address = "0.0.0.0:8081";
         };
 
-        aiden.modules.tailscale.authKeyPath = config.age.secrets.secret1.path;
+        services.tailscale = {
+          enable = true;
+          openFirewall = true;
+          authKeyFile = config.age.secrets.secret1.path;
+        };
       })
     ];
   };

@@ -9,9 +9,10 @@
       inputs.agenix.nixosModules.default
       inputs.switch-fix.nixosModules.switch-fix
     ] ++ (with config.flake.modules.nixos; [
-      common locale adguard avahi traefik tailscale router crowdsec
+      common locale adguard avahi traefik router crowdsec
     ]) ++ [
       config.flake.modules.nixos."home-assistant"
+      config.flake.modules.nixos."tailscale-udp-gro"
     ] ++ [
       ({ config, pkgs, lib, ... }: {
         networking.hostName = "gila";
@@ -60,10 +61,6 @@
             email = "aiden@oldstreetjournal.co.uk";
             domainName = "sw1a1aa.uk";
           };
-          tailscale = {
-            advertiseRoutes = true;
-            authKeyPath = config.age.secrets.gila-tailscale-authkey.path;
-          };
           home-assistant.devices = [
             "/dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_2ee577279f96ed119403c098a7669f5d-if00-port0"
           ];
@@ -74,6 +71,19 @@
             externalInterface = "enp1s0";
           };
         };
+
+        services.tailscale = {
+          enable = true;
+          openFirewall = true;
+          useRoutingFeatures = "server";
+          authKeyFile = config.age.secrets.gila-tailscale-authkey.path;
+          extraSetFlags = [
+            "--advertise-routes=10.0.0.0/24,10.0.1.0/24,10.0.2.0/24,10.0.3.0/24"
+            "--ssh"
+          ];
+        };
+
+        aiden.modules.tailscale-udp-gro.interfaces = [ "enp1s0" ];
       })
     ];
   };
