@@ -3,14 +3,14 @@
   flake.modules.nixos.beets =
     { pkgs, ... }:
     let
-      copyartifacts = pkgs.python3.pkgs.beets-copyartifacts.overridePythonAttrs {
-        version = "0.1.6";
-        src = pkgs.fetchFromGitHub {
-          owner = "adammillerio";
-          repo = "beets-copyartifacts";
-          tag = "v0.1.6";
-          hash = "sha256-fMnXuMwxylO9Q7EFPpkgwwNeBuviUa8HduRrqrqdMaI=";
-        };
+      unstablePkgs = import inputs.nixpkgs-unstable {
+        system = pkgs.stdenv.hostPlatform.system;
+      };
+      py3 = unstablePkgs.python3.pkgs;
+
+      beetcamp = unstablePkgs.callPackage "${inputs.self}/modules/beetcamp/_package.nix" { };
+
+      copyartifacts = py3.beets-copyartifacts.overridePythonAttrs {
         doCheck = false;
         meta.broken = false;
       };
@@ -18,14 +18,14 @@
     {
       environment.systemPackages = [
         pkgs.chromaprint
-        (pkgs.python3.pkgs.toPythonApplication (pkgs.python3.pkgs.beets.override {
+        (py3.toPythonApplication (py3.beets.override {
           pluginOverrides = {
             fetchart.enable = true;
             discogs.enable = true;
             chroma.enable = true;
             bandcamp = {
               enable = true;
-              propagatedBuildInputs = [ inputs.self.packages.x86_64-linux.beetcamp ];
+              propagatedBuildInputs = [ beetcamp ];
             };
             copyartifacts = {
               enable = true;
