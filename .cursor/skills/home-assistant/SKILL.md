@@ -156,10 +156,24 @@ template:
 
 - **Battery remotes (EndDevices) are sleepy** — bind/unbind commands are queued and delivered on next wake (button press). Send the command, then ask the user to press buttons.
 - **Philips Hue RWL022** sends BOTH custom cluster events (`0xfc00`) AND standard ZCL commands (`0x0006` On/Off, `0x0008` Level Control). The standard ZCL commands can directly control nearby lights. Fix: bind the remote's output clusters to the coordinator via `zha/devices/bind`.
+- **Hue RWL022 hold events fire repeatedly during a hold** (~every 2s) and the `dustins/zha-philips-hue-v2-smart-dimmer-switch-and-remote-rwl022` blueprint runs `Power_HoldPress` on every fire. A 5-second hold = 2-3 action runs. Make hold actions idempotent (e.g. plain `light.turn_off` rather than scenes/scripts that compound).
 - **`zha/devices/unbind` returns `success: true`** even if the target device didn't process the request (it just means the coordinator accepted the message).
 - **Touchlink** can create direct pairings between Hue remotes and nearby bulbs, bypassing HA entirely. HA logbook won't show these actions. Cannot be disabled in firmware.
-- **`remove_all` groups command**: Send via `zha.issue_zigbee_cluster_command` — cluster 4, command 4, endpoint 1.
+- **`zha.issue_zigbee_cluster_command` arg shape**: use `params` (a dict keyed by zigpy field names), not `args`. E.g. `remove_all` groups = `{cluster_id:4, command:4, command_type:"server", params:{}}`; `get_membership` = `params:{groups:[]}` (field is `groups`, not `group_list`).
+- **Removing a ZHA device cleanly**: `zha.remove` REST service with `{"ieee":"<addr>"}` — works even when the device is disabled or unreachable. The `device_registry/remove_config_entry` WS path does not work for ZHA ("Config entry does not support device removal").
 - **`jq` and `python3` are not installed on gila** — use `nix-shell -p jq --run '...'` or `nix-shell -p python3 --run '...'`.
+
+### IKEA TRADFRI bulbs
+
+- **`light.turn_off` *with* `transition:` on an already-off TRADFRI = bulb turns ON at brightness 1.** Firmware bug (Koenkk/zigbee2mqtt#22030, multiple bulb models including E27 WS globe / LED2103G5 / LED2005R5). HA's ZHA sends `Move to Level with On/Off (target=0)` for `turn_off+transition`; on an already-off TRADFRI this gets misinterpreted. Triggered by: (a) duplicate `turn_off` calls during a hold, (b) any `turn_off transition=X` to a bulb that's already off.
+- **HA does not see the bulb come back on** — the lamp doesn't proactively report state after this firmware path. `homeassistant.update_entity` forces a poll and reveals the true state.
+- **Workaround**: omit `transition:` from any `light.turn_off` action that may target a TRADFRI bulb. The plain ZCL `Off` command (cluster 6 cmd 0) is unaffected. Z2M's equivalent is the device-level `noOffTransition: true` flag, which ZHA does not have.
+
+### Label Registry
+
+- Labels are tagging metadata for entities/devices/areas. Useful for templates: `label_entities('mood')`, `label_entities('illumination') | select('in', area_entities('bedroom'))`.
+- **`config/label_registry/create` accepts `name` (required), plus optional `color`/`icon`/`description`. Do NOT pass `label_id`** — it's auto-slugified from `name`.
+- **Scenes do not accept `label_id` or `area_id`** as targets. Scene `entities:` must be a literal map of `entity_id` → state. To get label-driven dynamism, use a script with `target: { label_id: ... }` instead of a scene (`scene.turn_on` doesn't accept label targets).
 
 ### Event Debugging
 
@@ -174,6 +188,16 @@ Subscribe to all events via WebSocket and filter for `zha_event`, `state_changed
 | Kitchen | `kitchen` | Sonoff |
 | Garden | `garden` | Sonoff |
 | Office | `office` | Switch |
+
+## Labels
+
+Light fixtures are tagged by purpose:
+
+| Label | Meaning | Example members |
+|-------|---------|-----------------|
+| `illumination` | Functional task lighting | `light.ceiling_light`, `light.ikea_of_sweden_jetstrom_40100_light` |
+| `mood` | Tunable ambient lighting | `light.anglepoise_light`, `light.ikea_lamp_light` |
+| `novelty` | Decorative on/off-only fixtures | lava lamps |
 
 ## Custom Frontend
 
