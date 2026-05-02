@@ -173,6 +173,16 @@
                 response_types = [ "code" ];
                 token_endpoint_auth_method = "client_secret_basic";
               }
+              {
+                client_id = "homeassistant";
+                client_name = "Home Assistant";
+                client_secret = "$pbkdf2-sha512$310000$BxLOo3QF7Fd6.Fd2h2ipqw$E.hxBT3wlpLfLAimiwX5K66FbvAwv1DaiiLT/D290ORzqeGbwh2bdMbsXkbe6x4FpgcPn/py5kyWIYeAHAQA4A";
+                redirect_uris = [ "https://hass.sw1a1aa.uk/auth/oidc/callback" ];
+                scopes = [ "openid" "email" "profile" ];
+                grant_types = [ "authorization_code" ];
+                response_types = [ "code" ];
+                token_endpoint_auth_method = "client_secret_post";
+              }
             ];
           };
 
