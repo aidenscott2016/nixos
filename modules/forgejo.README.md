@@ -4,6 +4,16 @@ The Nix module declares the service, OIDC auth source registration, and
 runner. These steps are imperative and must be run once after a clean
 provision of bes.
 
+## Notes (declarative in `modules/forgejo.nix`)
+
+- Forgejo listens on `127.0.0.1:3002` (Traefik `git` app). Ports 3000 and
+  3001 on bes are commonly taken by other services; adjust if needed.
+- `oauth2_client.ACCOUNT_LINKING = "auto"` links the Authelia identity to
+  an existing Forgejo user by email without the `/user/link_account`
+  confirmation screen. Use `"login"` instead if you want to confirm with
+  local credentials first (use the **Sign in** tab on the link page, not
+  Register).
+
 ## 1. OIDC client secret (before first deploy)
 
 Generate a random plaintext, then hash it with authelia. Both pieces are
@@ -15,7 +25,8 @@ needed:
 
 - The printed `Digest:` value (`$pbkdf2-sha512$...`) goes into
   `identity_providers.oidc.clients.<forgejo>.client_secret` in
-  `modules/authelia.nix`.
+  `modules/authelia.nix`. The redirect URI must match Forgejo's OAuth
+  name casing, e.g. `https://git.sw1a1aa.uk/user/oauth2/Authelia/callback`.
 - The plaintext is stored in `secrets/forgejo-oidc-client-secret.age`
   (see `secrets/secrets.nix` for the recipient list). Encrypt with:
 
@@ -26,9 +37,8 @@ needed:
 
 ## 2. First admin user (after first deploy, on bes)
 
-Registration is disabled and OIDC auto-creation runs only on first
-sign-in. Create a local admin via the CLI so the OIDC source can be
-linked:
+Registration is disabled. Create a local admin via the CLI (needed once
+so the account exists before OIDC auto-linking):
 
     sudo -u git forgejo \
       --config /var/lib/forgejo/custom/conf/app.ini \
@@ -36,22 +46,22 @@ linked:
       --username aiden --email git@oldstreetjournal.co.uk \
       --random-password --admin
 
-Sign in once with the printed random password, then sign out and sign in
-again via "Sign in with Authelia". `oauth2_client.ACCOUNT_LINKING =
-"login"` merges the two accounts by email, provided the email matches
-the one in `secrets/authelia-users.age`.
+With `ACCOUNT_LINKING = "auto"`, sign in via "Sign in with Authelia";
+Forgejo merges by email if it matches `secrets/authelia-users.age`.
 
 ## 3. Runner registration token (after first deploy)
 
-In Forgejo: Site Administration -> Actions -> Runners -> "Create new
-Runner". Copy the token.
+Either generate on bes (no UI):
 
-The runner's `tokenFile` is consumed as a systemd `EnvironmentFile`, so
-the secret must contain a `TOKEN=...` line (not just the raw token):
-
-    echo "TOKEN=<paste-token-here>" | EDITOR='tee' agenix --edit \
+    TOK=$(sudo -u git forgejo \
+      --config /var/lib/forgejo/custom/conf/app.ini \
+      actions generate-runner-token)
+    printf 'TOKEN=%s\n' "$TOK" | EDITOR='tee' agenix --edit \
       secrets/forgejo-runner-token.age
 
-Then enable the `services.gitea-actions-runner.instances.bes` block in
-`modules/forgejo.nix`, declare `age.secrets.forgejo-runner-token`, and
-redeploy.
+Or in the web UI: Site Administration -> Actions -> Runners -> "Create
+new Runner".
+
+The runner's `tokenFile` is a systemd `EnvironmentFile`, so the secret
+must contain a `TOKEN=...` line (not just the raw token). After updating
+the `.age` file, redeploy bes.

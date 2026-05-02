@@ -34,7 +34,7 @@
           oauth2_client = {
             ENABLE_AUTO_REGISTRATION = true;
             USERNAME = "nickname";
-            ACCOUNT_LINKING = "login";
+            ACCOUNT_LINKING = "auto";
             UPDATE_AVATAR = true;
           };
           actions.ENABLED = true;
@@ -59,6 +59,20 @@
         owner = cfg.user;
         group = cfg.group;
         mode = "0400";
+      };
+
+      age.secrets.forgejo-runner-token.file =
+        "${inputs.self.outPath}/secrets/forgejo-runner-token.age";
+
+      services.gitea-actions-runner.instances.bes = {
+        enable = true;
+        name = "bes";
+        url = "https://git.sw1a1aa.uk";
+        tokenFile = config.age.secrets.forgejo-runner-token.path;
+        labels = [
+          "native:host"
+          "docker:docker://node:22-bookworm"
+        ];
       };
 
       # Register Authelia as an OIDC auth source via the forgejo CLI on first
