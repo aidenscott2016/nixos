@@ -18,7 +18,8 @@
             DOMAIN = "git.sw1a1aa.uk";
             ROOT_URL = "https://git.sw1a1aa.uk/";
             HTTP_ADDR = "127.0.0.1";
-            HTTP_PORT = 3000;
+            # 3000 (paperless-ai), 3001 (uptime-kuma), 3005, 3100 are in use on bes.
+            HTTP_PORT = 3002;
             START_SSH_SERVER = false;
             SSH_DOMAIN = "git.sw1a1aa.uk";
             SSH_PORT = 22;
@@ -32,7 +33,7 @@
           openid.ENABLE_OPENID_SIGNIN = false;
           oauth2_client = {
             ENABLE_AUTO_REGISTRATION = true;
-            USERNAME = "preferred_username";
+            USERNAME = "nickname";
             ACCOUNT_LINKING = "login";
             UPDATE_AVATAR = true;
           };
@@ -103,7 +104,7 @@
       };
 
       aiden.modules.reverseProxy.apps = [
-        { name = "git"; port = 3000; auth = false; }
+        { name = "git"; port = 3002; auth = false; }
       ];
     };
 }
