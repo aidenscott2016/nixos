@@ -21,6 +21,7 @@
       media-storage
       beets
       opencode
+      forgejo
     ])
     ++ [
       config.flake.modules.nixos.immich

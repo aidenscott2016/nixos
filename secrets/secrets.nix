@@ -56,4 +56,6 @@ in
   "authelia-oidc-client-paperless.age".publicKeys = [ aiden bes ];
   "authelia-oidc-client-portainer.age".publicKeys = [ aiden bes ];
   "authelia-users.age".publicKeys = [ aiden bes ];
+  "forgejo-oidc-client-secret.age".publicKeys = [ aiden bes ];
+  "forgejo-runner-token.age".publicKeys = [ aiden bes ];
 }

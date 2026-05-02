@@ -147,6 +147,16 @@
                 response_types = [ "code" ];
                 token_endpoint_auth_method = "client_secret_basic";
               }
+              {
+                client_id = "forgejo";
+                client_name = "Forgejo";
+                client_secret = "$pbkdf2-sha512$310000$Vo5b.Xneoj3tZdD.e72BdQ$y2KJhm/CfBh4ttrwTTrg6OJwW5FXV5YsbjntoNxCUIRkmpJrhgrSYHl1PKm46nQHcBO1l8pi4v/cST2LD4Tw6g";
+                redirect_uris = [ "https://git.sw1a1aa.uk/user/oauth2/authelia/callback" ];
+                scopes = [ "openid" "email" "profile" "groups" ];
+                grant_types = [ "authorization_code" ];
+                response_types = [ "code" ];
+                token_endpoint_auth_method = "client_secret_basic";
+              }
             ];
           };
 
