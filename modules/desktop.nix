@@ -9,7 +9,7 @@
         syncthing darkman printer emacs thunar
         locale keyd yubikey appimage pipewire ssh avahi
         hardware-acceleration ios cli-base
-        xdg-portal
+        xdg-portal kde-connect
       ];
 
       config = {
