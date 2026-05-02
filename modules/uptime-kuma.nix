@@ -33,8 +33,8 @@
       domain = "sw1a1aa.uk";
       monitors = [
         { name = "photos";    path = "/api/server/ping"; }
-        { name = "sonarr";    path = "/ping"; }
-        { name = "radarr";    path = "/ping"; }
+        { name = "tvarr";     path = "/ping"; }
+        { name = "filmarr";   path = "/ping"; }
         { name = "jellyfin";  path = "/health"; }
         { name = "slskd";     path = "/health"; }
         { name = "grafana";   path = "/api/health"; }

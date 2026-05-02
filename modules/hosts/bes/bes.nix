@@ -69,12 +69,12 @@
               reverseProxy.apps = [
                 { name = "photos"; port = 2283; auth = false; } # native OIDC; mobile app uses OAuth token flow
                 { name = "bazarr"; port = 6767; }
-                { name = "sonarr"; port = 8989; }
+                { name = "tvarr"; port = 8989; }
                 { name = "sab"; port = 8080; }
                 { name = "jellyfin"; port = 8096; auth = false; } # API clients use Jellyfin auth; forward-auth breaks websockets
                 { name = "portainer"; port = 9000; auth = false; } # native OIDC; Edge agent uses API tokens
                 { name = "deluge"; port = 8112; }
-                { name = "radarr"; port = 7878; }
+                { name = "filmarr"; port = 7878; }
                 { name = "slskd"; port = 5030; }
               ];
             };
