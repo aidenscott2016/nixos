@@ -54,9 +54,25 @@
             keep_stdout = true;
           };
 
-          authentication_backend.file = {
-            path = "/var/lib/authelia-main/users.yml";
-            watch = true;
+          authentication_backend = {
+            file = {
+              path = "/var/lib/authelia-main/users.yml";
+              watch = true;
+            };
+            password_reset.disable = true;
+          };
+
+          webauthn = {
+            disable = false;
+            enable_passkey_login = true;
+            experimental_enable_passkey_uv_two_factors = true;
+            display_name = "Authelia";
+            attestation_conveyance_preference = "indirect";
+            timeout = "60s";
+            selection_criteria = {
+              discoverability = "preferred";
+              user_verification = "preferred";
+            };
           };
 
           session = {
