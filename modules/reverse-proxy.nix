@@ -75,6 +75,7 @@
               websecure = {
                 forwardedHeaders.trustedIPs = [ "10.0.1.1" ];
                 address = ":443";
+                http.middlewares = [ "strip-remote-user@file" ];
               };
             };
           };
@@ -90,6 +91,7 @@
                   "Remote-Name"
                 ];
               };
+              middlewares.strip-remote-user.headers.customRequestHeaders."Remote-User" = "";
             };
           };
         };
